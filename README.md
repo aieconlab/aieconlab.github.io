@@ -1,4 +1,4 @@
-### Hi there, We're AI Econ Lab 👋
+### Hi there, We're AIEconLab 👋
 
 ## We're Economist, Data Scientist, Applied Scientist and AI specialists.
 

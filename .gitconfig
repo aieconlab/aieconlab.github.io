@@ -1,0 +1,6 @@
+[user]
+	name = Youngmin_Ju
+	email = youngmin.econ.ai@gmail.com
+
+[url "ssh://git@github.com/"]
+        insteadOf = https://github.com/

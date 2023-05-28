@@ -1,6 +1,6 @@
 ---
 title: "Youngmin Ju"
-image: "images/author.jpg"
+image: "images/Youngmin_Ju.jpg"
 email: "youngmin.econ.ai@gmail.com"
 social:
   - icon : "fab fa-linkedin-in" # themify icon pack : https://themify.me/themify-icons

@@ -5,7 +5,7 @@ languageCode = "en-us"
 contentDir = "content/english"
 weight = 1
 # footer content
-footer_content = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+footer_content = "English."
 
 
 ################################### French language #####################################
@@ -15,4 +15,4 @@ languageCode = "fr-fr"
 contentDir = "content/french"
 weight = 2
 # footer content
-footer_content = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+footer_content = "French."

@@ -4,7 +4,7 @@ date: 2020-03-14T15:40:24+06:00
 # post thumb
 images:
 #author
-author: "John Doe"
+author: "송하윤"
 # description
 description: "This is meta description"
 # Taxonomies

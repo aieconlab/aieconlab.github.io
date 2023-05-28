@@ -1,6 +1,6 @@
 ######################## default configuration ####################
-baseURL = "https://demo.gethugothemes.com/logbook/site/"
-title = "LogBook | Hugo Personal Blog Template"
+baseURL = "https://www.aieconlab.com/"
+title = "AIEconLab"
 theme = "logbook-hugo"
 # post pagination
 paginate = "5"
@@ -11,7 +11,7 @@ googleAnalytics = "" # Ex: UA-123-45
 # disqus short name
 disqusShortname = "themefisher-template" # get your shortname form here : https://disqus.com
 # disable language
-disableLanguages = [fr] # disable language from here
+disableLanguages = ["fr","kr"] # disable language from here
 
 ############################# Modules ##############################
 [module]

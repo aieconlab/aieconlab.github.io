@@ -5,7 +5,7 @@ date: 2020-03-14T15:40:24+06:00
 images:
   - "images/post/post-1.jpg"
 #author
-author: "John Doe"
+author: "Youngmin Ju"
 # description
 description: "This is meta description"
 # Taxonomies

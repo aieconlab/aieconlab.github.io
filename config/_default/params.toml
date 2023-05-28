@@ -6,12 +6,12 @@ logo = "images/logo.png"
 # use `x` with logo_width, example: "100x"
 logo_width = "150x"
 # logo text will only show when logo is missing.
-logo_text = "LogBook"
+logo_text = "AIEconLab"
 page_not_found_image = "images/404.png" # 404 error page image
 # image gallery shortcode
 image_gallery = true
 # email address
-email = "georgia.young@example.com"
+email = "youngmin.econ.ai@gmail.com"
 # contact form action
 contact_form_action = "#" # contact form works with https://formspree.io
 # search
@@ -27,7 +27,7 @@ sidebar = "right" # sidebar value (left, right or false)
 # custom script on header
 custom_script = ""
 # copyright
-copyright = "Design By [Themefisher](https://themefisher.com/) Develop By [Gethugothemes](https://gethugothemes.com/)"
+copyright = "Design By AIEconLab"
 
 # Preloader
 [preloader]

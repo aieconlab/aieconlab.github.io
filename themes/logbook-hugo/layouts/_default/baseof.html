@@ -1,0 +1,50 @@
+<!-- 
+
+PROJECT: Logbook Hugo
+VERSION: 1.4.0
+AUTHOR: Gethugothemes
+AUTHOR WEBSITE: https://gethugothemes.com
+
+-->
+
+<!DOCTYPE html>
+<html lang="{{ site.LanguageCode | default `en-US` }}" itemscope itemtype="http://schema.org/WebPage">
+
+
+<head>
+	{{ partial "essentials/head.html" . }}
+
+	<!-- cache partial only in production -->
+	{{ if hugo.IsProduction }}
+	{{ partialCached "essentials/style.html" . }}
+	{{ else }}
+	{{ partial "essentials/style.html" . }}
+	{{ end }}
+</head>
+
+<body>
+	<!-- cache partial only in production -->
+	{{ if hugo.IsProduction }}
+	{{ partialCached "components/preloader.html" . }}
+	{{ partialCached "datasets/gtm-noscript.html" . }}
+	{{ else }}
+	{{ partial "components/preloader.html" . }}
+	{{ end }}
+	{{ partial "essentials/header.html" . }}
+
+	<main>
+		{{ block "main" . }}{{ end }}
+	</main>
+
+	
+	<!-- cache partial only in production -->
+	{{ if hugo.IsProduction }}
+	{{ partialCached "essentials/footer.html" . }}
+	{{ partialCached "essentials/script.html" . }}
+	{{ else }}
+	{{ partial "essentials/footer.html" . }}
+	{{ partial "essentials/script.html" . }}
+	{{ end }}
+</body>
+
+</html>

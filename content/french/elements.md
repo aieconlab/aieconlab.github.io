@@ -1,94 +1,70 @@
 ---
 title: "Elements"
-description: "this is meta description"
+description: "Some of our Team members"
 draft: false
+layout: "elements"
 ---
 
-
-#### Heading example
-
-Here is example of hedings. You can use this heading by following markdownify rules. For example: use `#` for heading 1 and use `######` for heading 6.
-
-# Heading 1
-
-## Heading 2
-
-### Heading 3
-
-#### Heading 4
-
-##### Heading 5
-
-###### Heading 6
-
+# H1 Heading 
+## H2 Heading 
+### H3 Heading 
+#### H4 Heading 
+##### H5 Heading 
+###### H6 Heading 
 <hr>
 
-##### Emphasis
-
-Emphasis, aka italics, with *asterisks* or *underscores*.
-
-Strong emphasis, aka bold, with **asterisks** or **underscores**.
-
-Combined emphasis with **asterisks and *underscores***.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
-
+# Paragraph
+Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp speed, you appeared for an instant to be in two places at once. We have a saboteur aboard. We know you’re dealing in stolen ore. But I wanna talk about the assassination attempt on Lieutenant Worf. Could someone survive inside a transporter buffer for 75 years? Fate. It protects fools, little children, and ships.
 <hr>
 
-##### Link
-
-[An inline-style link](https://www.google.com)
-
-[An inline-style link with title](https://www.google.com "Google's Homepage")
-
-[A reference-style link][Arbitrary case-insensitive reference text]
-
-[A relative reference to a repository file](../blob/master/LICENSE)
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links.
-<http://www.example.com> or <http://www.example.com> and sometimes
-example.com (but not on Github, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.themefisher.com
-[1]: https://gethugothemes.com
-[link text itself]: https://www.getjekyllthemes.com
-
+# Emphasis :
+1. Did you come here for something in particular or just general
+2. Did you come here for something in **particular**
+3. *Did you come here*
+4. Did you come here for something in <u>**particular**</u> 
+5. <u>Did you come here for something in particular </u>
+6. Did you come here for ~~something in particular~~ 
+7. URLs and URLs in angle brackets will automatically get turned into links. <u>[http://www.example.com](http://www.example.com)</u>    or 
+8. <u>[http://www.example.com](http://www.example.com)</u> and sometimes example.com (but not on Github, for example).
 <hr>
 
-##### Paragraph
+# Ordered list
+1.  you appeared for an instant to be in two places at once.
+2.  We have a saboteur aboard. 
+3.  you appeared for an instant to be in two places at once.
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nihil enim maxime corporis cumque totam aliquid nam sint inventore optio modi neque laborum officiis necessitatibus, facilis placeat pariatur! Voluptatem, sed harum pariatur adipisci voluptates voluptatum cumque, porro sint minima similique magni perferendis fuga! Optio vel ipsum excepturi tempore reiciendis id quidem? Vel in, doloribus debitis nesciunt fugit sequi magnam accusantium modi neque quis, vitae velit, pariatur harum autem a! Velit impedit atque maiores animi possimus asperiores natus repellendus excepturi sint architecto eligendi non, omnis nihil. Facilis, doloremque illum. Fugit optio laborum minus debitis natus illo perspiciatis corporis voluptatum rerum laboriosam.
+</hr>
 
+# Unordered list
+* Quisque sem ipsum, placerat nec tortor vel, blandit vestibulum libero. Morbi sollicitudin viverra justo
+* Blandit vestibulum libero. Morbi sollicitudin viverra justo
+* Placerat nec tortor vel, blandit vestibulum libero. Morbi sollicitudin viverra justo
 <hr>
 
-##### Ordered List
-
-1. List item
-2. List item
-3. List item
-4. List item
-5. List item
-
+# Code and Syntax Highlighting :
+``` javascript
+var s = "JavaScript syntax highlighting";
+const plukDeop = key => obj => key.split
+const compose = key => obj => key.split
+alert(s);
+```
+``` javascript
+var s = "JavaScript syntax highlighting";
+const plukDeop = key => obj => key.split
+const compose = key => obj => key.split
+alert(s);
+```
 <hr>
 
-##### Unordered List
-
-* List item
-* List item
-* List item
-* List item
-* List item
-
+# Buttons
+{{< button "Button" "#!">}} 
 <hr>
 
-#### Notice
+# Quote
+> “Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp speed, you appeared for an instant to be in two places at once.” 
+<hr>
 
+# Notice :
 {{< notice "note" >}}
   This is a simple note.
 {{< /notice >}}
@@ -104,114 +80,64 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nihil enim maxime 
 {{< notice "warning" >}}
   This is a simple warning.
 {{< /notice >}}
+<hr>
 
-#### Tab
+# Tab :
+{{< tabs >}}
+  {{< tab "Tab 1" >}}
+  ## Title goes here
+  Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp speed, you appeared for an instant to be in two places at once. We have a saboteur aboard. We know you’re dealing in stolen ore. But I wanna talk about the assassination attempt on Lieutenant Worf. 
+  {{< /tab >}}
 
-{{< tabs "demo-tab" >}}
+  {{< tab "Tab 2" >}}
+   ## Title goes here
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <br> <br> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  {{< /tab >}}
 
-{{< tab "first" >}}
-First Tab
-{{< /tab >}}
-
-{{< tab "second" >}}
-Second Tab
-{{< /tab >}}
-
-{{< tab "third" >}}
-Third Tab
-{{< /tab >}}
+  {{< tab "Tab 3" >}}
+   ## Title goes here
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.<br> <br>
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo 
+  {{< /tab >}}
 
 {{< /tabs >}}
-
 <hr>
 
-### Collapse
-{{< collapse "This is an accordion 1" >}}
-Lorem ipsum dolor sit amet consectetur adipisicing elit.
-{{< /collapse >}}
-{{< collapse "This is an accordion 2" >}}
-Lorem ipsum dolor sit amet consectetur adipisicing elit.
-{{< /collapse >}}
-{{< collapse "This is an accordion 3" >}}
-Lorem ipsum dolor sit amet consectetur adipisicing elit.
-{{< /collapse >}}
+# Table :
+| #           | First             | Last              | Handle  |
+| :-----------: | :-------------:     |:-------------:    | :-----:|
+| **1**      | Row:1 Cell:1      | Row:1 Cell:2      | Row:1 Cell:3 |
+| **2**      | Row:2 Cell:1      | Row:2 Cell:2      |   Row:2 Cell:3 |
+| **3**      | Row:3 Cell:1      | Row:3 Cell:2      |    Row:3 Cell:3 |
 <hr>
 
-##### Code and Syntax Highlighting
+# Collapse :
+ {{< collapse "collapse 1" >}}
+  * Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  * Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  * Lorem ipsum dolor sit amet consectetur
+ {{< /collapse >}}
 
-Inline `code` has `back-ticks around` it.
+  {{< collapse "collapse 2" >}}
+  * Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  * Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  * Lorem ipsum dolor sit amet consectetur
+ {{< /collapse >}}
 
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
-
-```python
-s = "Python syntax highlighting"
-print s
-```
-
+  {{< collapse "collapse 3" >}}
+  * Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  * Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  * Lorem ipsum dolor sit amet consectetur
+ {{< /collapse >}}
 <hr>
 
-##### Blockquote
-
-> This is a blockquote example.
-
+# Image
+{{< image src="images/post/post-2.jpg" caption="" alt="alter-text" height="400" width="400" position="right" command="fill" option="q100" class="img-fluid" title="image title"  webp="false" >}}
 <hr>
 
-##### Inline HTML
-
-You can also use raw HTML in your Markdown, and it'll mostly work pretty well.
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
+# Gallery
+{{< gallery dir="images/gallery" class="" height="400" width="400" webp="true" command="Fit" options="" zoomable="true" >}}
 <hr>
 
-##### Tables
-
-Colons can be used to align columns.
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don't need to make the
-raw Markdown line up prettily. You can also use inline Markdown.
-
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
-
-<hr>
-
-##### Image
-
-{{< image src="images/post/02.jpg" caption="" alt="alter-text" height="" width="" position="center" command="fill" option="q100" class="img-fluid w-100" title="image title"  webp="false" >}}
-
-<hr>
-
-### Gallery
-
-{{< gallery dir="images/post" class="your-class" webp="false" command="Fit" option="" zoomable="true" >}}
-
-<hr>
-
-### Youtube video
-
-{{< youtube ResipmZmpDU >}}
-
-<hr>
-
-### Custom video
-
-{{< video src="https://www.w3schools.com/html/mov_bbb.mp4" width="500" height="auto" autoplay="false" loop="false" muted="false" controls="true" class="" >}}
+# Youtube :
+{{< youtube C0DPdy98e4c >}}

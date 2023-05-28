@@ -1,9 +1,9 @@
 ---
-title: "Terms And Conditions"
-description: "this is meta description"
+title: "Our Terms And Conditions"
 draft: false
+# description
+description: "This is meta description"
 ---
-
 
 #### Responsibility of Contributors
 

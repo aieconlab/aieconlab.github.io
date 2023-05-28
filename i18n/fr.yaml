@@ -1,68 +1,62 @@
+- id: continue_reading
+  translation: Relecture Continue
+
 - id: search_placeholder
-  translation: Cliquez pour rechercher...
+  translation: Tapez et appuyez sur Entrée ...
 
-- id: our_instagram
-  translation: Notre Instagram
+- id: latest_article
+  translation: Dernier article
 
-- id: name
-  translation: Votre Nom
+- id: categories
+  translation: Les catégories
 
-- id: email 
-  translation: Adresse E-mail
-
-- id: subject
-  translation: Sujette
-
-- id: message
-  translation: Votre Message Ici
-
-- id: send_message
-  translation: Envoyer Maintenant
-
-- id: search_result_for
-  translation: Résultats de recherche pour
-
-- id: you_may_also_like
-  translation: Tu Pourrais Aussi Aimer
-
-- id: most_recent_post
-  translation: Notre Article le plus récent
-
-- id: written_by
-  translation: Écrit par
-
-- id: read_more
-  translation: Lire la suite
-
-- id: read_article
-  translation: Lire l'article
-
-- id: showing_posts_from
-  translation: Affichage des messages de
-
-- id: home
-  translation: Maison
+- id: tags
+  translation: Mots clés
 
 - id: search
   translation: Chercher
 
-- id: categories
-  translation: Catégories
+- id: date
+  translation: Date
 
-- id: tags
-  translation: Mots Clés
+- id: posted_by
+  translation: Publié par cet auteur
+
+- id: send
+  translation: Envoyer maintenant
+
+- id: name
+  translation: votre nom
+
+- id: email 
+  translation: Votre adresse email
+
+- id: message
+  translation: Votre message ici
+
+- id: subscribe
+  translation: Abonnez-vous maintenant
+
+- id: write_email
+  translation: Formulaires de haine? Écrivez-nous par e-mail
+
+- id: subscribe_newsletter
+  translation: Abonnez-vous à la newsletter
+
+- id: quick_links
+  translation: Liens rapides
 
 - id: social
-  translation: Sociale
+  translation: Liens sociaux
 
-- id: copyright-text
-  translation: Conçu et Développé Par
+- id: back_to_home
+  translation: Back To Home
 
-- id: search_input_placeholder
-  translation: Recherche Logbook ..
+- id: about_me
+  translation: À propos de moi
 
-- id: no_results_for
-  translation: Aucun résultat pour
+- id: page_not_found
+  translation: Ooops! This Page Is Not Available
 
-- id: empty_search_results_placeholder
-  translation: Tapez quelque chose à rechercher..
+- id: search_results_for
+  translation: Search results for

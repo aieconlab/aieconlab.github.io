@@ -1,93 +1,141 @@
-############# English navigation ##############
+############### French navigation ################
 
-# main menu
+# Dropdown menu
 [[main]]
 weight = 1
-url = ""
-name = "Page d'accueil"
+name = "homepage"
 hasChildren = true
 
-  [[main]]
-  parent = "Page d'accueil"
-  weight = 1
-  url = "homepage/list/"
-  name = "List layout"
-
-  [[main]]
-  parent = "Page d'accueil"
-  weight = 2
-  url = "homepage/grid/"
-  name = "Grid layout"
-  
 [[main]]
+parent = "homepage"
+name = "Homepage Full Width"
+url = "homepage/full/"
+weight = 1
+
+[[main]]
+parent = "homepage"
+name = "Homepage Full With Left Sidebar"
+url = "homepage/full-left/"
+weight = 2
+
+[[main]]
+parent = "homepage"
+name = "Homepage Full With Right Sidebar"
+url = "homepage/full-right/"
 weight = 3
+
+[[main]]
+parent = "homepage"
+name = "Homepage List Style"
+url = "homepage/list/"
+weight = 4
+
+[[main]]
+parent = "homepage"
+name = "Homepage List With Left Sidebar"
+url = "homepage/list-left/"
+weight = 5
+
+[[main]]
+parent = "homepage"
+name = "Homepage List With Right Sidebar"
+url = "homepage/list-right/"
+weight = 6
+
+[[main]]
+parent = "homepage"
+name = "Homepage Grid Style"
+url = "homepage/grid/"
+weight = 7
+
+[[main]]
+parent = "homepage"
+name = "Homepage Grid With Left Sidebar"
+url = "homepage/grid-left/"
+weight = 8
+
+[[main]]
+parent = "homepage"
+name = "Homepage Grid With Right Sidebar"
+url = "homepage/grid-right/"
+weight = 9
+
+
+[[main]]
+name = "About"
 url = "about/"
-name = "À propos"
-  
+weight = 2
+
+[[main]]
+name = "Contact"
+url = "contact/"
+weight = 3
+
+# Dropdown menu
 [[main]]
 weight = 4
-url = "contact/"
-name = "Contact"
-
-[[main]]
-weight = 5
-url = "#"
 name = "Pages"
 hasChildren = true
 
-  [[main]]
-  parent = "Pages"
-  weight = 1
-  url = "author/"
-  name = "Auteur"
-  
-  [[main]]
-  parent = "Pages"
-  weight = 2
-  url = "tags/"
-  name = "Mots clés"
-  
-  [[main]]
-  parent = "Pages"
-  weight = 3
-  url = "tags/photography/"
-  name = "Balise unique"
-  
-  [[main]]
-  parent = "Pages"
-  weight = 4
-  url = "categories/"
-  name = "Catégorie"
-  
-  [[main]]
-  parent = "Pages"
-  weight = 5
-  url = "categories/lifestyle/"
-  name = "Catégorie Unique"
-  
-  [[main]]
-  parent = "Pages"
-  weight = 6
-  url = "elements/"
-  name = "Éléments"
-
-############################# Footer Menu ########################
-[[footer]]
+[[main]]
+parent = "Pages"
+name = "Author"
+url = "author/john-doe/"
 weight = 1
-url = "about/"
-name = "À propos"
 
-[[footer]]
+[[main]]
+parent = "Pages"
+name = "Category"
+url = "categories/photography/"
 weight = 2
-url = "author/"
-name = "Auteures"
 
-[[footer]]
+[[main]]
+parent = "Pages"
+name = "Tags"
+url = "tags/photo/"
 weight = 3
-url = "privacy/"
-name = "Confidentialité"
+
+[[main]]
+parent = "Pages"
+name = "Search"
+url = "http://demo.gethugothemes.com/logbook/fr/search/?s=image/"
+weight = 4
+
+[[main]]
+parent = "Pages"
+name = "404 Page"
+url = "404/"
+weight = 5
+
+[[main]]
+parent = "Pages"
+name = "Elements"
+url = "elements/"
+weight = 6
+
+[[main]]
+name = "Shop"
+url = "shop/"
+weight = 5
+
+
+# footer menu
+[[footer]]
+name = "About"
+url = "about/"
+weight = 1
 
 [[footer]]
-weight = 4
+name = "Contact"
+url = "contact/"
+weight = 2
+
+[[footer]]
+name = "Privacy Policy"
+url = "privacy-policy/"
+weight = 3
+
+[[footer]]
+name = "Terms Conditions"
 url = "terms-conditions/"
-name = "termes et conditions"
+weight = 4

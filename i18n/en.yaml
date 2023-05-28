@@ -1,50 +1,11 @@
+- id: continue_reading
+  translation: Continue Reading
+
 - id: search_placeholder
-  translation: Click to search..
+  translation: Type & Hit Enter...
 
-- id: our_instagram
-  translation: Our Instagram
-
-- id: name
-  translation: Your Name
-
-- id: email
-  translation: Email Address
-
-- id: subject
-  translation: Subject
-
-- id: message
-  translation: Your Message Here
-
-- id: send_message
-  translation: Send Message
-
-- id: search_result_for
-  translation: Search results for
-
-- id: you_may_also_like
-  translation: You May Also Like
-
-- id: most_recent_post
-  translation: Our Most Recent Post
-
-- id: written_by
-  translation: Written By
-
-- id: read_more
-  translation: Read More
-  
-- id: read_article
-  translation: Read Article
-
-- id: showing_posts_from
-  translation: Showing posts from
-
-- id: home
-  translation: Home
-
-- id: search
-  translation: Search
+- id: latest_article
+  translation: Latest Article
 
 - id: categories
   translation: Categories
@@ -52,8 +13,50 @@
 - id: tags
   translation: Tags
 
-- id: social
-  translation: Social
+- id: search
+  translation: Search
 
-- id: copyright-text
-  translation: Designed & Developed By
+- id: date
+  translation: Date
+
+- id: posted_by
+  translation: Posted by this author
+
+- id: send
+  translation: Send Now
+
+- id: name
+  translation: Your Name
+
+- id: email 
+  translation: Your Email Address
+
+- id: message
+  translation: Your Message Here
+
+- id: subscribe
+  translation: Subscribe now
+
+- id: write_email
+  translation: Hate Forms? Write Us Email
+
+- id: subscribe_newsletter
+  translation: Subscribe Newsletter
+
+- id: quick_links
+  translation: Quick Links
+
+- id: social
+  translation: Social Links
+
+- id: back_to_home
+  translation: Back To Home
+
+- id: about_me
+  translation: About Me
+
+- id: page_not_found
+  translation: Ooops! This Page Is Not Available
+
+- id: search_results_for
+  translation: Search results for

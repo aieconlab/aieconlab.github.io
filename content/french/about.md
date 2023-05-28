@@ -1,48 +1,38 @@
 ---
-title: "About"
+title: "Hi, I Am John Doe"
+image: "images/author-full.jpg"
+# description
+description: "This is meta description"
 layout: "about"
-image: "images/about.jpg"
 draft: false
 
-#caption
-caption:
-  enable: true
-  title: "I’m Henara Colii, A content writer based in LDN, currently at Bookworm."
-
-# social
 social:
-  enable: true
-  social_links:
-  - link: "https://www.facebook.com/"
-    icon: "fab fa-facebook-f"
-
-  - link: "https://www.twitter.com/"
-    icon: "fab fa-twitter"
-    
-  - link: "https://www.linkedin.com/"
-    icon: "fab fa-instagram"
-    
-  - link: "https://www.github.com/"
-    icon: "fab fa-linkedin-in"
-
-# what_i_do
-what_i_do:
-  title: "What I Do"
-  enable: true
-  item:
-  - title: "Content Writing"
-    icon: "fas fa-pen-nib"
-    description: "Purus eget ipsum elementum venenatis, quis rutrum mi semper nonpurus eget ipsum elementum venenatis."
-    
-  - title: "Photography"
-    icon: "fas fa-camera"
-    description: "Aenean maximus urna magna elementum venenatis, quis rutrum mi semper non purus eget ipsum elementum venenatis."
-    
-  - title: "Web Research"
-    icon: "fas fa-snowflake"
-    description: "Aenean maximus urna magna elementum venenatis, quis rutrum mi semper non purus eget ipsum elementum venenatis."
- 
+  - icon: "fab fa-facebook"
+    link: "https://facebook.com"
+  - icon: "fab fa-twitter"
+    link: "https://twitter.com"
+  - icon: "fab fa-instagram"
+    link: "https://instagram.com"
+  - icon: "fab fa-linkedin-in"
+    link: "https://linkedin.com"
 ---
-A content writer with over 12 years experience working across brand identity, publishing and digital products. Maecenas sit amet purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis, quis rutrum mi semper non purus eget.
 
-Purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis, quis rutrum mi semper non purus eget ipsum elementum venenatis.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Condimentum in urna justo elit turpis risus vitae viverra enim. Augue quis vitae in non nisi, posuere ultrices tempus. Feugiat consequat suspendisse laoreet vitae enim adipiscing cursus. Duis nunc vitae tincidunt sed nibh id. Egestas erat consequat, ornare etiam donec faucibus. Lorem ut enim nunc, senectus adipiscing sed. Lobortis commodo aliquet pulvinar molestie faucibus diam. Semper porttitor justo, et dictum 
+
+Faucibus duis urna, consequat morbi imperdiet pulvinar. Mauris vitae sed aliquet eu tincidunt id. Nulla leo eget erat vel pharetra. Morbi nullam morbi non purus, augue. Massa cras odio ante cursus a mauris. Volutpat faucibus feugiat feugiat euismod congue ridiculus. Et ipsum euismod nulla et aenean diam duis. Sem molestie est mauris sit. Et eleifend odio 
+
+{{< quote by="John Doe" >}}
+Life is a series of natural and spontaneous changes. Don’t resist them – that only create sorrow. Let reality changes be reality. Let things flow naturally way they like.
+{{</ quote >}}
+
+<hr>
+
+#### My Skills & Experiences:
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cumto sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.
+
+* In enim justo, rhoncus ut,
+* Curabitur ullamcorper ultricies
+* Donec vitae sapien utlorem
+
+Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.

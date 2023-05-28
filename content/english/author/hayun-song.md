@@ -1,6 +1,6 @@
 ---
 title: "Hayun Song"
-image: "images/Hayun_Song.jpg"
+image: "images/Hayun_Song.png"
 email: "hayun.econ.ai@gmail.com"
 social:
   - icon : "fab fa-linkedin-in" # themify icon pack : https://themify.me/themify-icons

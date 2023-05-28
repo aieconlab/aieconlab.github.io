@@ -11,7 +11,7 @@ description: "This is meta description"
 # Taxonomies
 categories: ["AI_Trends"]
 tags: ["seasone","new"]
-type: "featured" # available type (regular or featured)
+type: "regular" # available type (regular or featured)
 draft: false
 ---
 

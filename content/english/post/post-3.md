@@ -9,7 +9,7 @@ author: "Hayun Song"
 # description
 description: "This is meta description"
 # Taxonomies
-categories: ["videography"]
+categories: ["AI Anlysis"]
 tags: ["video","image"]
 type: "featured" # available type (regular or featured)
 draft: false

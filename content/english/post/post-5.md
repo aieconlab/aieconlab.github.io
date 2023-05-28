@@ -5,11 +5,11 @@ date: 2020-03-14T15:40:24+06:00
 images:
   - "images/post/post-5.jpg"
 #author
-author: "이정혁"
+author: "JungHyuk Lee"
 # description
 description: "This is meta description"
 # Taxonomies
-categories: ["newyork city"]
+categories: ["AI Columns"]
 tags: ["city","photo"]
 type: "featured" # available type (regular or featured)
 draft: false

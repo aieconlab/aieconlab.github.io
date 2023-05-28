@@ -5,11 +5,11 @@ date: 2020-03-14T15:40:24+06:00
 images:
   - "images/post/post-4.jpg"
 #author
-author: "주영민"
+author: "Youngmin Ju"
 # description
 description: "This is meta description"
 # Taxonomies
-categories: ["four seasone"]
+categories: ["AI Trends"]
 tags: ["seasone","new"]
 type: "featured" # available type (regular or featured)
 draft: false

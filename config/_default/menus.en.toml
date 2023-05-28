@@ -40,8 +40,25 @@ name = "Hayun Song"
 url = "author/hayun-song/"
 weight = 3
 
+
 [[main]]
+name = "AI Trends"
+url = "categories/AI Trends/"
 weight = 5
+
+[[main]]
+name = "AI Anlysis"
+url = "categories/AI Anlysis/"
+weight = 6
+
+[[main]]
+name = "AI Columns"
+url = "categories/AI Columns/"
+weight = 7
+
+
+[[main]]
+weight = 8
 name = "Pages"
 hasChildren = true
 
@@ -53,32 +70,9 @@ weight = 1
 
 [[main]]
 parent = "Pages"
-name = "Category"
-url = "categories/photography/"
-weight = 2
-
-[[main]]
-parent = "Pages"
 name = "Tags"
 url = "tags/photo/"
-weight = 3
-
-[[main]]
-parent = "Pages"
-name = "Search"
-url = "http://demo.gethugothemes.com/logbook/search/?s=image/"
-weight = 4
-
-[[main]]
-parent = "Pages"
-name = "404 Page"
-url = "404/"
-weight = 5
-
-[[main]]
-name = "Shop"
-url = "shop/"
-weight = 6
+weight = 2
 
 
 # footer menu

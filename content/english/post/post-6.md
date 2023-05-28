@@ -4,11 +4,11 @@ date: 2020-03-14T15:40:24+06:00
 # post thumb
 images:
 #author
-author: "송하윤"
+author: "Hayun Song"
 # description
 description: "This is meta description"
 # Taxonomies
-categories: ["newyork city"]
+categories: ["AI Anlysis"]
 tags: ["city","photo"]
 type: "regular" # available type (regular or featured)
 draft: false

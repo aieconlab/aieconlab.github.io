@@ -4,14 +4,14 @@ favicon = "images/favicon.png"
 # logo
 logo = "images/logo.png"
 # use `x` with logo_width, example: "100x"
-logo_width = "200x"
+logo_width = "250x"
 # logo text will only show when logo is missing.
 logo_text = "AIEconLab"
 page_not_found_image = "images/404.png" # 404 error page image
 # image gallery shortcode
 image_gallery = true
 # email address
-email = "georgia.young@example.com"
+email = "youngmin.econ.ai@gmail.com"
 # contact form action
 contact_form_action = "#" # contact form works with https://formspree.io
 # search
@@ -50,11 +50,11 @@ currency = "$"
 
 # promotion
 [promotion]
-title = "Create Stunning Website!!"
-content = "Lorem ipsum dolor sit amet, consectetur sociis. Etiam nunc amet id dignissim. Feugiat id tempor vel sit ornare."
+title = "AIEconLab!"
+content = "Welcome to AIEconLab."
 image = "images/promotion.jpg"
 button_label = "Get Started"
-button_link = "https://themefisher.com/"
+button_link = "https://www.aieconlab.com/"
 
 # seo meta data for OpenGraph / Twitter Card
 [metadata]

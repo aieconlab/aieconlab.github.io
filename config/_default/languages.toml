@@ -5,7 +5,7 @@ languageCode = "en-us"
 contentDir = "content/english"
 weight = 1
 # footer content
-footer_content = "English."
+footer_content = ""
 
 
 ################################### French language #####################################
@@ -15,4 +15,4 @@ languageCode = "fr-fr"
 contentDir = "content/french"
 weight = 2
 # footer content
-footer_content = "French."
+footer_content = ""

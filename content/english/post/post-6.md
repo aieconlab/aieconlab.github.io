@@ -8,7 +8,7 @@ author: "Hayun Song"
 # description
 description: "This is meta description"
 # Taxonomies
-categories: ["AI Anlysis"]
+categories: ["AI_Anlysis"]
 tags: ["city","photo"]
 type: "regular" # available type (regular or featured)
 draft: false

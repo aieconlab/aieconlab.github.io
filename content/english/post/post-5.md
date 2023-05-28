@@ -9,7 +9,7 @@ author: "JungHyuk Lee"
 # description
 description: "This is meta description"
 # Taxonomies
-categories: ["AI Columns"]
+categories: ["AI_Columns"]
 tags: ["city","photo"]
 type: "featured" # available type (regular or featured)
 draft: false

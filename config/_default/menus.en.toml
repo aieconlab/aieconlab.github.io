@@ -42,18 +42,18 @@ weight = 3
 
 
 [[main]]
-name = "AI Trends"
-url = "categories/AI Trends/"
+name = "AI_Trends"
+url = "categories/AI_Trends/"
 weight = 5
 
 [[main]]
-name = "AI Anlysis"
-url = "categories/AI Anlysis/"
+name = "AI_Anlysis"
+url = "categories/AI_Anlysis/"
 weight = 6
 
 [[main]]
-name = "AI Columns"
-url = "categories/AI Columns/"
+name = "AI_Columns"
+url = "categories/AI_Columns/"
 weight = 7
 
 

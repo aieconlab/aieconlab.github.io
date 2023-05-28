@@ -9,7 +9,7 @@ author: "JungHyuk Lee"
 # description
 description: "This is meta description"
 # Taxonomies
-categories: ["AI Columns"]
+categories: ["AI_Columns"]
 tags: ["booth","image"]
 type: "regular" # available type (regular or featured)
 draft: false

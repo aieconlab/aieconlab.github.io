@@ -1,6 +1,6 @@
 ---
-title: "Elements That You Can Use To Create A New Post On This Template."
-date: 2020-03-15T15:40:24+06:00
+title: "Source Page"
+date: 2023-05-20T03:15:24+06:00
 # post thumb
 images:
   - "images/post/post-6.jpg"
@@ -9,10 +9,10 @@ images:
 #author
 author: "Youngmin Ju"
 # description
-description: "This is meta description"
+description: "Sources"
 # Taxonomies
-categories: ["photography"]
-tags: ["photo","image"]
+categories: ["AI_Trends"]
+tags: ["tech","trends"]
 type: "regular" # available type (regular or featured)
 draft: false
 ---

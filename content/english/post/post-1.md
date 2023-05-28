@@ -1,40 +1,60 @@
 ---
-title: "Cheerful Loving Couple Bakers Drinking Coffee"
-date: 2020-03-14T15:40:24+06:00
+title: "2023년 주목해야 할 인공지능 트렌드 키워드 5개"
+date: 2023-05-28T03:15:24+06:00
 # post thumb
 images:
   - "images/post/post-1.jpg"
 #author
 author: "Youngmin Ju"
 # description
-description: "This is meta description"
+description: "생성형 AI 시대가 개막하는 2023년을 바라보며"
 # Taxonomies
 categories: ["AI_Trends"]
-tags: ["photo","image"]
+tags: ["tech","trends"]
 type: "regular" # available type (regular or featured)
 draft: false
 ---
 
-It’s no secret that the digital industry is booming. From exciting startups to global brands, companies
-are reaching out to digital agencies, responding to the new possibilities available. However, the industry
-is fast becoming overcrowded, heaving with agencies offering similar services — on the surface, at least.
-Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to
-innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at
+인공지능 기술 수준은 최근 10년 사이 급격하게 변화했습니다. 단순 업무만을 대신하던 AI는 점점 더 많은 일을 가능하게 만들었죠. 예를 들어, 데이터헌트의 모기업인 피스컬노트는 정부, 의회, 법원 등의 정책, 법, 규제 등의 정보를 인공지능·빅데이터 기술로 수집·분석해 전 세계 5000여 개 기업, 공공기관, 로펌, NGO(비정부 기구) 등에 서비스하고 있습니다. 이렇게 방대한 자료를 상황에 맞게 추려 제공하는 것은, 10년 전만 해도 상상도 못할 일이었죠. 이제 다가오는 2023년에는 더 많은 일들이 가능해질 것입니다. 인공지능과 빅데이터를 다루는 기업이라면 반드시 주목해야 할 다섯 가지의 AI 트렌드 키워드를 공개합니다.
 
-It’s no secret that the digital industry is booming. From exciting startups to global brands, companies
-are reaching out to digital agencies, responding to the new possibilities available. However, the industry
-is fast becoming overcrowded, heaving with agencies offering similar services — on the surface, at least.
-Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to
-innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at
+# 시대의 변화와 거대한 흐름을 맞이하는 인공지능
+‍
+## keyword 1. 인공지능 민주화
+‍
+국내 기업이, 특히 중소·스타트업 기업이 인공지능 도입을 적극적으로 추진할 수 없는 이유는 여러가지가 있습니다. 전문가들은 그 중 가장 큰 원인을 전문 인력의 부재와 기술력의 부족을 꼽았었죠. 실제로 2023년, 많은 기업이 AI 성장 도입 국면 앞에서 멈칫했던 이유도 위와 같습니다.
 
-It’s no secret that the digital industry is booming. From exciting startups to global brands, companies
-are reaching out to digital agencies, responding to the new possibilities available. However, the industry
-is fast becoming overcrowded, heaving with agencies offering similar services — on the surface, at least.
-Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to
-innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at
+데이터헌트는 궁극적으로 모두가 인공지능을 사용하는 미래를 꿈꿉니다. 그것이 개발자든, 데이터 사각지대에 있는 사람이든 말입니다. 모든 사람들이 사용할 수 있고 모든 조직이 혜택을 받을 수 있을 때 인공지능의 잠재력이 최대한 발휘된다고 믿기 때문입니다. 2023년 인공지능 업계 전문가들은 궁극적으로 인공지능의 민주화가 이뤄질 것을 예상하며, “누구든지 데이터 과학자나 엔지니어가 될 수 있도록 함으로써 인공지능의 힘과 유용성이 모두에게 닿을 것이다”라고 설명했습니다.
 
-It’s no secret that the digital industry is booming. From exciting startups to global brands, companies
-are reaching out to digital agencies, responding to the new possibilities available. However, the industry
-is fast becoming overcrowded, heaving with agencies offering similar services — on the surface, at least.
-Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to
-innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at
+## keyword 2. 생성 모델의 진화
+‍
+2022년 가장 뜨거운 관심을 모았던 AI는 다름 아닌 이미지·영상·음성 생성 인공지능 모델이습니다. 알고리즘이 기존에 있던 데이터를 가져와 완전히 새로운 콘텐츠를 생성하는 메커니즘이었죠. 또한 합성 데이터의 인기도 많은 화제를 모았습니다. 머신러닝을 교육하는 과정에서 높은 퀄리티의 합성 데이터를 사용해 훨씬 더 많은 것들을 학습시킬 수 있었죠. 규범이나 제제에 얽매일 필요도 없었기에, 그동안 제도에 묶여 사용하지 못했던 데이터들을 훨씬 더 자유롭게 사용할 수 있었습니다.
+
+전문가들은 2023년에는 기업에서 다목적으로 사용하는 합성 데이터를 생성하는 데에 이와 같은 콘텐츠 생성 AI를 활용할 것이라고 지목했습니다. 합성 오디오나 비디오 데이터를 사용하면 실제 비디오에서 영화와 연설을 캡쳐할 필요가 없습니다. 청중이 보고 싶고, 듣고 싶은 내용을 생성 도구에 입력하기만 하면 인공지능 모델이 자동으로 만들어낼 수 있었죠.
+
+하지만 합성 데이터 역시 아직 해결하지 못한 과제가 많습니다. ‘딥페이크’라고 불리는 부정적인 인식을 완벽하게 탈피하지 못했기 때문이죠. 은퇴한 배우의 얼굴을 복원해 그의 생생한 모습을 통해 팬들의 향수를 불러낼 수 있다는 장점만을 부각하기에, 딥페이크의 악명은 무시할 수준이 아니었습니다. 이미지 생성 인공지능 모델 역시 학습 데이터가 기존 작가들의 그림이었다는 점에서 저작권 논란을 비껴갈 수 없었습니다. 즉, 생성 모델의 시장이 지금의 긍정적인 모습을 이어가기 위해서는 반드시 위 논란을 건강하게 해결해야 할 것입니다.
+
+## keyword 3. 인공지능, 증강현실을 만나다
+‍
+2023년에는 더 많은 사람들이 효율적인 작업을 수행할 수 있도록 특별히 설계된 로봇이나 스마트 기계와 함께 일할 것입니다. 이미 소매나 산업 작업장 등에서 활발하게 사용하고 있죠. 데이터 분석 기능에 즉시 액세스하는 형태의 증강현실(AR) 헤드셋의 형태 역시 종종 보이고 있습니다. 기술을 통해 생산성의 효율을 극대화한 사례로 추대 받고 있죠. 즉, 아이언맨의 충실한 비서, ‘자비스’가 실현될 날이 멀지 않았다는 뜻입니다.
+
+인공지능 기반의 가상 비서는 신속하게 질문에 응답할 수 있을 뿐만 아니라, 비즈니스 의사결정 과정에서 보다 효율적인 대안을 제시할 수 있습니다. 이에 스마트한 기계와 함께 작업하는 능력이 점점 더 필수화되고, 보편화될 것이라고 전문가들은 분석했습니다. 이런 AI가 있는 기업과 비교했을 때, 그렇지 못한 기업은 성장 차이가 벌어질 수밖에 없다고도 덧붙였죠.
+
+하지만 인공지능 증강현실의 만남이 반드시 성공적이었던 것은 아닙니다. 아마존은 2014년에 자체적으로 개발한 스마트폰인 ‘파이어폰(Fire Phone)’을 출시했습니다. 아마존의 대표적인 실패작으로도 꼽히죠. 물론 시대를 너무 앞섰다는 평도 따릅니다. 파이어폰은 4개의 적외선 카메라를 탑재하여 컴퓨터 비전 알고리즘을 실시간 처리할 수 있도록 했습니다. 마치 아이폰 X의 트루뎁스 카메라가 얼굴을 인식하고, 뉴럴 엔진이 데이터를 처리하는 것처럼 말이죠.
+
+이후 이 카메라는 파이어플라이(Firefly)라는 검색 기능에 활용되었습니다. 파이어폰은 실패했지만 그 시스템은 그대로 ‘아마존 GO’에 이식되었죠. ‘아마존 GO’는 궁극적으로 고객이 계산대에 물건을 올려놓지 않더라도 움직이는 장바구니들을 분석해 나갈 때 결제하는 메커니즘을 선보였습니다.
+
+## Keyword 4. 설명 가능한 인공지능
+‍
+인공지능 혁신이 가져다주는 장밋빛 미래를 논하는 글도 많지만, 여전히 그 비전이 과장되었다고 지적하는 사람들도 많습니다. 여전히 신뢰성 측면에서 완벽하지 못하다는 것이죠. 가장 유용하고 강력한 인공지능 사용 사례는 건강이나 금융 정보 등, 매우 민감한 데이터를 취급하는 영역입니다. 아무리 높은 정확도를 자랑하는 예측 분석 모델이라고 하더라도, 사용자의 신뢰를 얻지 못한다면 실용성은 급격히 떨어집니다. 일반 대중이 인공지능 자체를 신뢰하지 않거나, 어떻게 AI가 결정을 내리는지 이해하지 못한다면 정보를 넘겨주지 않을 것이기 때문이죠.
+
+즉, 인공지능 프로젝트를 수행하는 사람들은 모델이 어떻게 이런 결정을 내리게 되었는지 많은 사람들에게 설명할 수 있어야 합니다. 그리고 어떤 정보가 사용되었는지 투명하게 공개되어야 하죠. 인공지능 자체의 판단은 완벽하지 않습니다. 기존 데이터를 학습하는 과정에서 편향된 데이터나 자동화된 편견이 유입될 가능성이 높습니다. 그런 인공지능이 고용이나 사법, 의료 등 기민한 판단이 필요한 분야에 접근하여 결정에 참여한다면 어떻게 될까요? 전문가들은 인공지능 프로젝트의 무조건적인 성공을 위해 사용자 및 소비자들을 기만하는 행위를 멈춰야 한다고 지적했습니다. 시스템의 편견과 불공정을 묻어둔 채 좋은 모습만 보여준다면 빛 좋은 개살구와 다를 바가 없기 때문입니다.
+
+데이터헌트가 데이터 공정 및 처리 과정에서 온전히 인공지능 모델에게 판단을 맡겨두지 않는 이유도 위와 같습니다. 우리가 제작한 플랫폼의 완성도는 신뢰할 수 있지만, 그 과정에서 생길 수 있는 ‘만약의’ 오차를 줄이기 위함이죠. 더 나은 기술력은 시간만 주어진다면 충분히 발전할 수 있습니다. 하지만 사소한 오판이 잘못된 결정을 부를 수 있기에, 데이터헌트는 여전히 전문가의 손길을 필요로 하는 휴먼인더루프 방식을 고집합니다.
+
+‍## keyword 5. 지속 가능한 인공지능
+‍
+모든 업계에서 환경에 대한 관심이 높아지고 있습니다. 인공지능 업계 역시 탄소 배출을 줄이고 환경에 미치는 영향을 최소화하기 위해 노력해야 합니다. 특히 AI 알고리즘은 클라우드 네트워크나 엣지 장치 등 많은 양의 전력과 자원을 필요로 합니다. 따라서 지속 가능한 AI에 대해 논의해봐야 할 시점이 다가오고 있죠.
+
+업계는 지속 가능한 인공지능을 위해 재생 가능한 에너지의 인프라를 구축하기 위해 노력해야 합니다. 단순히 기업의 이익 증대만을 위해 마구잡이로 개발하기보다는, 지구가 직면한 시급한 문제를 전 지구촌이 함께 해결해야 하죠. 전문가들은 2023년 성공적인 인공지능 프로젝트를 위해, 지속 가능한 인공지능 역시 염두에 둬야 할 문제로 강조하고 있습니다. 재생 에너지 등을 사용해 에너지 효율적인 방식으로 제품과 서비스를 만드는 기반의 기획이 필요하다고 짚었습니다.
+
+‍

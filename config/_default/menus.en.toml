@@ -18,67 +18,67 @@ weight = 3
 
 # Dropdown menu
 [[main]]
+weight = 4
 name = "Author"
 hasChildren = true
-weight = 4
 
-    [[main]]
-    parent = "Author"
-    name = "JungHyuk Lee"
-    url = "author/junghyuk-lee/"
-    weight = 1
+[[main]]
+parent = "Author"
+name = "JungHyuk Lee"
+url = "author/junghyuk-lee/"
+weight = 1
 
-    [[main]]
-    parent = "Author"
-    name = "Youngmin Ju"
-    url = "author/youngmin-ju/"
-    weight = 2
+[[main]]
+parent = "Author"
+name = "Youngmin Ju"
+url = "author/youngmin-ju/"
+weight = 2
 
-    [[main]]
-    parent = "Author"
-    name = "Hayun Song"
-    url = "author/hayun-song/"
-    weight = 3
+[[main]]
+parent = "Author"
+name = "Hayun Song"
+url = "author/hayun-song/"
+weight = 3
 
 [[main]]
 weight = 5
 name = "Pages"
 hasChildren = true
 
-    [[main]]
-    parent = "Pages"
-    name = "Elements"
-    url = "elements/"
-    weight = 1
+[[main]]
+parent = "Pages"
+name = "Elements"
+url = "elements/"
+weight = 1
 
-    [[main]]
-    parent = "Pages"
-    name = "Category"
-    url = "categories/photography/"
-    weight = 2
+[[main]]
+parent = "Pages"
+name = "Category"
+url = "categories/photography/"
+weight = 2
 
-    [[main]]
-    parent = "Pages"
-    name = "Tags"
-    url = "tags/photo/"
-    weight = 3
+[[main]]
+parent = "Pages"
+name = "Tags"
+url = "tags/photo/"
+weight = 3
 
-    [[main]]
-    parent = "Pages"
-    name = "Search"
-    url = "http://demo.gethugothemes.com/logbook/search/?s=image/"
-    weight = 4
+[[main]]
+parent = "Pages"
+name = "Search"
+url = "http://demo.gethugothemes.com/logbook/search/?s=image/"
+weight = 4
 
-    [[main]]
-    parent = "Pages"
-    name = "404 Page"
-    url = "404/"
-    weight = 5
+[[main]]
+parent = "Pages"
+name = "404 Page"
+url = "404/"
+weight = 5
 
 [[main]]
 name = "Shop"
 url = "shop/"
-weight = 5
+weight = 6
 
 
 # footer menu

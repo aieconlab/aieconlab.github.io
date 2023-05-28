@@ -1,7 +1,7 @@
 ---
-title: "Hi, I Am John Doe"
-image: "images/author-full.jpg"
-email: "sojonatmail@gmail.com"
+title: "Hi, We are AIEconLab"
+image: "images/author-full.png"
+email: "youngmin.econ.ai@gmail.com"
 # description
 description: "This is meta description"
 layout: "about"

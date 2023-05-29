@@ -29,6 +29,18 @@ custom_script = ""
 # copyright
 copyright = "Design By AIEconLab"
 
+# customize your color and font from here.
+[params.variables]
+color_primary = "#3d85c6"
+body_color = "#fff"
+text_color = "#696c6d"
+text_color_dark = "#1c1d1f"
+text_color_light = "#888c8e"
+border_color = "#ddd"
+black = "#000"
+white = "#fff"
+light = "#f0f0f0"
+
 # Preloader
 [preloader]
 enable = false
@@ -36,14 +48,14 @@ preloader = "" # use jpg, png, svg or gif format.
 
 # Subscription
 [subscription]
-enable = true
+enable = false
 # mailchimp subsciption
 mailchimp_form_action = "https://gmail.us4.list-manage.com/subscribe/post?u=463ee871f45d2d93748e77cad&amp;id=a0a2c6d074" # replace this url with yours
 mailchimp_form_name = "b_463ee871f45d2d93748e77cad_a0a2c6d074"                                                           # replace this code with yours
 
 # snipcart for shop
 [snipcart]
-enable = true
+enable = false
 # snipcart public api key
 snipcart_api = "ZDgxY2ZiM2EtMWRmMi00M2ZkLWI1MDAtNzA2MDc0Y2Q1MzJlNjM3MTAzNDIwOTQ1NDA4NjM4"
 currency = "$"

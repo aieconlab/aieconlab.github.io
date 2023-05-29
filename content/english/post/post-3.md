@@ -11,7 +11,7 @@ description: "This is meta description"
 # Taxonomies
 categories: ["AI_Anlysis"]
 tags: ["video","image"]
-type: "featured" # available type (regular or featured)
+type: "regular" # available type (regular or featured)
 draft: false
 ---
 1. 최신 AI 논문 보는 곳

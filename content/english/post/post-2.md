@@ -3,7 +3,7 @@ title: "완벽한 챗GPT 강의"
 date: 2023-05-26T03:15:24+06:00
 # post thumb
 images:
-  - "images/post/post-2.jpg"
+  - "images/Group1.png"
 #author
 author: "JungHyuk Lee"
 # description

@@ -10,10 +10,10 @@ author: "Youngmin Ju"
 # description
 description: "Sources"
 # Taxonomies
-categories: ["AI_Trends"]
+categories: ["AI_트렌드"]
 tags: ["tech","trend"]
 type: "regular" # available type (regular or featured)
-draft: false
+draft: true
 ---
 
 

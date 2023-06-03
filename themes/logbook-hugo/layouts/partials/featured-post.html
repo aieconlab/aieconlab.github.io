@@ -19,10 +19,10 @@
           <source srcset="{{ $imageLG.RelPermalink }}" media="(max-width: 991px)">
           <source srcset="{{ $imageXL.RelPermalink }}" media="(max-width: 1200px)">
           <source srcset="{{ $imageXL.RelPermalink }}">
-          <img loading="lazy" class="img-fluid w-100 featured-post-img" src="{{$imageXL.RelPermalink}}" alt="post image" width="{{$image.Width}}" height="{{$image.Height}}">
+          <img loading="lazy" class="img-fluid w-100 featured-post-img" src="{{$imageSM.RelPermalink}}" alt="post image" width="{{$image.Width}}" height="{{$image.Height}}">
         </picture>
         {{ else }}
-        <img loading="lazy" class="img-fluid w-100 featured-post-img" src="{{ $imageFallback.RelPermalink }}" alt="post image" width="{{$image.Width}}" height="{{$image.Height}}">
+        <img loading="lazy" class="img-fluid w-100 featured-post-img" src="{{ $imageSM.RelPermalink }}" alt="post image" width="{{$image.Width}}" height="{{$image.Height}}">
         {{ end }}
         {{ end }}
         {{ end }}
@@ -36,10 +36,10 @@
               <li class="list-inline-item">{{ i18n "date" }} : {{ .PublishDate.Format "January 2, 2006" }}</li>
               <li class="list-inline-item">{{ i18n "categories" }} :
                 {{ range $i,$p:= .Params.Categories }}{{if ne $i 0}},{{end}}<a
-                  href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/" class="ml-1">{{ . | humanize }} </a>
+                  href="{{ `categories/` | relLangURL }}{{ . | urlize | upper }}/" class="ml-1">{{ . | upper }} </a>
                 {{end}}</li>
               <li class="list-inline-item">{{i18n "tags"}} : {{ range $i,$p:= .Params.Tags }}{{if ne $i 0}},{{end}}<a
-                  href="{{ `tags/` | relLangURL }}{{ . | urlize | lower }}/" class="ml-1">{{ . | humanize }} </a> {{end}}
+                  href="{{ `tags/` | relLangURL }}{{ . | urlize | upper }}/" class="ml-1">{{ . | upper }} </a> {{end}}
               </li>
             </ul>
           </div>

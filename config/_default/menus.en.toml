@@ -37,18 +37,18 @@ hasChildren = true
 
 
 [[main]]
-name = "AI_Trends"
-url = "categories/AI_Trends/"
+name = "AI_트렌드"
+url = "categories/AI_트렌드/"
 weight = 3
 
 [[main]]
-name = "AI_Anlysis"
-url = "categories/AI_Anlysis/"
+name = "AI_분석"
+url = "categories/AI_분석/"
 weight = 4
 
 [[main]]
-name = "AI_Columns"
-url = "categories/AI_Columns/"
+name = "AI_칼럼"
+url = "categories/AI_칼럼/"
 weight = 5
 
 [[main]]

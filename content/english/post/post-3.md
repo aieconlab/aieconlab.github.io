@@ -9,7 +9,7 @@ author: "Hayun Song"
 # description
 description: "This is meta description"
 # Taxonomies
-categories: ["AI_Anlysis"]
+categories: ["AI_분석"]
 tags: ["tech","AI","Paper"]
 type: "regular" # available type (regular or featured)
 draft: false

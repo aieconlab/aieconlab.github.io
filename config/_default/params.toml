@@ -64,7 +64,7 @@ currency = "$"
 [promotion]
 title = "AIEconLab!"
 content = "Welcome to AIEconLab."
-image = "images/promotion.jpg"
+image = "images/Group1.png"
 button_label = "Get Started"
 button_link = "https://www.aieconlab.com/"
 
@@ -121,28 +121,28 @@ sidebar = [
   "categories",
   "recent-post",
   "tags",
-  "social",
+  #"social",
 ]
 # available widget : search,about-me,categories,tags,recent-post,social,promotion,subscription
 
 
 ############################# social site ########################
-[[social]]
-name = "facebook"
-icon = "fab fa-facebook" # fontawesome icons: https://fontawesome.com/icons/
-link = "#"
+#[[social]]
+#name = "facebook"
+#icon = "fab fa-facebook" # fontawesome icons: https://fontawesome.com/icons/
+#link = "#"
 
 [[social]]
-name = "twitter"
-icon = "fab fa-twitter" # fontawesome icons: https://fontawesome.com/icons/
-link = "#"
+#name = "twitter"
+#icon = "fab fa-twitter" # fontawesome icons: https://fontawesome.com/icons/
+#link = "#"
 
-[[social]]
-name = "linkedin"
-icon = "fab fa-linkedin-in" # fontawesome icons: https://fontawesome.com/icons/
-link = "#"
+#[[social]]
+#name = "linkedin"
+#icon = "fab fa-linkedin-in" # fontawesome icons: https://fontawesome.com/icons/
+#link = "#"
 
 [[social]]
 name = "github"
 icon = "fab fa-github" # fontawesome icons: https://fontawesome.com/icons/
-link = "#"
+link = "https://github.com/aieconlab"

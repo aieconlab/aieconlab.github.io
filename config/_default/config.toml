@@ -3,7 +3,7 @@ baseURL = "https://www.aieconlab.com/"
 title = "AIEconLab"
 theme = "logbook-hugo"
 # post pagination
-paginate = "5"
+paginate = "4"
 # post excerpt
 summaryLength = "50"
 # google analytics

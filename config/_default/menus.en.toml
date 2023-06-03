@@ -56,23 +56,22 @@ name = "Contact"
 url = "contact/"
 weight = 7
 
-[[main]]
-weight = 8
-name = "Pages"
-hasChildren = true
+#[[main]]
+#weight = 8
+#name = "Pages"
+#hasChildren = true
 
-    [[main]]
-    parent = "Pages"
-    name = "Elements"
-    url = "elements/"
-    weight = 1
+#    [[main]]
+#    parent = "Pages"
+#    name = "Elements"
+#    url = "elements/"
+#    weight = 1
 
-    [[main]]
-    parent = "Pages"
-    name = "Tags"
-    url = "tags/photo/"
-    weight = 2
-
+#    [[main]]
+#    parent = "Pages"
+#    name = "Tags"
+#    url = "tags/photo/"
+#    weight = 2
 
 # footer menu
 [[footer]]
@@ -85,12 +84,12 @@ name = "Contact"
 url = "contact/"
 weight = 2
 
-[[footer]]
-name = "Privacy Policy"
-url = "privacy-policy/"
-weight = 3
+#[[footer]]
+#name = "Privacy Policy"
+#url = "privacy-policy/"
+#weight = 3
 
-[[footer]]
-name = "Terms Conditions"
-url = "terms-conditions/"
-weight = 4
+#[[footer]]
+#name = "Terms Conditions"
+#url = "terms-conditions/"
+#weight = 4

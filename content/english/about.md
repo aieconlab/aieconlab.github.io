@@ -7,15 +7,15 @@ description: "This is meta description"
 layout: "about"
 draft: false
 
-social:
-  - icon: "fab fa-facebook"
-    link: "https://facebook.com"
-  - icon: "fab fa-twitter"
-    link: "https://twitter.com"
-  - icon: "fab fa-instagram"
-    link: "https://instagram.com"
-  - icon: "fab fa-linkedin-in"
-    link: "https://linkedin.com"
+# social:
+#   - icon: "fab fa-facebook"
+#     link: "https://facebook.com"
+#   - icon: "fab fa-twitter"
+#     link: "https://twitter.com"
+#   - icon: "fab fa-instagram"
+#     link: "https://instagram.com"
+#   - icon: "fab fa-linkedin-in"
+#     link: "https://linkedin.com"
 ---
 
 AIEconLab (인공지능경제연구소)에 오신 것을 환영합니다.

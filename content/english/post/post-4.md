@@ -10,7 +10,7 @@ author: "Youngmin Ju"
 description: "This is meta description"
 # Taxonomies
 categories: ["AI_트렌드"]
-tags: ["AI","Trend"]
+tags: ["AI","트렌드"]
 type: "regular" # available type (regular or featured)
 draft: false
 ---

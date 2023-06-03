@@ -19,19 +19,19 @@ hasChildren = true
 
     [[main]]
     parent = "Author"
-    name = "JungHyuk Lee"
+    name = "이정혁"
     url = "author/junghyuk-lee/"
     weight = 1
 
     [[main]]
     parent = "Author"
-    name = "Youngmin Ju"
+    name = "주영민"
     url = "author/youngmin-ju/"
     weight = 2
 
     [[main]]
     parent = "Author"
-    name = "Hayun Song"
+    name = "송하윤"
     url = "author/hayun-song/"
     weight = 3
 

@@ -10,7 +10,7 @@ author: "JungHyuk Lee"
 description: "This is meta description"
 # Taxonomies
 categories: ["AI_칼럼"]
-tags: ["AI","Column"]
+tags: ["AI","칼럼"]
 type: "regular" # available type (regular or featured)
 draft: false
 ---

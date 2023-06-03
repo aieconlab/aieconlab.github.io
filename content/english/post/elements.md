@@ -11,7 +11,7 @@ author: "Youngmin Ju"
 description: "Sources"
 # Taxonomies
 categories: ["AI_트렌드"]
-tags: ["tech","trend"]
+tags: ["tech","트렌드"]
 type: "regular" # available type (regular or featured)
 draft: true
 ---

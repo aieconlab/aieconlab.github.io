@@ -1,5 +1,5 @@
 ---
-title: "AI_Anlysis"
+title: "AI_Analysis"
 date: 2023-03-14T15:40:24+06:00
 # post thumb
 images:
@@ -10,9 +10,9 @@ author: "Hayun Song"
 description: "This is meta description"
 # Taxonomies
 categories: ["AI_분석"]
-tags: ["AI","Analysis"]
+tags: ["AI","분석"]
 type: "regular" # available type (regular or featured)
 draft: false
 ---
 
-AI_Anlysis
+AI_Analysis

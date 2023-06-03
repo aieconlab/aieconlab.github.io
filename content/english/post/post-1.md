@@ -10,7 +10,7 @@ author: "Youngmin Ju"
 description: "생성형 AI 시대가 개막하는 2023년을 바라보며"
 # Taxonomies
 categories: ["AI_트렌드"]
-tags: ["tech","Trend"]
+tags: ["tech","트렌드"]
 type: "featured" # available type (regular or featured)
 draft: false
 ---

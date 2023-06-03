@@ -5,7 +5,7 @@ date: 2023-03-14T15:40:24+06:00
 images:
   - "images/post/post-4.jpg"
 #author
-author: "Youngmin Ju"
+author: "주영민"
 # description
 description: "This is meta description"
 # Taxonomies

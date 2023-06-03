@@ -5,7 +5,7 @@ date: 2023-03-14T15:40:24+06:00
 images:
   - "images/post/post-6.jpg"
 #author
-author: "Hayun Song"
+author: "송하윤"
 # description
 description: "This is meta description"
 # Taxonomies

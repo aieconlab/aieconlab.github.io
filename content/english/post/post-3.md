@@ -5,13 +5,13 @@ date: 2023-05-28T03:15:24+06:00
 images:
   - "images/post/post-3.jpg"
 #author
-author: "Hayun Song"
+author: "주영민"
 # description
 description: "This is meta description"
 # Taxonomies
 categories: ["AI_분석"]
 tags: ["tech","AI","분석"]
-type: "regular" # available type (regular or featured)
+type: "featured" # available type (regular or featured)
 draft: false
 ---
 

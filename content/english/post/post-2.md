@@ -5,7 +5,7 @@ date: 2023-05-26T03:15:24+06:00
 images:
   - "images/post/chatgpt.png"
 #author
-author: "JungHyuk Lee"
+author: "이정혁"
 # description
 description: "행시 수석 인공지능 전문 경제학자 이정혁의 완벽한 챗GPT 강의"
 # Taxonomies

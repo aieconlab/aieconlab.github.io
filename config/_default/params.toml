@@ -116,10 +116,10 @@ button = "I Accept"
 sidebar = [
   "search",
   "about-me",
+  "recent-post",
   "promotion",
   "subscription",
-  "categories",
-  "recent-post",
+  "categories",  
   "tags",
   #"social",
 ]

@@ -1,5 +1,5 @@
 ---
-title: "Youngmin Ju"
+title: "주영민 (Youngmin Ju) "
 image: "images/Youngmin_Ju.jpg"
 email: "youngmin.econ.ai@gmail.com"
 social:
@@ -9,4 +9,10 @@ social:
   #   link : "https://github.com/aieconlab"
 ---
 
-주영민 박사. 
+
+-	서던캘리포니아대학교 (USC) 경제학 박사
+-	(현) Datacrunch Global, Data Scientist
+-	주요 저서 및 논문: 
+o	< Control function approach for partly ordered endogenous treatments: Military rank premium in wage >, Oxford Bulletin of Economics and Statistics, 2017
+-	Specialty: 인공지능 트렌드, 최신 기술
+-	Website: https://youngminju.com/

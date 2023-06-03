@@ -1,5 +1,5 @@
 ---
-title: "Hayun Song"
+title: "송하윤 (Hayun Song)"
 image: "images/Hayun_Song.png"
 email: "hayun.econ.ai@gmail.com"
 social:
@@ -9,7 +9,7 @@ social:
   #   link : "https://github.com/aieconlab"
 ---
 
-송하윤 (Hayun Song)
+
 -	서던캘리포니아대학교 (USC) 경제학 박사과정
 -	Specialty: 인공지능 및 머신러닝 이론
 -	Website: 

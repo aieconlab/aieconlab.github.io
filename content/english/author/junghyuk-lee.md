@@ -1,5 +1,5 @@
 ---
-title: "JungHyuk Lee"
+title: "이정혁 (Jung Hyuk Lee)"
 image: "images/JungHyuk_Lee.jpg"
 email: "junghyuk.econ.ai@gmail.com"
 social:

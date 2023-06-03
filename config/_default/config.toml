@@ -5,7 +5,7 @@ theme = "logbook-hugo"
 # post pagination
 paginate = "4"
 # post excerpt
-summaryLength = "50"
+summaryLength = "40"
 # google analytics
 googleAnalytics = "" # Ex: UA-123-45
 # disqus short name

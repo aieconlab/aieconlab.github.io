@@ -4,7 +4,7 @@ favicon = "images/favicon.png"
 # logo
 logo = "images/logo.png"
 # use `x` with logo_width, example: "100x"
-logo_width = "250x"
+logo_width = "328x"
 # logo text will only show when logo is missing.
 logo_text = "AIEconLab"
 page_not_found_image = "images/404.png" # 404 error page image

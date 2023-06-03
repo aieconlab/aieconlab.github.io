@@ -3,7 +3,6 @@ title: "Source Page"
 date: 2023-05-20T03:15:24+06:00
 # post thumb
 images:
-  - "images/post/post-6.jpg"
   - "images/post/post-1.jpg"
   - "images/post/post-3.jpg"
 #author
@@ -12,7 +11,7 @@ author: "Youngmin Ju"
 description: "Sources"
 # Taxonomies
 categories: ["AI_Trends"]
-tags: ["tech","trends"]
+tags: ["tech","trend"]
 type: "regular" # available type (regular or featured)
 draft: false
 ---

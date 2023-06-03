@@ -1,19 +1,19 @@
 ############### English navigation ################
 
 # Dropdown menu
-[[main]]
-name = "Home"
-url = "homepage/grid-right/"
-weight = 1
+#[[main]]
+#name = "Home"
+#url = "homepage/grid-right/"
+#weight = 1
 
 [[main]]
 name = "About"
 url = "about/"
-weight = 2
+weight = 1
 
 # Dropdown menu
 [[main]]
-weight = 3
+weight = 2
 name = "Author"
 hasChildren = true
 
@@ -39,22 +39,22 @@ hasChildren = true
 [[main]]
 name = "AI_Trends"
 url = "categories/AI_Trends/"
-weight = 4
+weight = 3
 
 [[main]]
 name = "AI_Anlysis"
 url = "categories/AI_Anlysis/"
-weight = 5
+weight = 4
 
 [[main]]
 name = "AI_Columns"
 url = "categories/AI_Columns/"
-weight = 6
+weight = 5
 
 [[main]]
 name = "Contact"
 url = "contact/"
-weight = 7
+weight = 6
 
 #[[main]]
 #weight = 8

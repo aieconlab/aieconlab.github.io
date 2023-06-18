@@ -1,6 +1,6 @@
 ---
 title: "AI_Trends"
-date: 2023-06-18T13:25:20+09:00
+date: 2023-05-18T01:00:00+09:00
 # post thumb
 images:
   - "images/post/post-4.jpg"

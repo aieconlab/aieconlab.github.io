@@ -1,6 +1,6 @@
 ---
 title: "본격화되는 인공지능 사회, 우리 사회의 정책적 고민이 시작되어야 하는 이유"
-date: 2023-06-18T13:00:00+06:00
+date: 2023-06-17T13:00:00+06:00
 # post thumb
 images:
   - "images/post/image_statement_ai_safety.png"

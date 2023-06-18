@@ -26,7 +26,7 @@ draft: false
 >
 > (AI로 인한 인류 멸종 위기를 완화하는 것은 팬데믹이나 핵전쟁과 같은 다른 사회적 스케일의 위험들과 동일 선상에서 세계적인 우선순위로 취급되어야 한다.)
 >
-> •	출처: [Center for AI Safety](safe.ai/statement-on-ai-risk)
+> •	출처: [Center for AI Safety](https://www.safe.ai/statement-on-ai-risk)
 
 
 이 짧은 선언문은 인공지능 전문가들이 AI가 인류의 존속을 위협하는 팬데믹, 핵전쟁 수준의 잠재적 위험성을 가질 수 있다고 평가한다는 것을 의미하며, 인류에 대한 실질적이고도 치명적인 위기가 우리가 일상생활에서 체감하는 것보다 훨씬 더 가까워졌을 수도 있음을  시사한다. 

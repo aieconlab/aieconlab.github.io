@@ -10,7 +10,7 @@ author: "이정혁"
 description: "Column No. 1 - AI Safety and Policy"
 # Taxonomies
 categories: ["AI_칼럼"]
-tags: ["AI","칼럼"]
+tags: ["AI","AI안전", "AI정책]
 type: "featured" # available type (regular or featured)
 draft: false
 ---

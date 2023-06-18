@@ -10,7 +10,7 @@ author: "이정혁"
 description: "Column No. 1 - AI Safety and Policy"
 # Taxonomies
 categories: ["AI_칼럼"]
-tags: ["AI","AI안전", "AI정책]
+tags: ["AI","AI안전", "AI정책"]
 type: "featured" # available type (regular or featured)
 draft: false
 ---
@@ -35,6 +35,7 @@ draft: false
 
 
 > **인공지능 관련 미국 정부의 주요 대응 (2023년 상반기까지)**
+> 
 > -	AI 권리장전 청사진 (Blueprint for an AI Bill of Rights) 제시
 > -	AI 위험관리 프레임워크 (AI Risk Management Framework) 발표
 > -	연방정부 기구의 AI 등 신기술 알고리즘에 의한 차별 금지 행정명령 발표

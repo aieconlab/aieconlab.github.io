@@ -1,6 +1,6 @@
 ---
 title: "AI 논문 사이트 모음"
-date: 2023-05-28T03:15:24+06:00
+date: 2023-05-28T03:15:24+09:00
 # post thumb
 images:
   - "images/post/post-3.jpg"

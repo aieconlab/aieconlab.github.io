@@ -1,6 +1,6 @@
 ---
 title: "AI_Analysis"
-date: 2023-03-14T15:40:24+06:00
+date: 2023-03-14T15:40:24+09:00
 # post thumb
 images:
   - "images/post/post-6.jpg"

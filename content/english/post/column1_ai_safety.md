@@ -36,12 +36,12 @@ draft: false
 
 > **인공지능 관련 미국 정부의 주요 대응 (2023년 상반기까지)**
 > 
->  -	AI 권리장전 청사진 (Blueprint for an AI Bill of Rights) 제시
->  -	AI 위험관리 프레임워크 (AI Risk Management Framework) 발표
->  -	연방정부 기구의 AI 등 신기술 알고리즘에 의한 차별 금지 행정명령 발표
->  -	AI 업계 4대 기업 (Alphabet, Anthropic, Microsoft, OpenAI) CEO 면담
->  -	국가차원에서 책임 있는 인공지능 연구개발 (R&D)을 위한 연구기금 지원
->  -	생성형 AI 시스템에 대한 공적 평가방안 발표 등  
+> -	AI 권리장전 청사진 (Blueprint for an AI Bill of Rights) 제시
+> -	AI 위험관리 프레임워크 (AI Risk Management Framework) 발표
+> -	연방정부 기구의 AI 등 신기술 알고리즘에 의한 차별 금지 행정명령 발표
+> -	AI 업계 4대 기업 (Alphabet, Anthropic, Microsoft, OpenAI) CEO 면담
+> -	국가차원에서 책임 있는 인공지능 연구개발 (R&D)을 위한 연구기금 지원
+> -	생성형 AI 시스템에 대한 공적 평가방안 발표 등  
 
 
 다만, 미국 행정부의 대응은 어디까지나 “미국 국민의” 안위에 초점이 맞춰져 있다는 것에 주목할 필요가 있다. (White House Announcement, 2023. 05.04, *“Biden-Harris Administration announces new actions to promote responsible AI innovation that protects Americans’ rights and safety.”*) AI가 그 발생지인 미국을 넘어 전 세계와 인류에 급속한 사회적∙경제적 변화를 유발하고 있음에도 불구하고, (일부 국제기구 차원의 대응을 제외하고는) 근본적인 정책적 대응은 여전히 각국 정부의 손에 맡겨져 있는 것이다.

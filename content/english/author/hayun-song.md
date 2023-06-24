@@ -10,6 +10,6 @@ social:
 ---
 
 
--	서던캘리포니아대학교 (USC) 경제학 박사과정
+-	서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사과정
 -	Specialty: 인공지능 및 머신러닝 이론
 -	Website: 

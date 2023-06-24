@@ -9,7 +9,7 @@ social:
   #   link : "https://github.com/aieconlab"
 ---
 
--	서던캘리포니아대학교 (USC) 경제학 박사
+-	서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사
 -	(현) 기획재정부 예산실
 -	주요 저서 및 논문: 
 < 완벽한 챗GPT 강의 >, 성안당, 2023

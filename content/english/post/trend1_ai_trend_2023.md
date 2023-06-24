@@ -5,7 +5,7 @@ date: 2023-05-27T01:00:00+09:00
 images:
   - "images/post/AI_.jpg"
 #author
-author: "주영민"
+author: "주영민 (Youngmin Ju)"
 # description
 description: "생성형 AI 시대가 개막하는 2023년을 바라보며"
 # Taxonomies

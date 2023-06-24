@@ -1,5 +1,5 @@
 ---
-title: "주영민 (Youngmin Ju) "
+title: "주영민 (Youngmin Ju)"
 image: "images/Youngmin_Ju.jpg"
 email: "youngmin.econ.ai@gmail.com"
 social:

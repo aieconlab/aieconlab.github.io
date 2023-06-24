@@ -3,7 +3,7 @@ title: "2023년 주목해야 할 인공지능 트렌드 키워드 3개"
 date: 2023-05-27T01:00:00+09:00
 # post thumb
 images:
-  - "images/post/post-1.jpg"
+  - "images/post/AI_.jpg"
 #author
 author: "주영민"
 # description

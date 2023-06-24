@@ -1,6 +1,6 @@
 ---
 title: "완벽한 챗GPT 강의"
-date: 2023-05-26T01:00:00+09:00
+date: 2023-06-06T01:00:00+09:00
 # post thumb
 images:
   - "images/post/chatgpt.png"

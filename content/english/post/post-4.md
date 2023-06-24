@@ -12,7 +12,7 @@ description: "This is meta description"
 categories: ["AI_트렌드"]
 tags: ["AI","트렌드"]
 type: "regular" # available type (regular or featured)
-draft: false
+draft: true
 ---
 
 AI_Trends

@@ -12,7 +12,7 @@ description: "This is meta description"
 categories: ["AI_분석"]
 tags: ["AI","분석"]
 type: "regular" # available type (regular or featured)
-draft: false
+draft: true
 ---
 
 AI_Analysis

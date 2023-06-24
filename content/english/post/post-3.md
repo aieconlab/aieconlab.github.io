@@ -12,7 +12,7 @@ description: "This is meta description"
 categories: ["AI_분석"]
 tags: ["tech","AI","분석"]
 type: "featured" # available type (regular or featured)
-draft: false
+draft: true
 ---
 
 ### 1. 최신 AI 논문 보는 곳

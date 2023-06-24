@@ -5,7 +5,7 @@ date: 2023-06-18T01:00:00+09:00
 images:
   - "images/post/image_statement_ai_safety.png"
 #author
-author: "이정혁"
+author: "이정혁 (Jung Hyuk Lee)"
 # description
 description: "Column No. 1 - AI Safety and Policy"
 # Taxonomies

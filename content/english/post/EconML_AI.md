@@ -2,7 +2,6 @@
 title: "경제와 머신러닝 기반의 인공지능"
 date: 2023-07-04T01:00:00+09:00
 # post thumb
-images:
 #author
 author: "송하윤 (Song, Hayun)"
 # description

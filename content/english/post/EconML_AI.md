@@ -13,8 +13,6 @@ type: "featured" # available type (regular or featured)
 draft: false
 ---
 
-### **경제와 머신러닝 기반의 인공지능**
-
 이 포스팅에서는 경제와 머신러닝, 그리고 인공지능 사이의 관계를 명확히 하고 우리가 AI의 시스템을 통해 경제에 대해 어떠한 시각을 가져야하는 지에 대해 이야기를 펼쳐보려고 합니다. 
 
 

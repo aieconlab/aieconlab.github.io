@@ -9,7 +9,7 @@ description: "ML-derived AI and ECON"
 # Taxonomies
 categories: ["AI_분석"]
 tags: ["AI","ML","AI분석","경제분석"]
-type: "featured" # available type (regular or featured)
+type: "regular" # available type (regular or featured)
 draft: false
 ---
 

@@ -10,7 +10,7 @@ author: "이정혁 (Jung Hyuk Lee)"
 description: "행시 수석 인공지능 전문 경제학자 이정혁의 완벽한 챗GPT 강의"
 # Taxonomies
 categories: ["AI_칼럼"]
-tags: ["tech","AI"]
+tags: ["Tech","AI"]
 type: "regular" # available type (regular or featured)
 draft: false
 ---

@@ -27,7 +27,7 @@ draft: false
 
 머신러닝을 단지 방법론적인 툴로 보는 것은, 시간이 흐르며 누적되는 데이터를 통해 성능을 향상시키는 알고리즘으로 이해하는 것입니다. 그러나 동시에, 머신러닝의 기반이 되는 것은 통계적 학습모델입니다 (Hastie et al. 2012). 따라서 경제학적 분석 도구로서 머신러닝을 바라볼 때, 우리는 일반적인 머신러닝의 분류와 경제적 통계분석 사이의 유사성을 탐색하는 것이 적절할 것입니다. 아래 그림은 일반적인 머신러닝의 분류를 도식화한 것입니다.
 
-![기계학습의 일반적인 분류](https://github.com/aieconlab/repo/blob/master/assets/images/post/ML_category.png)
+![기계학습의 일반적인 분류] (/assets/images/post/ML_category.png)
 
 **그림1. 기계학습 (머신러닝, Machine Learning; ML)의 일반적인 분류**
 

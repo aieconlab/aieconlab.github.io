@@ -8,7 +8,7 @@
         {{ range first 1 .}}
         {{ if (fileExists (add `assets/` .)) }}
         {{ $image:= resources.Get . }}
-        {{ $imageFallback:= $image.Fit "800x400" }}
+        {{ $imageFallback:= $image.Resize "800x400" }}
         {{ $imageXL:= $image.Fit "800x400 webp" }}
         {{ $imageLG:= $image.Fit "650x325 webp" }}
         {{ $imageMD:= $image.Fit "600x300 webp" }}

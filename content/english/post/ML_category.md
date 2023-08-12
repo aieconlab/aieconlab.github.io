@@ -7,11 +7,11 @@ images:
 # author
 author: "송하윤 (Hayun Song)"
 # description
-description: "ML Category and Economic Approach"
+description: "ML Category and Economic Approach."
 # Taxonomies
 categories: ["AI_분석"]
 tags: ["AI","ML","AI분석","경제분석","분류"]
-type: "regular" # available type (regular or featured)
+type: "featured" # available type (regular or featured)
 draft: false
 ---
 

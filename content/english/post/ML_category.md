@@ -5,7 +5,7 @@ date: 2023-08-12T01:00:00+09:00
 images:
   - "images/post/defaultlogo.png"
 # author
-author: "송하윤 (Song, Hayun)"
+author: "송하윤 (Hayun Song)"
 # description
 description: "ML Category and Economic Approach"
 # Taxonomies

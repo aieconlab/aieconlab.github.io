@@ -11,7 +11,7 @@ description: "Column No. 1 - AI Safety and Policy"
 # Taxonomies
 categories: ["AI_칼럼"]
 tags: ["AI","AI안전","AI정책"]
-type: "featured" # available type (regular or featured)
+type: "regular" # available type (regular or featured)
 draft: false
 ---
 

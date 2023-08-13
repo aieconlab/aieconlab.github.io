@@ -10,9 +10,9 @@
         {{ $image:= resources.Get . }}
         {{ $imageFallback:= $image.Resize "400x200" }}
         {{ $imageXL:= $image.Resize "400x200 webp" }}
-        {{ $imageLG:= $image.Resize "400x200 webp" }}
-        {{ $imageMD:= $image.Resize "400x200 webp" }}
-        {{ $imageSM:= $image.Resize "400x200 webp" }}
+        {{ $imageLG:= $image.Resize "350x175 webp" }}
+        {{ $imageMD:= $image.Resize "300x150 webp" }}
+        {{ $imageSM:= $image.Resize "250x100 webp" }}
         <picture>
           <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 575px)">
           <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 767px)">

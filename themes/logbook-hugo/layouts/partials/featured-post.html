@@ -8,11 +8,11 @@
         {{ range first 1 .}}
         {{ if (fileExists (add `assets/` .)) }}
         {{ $image:= resources.Get . }}
-        {{ $imageFallback:= $image.Resize "x400" }}
-        {{ $imageXL:= $image.Resize "x400 webp" }}
-        {{ $imageLG:= $image.Resize "x325 webp" }}
-        {{ $imageMD:= $image.Resize "x300 webp" }}
-        {{ $imageSM:= $image.Resize "x200 webp" }}
+        {{ $imageFallback:= $image.Fit "x400" }}
+        {{ $imageXL:= $image.Fit "x400 webp" }}
+        {{ $imageLG:= $image.Fit "x325 webp" }}
+        {{ $imageMD:= $image.Fit "x300 webp" }}
+        {{ $imageSM:= $image.Fit "x200 webp" }}
         <picture>
           <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 575px)">
           <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 767px)">

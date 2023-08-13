@@ -8,11 +8,11 @@
         {{ range first 1 .}}
         {{ if (fileExists (add `assets/` .)) }}
         {{ $image:= resources.Get . }}
-        {{ $imageFallback:= $image.Crop "400x200 smart" }}
-        {{ $imageXL:= $image.Crop "400x200 smart" }}
-        {{ $imageLG:= $image.Crop "400x200 smart" }}
-        {{ $imageMD:= $image.Crop "400x200 smart" }}
-        {{ $imageSM:= $image.Crop "400x200 smart" }}
+        {{ $imageFallback:= $image.Fit "400x200" }}
+        {{ $imageXL:= $image.Fit "400x200" }}
+        {{ $imageLG:= $image.Fit "400x200" }}
+        {{ $imageMD:= $image.Fit "400x200" }}
+        {{ $imageSM:= $image.Fit "400x200" }}
         <picture>
           <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 575px)">
           <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 767px)">

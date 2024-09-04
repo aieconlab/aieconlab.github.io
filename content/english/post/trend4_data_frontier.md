@@ -9,7 +9,7 @@ description: "Trend - Data Frontier"
 # Taxonomies
 categories: ["AI_트렌드"]
 tags: ["AI","Tech","Trend","Industry","Data Frontier"]
-type: "regular" # available type (regular or featured)
+type: "featured" # available type (regular or featured)
 draft: false
 ---
 

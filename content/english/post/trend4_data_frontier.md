@@ -2,6 +2,8 @@
 title: "Data Frontier에 다다른 AI 테크기업들"
 date: 2024-09-04T14:00:00+09:00
 # post thumb
+images:
+  - "images/post/data frontier.png"
 #author
 author: "이정혁 (Jung Hyuk Lee)"
 # description

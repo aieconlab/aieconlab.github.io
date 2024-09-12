@@ -1,6 +1,9 @@
 ---
 title: "AI 붐, 알고보면 거품인가?"
 date: 2024-09-10T20:00:00+09:00
+# post thumb
+images:
+  - "images/post/ai_hype.png"
 #author
 author: "이정혁 (Jung Hyuk Lee)"
 # description

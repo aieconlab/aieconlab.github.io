@@ -8,7 +8,7 @@ description: "Trend - AI hype"
 # Taxonomies
 categories: ["AI_트렌드"]
 tags: ["AI","Tech","Trend","Industry","AI hype"]
-type: "regular" # available type (regular or featured)
+type: "featured" # available type (regular or featured)
 draft: false
 ---
 

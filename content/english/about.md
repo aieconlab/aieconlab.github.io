@@ -1,5 +1,5 @@
 ---
-title: "Hi, We are AIEconLab"
+title: "인공지능경제연구소(AIEconLab)"
 image: "images/author-full.png"
 email: "youngmin.econ.ai@gmail.com"
 # description
@@ -18,7 +18,7 @@ draft: false
 #     link: "https://linkedin.com"
 ---
 
-AIEconLab (인공지능경제연구소)에 오신 것을 환영합니다.
+인공지능경제연구소(AIEconLab)에 오신 것을 환영합니다.
 
 AIEconLab은 2023년 여름 서던캘리포니아대학교(Universoty of Southern California) 경제학 박사 세 사람을 주축으로 설립된 연구단체입니다.
 

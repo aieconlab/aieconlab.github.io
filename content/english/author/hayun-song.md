@@ -10,6 +10,7 @@ social:
 ---
 
 
--	서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사과정
+-	서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사
+-	(현) 대외경제연구원 해외거시팀 부연구위원
 -	Specialty: 인공지능 및 머신러닝 이론
--	Website: 
+-	Website: https://hayunsong.com

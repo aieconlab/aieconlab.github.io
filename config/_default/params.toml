@@ -62,8 +62,8 @@ currency = "$"
 
 # promotion
 [promotion]
-title = "인공지능경제연구소"
-content = "Welcome to AIEconLab."
+title = "AIEconLab"
+content = "인공지능경제연구소"
 image = "images/Group1.png"
 button_label = "Get Started"
 button_link = "https://www.aieconlab.com/"

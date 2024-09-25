@@ -11,7 +11,5 @@ social:
 
 -	서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사
 -	(현) 기획재정부 예산실
--	주요 저서 및 논문: 
-< 완벽한 챗GPT 강의 >, 성안당, 2023
 -	Specialty: 인공지능 사회경제적 영향, 인공지능 정책
 -	Website: https://sites.google.com/usc.edu/jayjhlee/home

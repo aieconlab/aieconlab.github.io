@@ -159,3 +159,8 @@ GANs은 실제 데이터 분포를 모방하는 새로운 합성 데이터를 �
 Agrawal, A., Gans, J., & Goldfarb, A. (Eds.). (2019). Economics of Artificial Intelligence: An Agenda. National Bureau of Economic Research. [https://www.nber.org/books-and-chapters/economics-artificial-intelligence-agenda](https://www.nber.org/books-and-chapters/economics-artificial-intelligence-agenda)
 
 Hastie, Trevor, Tibshirani, Robert and Friedman, Jerome. The Elements of Statistical Learning. New York, NY, USA: Springer New York Inc., 2001.
+
+<hr>
+
+인공지능경제연구소(AIEconLab)은 좋은 정보의 자유로운 교류를 통한 지식 발전을 지향합니다. 동 블로그의 모든 저작물은 자유롭게 퍼나르셔도 됩니다만, 출처를 밝혀주시면 감사하겠습니다. 
+(출처: 인공지능경제연구소(AIEconLab) 블로그(aieconlab.com))

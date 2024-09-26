@@ -20,7 +20,7 @@ draft: false
 
 인공지능경제연구소(AIEconLab)에 오신 것을 환영합니다.
 
-AIEconLab은 2023년 여름 서던캘리포니아대학교(Universoty of Southern California) 경제학 박사 세 사람을 주축으로 설립된 연구단체입니다.
+AIEconLab은 2023년 여름 서던캘리포니아대학교(University of Southern California) 경제학 박사 세 사람을 주축으로 설립된 연구단체입니다.
 
 2022년 11월말 출시된 챗GPT는 전 세계적인 AI 열풍을 불러 일으켰습니다. 어느날 갑자기 생겨난 새로운 기술이 아님에도 불구하고, 챗GPT가 보여준 생성형 인공지능으로서의 놀라운 성능은 어쩌면 인공지능이 인간의 사고능력을 넘어서는 일반 인공 지능(Artificial General Intelligence), 혹은 이것이 초래하는 특이점(Singularity)이 머지 않았다는 기대와 두려움을 낳게 하였습니다. 이미 제프리 힌튼(Geoffrey Hinton) 등 세계적인 인공지능 분야 석학들은 인공지능의 과도한 발전이 인류 미래에 미칠 심대한 위험성을 경고하고 있습니다.
 

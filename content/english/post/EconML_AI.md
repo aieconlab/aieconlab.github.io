@@ -77,3 +77,8 @@ Haugeland, John. (1985). Artiﬁcial Intelligence: The Very Idea. Cambridge, MA:
 Meta AI. (n.d.). About Meta AI. Retrieved June 25, 2023, from [https://ai.facebook.com/about/](https://ai.facebook.com/about/)
 
 Microsoft. (n.d.). Artificial intelligence (AI) architecture. Retrieved June 25, 2023, from [https://learn.microsoft.com/en-us/azure/architecture/data-guide/big-data/ai-overview](https://learn.microsoft.com/en-us/azure/architecture/data-guide/big-data/ai-overview)
+
+<hr>
+
+인공지능경제연구소(AIEconLab)은 좋은 정보의 자유로운 교류를 통한 지식 발전을 지향합니다. 동 블로그의 모든 저작물은 자유롭게 퍼나르셔도 됩니다만, 출처를 밝혀주시면 감사하겠습니다. 
+(출처: 인공지능경제연구소(AIEconLab) 블로그(aieconlab.com))

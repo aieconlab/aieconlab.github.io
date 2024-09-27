@@ -1,6 +1,6 @@
 ---
 title: "UN이 마침내 AI를 위한 새로운 국제 거버넌스 체제를 제시"
-date: 2024-09-26T21:00:00+09:00
+date: 2024-09-27T17:00:00+09:00
 # post thumb
 images:
   - "images/post/UN report_cover.png"

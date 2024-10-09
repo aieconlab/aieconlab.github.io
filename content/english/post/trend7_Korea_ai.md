@@ -1,6 +1,6 @@
 ---
 title: "대한민국 정부와 AI"
-date: 2024-10-10T22:00:00+09:00
+date: 2024-10-10T23:00:00+09:00
 # post thumb
 images:
   - "images/post/ai위원회.png"
@@ -12,7 +12,7 @@ description: "Trend - Korea's AI Policy"
 categories: ["AI_트렌드"]
 tags: ["AI","Tech","Trend","Policy","Sovereign AI"]
 type: "featured" # available type (regular or featured)
-draft: true
+draft: false
 ---
 
 인공지능이 가져오는 급격한 사회 변화와 이에 따른 선제적 대응 필요성에 대해 인식이 공유되면서, 민간부문뿐 아니라 각국 정부도 앞다투어 움직이고 있습니다. 
@@ -53,7 +53,7 @@ OECD Digital Economy Outlook(2024)에 따르면, 우리나라 기업의 디지�
 
 결국, 최첨단 기술의 창발은 시장에서 일어납니다. 
 정부의 본질적인 역할은 어디까지나 혁신이 일어나기 위한 물적·인적 인프라를 구축해 뒷받침하고, 혁신이 사회의 과도한 불균형으로 이어지지 않게 안전판을 마련하는 일입니다. 
-다만, 미국 빅테크 중심의 AI 기술 발전이 거스르기 어려운 대세로 굳어져가는 상황에서, AI시대의 전략적 우위를 점하기 위해 국가가 구체적으로 어디까지 역할을 할 것인지에 대한 논쟁은 현재진행형입니다. 
+그럼에도, 미국 빅테크 중심의 AI 기술 발전이 거스르기 어려운 대세로 굳어져가는 상황에서 AI시대의 전략적 우위를 점하기 위해 국가가 구체적으로 어디까지 역할을 할 것인지에 대한 논쟁은 현재진행형입니다. 
 관련하여, 조선일보에서 소버린 AI 이슈를 심도 있게 다룬 특집기사가 나와 링크를 공유하며, 이 글을 마칩니다.
 
 - 조선일보, 10.8일자, 소버린 AI(上) AI 모델 다툼
@@ -62,7 +62,7 @@ OECD Digital Economy Outlook(2024)에 따르면, 우리나라 기업의 디지�
 
 - 조선일보, 10.10일자, 소버린 AI(下) 한국 AI의 현주소
 
-[링크: soon to be updated]
+[링크: [soon to be updated](https://www.chosun.com/economy/tech_it/2024/10/10/G7PUWBL5BFA2DLDJYQWATTRXPY/)]
 
 
 <hr>

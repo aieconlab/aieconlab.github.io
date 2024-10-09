@@ -38,6 +38,8 @@ draft: true
 마지막으로 넷째, AI 안전 및 글로벌 리더십 확보를 위해 ‘AI기본법’을 연내 제정토록 추진하고, ‘AI안전연구소’를 올 11월 설립합니다. 
 한편, < 4대 분야 정책 추진방향 > 은 AI 스타트업·인재 육성, 핵심·원천기술 확충, 지속 가능한 AI발전·확산 기반 조성, 신질서 정립 및 글로벌 AI규범·거버넌스 주도의 네 가지 입니다. 
 
+![국가 AI전략 정책방향](https://raw.githubusercontent.com/aieconlab/aieconlab.github.io/main/assets/images/post/ai_policy.png)
+
 AI가 주도해갈 가까운 미래를 생각하면, 대통령 직속 국가인공지능위원회의 출범과 정책 청사진의 제시는 고무적인 일입니다. 
 정부는 AI를 우리나라가 육성해 나가야 할 산업(미래 먹거리)으로 보는 관점에 좀 더 중점을 두고 있는 것으로 보입니다. 
 특히, AI도입률을 산업부문 70%, 공공부문 95%로 높이겠다는 포부는 사실상 우리사회 전반에 AI를 일상화·내재화하겠다는 것으로 읽힙니다.
@@ -56,10 +58,11 @@ OECD Digital Economy Outlook(2024)에 따르면, 우리나라 기업의 디지�
 
 - 조선일보, 10.8일자, 소버린 AI(上) AI 모델 다툼
 
-[링크: 
+[링크: https://www.chosun.com/economy/tech_it/2024/10/08/JTOBN4JRZVEWRM3NJRG5RSOQWU/]
 
 - 조선일보, 10.10일자, 소버린 AI(下) 한국 AI의 현주소
-[링크: 
+
+[링크: soon to be updated]
 
 
 <hr>

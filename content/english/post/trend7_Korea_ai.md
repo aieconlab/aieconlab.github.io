@@ -62,8 +62,11 @@ OECD Digital Economy Outlook(2024)에 따르면, 우리나라 기업의 디지�
 
 - 조선일보, 10.10일자, 소버린 AI(下) 한국 AI의 현주소
 
-[링크: [soon to be updated](https://www.chosun.com/economy/tech_it/2024/10/10/G7PUWBL5BFA2DLDJYQWATTRXPY/)]
+[링크: https://www.chosun.com/economy/tech_it/2024/10/10/G7PUWBL5BFA2DLDJYQWATTRXPY/]
 
+- 조선일보, 10.10일자, "AI 제국주의 시대, 최소한 독립국은 돼야"...하정우 센터장 인터뷰
+
+[링크: https://www.chosun.com/economy/tech_it/2024/10/10/OJWPTPOMXRB6HGDKPSWJUZG74E/]
 
 <hr>
 

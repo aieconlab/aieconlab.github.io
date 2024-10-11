@@ -1,6 +1,6 @@
 ---
 title: "대한민국 정부와 AI"
-date: 2024-10-10T23:00:00+09:00
+date: 2024-10-10T22:00:00+09:00
 # post thumb
 images:
   - "images/post/ai위원회.png"

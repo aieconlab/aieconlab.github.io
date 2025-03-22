@@ -23,7 +23,7 @@ draft: false
 
 AI 기술에 관심 있는 분들이라면 앞으로 이 청사진이 어떻게 실현될지 주목할 필요가 있습니다.
 
-다음은 원문 링크와 원문의 요약입니다: [OpenAI의 경제 청사진](https://openai.com/global-affairs/openais-economic-blueprint/)
+다음은 원문 링크와 원문의 전체 번역입니다: [OpenAI의 경제 청사진](https://openai.com/global-affairs/openais-economic-blueprint/)
 
 # 미국의 AI
 # OpenAI의 경제 청사진

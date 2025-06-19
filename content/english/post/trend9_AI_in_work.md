@@ -34,7 +34,6 @@ AI 기술이 발전하면서 우리 마음속에는 막연한 두려움과 피�
 그렇다면 자동화를 원하는 이유는 무엇일까요? 놀랍게도 '일하기 싫어서'가 아니었습니다. 가장 큰 이유는 **"단순하고 반복적인 업무에서 벗어나 더 가치 있는 일에 시간을 쓰고 싶다"** 는 것이었습니다.
 
 ![Figure 4b](https://raw.githubusercontent.com/aieconlab/aieconlab.github.io/main/assets/images/post/workwithai/F4.png)  
-
 > *▲ 그림 1: 노동자들의 자동화 선호 이유 (자료: "Future of Work with AI Agents", Figure 4b) 가장 많은 응답자가 '더 가치 있는 일에 시간을 쓰기 위해' 자동화를 원한다고 답했습니다.*
 
 이는 노동자들이 AI를 자신의 자리를 위협하는 '대체재'가 아닌, 자신의 업무 가치를 높여주는 '조력자'로 인식하고 있다는 것을 보여줍니다.
@@ -52,7 +51,6 @@ AI 기술이 발전하면서 우리 마음속에는 막연한 두려움과 피�
 AI 기술은 이미 많은 것을 할 수 있습니다. 하지만 기술적으로 가능하다고 해서 현장에서 반드시 환영받는 것은 아니었습니다. 스탠퍼드 연구팀은 '노동자의 자동화 선호도'와 '전문가가 평가한 AI의 기술적 역량'을 기준으로 업무를 4개의 영역으로 나누었습니다.
 
 ![Figure 5a](https://raw.githubusercontent.com/aieconlab/aieconlab.github.io/main/assets/images/post/workwithai/F5.png) 
- 
 > *▲ 그림 2: 자동화 선호도-역량 분석 (Desire-Capability Landscape) (자료: "Future of Work with AI Agents", Figure 5a)*
 
 🟢 **자동화 청신호 (Automation "Green Light" Zone):** 노동자도 원하고, AI 역량도 충분한 영역입니다. 고객과의 미팅 일정 조율, 정기적인 데이터 품질 보고서 확인 등이 여기에 해당합니다.
@@ -74,7 +72,6 @@ AI 기술은 이미 많은 것을 할 수 있습니다. 하지만 기술적으�
 분석 결과, 대다수 직업(45.2%)에서 가장 선호되는 협업 형태는 **H3: 동등한 파트너십(Equal Partnership)** 이었습니다.
 
 ![Figure 6b](https://raw.githubusercontent.com/aieconlab/aieconlab.github.io/main/assets/images/post/workwithai/F6.png) 
-
 > *▲ 그림 3: 직업별 선호하는 인간 주도성 척도(HAS) 분포 (자료: "Future of Work with AI Agents", Figure 6b) H3(동등한 파트너십)가 가장 큰 비중을 차지하며, 완전 자동화(H1)나 완전 인간 주도(H5)의 극단적인 형태는 소수에 불과했습니다.*
 
 이는 AI가 모든 것을 알아서 처리해주거나(H1), 인간이 모든 것을 통제하고 AI는 보조만 하는(H5) 극단적인 관계보다, AI와 인간이 서로 긴밀하게 협력하며 시너지를 내는 모델을 사람들이 원한다는 것을 의미합니다. "중요한 일은 내가 직접 확인해야 마음이 놓인다"는 인간의 심리가 반영된 결과일지도 모릅니다.
@@ -86,7 +83,6 @@ AI 기술은 이미 많은 것을 할 수 있습니다. 하지만 기술적으�
 그렇다면 AI와의 협업이 보편화될 미래에, 우리는 어떤 능력을 키워야 할까요? 논문은 '현재 고임금을 받는 기술'과 '미래에 높은 인간 주도성을 요구하는 기술'을 비교하며 그 답을 제시합니다.
 
 ![Figure 7](https://raw.githubusercontent.com/aieconlab/aieconlab.github.io/main/assets/images/post/workwithai/F7.png)  
-
 > *▲ 그림 4: 평균 임금과 인간 주도성 요구 수준에 따른 핵심 기술 순위 변화 (자료: "Future of Work with AI Agents", Figure 7) 왼쪽은 현재 임금 기준 순위, 오른쪽은 AI 시대에 요구되는 인간 주도성 기준 순위입니다. 선의 움직임을 통해 미래 가치의 변화를 한눈에 볼 수 있습니다.*
 
 #### 가치가 하락하는 능력:

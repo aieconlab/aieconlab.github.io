@@ -1,5 +1,5 @@
 ---
-title: "인공지능과 소프트웨어 개발의 미래"
+title: "AI가 당신의 직업을 빼앗을까요? 스탠퍼드 논문이 밝힌 '의외의' 미래"
 date: 2025-06-20T01:00:00+09:00
 # post thumb
 images:
@@ -14,8 +14,6 @@ tags: ["AI","Tech","Trend","Work","Future"]
 type: "featured" # available type (regular or featured)
 draft: false
 ---
-
-# AI가 당신의 직업을 빼앗을까요? 스탠퍼드 논문이 밝힌 '의외의' 미래
 
 "AI가 결국 인간의 모든 일을 대체할 것이다."
 

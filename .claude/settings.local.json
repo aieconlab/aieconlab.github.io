@@ -2,7 +2,18 @@
   "permissions": {
     "allow": [
       "Bash(hugo:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(git push:*)",
+      "Bash(ssh:*)",
+      "Bash(dir \"c:\\\\Users\\\\User\\\\.ssh\"\")",
+      "Bash(git remote set-url:*)",
+      "Bash(ssh-add:*)",
+      "Bash(gh auth:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git mv:*)",
+      "Bash(timeout:*)",
+      "Bash(ping:*)"
     ]
   }
 }

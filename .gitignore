@@ -1,0 +1,10 @@
+# Windows NUL device artifact
+nul
+
+# Hugo generated files
+public/
+resources/_gen/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -5,7 +5,7 @@ date: 2025-03-22T16:00:00+09:00
 images:
   - "images/post/AI_in_America.png"
 #author
-author: "송하윤 (Song Hayun)"
+author: "송하윤 (Hayun Song)"
 # description
 description: "AI in America - OpenAI's Economic Blueprint"
 # Taxonomies

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI_분석 on AIEconLab</title>
+    <link>https://www.aieconlab.com/categories/ai_%EB%B6%84%EC%84%9D/</link>
+    <description>Recent content in AI_분석 on AIEconLab</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 12 Aug 2023 01:00:00 +0900</lastBuildDate><atom:link href="https://www.aieconlab.com/categories/ai_%EB%B6%84%EC%84%9D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>기계학습 (머신러닝, Machine Learning; ML)의 분류와 경제학적 접근</title>
+      <link>https://www.aieconlab.com/post/ml_category/</link>
+      <pubDate>Sat, 12 Aug 2023 01:00:00 +0900</pubDate>
+      
+      <guid>https://www.aieconlab.com/post/ml_category/</guid>
+      <description>기계학습 (머신러닝, Machine Learning; ML)의 분류와 경제학적 접근 지난 번의 글에서는 인공지능 (Artificial Intelligence; AI)에 대한 분류와 경제적 개념의 확장을 AI의 정의를 통해 살펴보았습니다. 이번 글에서는 AI 발전의 핵심 요소이며, 사회현상에 대한 경제분석을 가능케 한 기계학습 (Machine Learning; ML) 영역에 대해 논의하고자 합니다.</description>
+    </item>
+    
+    <item>
+      <title>경제와 머신러닝 기반의 인공지능</title>
+      <link>https://www.aieconlab.com/post/econml_ai/</link>
+      <pubDate>Tue, 04 Jul 2023 01:00:00 +0900</pubDate>
+      
+      <guid>https://www.aieconlab.com/post/econml_ai/</guid>
+      <description>이 포스팅에서는 경제와 머신러닝, 그리고 인공지능 사이의 관계를 명확히 하고 우리가 AI의 시스템을 통해 경제에 대해 어떠한 시각을 가져야하는 지에 대해 이야기를 펼쳐보려고 합니다.
+‘빅데이터’라는 한 단어로 정의되는 데이터 혁명은 우리에게 많은 변화를 가져왔습니다. 수많은 변화 중 우리 주위에서 심심치 않게 들리는 ‘인공지능 (AI)’ 혁신 또한 그 첫 시작을 생각해 보면 이 또한 데이터 혁명의 결과라고 할 수 있습니다.</description>
+    </item>
+    
+  </channel>
+</rss>

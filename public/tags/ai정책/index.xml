@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI정책 on AIEconLab</title>
+    <link>https://www.aieconlab.com/tags/ai%EC%A0%95%EC%B1%85/</link>
+    <description>Recent content in AI정책 on AIEconLab</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Jul 2023 01:00:00 +0900</lastBuildDate><atom:link href="https://www.aieconlab.com/tags/ai%EC%A0%95%EC%B1%85/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>인간 – 인공지능 분업구조를 통한 지속가능한 성장</title>
+      <link>https://www.aieconlab.com/post/column_2_div_labor/</link>
+      <pubDate>Sat, 22 Jul 2023 01:00:00 +0900</pubDate>
+      
+      <guid>https://www.aieconlab.com/post/column_2_div_labor/</guid>
+      <description>흔히 경제학의 아버지라 불리는 애덤 스미스가 18세기에 &amp;lt;국부론 (The Wealth of Nations) &amp;gt;을 집필한 이래, 경제학은 이론적으로나 방법론적으로나 눈부신 발전을 이뤄왔다. 그럼에도 불구하고, 경제학의 핵심 원리를 단 하나 꼽으라면 필자는 주저없이 분업(division of labor)의 원리를 고른다. 스미스가 국부론에서 든 유명한 “핀 공장의 예시 (pin factory example)”를 보면, 분업을 통한 생산성 향상의 원리는 자명하다.</description>
+    </item>
+    
+    <item>
+      <title>본격화되는 인공지능 사회, 우리 사회의 정책적 고민이 시작되어야 하는 이유</title>
+      <link>https://www.aieconlab.com/post/column1_ai_safety/</link>
+      <pubDate>Sun, 18 Jun 2023 01:00:00 +0900</pubDate>
+      
+      <guid>https://www.aieconlab.com/post/column1_ai_safety/</guid>
+      <description>작년말 챗GPT 출시 후 본격적으로 이슈화된 인공지능의 급격한 발전은 지난 몇 차례의 인공지능 붐 시기 때와는 또 한 차원 다른 사회적 반응을 유발하고 있다. 인공지능 열광(hype)이라는 표현이 등장할 정도로 인간의 사고수준에 점차 근접해 가는 인공지능 기술에 대한 경탄이 있는 한편, 사회 일각에서는 곧 인간을 넘어설 인공지능에 의해 인류는 종 자체로서 생존의 위기를 맞이할 것이라고 경고하고 있다.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -195,6 +195,20 @@ a:hover {
     overflow-wrap: break-word;
   }
 
+  // Typography Enhancement for Korean Readability
+  p {
+    font-size: 1.0625rem;             // 17px (포스트 본문)
+    line-height: 1.9;                 // 한국어 최적화
+    margin-bottom: 1.5rem;            // 단락 간격 확대
+    color: $text-color;
+  }
+
+  li {
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    margin-bottom: 0.75rem;           // 기존 0.62rem
+  }
+
   img {
     max-width: 100%;
     height: auto;
@@ -263,6 +277,30 @@ a:hover {
 
   strong {
     font-weight: 600;
+  }
+
+  // Heading Hierarchy Enhancement
+  h2 {
+    font-size: 1.5rem;                // 24px
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $border-color;
+  }
+
+  h3 {
+    font-size: 1.25rem;               // 20px
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.875rem;
+  }
+
+  h4 {
+    font-size: 1.125rem;              // 18px
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 
   a {
@@ -437,53 +475,74 @@ a:hover {
   //   }
   // }
 
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
-  blockquote{
-    font-size: 1em;
-    width:95%;
-    margin:50px auto;
-    font-family:Open Sans;
-    font-style:italic;
-    color: #555555;
-    padding:1.5em 35px 1.5em 55px;
-    border-left:8px solid $color-primary ;
-    line-height:1.6;
+  blockquote {
+    font-size: 1.0625rem;             // 17px
+    line-height: 1.85;
+    width: 95%;
+    margin: 2rem auto;
+    font-family: $font-primary;
+    font-style: italic;
+    color: $text-color;
+    padding: 1.5rem 2rem 1.5rem 3rem;
+    border-left: 4px solid $color-primary;
     position: relative;
-    background:#EDEDED;
+    background: $light;
+    border-radius: 0 8px 8px 0;
+
+    p {
+      margin-bottom: 0;
+      font-size: inherit;
+      line-height: inherit;
+    }
   }
 
-  blockquote::before{
-    font-family:Arial;
+  blockquote::before {
+    font-family: Georgia, serif;
     content: "\201C";
-    color:#6ab0de;
-    font-size:4em;
+    color: $color-primary;
+    font-size: 3rem;
     position: absolute;
-    left: 10px;
-    top:-10px;
+    left: 0.5rem;
+    top: 0;
+    line-height: 1;
   }
 
-  blockquote::after{
+  blockquote::after {
     content: '';
   }
 
-  blockquote span{
-    display:block;
-    color:#333333;
+  blockquote span {
+    display: block;
+    color: $text-color-dark;
     font-style: normal;
-    font-weight: bold;
-    margin-top:2em;
+    font-weight: 600;
+    margin-top: 1.5rem;
   }
 
 
   pre {
     display: block;
-    padding: 9.5px;
-    margin: 10px 0px 0.62rem;
+    padding: 1.25rem;
+    margin: 1rem 0 1.5rem;
     white-space: pre-wrap;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 
   code {
     margin-bottom: 0 !important;
-    font-size: 100%;
+    font-size: 0.9rem;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    background: rgba($text-color-light, 0.1);
+  }
+
+  pre code {
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
   }
 }

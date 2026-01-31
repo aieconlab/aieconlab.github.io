@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Frontier on AIEconLab</title>
+    <link>https://www.aieconlab.com/tags/data-frontier/</link>
+    <description>Recent content in Data Frontier on AIEconLab</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 Sep 2024 20:00:00 +0900</lastBuildDate><atom:link href="https://www.aieconlab.com/tags/data-frontier/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Frontier에 다다른 AI 테크기업들</title>
+      <link>https://www.aieconlab.com/post/trend4_data_frontier/</link>
+      <pubDate>Wed, 04 Sep 2024 20:00:00 +0900</pubDate>
+      
+      <guid>https://www.aieconlab.com/post/trend4_data_frontier/</guid>
+      <description>올 8월 유명 저자 세 사람이 Anthropic을 저작권법 위반 혐의로 고소하였으며, 그 외에도 AI Tech 기업들에 대한 저작권법 관련 집단소송이 줄을 잇는 상황입니다. 제일 유명한 사례로 작년에 New York Times가 OpenAI와 마이크로소프트를 상대로 제기한 소송이 있죠.
+전문가들은 이제 AI Tech 기업들은 “data frontier(데이터 프론티어)”에 도달했다고 평가합니다.</description>
+    </item>
+    
+  </channel>
+</rss>

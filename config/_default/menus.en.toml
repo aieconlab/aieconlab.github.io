@@ -38,17 +38,17 @@ hasChildren = true
 
 [[main]]
 name = "AI_트렌드"
-url = "categories/AI_트렌드/"
+url = "categories/ai_트렌드/"
 weight = 3
 
 [[main]]
 name = "AI_분석"
-url = "categories/AI_분석/"
+url = "categories/ai_분석/"
 weight = 4
 
 [[main]]
 name = "AI_칼럼"
-url = "categories/AI_칼럼/"
+url = "categories/ai_칼럼/"
 weight = 5
 
 [[main]]

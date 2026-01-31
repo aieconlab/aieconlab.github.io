@@ -8,18 +8,18 @@
         {{ range first 1 .}}
         {{ if (fileExists (add `assets/` .)) }}
         {{ $image:= resources.Get . }}
-        {{ $imageFallback:= $image.Resize "400x200" }}
-        {{ $imageXL:= $image.Resize "400x200 webp" }}
-        {{ $imageLG:= $image.Resize "350x175 webp" }}
-        {{ $imageMD:= $image.Resize "300x150 webp" }}
-        {{ $imageSM:= $image.Resize "200x100 webp" }}
+        {{ $imageFallback:= $image.Fill "800x400 Center" }}
+        {{ $imageXL:= $image.Fill "800x400 webp Center" }}
+        {{ $imageLG:= $image.Fill "700x350 webp Center" }}
+        {{ $imageMD:= $image.Fill "600x300 webp Center" }}
+        {{ $imageSM:= $image.Fill "400x200 webp Center" }}
         <picture>
-          <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 600px)">
-          <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 600px)">
-          <source srcset="{{ $imageLG.RelPermalink }}" media="(max-width: 600px)">
-          <source srcset="{{ $imageXL.RelPermalink }}" media="(max-width: 600px)">
+          <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 575px)">
+          <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 767px)">
+          <source srcset="{{ $imageLG.RelPermalink }}" media="(max-width: 991px)">
+          <source srcset="{{ $imageXL.RelPermalink }}" media="(max-width: 1199px)">
           <source srcset="{{ $imageXL.RelPermalink }}">
-          <img loading="lazy" class="img-fluid w-100 featured-post-img" src="{{$imageSM.RelPermalink}}" alt="post image" width="{{$image.Width}}" height="{{$image.Height}}">
+          <img loading="lazy" class="img-fluid w-100 featured-post-img" src="{{$imageFallback.RelPermalink}}" alt="post image" width="{{$imageXL.Width}}" height="{{$imageXL.Height}}">
         </picture>
         {{ else }}
         <img loading="lazy" class="img-fluid w-100 featured-post-img" src="{{ $imageSM.RelPermalink }}" alt="post image" width="{{$image.Width}}" height="{{$image.Height}}">

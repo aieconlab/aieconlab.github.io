@@ -1,0 +1,221 @@
+// ============================================
+// Author Page Styles
+// Custom styles for modernized author profile
+// ============================================
+
+// Section Background
+.author-section {
+  background: linear-gradient(180deg, $light 0%, $body-color 100%);
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+// Card Container
+.author-card {
+  background: $white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  padding: 3rem;
+  max-width: 700px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+}
+
+// Header (Avatar + Info)
+.author-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+// Avatar
+.author-avatar {
+  margin-bottom: 1.5rem;
+
+  .avatar-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid $white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      width: 120px;
+      height: 120px;
+    }
+  }
+}
+
+// Author Info
+.author-info {
+  .author-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $text-color-dark;
+    margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+// Social Links
+.author-social {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+
+  .social-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: $light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-color;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: $color-primary;
+      color: $white;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    }
+  }
+}
+
+// Bio Section
+.author-bio {
+  border-top: 1px solid $border-color;
+  padding-top: 2rem;
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: $text-color;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 1rem;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: $color-primary;
+      }
+    }
+  }
+}
+
+// ============================================
+// Post Cards (Author's Posts)
+// ============================================
+
+.post-card {
+  background: $white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+
+    .post-card-image img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.post-card-image {
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+}
+
+.post-card-content {
+  padding: 1.25rem;
+}
+
+.post-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+
+  a {
+    color: $text-color-dark;
+    border-bottom: none;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+.post-card-meta {
+  font-size: 0.85rem;
+  color: $text-color-light;
+  margin-bottom: 0.75rem;
+
+  i {
+    margin-right: 0.25rem;
+  }
+}
+
+.post-card-excerpt {
+  font-size: 0.9rem;
+  color: $text-color;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+// Section Title
+.section-title h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: $color-primary;
+    border-radius: 2px;
+  }
+}

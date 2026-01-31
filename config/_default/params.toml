@@ -30,16 +30,23 @@ custom_script = ""
 copyright = "Design By AIEconLab"
 
 # customize your color and font from here.
-[params.variables]
-color_primary = "#3d85c6"
-body_color = "#fff"
-text_color = "#696c6d"
-text_color_dark = "#1c1d1f"
-text_color_light = "#888c8e"
-border_color = "#ddd"
-black = "#000"
-white = "#fff"
-light = "#f0f0f0"
+[variables]
+# Modern Color Palette (Updated 2026-02-01)
+color_primary = "#2563eb"      # Modern Blue (Tailwind blue-600)
+body_color = "#ffffff"         # Pure white
+text_color = "#334155"         # Slate-700 (더 진한 본문)
+text_color_dark = "#0f172a"    # Slate-900 (제목용)
+text_color_light = "#64748b"   # Slate-500 (보조 텍스트)
+border_color = "#e2e8f0"       # Slate-200 (부드러운 테두리)
+black = "#0f172a"              # Slate-900
+white = "#ffffff"
+light = "#f1f5f9"              # Slate-100 (Surface)
+
+# Typography Settings
+font_primary = "Pretendard"
+font_primary_type = "sans-serif"
+font_secondary = "Pretendard"
+font_secondary_type = "sans-serif"
 
 # Preloader
 [preloader]

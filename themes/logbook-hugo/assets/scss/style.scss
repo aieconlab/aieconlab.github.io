@@ -33,3 +33,6 @@ $icon-font: '{{.icon_font | default "Font Awesome 5 Free"}}';
 {{ end }}
 
 @import 'templates/main.scss';
+
+// Custom Author Page Styles
+@import 'custom/author';

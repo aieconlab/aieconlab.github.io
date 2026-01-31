@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>분류 on AIEconLab</title>
+    <link>https://www.aieconlab.com/tags/%EB%B6%84%EB%A5%98/</link>
+    <description>Recent content in 분류 on AIEconLab</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 12 Aug 2023 01:00:00 +0900</lastBuildDate><atom:link href="https://www.aieconlab.com/tags/%EB%B6%84%EB%A5%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>기계학습 (머신러닝, Machine Learning; ML)의 분류와 경제학적 접근</title>
+      <link>https://www.aieconlab.com/post/ml_category/</link>
+      <pubDate>Sat, 12 Aug 2023 01:00:00 +0900</pubDate>
+      
+      <guid>https://www.aieconlab.com/post/ml_category/</guid>
+      <description>기계학습 (머신러닝, Machine Learning; ML)의 분류와 경제학적 접근 지난 번의 글에서는 인공지능 (Artificial Intelligence; AI)에 대한 분류와 경제적 개념의 확장을 AI의 정의를 통해 살펴보았습니다. 이번 글에서는 AI 발전의 핵심 요소이며, 사회현상에 대한 경제분석을 가능케 한 기계학습 (Machine Learning; ML) 영역에 대해 논의하고자 합니다.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors on AIEconLab</title>
+    <link>https://www.aieconlab.com/author/</link>
+    <description>Recent content in Authors on AIEconLab</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://www.aieconlab.com/author/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>송하윤 (Hayun Song)</title>
+      <link>https://www.aieconlab.com/author/hayun-song/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aieconlab.com/author/hayun-song/</guid>
+      <description> 서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사 (현) 대외경제정책연구원 국제거시팀 부연구위원 Specialty: 인공지능 및 머신러닝 이론 </description>
+    </item>
+    
+    <item>
+      <title>이정혁 (Jung Hyuk Lee)</title>
+      <link>https://www.aieconlab.com/author/junghyuk-lee/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aieconlab.com/author/junghyuk-lee/</guid>
+      <description> 서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사 (현) 기획재정부 예산실 Specialty: 인공지능 사회경제적 영향, 인공지능 정책 </description>
+    </item>
+    
+    <item>
+      <title>주영민 (Youngmin Ju)</title>
+      <link>https://www.aieconlab.com/author/youngmin-ju/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aieconlab.com/author/youngmin-ju/</guid>
+      <description> 서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사 (현) VWS, AI Lead (전) Decode Data Inc., Founder/Data Scientist (전) Datacrunch Global, Data Scientist (전) 육군3사관학교 경제학과 조교수 Specialty: 인공지능 트렌드, 머신러닝, 인과추론, 데이터 사이언스 </description>
+    </item>
+    
+  </channel>
+</rss>

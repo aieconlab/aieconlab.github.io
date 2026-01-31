@@ -77,10 +77,10 @@ button_link = "https://www.aieconlab.com/"
 
 # seo meta data for OpenGraph / Twitter Card
 [metadata]
-keywords = ["Boilerplate", "Hugo", "Themefisher", "GetHugoThemes"]
-description = "This is meta description"
-author = "Themefisher"
-image = "images/favicon.png"                                       # this image will be used as fallback if a page has no image of its own
+keywords = ["AI", "인공지능", "경제학", "AI트렌드", "머신러닝", "AIEconLab", "인공지능경제연구소"]
+description = "인공지능경제연구소(AIEconLab) - AI 경제학 연구, 트렌드 분석, 정책 연구"
+author = "AIEconLab"
+image = "images/logo.png"
 
 # matomo tracking: see https://matomo.org/
 [matomo]
@@ -134,22 +134,17 @@ sidebar = [
 
 
 ############################# social site ########################
-#[[social]]
-#name = "facebook"
-#icon = "fab fa-facebook" # fontawesome icons: https://fontawesome.com/icons/
-#link = "#"
+[[social]]
+name = "주영민 LinkedIn"
+icon = "fab fa-linkedin-in"
+link = "https://www.linkedin.com/in/youngminju/"
 
 [[social]]
-#name = "twitter"
-#icon = "fab fa-twitter" # fontawesome icons: https://fontawesome.com/icons/
-#link = "#"
-
-#[[social]]
-#name = "linkedin"
-#icon = "fab fa-linkedin-in" # fontawesome icons: https://fontawesome.com/icons/
-#link = "#"
+name = "이정혁 LinkedIn"
+icon = "fab fa-linkedin-in"
+link = "https://www.linkedin.com/in/jung-hyuk-lee-0516a719b/"
 
 [[social]]
-name = "github"
-icon = "fab fa-github" # fontawesome icons: https://fontawesome.com/icons/
-link = "https://github.com/aieconlab"
+name = "송하윤 LinkedIn"
+icon = "fab fa-linkedin-in"
+link = "https://www.linkedin.com/in/hayunsong/"

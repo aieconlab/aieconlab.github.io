@@ -100,17 +100,17 @@
     },
     "headline": "{{.Title}}",
     "description": "{{.Params.description}}",
-    "image": "{{.Params.images | relURL}}",
+    {{ if .Params.images }}"image": "{{ (index .Params.images 0) | absURL }}",{{ else }}"image": "{{ site.Params.metadata.image | absURL }}",{{ end }}
     "author": {
       "@type": "Person",
       "name": "{{.Params.author}}"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "{{site.Params.author}}",
+      "name": "AIEconLab",
       "logo": {
         "@type": "ImageObject",
-        "url": "{{site.Params.logo}}"
+        "url": "{{ site.Params.logo | absURL }}"
       }
     },
     "datePublished": "{{.PublishDate.Format `2006-01-02`}}"

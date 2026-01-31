@@ -1,8 +1,22 @@
 {
-  "sessionCount": 12,
+  "sessionCount": 13,
   "lastSession": {
-    "startedAt": "2026-01-31T23:01:42.357Z",
+    "startedAt": "2026-02-01T08:10:00.000Z",
     "platform": "claude",
     "level": "Starter"
+  },
+  "activeFeatures": {
+    "site-improvement": {
+      "phase": "completed",
+      "createdAt": "2026-02-01T08:10:00.000Z",
+      "planPath": "docs/01-plan/features/site-improvement.plan.md",
+      "designPath": "docs/02-design/features/site-improvement.design.md",
+      "analysisPath": "docs/03-analysis/site-improvement.analysis.md",
+      "reportPath": "docs/04-report/features/site-improvement.report.md",
+      "doCompletedAt": "2026-02-01T08:22:00.000Z",
+      "checkCompletedAt": "2026-02-01T08:25:00.000Z",
+      "reportCompletedAt": "2026-02-01T08:28:00.000Z",
+      "matchRate": 100
+    }
   }
 }

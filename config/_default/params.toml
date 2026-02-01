@@ -13,7 +13,7 @@ image_gallery = true
 # email address
 email = "youngmin.econ.ai@gmail.com"
 # contact form action
-contact_form_action = "#" # contact form works with https://formspree.io
+contact_form_action = "https://formspree.io/f/xvzqpdne"
 # search
 search = true
 # main sections

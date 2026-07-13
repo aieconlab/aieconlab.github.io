@@ -1,0 +1,10 @@
+<!--
+  Markdown image render hook (site-level).
+  Usage in markdown:  ![alt text](/path/to/img.png "그림 N: 캡션 텍스트")
+  The quoted title becomes a proper <figcaption> under the image.
+  Images without a title render as a plain figure (no caption).
+-->
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="{{ .Destination | safeURL }}" alt="{{ .Text }}">
+  {{ with .Title }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

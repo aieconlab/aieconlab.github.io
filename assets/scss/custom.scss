@@ -1,0 +1,52 @@
+/* ==========================================================================
+   AIEconLab site-level style overrides (loaded after the theme styles)
+   Scope: mobile fixes for the featured-post slick slider — no visual change
+   on desktop, no content change.
+   ========================================================================== */
+
+/* Korean typography: never break inside a word (applies at every width) */
+.featured-post-content h2,
+.featured-post-content .post-title {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 767px) {
+
+  /* 1) Slider dots: the theme positions them absolutely at the slider's
+     bottom edge; with 14 slides the dot list wraps to two rows and lands
+     on top of the tag line. Let them flow below the slide instead. */
+  .featured-post-slider .slick-dots {
+    position: static !important;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 0.25rem auto 0;
+    padding: 0;
+  }
+  .featured-post-slider .slick-dots li {
+    margin: 0 2px;
+  }
+
+  /* 2) With the dots out of the overlap zone the huge reserved margin
+     under the meta line is dead space — tighten it. */
+  .featured-post-content .post-meta {
+    margin-bottom: 1rem !important;
+  }
+
+  /* 3) Slightly smaller hero title on phones so long Korean titles
+     fit in two lines. */
+  .featured-post-content h2 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+
+  /* 4) Trim the tall empty band between the header and the slider. */
+  section:has(.featured-post-slider) {
+    padding-top: 1.25rem;
+  }
+}

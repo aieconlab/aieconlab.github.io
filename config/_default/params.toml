@@ -80,7 +80,7 @@ button_link = "https://www.aieconlab.com/"
 keywords = ["AI", "인공지능", "경제학", "AI트렌드", "머신러닝", "AIEconLab", "인공지능경제연구소"]
 description = "인공지능경제연구소(AIEconLab) - AI 경제학 연구, 트렌드 분석, 정책 연구"
 author = "AIEconLab"
-image = "images/logo.png"
+image = "images/og-image.png"
 
 # matomo tracking: see https://matomo.org/
 [matomo]

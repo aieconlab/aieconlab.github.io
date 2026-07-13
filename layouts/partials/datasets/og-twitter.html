@@ -1,0 +1,90 @@
+<!--
+  Site override of themes/logbook-hugo/layouts/partials/datasets/og-twitter.html
+  Fixes over the theme version:
+  1. og:image / twitter:image use absolute URLs (.Permalink) — required by FB/Kakao scrapers
+  2. og:image:width/height/type only emitted together with og:image (no orphan tags)
+  3. og:image:type extension had a leading dot ("image/.png") — trimmed
+  4. Images wider than 1200px are resized for the share card (originals stay untouched)
+-->
+{{ $description:= site.Params.metadata.description }}
+{{ $imagePath:= site.Params.metadata.image }}
+
+<!-- if multiple images, get the first one -->
+{{ if .Params.images }}
+{{ range first 1 .Params.images }}
+{{ $imagePath = . }}
+{{ end }}
+{{ else if .Params.image }}
+{{ $imagePath = .Params.image }}
+{{ end }}
+
+<!-- ######### Opengraph and Twitter image meta ############## -->
+{{ if $imagePath }}
+
+<!-- check cdn/static image -->
+{{ if or (hasPrefix $imagePath "http") (fileExists (add `static/` (string $imagePath))) }}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ $imagePath | absURL }}" />
+<meta property="og:image" content="{{ $imagePath | absURL }}" />
+{{ else }}
+
+<!-- content and assets image path variable -->
+{{ $contentImage:= .Resources.GetMatch (printf "*%s*" $imagePath) }}
+{{ $assetImage:= fileExists (add `assets/` (string $imagePath)) }}
+
+<!-- check image existence -->
+{{ if or $contentImage $assetImage }}
+
+{{ if $contentImage }}
+{{ .Scratch.Set "image-exists" $contentImage }}
+{{ else }}
+{{ .Scratch.Set "image-exists" (resources.Get $imagePath) }}
+{{ end }}
+{{ $image:= .Scratch.Get "image-exists" }}
+
+<!-- image extension without the leading dot -->
+{{ $imageExt:= strings.TrimPrefix "." (path.Ext $image.RelPermalink) }}
+
+{{ if eq $imageExt "svg" }}
+<meta property="og:image" content="{{ $image.Permalink }}" />
+<meta name="twitter:image" content="{{ $image.Permalink }}" />
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:type" content="image/svg+xml">
+{{ else }}
+
+<!-- serve a reasonably-sized share image -->
+{{ $ogImage:= $image }}
+{{ if gt $image.Width 1200 }}{{ $ogImage = $image.Resize "1200x" }}{{ end }}
+
+{{ if and (gt $ogImage.Width 144) (gt $ogImage.Height 144) }}
+<meta property="og:image" content="{{ $ogImage.Permalink }}" />
+<meta name="twitter:image" content="{{ $ogImage.Permalink }}" />
+<meta name="twitter:card" content="summary{{ if (and (gt $ogImage.Width 300) (gt $ogImage.Height 157) (not (eq $ogImage.Width $ogImage.Height))) }}_large_image{{ end }}">
+<meta property="og:image:width" content="{{ $ogImage.Width }}">
+<meta property="og:image:height" content="{{ $ogImage.Height }}">
+<meta property="og:image:type" content="image/{{ replaceRE `^jpg$` `jpeg` $imageExt }}">
+{{ end }} <!-- /if image gt 144px -->
+
+{{ end }} <!-- /if svg -->
+{{ end }} <!-- /if image exist -->
+{{ end }} <!-- /check cdn/static image -->
+{{ end }} <!-- /if imagePath -->
+<!-- ######### /Opengraph and Twitter image meta ############## -->
+
+
+<!-- ######### opengraph others meta ############## -->
+<meta property="og:title" content="{{ with .Title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
+<meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with $description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{.Permalink}}" />
+
+<!-- ########## twitter others meta ############### -->
+<meta name="twitter:title" content="{{ with .Title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
+<meta name="twitter:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with $description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+
+{{ with site.Social.twitter }}
+<meta name="twitter:site" content="@{{ . }}" />
+{{ end }}
+{{ range site.Authors }}
+{{ with .twitter }}<meta name="twitter:creator" content="@{{ . }}" />{{ end }}
+{{ end }}

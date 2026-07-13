@@ -8,7 +8,7 @@ AIEconLab (인공지능경제연구소) - A Hugo static site for an AI Economics
 
 - **Site URL**: https://www.aieconlab.com/
 - **Theme**: logbook-hugo
-- **Deployment**: Netlify (auto-deploys from git)
+- **Deployment**: GitHub Pages via GitHub Actions (`.github/workflows/hugo.yml`, Hugo 0.124.0 extended). Every push to `main` builds and deploys automatically — do NOT commit the `public/` build output.
 
 ## Common Commands
 

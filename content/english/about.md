@@ -3,7 +3,7 @@ title: "인공지능경제연구소(AIEconLab)"
 image: "images/author-full.png"
 email: "youngmin.econ.ai@gmail.com"
 # description
-description: "This is meta description"
+description: "인공지능경제연구소(AIEconLab) 소개 - 2023년 서던캘리포니아대학교(USC) 경제학 박사들이 설립한 AI·경제 연구단체입니다."
 layout: "about"
 draft: false
 

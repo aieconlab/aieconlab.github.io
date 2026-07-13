@@ -9,3 +9,6 @@ resources/_gen/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local-only analysis code (not published)
+analysis/

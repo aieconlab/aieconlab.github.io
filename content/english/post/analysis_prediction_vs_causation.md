@@ -104,11 +104,11 @@ $$
 
 시뮬레이션의 논리가 현실에서 어떻게 나타나는지, 한국의 거시 자료로 확인합니다. 1991년부터 2023년까지의 월간 자료에서 3개월 인터뱅크 금리(OECD Main Economic Indicators, FRED 경유)와 소비자물가 상승률을 정리했습니다. 인터뱅크 금리는 정책수단 그 자체가 아니라 정책 기대, 유동성, 위험 프리미엄을 함께 반영하는 시장금리라는 점에 유의가 필요합니다. 인플레이션은 CPI 지수의 100×12개월 로그차분으로 계산했습니다.
 
-![한국 금리와 인플레이션 시계열](/images/post/prediction_causation/fig04_rate_inflation_ts.png "그림 4: 한국의 3개월 인터뱅크 금리와 인플레이션, 1991년부터 2023년까지 월간 자료. (자료: FRED, 계산: 필자)")
+![한국 금리와 인플레이션 시계열](/images/post/prediction_causation/fig04_rate_inflation_ts.png "그림 4: 한국의 3개월 인터뱅크 금리와 인플레이션, 1991년부터 2023년까지 월간 자료. (자료: OECD Main Economic Indicators, FRED 경유. 계산: 필자)")
 
 이번 달의 금리와 12개월 뒤의 인플레이션을 짝지어 회귀하면(1991년 1월부터 2022년 11월까지 383개월), 기울기는 +0.19, 상관계수는 +0.55입니다. 2000년 이후로 표본을 제한해도 기울기 +0.29, 상관 +0.35로 부호가 유지됩니다.
 
-![금리와 1년 뒤 인플레이션](/images/post/prediction_causation/fig05_rate_inflation_scatter.png "그림 5: 이번 달의 인터뱅크 금리와 12개월 뒤 인플레이션의 산점도. 양의 기울기가 뚜렷하다. (자료: FRED, 계산: 필자)")
+![금리와 1년 뒤 인플레이션](/images/post/prediction_causation/fig05_rate_inflation_scatter.png "그림 5: 이번 달의 인터뱅크 금리와 12개월 뒤 인플레이션의 산점도. 양의 기울기가 뚜렷하다. (자료: OECD Main Economic Indicators, FRED 경유. 계산: 필자)")
 
 이 연관은 미래 물가의 예측에 쓸 수 있을 것처럼 보입니다. 다만 예측력에 대한 엄밀한 주장이 되려면 표본 외 평가와, 인플레이션 자신의 과거값이 이미 담고 있는 정보 대비 증분 성능의 검증이 필요합니다. 여기서는 강한 양(+)의 표본 내 연관이 존재한다는 사실까지만 확인해 두고, 본 절의 초점인 다음 단계로 넘어갑니다. 이 계수를 인과로 읽으면 "금리를 올리면 1년 뒤 물가가 오른다"는, 표준적인 통화정책 이론과 정반대의 결론이 나온다는 점입니다.
 
@@ -179,7 +179,7 @@ $$
 * Athey, S. (2017). [Beyond Prediction: Using Big Data for Policy Problems](https://www.science.org/doi/10.1126/science.aal4321). *Science*, 355, 483-485.
 * Athey, S., and G. W. Imbens (2019). [Machine Learning Methods That Economists Should Know About](https://www.annualreviews.org/content/journals/10.1146/annurev-economics-080217-053433). *Annual Review of Economics*, 11, 685-725.
 * Belloni, A., V. Chernozhukov, and C. Hansen (2014). [High-Dimensional Methods and Inference on Structural and Treatment Effects](https://www.aeaweb.org/articles?id=10.1257/jep.28.2.29). *Journal of Economic Perspectives*, 28(2), 29-50.
-* Bernanke, B. S., J. Boivin, and P. Eliasz (2005). [Measuring the Effects of Monetary Policy: A Factor-Augmented Vector Autoregressive (FAVAR) Approach](https://www.nber.org/papers/w10220). *Quarterly Journal of Economics*, 120(1), 387-422.
+* Bernanke, B. S., J. Boivin, and P. Eliasz (2005). [Measuring the Effects of Monetary Policy: A Factor-Augmented Vector Autoregressive (FAVAR) Approach](https://doi.org/10.1162/0033553053327452). *Quarterly Journal of Economics*, 120(1), 387-422.
 * Chernozhukov, V., D. Chetverikov, M. Demirer, E. Duflo, C. Hansen, W. Newey, and J. Robins (2018). [Double/Debiased Machine Learning for Treatment and Structural Parameters](https://doi.org/10.1111/ectj.12097). *The Econometrics Journal*, 21(1), C1-C68.
 * Kleinberg, J., J. Ludwig, S. Mullainathan, and Z. Obermeyer (2015). [Prediction Policy Problems](https://www.aeaweb.org/articles?id=10.1257/aer.p20151023). *American Economic Review: Papers and Proceedings*, 105(5), 491-495.
 * Mullainathan, S., and J. Spiess (2017). [Machine Learning: An Applied Econometric Approach](https://www.aeaweb.org/articles?id=10.1257/jep.31.2.87). *Journal of Economic Perspectives*, 31(2), 87-106.

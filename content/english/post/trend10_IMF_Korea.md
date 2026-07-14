@@ -1,6 +1,6 @@
 ---
 title: "세계는 내리고, 한국은 올렸다: IMF가 공식화한 'AI 경제 격차'"
-date: 2026-07-13T15:30:00+09:00
+date: 2026-07-14T09:00:00+09:00
 # post thumb
 images:
   - "images/post/imf_korea_2026.png"

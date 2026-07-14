@@ -1,6 +1,6 @@
 ---
 title: "경제 전망은 왜 빗나가는가: 35년의 데이터, 그리고 하나의 실험"
-date: 2026-07-13T16:30:00+09:00
+date: 2026-07-14T09:30:00+09:00
 # post thumb
 images:
   - "images/post/forecast_errors_cover.png"

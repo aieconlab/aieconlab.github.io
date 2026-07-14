@@ -4,6 +4,13 @@
    on desktop, no content change.
    ========================================================================== */
 
+/* KaTeX display equations: horizontal scroll on narrow screens instead of page overflow */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.15rem 0;
+}
+
 /* Figures in post bodies: image + small muted caption (render-image hook) */
 .post-figure {
   margin: 1.75rem 0 2.25rem;

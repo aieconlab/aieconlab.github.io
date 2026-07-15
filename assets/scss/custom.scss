@@ -61,143 +61,30 @@ textarea:focus-visible,
   outline: 0;
 }
 
-/* Homepage hierarchy and static editorial cards. */
-.home-featured {
-  padding-top: 3.5rem;
-}
-
-.home-latest {
-  padding-top: 3.75rem;
-}
-
-.home-section-heading {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.home-section-heading h2 {
-  position: relative;
-  margin-bottom: 0;
-  padding-bottom: 0.75rem;
-  font-size: 1.6rem;
-  font-weight: 700;
-}
-
-.home-section-heading h2::after {
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 3rem;
-  height: 3px;
-  border-radius: 3px;
-  background: #2563eb;
-  content: "";
-}
-
-.home-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
-  background: #ffffff;
-  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.home-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.11);
-}
-
-.home-card-media {
-  display: block;
-  overflow: hidden;
-  aspect-ratio: 16 / 9;
-  background: #f1f5f9;
-}
-
-.home-card-media picture {
-  display: block;
-  height: 100%;
-}
-
-.home-card-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.25s ease;
-}
-
-.home-card:hover .home-card-image {
-  transform: scale(1.025);
-}
-
-.home-card-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 1.25rem;
-}
-
-.home-card-title {
-  margin-bottom: 0.8rem;
-  font-size: 1.2rem;
-  font-weight: 700;
-  line-height: 1.45;
+/* Korean typography for titles over the restored homepage hero. */
+.featured-post-content h2,
+.featured-post-content .post-title {
   word-break: keep-all;
   overflow-wrap: break-word;
 }
 
-.home-card-title a {
-  color: #0f172a;
-}
-
-.home-card-title a:hover {
-  color: #2563eb;
-}
-
-.home-card-meta {
+.featured-post-content .post-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem 0.75rem;
-  margin-bottom: 0.8rem;
-  color: #64748b;
-  font-size: 0.82rem;
-  line-height: 1.5;
+  justify-content: center;
+  max-width: 100%;
+  gap: 0.35rem 0.75rem;
 }
 
-.home-card-meta .list-inline-item {
+.featured-post-content .post-meta .list-inline-item {
+  min-width: 0;
+  max-width: 100%;
   margin-right: 0;
+  white-space: normal;
 }
 
-.home-card-meta a {
-  color: #64748b;
-  border-bottom: 1px dotted #cbd5e1;
-}
-
-.home-card-summary {
-  margin-bottom: 1.1rem;
-  color: #475569;
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
-
-.home-latest-card .btn {
-  align-self: flex-start;
-  margin-top: auto;
-}
-
-.home-pagination {
-  margin-top: 1rem;
-}
-
-.home-pagination .page-item.active .page-link {
-  display: inline-block;
+.featured-post-slider:not(.slick-initialized) .featured-post:not(:first-child) {
+  display: none;
 }
 
 /* Long-form article navigation and staff-only commenting. */
@@ -427,6 +314,40 @@ textarea:focus-visible,
 }
 
 @media (max-width: 767px) {
+  .featured-post-slider .slick-dots {
+    position: static !important;
+    left: auto;
+    bottom: auto;
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 0.25rem auto 0;
+    padding: 0;
+    transform: none;
+  }
+
+  .featured-post-slider .slick-dots li {
+    margin: 0 2px;
+  }
+
+  .featured-post-content .post-meta {
+    margin-bottom: 1rem !important;
+  }
+
+  .featured-post-content .featured-post-tags {
+    display: none;
+  }
+
+  .featured-post-content h2 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .home-hero {
+    padding-top: 1.25rem;
+  }
+
   .article-section {
     padding-top: 2rem;
   }
@@ -447,31 +368,6 @@ textarea:focus-visible,
   .staff-comments__header {
     padding: 1rem;
   }
-
-  .home-featured {
-    padding-top: 1.75rem;
-  }
-
-  .home-latest {
-    padding-top: 2.5rem;
-    padding-bottom: 3.5rem;
-  }
-
-  .home-section-heading {
-    margin-bottom: 1.25rem;
-  }
-
-  .home-section-heading h2 {
-    font-size: 1.4rem;
-  }
-
-  .home-card-body {
-    padding: 1.1rem;
-  }
-
-  .home-card-title {
-    font-size: 1.12rem;
-  }
 }
 
 @media (max-width: 575px) {
@@ -481,14 +377,7 @@ textarea:focus-visible,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .skip-link,
-  .home-card,
-  .home-card-image {
+  .skip-link {
     transition: none;
-  }
-
-  .home-card:hover,
-  .home-card:hover .home-card-image {
-    transform: none;
   }
 }

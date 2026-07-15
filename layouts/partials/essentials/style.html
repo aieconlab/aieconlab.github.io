@@ -5,7 +5,8 @@
 -->
 {{ $imageCount := 0 }}
 {{ with .Params.images }}{{ $imageCount = len . }}{{ end }}
-{{ $needsSlick := or (eq .Section "shop") (gt $imageCount 1) }}
+{{ $hasHomeSlider := and .IsHome site.Params.featured_post }}
+{{ $needsSlick := or $hasHomeSlider (eq .Section "shop") (gt $imageCount 1) }}
 {{ $baseStyles := slice }}
 {{ $slickStyles := slice }}
 

@@ -124,7 +124,7 @@ $(document).on("turbolinks:load", preloader);
 			$('.featured-post-slider').slick({
 				slidesToShow: 1,
 				slidesToScroll: 1,
-				autoplay: true,
+				autoplay: false,
 				dots: true,
 				arrows: true,
 				vertical: false,

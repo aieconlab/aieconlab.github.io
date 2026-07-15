@@ -6,7 +6,8 @@
 {{ $needsSearch := eq .Layout "search" }}
 {{ $imageCount := 0 }}
 {{ with .Params.images }}{{ $imageCount = len . }}{{ end }}
-{{ $needsSlick := or (eq .Section "shop") (gt $imageCount 1) }}
+{{ $hasHomeSlider := and .IsHome site.Params.featured_post }}
+{{ $needsSlick := or $hasHomeSlider (eq .Section "shop") (gt $imageCount 1) }}
 {{ $renderedContent := "" }}
 {{ if .IsPage }}{{ $renderedContent = string .Content }}{{ end }}
 {{ $needsGallery := and site.Params.image_gallery (or (in $renderedContent "gallery-item") (in $renderedContent "glightbox") (in $renderedContent "popupable")) }}

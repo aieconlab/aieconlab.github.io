@@ -1,15 +1,22 @@
 {{ define "main" }}
 
-{{ $featuredPosts := first 3 (where site.RegularPages "Type" "featured") }}
+{{ $featuredPosts := slice }}
+{{ if site.Params.featured_post }}
+  {{ $featuredPosts = first 3 (where site.RegularPages "Type" "featured") }}
+{{ end }}
 {{ $featuredPermalinks := slice }}
 {{ range $featuredPosts }}
   {{ $featuredPermalinks = $featuredPermalinks | append .RelPermalink }}
 {{ end }}
 
 {{ $postPages := where site.RegularPages "Section" "in" site.Params.mainSections }}
-{{ $latestPosts := where $postPages "RelPermalink" "not in" $featuredPermalinks }}
-{{ $paginator := .Paginate $latestPosts }}
-{{ $showFeatured := and site.Params.featured_post (eq $paginator.PageNumber 1) }}
+{{ $listPosts := $postPages }}
+{{ if gt (len $featuredPermalinks) 0 }}
+  {{ $listPosts = where $postPages "RelPermalink" "not in" $featuredPermalinks }}
+{{ end }}
+{{ .Scratch.Set "where" $listPosts }}
+{{ $paginator := .Paginate (where (.Scratch.Get "where") "Section" "in" site.Params.mainSections) }}
+{{ $showFeatured := and (gt (len $featuredPosts) 0) (eq $paginator.PageNumber 1) }}
 
 <h1 class="sr-only">
   {{ if eq $paginator.PageNumber 1 }}
@@ -20,9 +27,9 @@
 </h1>
 
 {{ if $showFeatured }}
-  {{ partial "featured-post.html" . }}
+  {{ partial "featured-post.html" (dict "Posts" $featuredPosts) }}
 {{ end }}
 
-{{ partial "home-latest.html" (dict "Page" . "Paginator" $paginator "HasFeatured" $showFeatured) }}
+{{ partial "default.html" . }}
 
 {{ end }}

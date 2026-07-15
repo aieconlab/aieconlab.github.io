@@ -1,74 +1,78 @@
-{{ $featuredPosts := first 3 (where site.RegularPages "Type" "featured") }}
+{{ $featuredPosts := .Posts }}
 
-{{ with $featuredPosts }}
-<section class="home-featured section-sm pb-0" aria-labelledby="featured-heading">
+{{ if gt (len $featuredPosts) 0 }}
+<section class="home-hero section-sm pb-0" aria-label="주요 글">
   <div class="container">
-    <div class="home-section-heading">
-      <h2 id="featured-heading">주요 글</h2>
-    </div>
-
-    <div class="row home-featured-grid">
-      {{ range $index, $post := . }}
+    <div class="featured-post-slider rounded-lg overflow-hidden">
+      {{ range $index, $post := $featuredPosts }}
       {{ $isPriority := eq $index 0 }}
-      <div class="col-lg-4 col-md-6 mb-4">
-        <article class="home-card home-featured-card">
-          {{ with $post.Params.images }}
-          {{ $imagePath := index . 0 }}
-          <a class="home-card-media" href="{{ $post.RelPermalink }}" tabindex="-1">
-            {{ if fileExists (add "assets/" $imagePath) }}
-              {{ $image := resources.Get $imagePath }}
-              {{ $imageFallback := $image.Fill "720x405 Center" }}
-              {{ $imageLG := $image.Fill "720x405 webp Center" }}
-              {{ $imageSM := $image.Fill "480x270 webp Center" }}
+      <article class="featured-post">
+        {{ with $post.Params.images }}
+          {{ range first 1 . }}
+            {{ if fileExists (add "assets/" .) }}
+              {{ $image := resources.Get . }}
+              {{ $imageFallback := $image.Fill "800x400 Center" }}
+              {{ $imageXL := $image.Fill "800x400 webp Center" }}
+              {{ $imageLG := $image.Fill "700x350 webp Center" }}
+              {{ $imageMD := $image.Fill "600x300 webp Center" }}
+              {{ $imageSM := $image.Fill "400x200 webp Center" }}
               <picture>
                 <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 575px)">
-                <source srcset="{{ $imageLG.RelPermalink }}">
+                <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 767px)">
+                <source srcset="{{ $imageLG.RelPermalink }}" media="(max-width: 991px)">
+                <source srcset="{{ $imageXL.RelPermalink }}">
                 <img
-                  class="home-card-image"
+                  class="img-fluid w-100 featured-post-img"
                   src="{{ $imageFallback.RelPermalink }}"
-                  alt="{{ $post.Title }}"
-                  width="{{ $imageLG.Width }}"
-                  height="{{ $imageLG.Height }}"
+                  alt="{{ $post.Title | plainify }}"
+                  width="{{ $imageXL.Width }}"
+                  height="{{ $imageXL.Height }}"
                   loading="{{ if $isPriority }}eager{{ else }}lazy{{ end }}"
                   decoding="async"
                   {{ if $isPriority }}fetchpriority="high"{{ end }}>
               </picture>
             {{ else }}
               <img
-                class="home-card-image"
-                src="{{ $imagePath | absURL }}"
-                alt="{{ $post.Title }}"
+                class="img-fluid w-100 featured-post-img"
+                src="{{ . | absURL }}"
+                alt="{{ $post.Title | plainify }}"
                 loading="{{ if $isPriority }}eager{{ else }}lazy{{ end }}"
                 decoding="async"
                 {{ if $isPriority }}fetchpriority="high"{{ end }}>
             {{ end }}
-          </a>
           {{ end }}
+        {{ end }}
 
-          <div class="home-card-body">
-            <h3 class="home-card-title">
-              <a href="{{ $post.RelPermalink }}">{{ $post.Title | markdownify }}</a>
-            </h3>
-            <ul class="list-inline home-card-meta" aria-label="글 정보">
+        <div class="featured-post-overlay">
+          <div class="featured-post-content">
+            <h2 class="mb-3">
+              <a href="{{ $post.RelPermalink }}" class="post-title">{{ $post.Title | markdownify }}</a>
+            </h2>
+            <ul class="list-inline post-meta mb-5" aria-label="글 정보">
               {{ with $post.Params.author }}
               <li class="list-inline-item">
-                <i class="fas fa-user mr-1" aria-hidden="true"></i>
-                <a href="{{ `author/` | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+                <i class="fas fa-user mr-2" aria-hidden="true"></i><a href="{{ `author/` | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
               </li>
               {{ end }}
               <li class="list-inline-item">
-                <time datetime="{{ $post.PublishDate.Format `2006-01-02` }}">{{ $post.PublishDate.Format "2006년 1월 2일" }}</time>
+                {{ i18n "date" }} : <time datetime="{{ $post.PublishDate.Format `2006-01-02` }}">{{ $post.PublishDate.Format "2006년 1월 2일" }}</time>
               </li>
-              {{ range first 1 $post.Params.categories }}
+              {{ with $post.Params.categories }}
               <li class="list-inline-item">
-                <a href="{{ `categories/` | relLangURL }}{{ . | urlize }}/">{{ replace . "_" " " }}</a>
+                {{ i18n "categories" }} :
+                {{ range $i, $category := . }}{{ if ne $i 0 }},{{ end }}<a href="{{ `categories/` | relLangURL }}{{ $category | urlize }}/" class="ml-1">{{ replace $category "_" " " }}</a>{{ end }}
+              </li>
+              {{ end }}
+              {{ with $post.Params.tags }}
+              <li class="list-inline-item featured-post-tags">
+                {{ i18n "tags" }} :
+                {{ range $i, $tag := . }}{{ if ne $i 0 }},{{ end }}<a href="{{ `tags/` | relLangURL }}{{ $tag | urlize }}/" class="ml-1">{{ replace $tag "_" " " }}</a>{{ end }}
               </li>
               {{ end }}
             </ul>
-            <p class="home-card-summary">{{ $post.Summary | plainify | htmlUnescape | truncate 115 }}</p>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
       {{ end }}
     </div>
   </div>

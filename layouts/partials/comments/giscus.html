@@ -1,12 +1,7 @@
 {{- $config := site.Data.comments -}}
-{{- $discussionNumber := 0 -}}
-{{- with $config.discussions -}}
-  {{- with index . $.RelPermalink -}}
-    {{- $discussionNumber = int . -}}
-  {{- end -}}
-{{- end -}}
+{{- $showComments := and $config.enable .IsPage (eq .Section "post") -}}
 
-{{- if and $config.enable (gt $discussionNumber 0) -}}
+{{- if $showComments -}}
 <section id="staff-comments"
          class="staff-comments mt-5"
          aria-labelledby="staff-comments-title"
@@ -26,8 +21,10 @@
     <script src="https://giscus.app/client.js"
             data-repo="{{ $config.repo }}"
             data-repo-id="{{ $config.repo_id }}"
-            data-mapping="number"
-            data-term="{{ $discussionNumber }}"
+            data-category="{{ $config.category }}"
+            data-category-id="{{ $config.category_id }}"
+            data-mapping="{{ $config.mapping }}"
+            data-strict="{{ if $config.strict }}1{{ else }}0{{ end }}"
             data-reactions-enabled="0"
             data-emit-metadata="0"
             data-input-position="top"

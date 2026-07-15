@@ -1,15 +1,15 @@
-# Pilot configuration: comments are read and written through giscus, while
-# GitHub's collaborators-only interaction limit restricts who can post.
+# Comments are available on every blog post through giscus. Each post is
+# matched to a GitHub Discussion by its stable URL pathname; a Discussion is
+# created automatically when the first comment is submitted.
 enable = true
 repo = "aieconlab/aieconlab.github.io"
 repo_id = "R_kgDOJdD9JQ"
+category = "Announcements"
+category_id = "DIC_kwDOJdD9Jc4DBPpa"
+mapping = "pathname"
+strict = true
 
 # GitHub's collaborators-only interaction limit protects the unlocked
 # Discussions used by giscus. GitHub limits this setting to six months.
 interaction_limit = "collaborators_only"
 interaction_limit_expires_at = "2027-01-15T11:39:22Z"
-
-# Map each article path to its pre-created Discussion number. Discussions must
-# remain unlocked for giscus input while the interaction limit is active.
-[discussions]
-"/post/trend11_345_vision/" = 2

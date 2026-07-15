@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ site.LanguageCode | default `ko-KR` }}" itemscope itemtype="https://schema.org/WebPage">
+<html lang="{{ site.LanguageCode | default `ko-KR` }}" data-ui-language="ko" itemscope itemtype="https://schema.org/WebPage">
 <head>
   {{ partial "essentials/head.html" . }}
   {{ partial "essentials/style.html" . }}
 </head>
 
 <body id="top">
-  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+  <a class="skip-link" href="#main-content" data-ui-i18n="skip_to_content">본문으로 건너뛰기</a>
 
   {{ if hugo.IsProduction }}
     {{ partialCached "components/preloader.html" . }}

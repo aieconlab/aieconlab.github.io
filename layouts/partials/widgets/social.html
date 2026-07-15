@@ -1,0 +1,10 @@
+{{ "<!-- Social -->" | safeHTML }}
+<div class="widget">
+  <h5 class="widget-title"><span data-ui-i18n="social">{{ i18n "social" }}</span></h5>
+  <ul class="list-inline widget-list-inline mb-3">
+    {{ range site.Params.social }}
+    <li class="list-inline-item"><a href="{{.link | safeURL }}" style="padding:5px 15px" aria-label="{{ .name }}"
+      data-ui-aria-label="{{ .ui_key }}"><i class="{{.icon}}" aria-hidden="true"></i></a></li>
+    {{ end }}
+  </ul>
+</div>

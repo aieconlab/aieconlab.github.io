@@ -1,0 +1,27 @@
+{{ "<!-- latest post -->" | safeHTML }}
+<div class="widget">
+  <h5 class="widget-title"><span data-ui-i18n="latest_article">{{ i18n "latest_article" }}</span></h5>
+  <ul class="list-unstyled widget-list mb-0">
+  {{ range first 3 ( where site.RegularPages "Section" "in" site.Params.mainSections )}}
+    <li class="media widget-post align-items-center">
+      <a href="{{ .Permalink }}">
+        {{with .Params.images}}
+        {{ range first 1 .}}
+        {{ if (fileExists (add `assets/` .)) }}
+        {{ $image:= resources.Get . }}
+        {{ $imageSM:= $image.Fill "60x60 center webp" }}
+        <img loading="lazy" class="mr-3" src="{{$imageSM.Permalink}}" alt="">
+        {{ else }}
+        <img loading="lazy" class="mr-3" src="{{ . | absURL }}" alt="">
+        {{ end }}
+        {{ end }}
+        {{end}}
+      </a>
+      <div class="media-body">
+        <h5 class="h6 mb-0"><a href="{{ .Permalink }}">{{ .Title }}</a></h5>
+        <small><time datetime="{{ .PublishDate.Format `2006-01-02` }}" data-ui-date="{{ .PublishDate.Format `2006-01-02` }}">{{ .PublishDate.Format "2006년 1월 2일" }}</time></small>
+      </div>
+    </li>
+  {{ end }}
+  </ul>
+</div>

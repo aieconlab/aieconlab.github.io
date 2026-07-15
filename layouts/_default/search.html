@@ -1,0 +1,41 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-5">
+        <div class="title-bordered">
+          <h1 class="h4"><span data-ui-i18n="search_results_for">{{ i18n `search_results_for`}}</span>
+            <span class="text-primary" id="search-keyword"></span>
+          </h1>
+        </div>
+      </div>
+      <div class="col-12">
+        <div id="search-results"></div>
+        <script id="search-result-template" type="text/x-js-template">
+          <article class="row mb-5" id="summary-${key}">
+            <div class="col-md-4 mb-4 mb-md-0">
+              ${ isset image }<img loading="lazy" class="img-fluid rounded-lg" src="${image}" alt="${title}">${end}
+            </div>
+            <div class="col-md-8">
+              <h3 class="h5"><a class="post-title" href="${link}">${title}</a></h3>
+              <ul class="list-inline post-meta mb-2">
+                <li class="list-inline-item"><span data-ui-i18n="date">{{ i18n "date" }}</span> : <time data-ui-date="${date}">${date}</time></li>
+                ${ isset categories }<li class="list-inline-item"><span data-ui-i18n="categories">{{ i18n "categories" }}</span> : <span data-ui-category-list>${categories}</span></li>${ end }
+              </ul>
+              <p>${snippet}</p>
+              <a href="${link}" class="btn btn-outline-primary"><span data-ui-i18n="continue_reading">{{ i18n "continue_reading"}}</span></a>
+            </div>
+          </article>
+        </script>
+        <script id="search-empty-template" type="text/x-js-template">
+          <div class="text-center">
+            <img class="img-fluid mb-5" src="{{ `no-search-found.png` | relURL }}" width="300" alt="">
+            <h3 data-ui-i18n="no_search_results">{{ i18n "no_search_results" }}</h3>
+          </div>
+        </script>
+      </div>
+    </div>
+  </div>
+</section>
+<script>var indexURL = {{"index.json" | absLangURL}};</script>
+{{ end }}

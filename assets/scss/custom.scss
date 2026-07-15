@@ -61,6 +61,55 @@ textarea:focus-visible,
   outline: 0;
 }
 
+/* Interface-only Korean/English switch. Article content and URLs stay unchanged. */
+html[data-ui-language="en"]:not([data-ui-language-ready="true"]) [data-ui-i18n],
+html[data-ui-language="en"]:not([data-ui-language-ready="true"]) [data-ui-date],
+html[data-ui-language="en"]:not([data-ui-language-ready="true"]) [data-ui-category],
+html[data-ui-language="en"]:not([data-ui-language-ready="true"]) [data-ui-category-list],
+html.ui-language-pending [data-ui-placeholder],
+html.ui-language-pending [data-ui-language-option] {
+  visibility: hidden;
+}
+
+.ui-language-switcher {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.1rem;
+  margin-left: 0.75rem;
+  padding: 0.18rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #f8fafc;
+}
+
+.ui-language-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.15rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.45rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+.ui-language-button:hover {
+  color: #0f172a;
+}
+
+.ui-language-button[aria-pressed="true"] {
+  background: #2563eb;
+  color: #ffffff;
+}
+
 /* Korean typography for titles over the restored homepage hero. */
 .featured-post-content h2,
 .featured-post-content .post-title {
@@ -310,6 +359,15 @@ textarea:focus-visible,
 
   header .navbar-collapse {
     flex-basis: 100%;
+  }
+
+  .ui-language-switcher {
+    margin: 0.75rem auto 0.25rem;
+  }
+
+  .ui-language-button {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
   }
 }
 

@@ -1,7 +1,7 @@
 {{ $featuredPosts := .Posts }}
 
 {{ if gt (len $featuredPosts) 0 }}
-<section class="home-hero section-sm pb-0" aria-label="주요 글">
+<section class="home-hero section-sm pb-0" aria-label="주요 글" data-ui-aria-label="featured_posts">
   <div class="container">
     <div class="featured-post-slider rounded-lg overflow-hidden">
       {{ range $index, $post := $featuredPosts }}
@@ -48,24 +48,25 @@
             <h2 class="mb-3">
               <a href="{{ $post.RelPermalink }}" class="post-title">{{ $post.Title | markdownify }}</a>
             </h2>
-            <ul class="list-inline post-meta mb-5" aria-label="글 정보">
+            <ul class="list-inline post-meta mb-5" aria-label="글 정보" data-ui-aria-label="post_information">
               {{ with $post.Params.author }}
               <li class="list-inline-item">
                 <i class="fas fa-user mr-2" aria-hidden="true"></i><a href="{{ `author/` | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
               </li>
               {{ end }}
               <li class="list-inline-item">
-                {{ i18n "date" }} : <time datetime="{{ $post.PublishDate.Format `2006-01-02` }}">{{ $post.PublishDate.Format "2006년 1월 2일" }}</time>
+                <span data-ui-i18n="date">{{ i18n "date" }}</span> :
+                <time datetime="{{ $post.PublishDate.Format `2006-01-02` }}" data-ui-date="{{ $post.PublishDate.Format `2006-01-02` }}">{{ $post.PublishDate.Format "2006년 1월 2일" }}</time>
               </li>
               {{ with $post.Params.categories }}
               <li class="list-inline-item">
-                {{ i18n "categories" }} :
-                {{ range $i, $category := . }}{{ if ne $i 0 }},{{ end }}<a href="{{ `categories/` | relLangURL }}{{ $category | urlize }}/" class="ml-1">{{ replace $category "_" " " }}</a>{{ end }}
+                <span data-ui-i18n="categories">{{ i18n "categories" }}</span> :
+                {{ range $i, $category := . }}{{ if ne $i 0 }},{{ end }}<a href="{{ `categories/` | relLangURL }}{{ $category | urlize }}/" class="ml-1" data-ui-category="{{ $category }}">{{ replace $category "_" " " }}</a>{{ end }}
               </li>
               {{ end }}
               {{ with $post.Params.tags }}
               <li class="list-inline-item featured-post-tags">
-                {{ i18n "tags" }} :
+                <span data-ui-i18n="tags">{{ i18n "tags" }}</span> :
                 {{ range $i, $tag := . }}{{ if ne $i 0 }},{{ end }}<a href="{{ `tags/` | relLangURL }}{{ $tag | urlize }}/" class="ml-1">{{ replace $tag "_" " " }}</a>{{ end }}
               </li>
               {{ end }}

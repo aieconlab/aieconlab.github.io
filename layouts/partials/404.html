@@ -1,0 +1,15 @@
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 data-ui-i18n="page_not_found">{{i18n `page_not_found`}}</h1>
+        <div class="mb-5">
+          {{ $img:= resources.Get (site.Params.page_not_found_image) }}
+          {{ $img:= $img.Resize "600x webp" }}
+          <img loading="lazy" decoding="async" class="img-fluid" width="600" height="404" src="{{$img.RelPermalink}}" alt="페이지를 찾을 수 없음" data-ui-alt="page_not_found_image_alt">
+        </div>
+        <a href="{{site.BaseURL | relLangURL }}" class="btn btn-primary"><span data-ui-i18n="back_to_home">{{i18n "back_to_home"}}</span></a>
+      </div>
+    </div>
+  </div>
+</section>

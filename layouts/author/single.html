@@ -30,14 +30,21 @@
 
           <!-- Social Links -->
           {{ with .Params.social }}
+          {{ $authorName := $.Title }}
           <div class="author-social">
             {{ range . }}
+            {{ $labelKey := "author_external_profile" }}
+            {{ if in .icon "linkedin" }}{{ $labelKey = "author_linkedin" }}
+            {{ else if in .icon "globe" }}{{ $labelKey = "author_website" }}
+            {{ else if in .icon "university" }}{{ $labelKey = "author_institution" }}{{ end }}
             <a href="{{ .link | safeURL }}"
                class="social-btn"
                target="_blank"
                rel="noopener noreferrer"
-               aria-label="{{ .icon }}">
-              <i class="{{ .icon }}"></i>
+               aria-label="{{ $authorName }} 외부 프로필"
+               data-ui-aria-label="{{ $labelKey }}"
+               data-ui-param-name="{{ $authorName }}">
+              <i class="{{ .icon }}" aria-hidden="true"></i>
             </a>
             {{ end }}
           </div>
@@ -59,7 +66,7 @@
     <div class="row">
       <div class="col-12">
         <div class="section-title text-center mb-5">
-          <h2>{{ i18n "posted_by" }}</h2>
+          <h2 data-ui-i18n="posted_by">{{ i18n "posted_by" }}</h2>
         </div>
       </div>
 
@@ -89,7 +96,7 @@
               <a href="{{ .RelPermalink }}">{{ .Title }}</a>
             </h3>
             <div class="post-card-meta">
-              <span><i class="far fa-calendar-alt"></i> {{ .PublishDate.Format "2006년 1월 2일" }}</span>
+              <span><i class="far fa-calendar-alt"></i> <time datetime="{{ .PublishDate.Format `2006-01-02` }}" data-ui-date="{{ .PublishDate.Format `2006-01-02` }}">{{ .PublishDate.Format "2006년 1월 2일" }}</time></span>
             </div>
             <p class="post-card-excerpt">{{ .Summary | truncate 80 }}</p>
           </div>

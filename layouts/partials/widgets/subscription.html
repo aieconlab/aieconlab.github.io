@@ -1,0 +1,14 @@
+{{ if site.Params.subscription.enable }}
+{{ with site.Params.subscription }}
+<div class="widget">
+  <h5 class="widget-title"><span data-ui-i18n="subscribe_newsletter">{{ i18n "subscribe_newsletter" }}</span></h5>
+  <form action="{{ .mailchimp_form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank" class="widget-search">
+    <input class="mb-3" id="newsletter-email" name="EMAIL" type="email" placeholder="{{ i18n `email`}}" data-ui-placeholder="email">
+    <button type="submit" class="btn btn-primary" name="subscribe" aria-label="{{ i18n `subscribe` }}" data-ui-aria-label="subscribe"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+      <input type="text" name="{{ .mailchimp_form_name }}" tabindex="-1">
+    </div>
+  </form>
+</div>
+{{ end }}
+{{ end }}

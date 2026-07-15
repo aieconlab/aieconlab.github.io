@@ -8,6 +8,7 @@
 
 [[main]]
 name = "연구소 소개"
+identifier = "menu_about"
 url = "about/"
 weight = 1
 
@@ -15,50 +16,58 @@ weight = 1
 [[main]]
 weight = 2
 name = "연구진"
-identifier = "Author"
+identifier = "menu_researchers"
 hasChildren = true
 
     [[main]]
-    parent = "Author"
+    parent = "menu_researchers"
     name = "이정혁"
+    identifier = "author_lee"
     url = "author/이정혁-jung-hyuk-lee/"
     weight = 1
 
     [[main]]
-    parent = "Author"
+    parent = "menu_researchers"
     name = "주영민"
+    identifier = "author_ju"
     url = "author/주영민-youngmin-ju/"
     weight = 2
 
     [[main]]
-    parent = "Author"
+    parent = "menu_researchers"
     name = "송하윤"
+    identifier = "author_song"
     url = "author/송하윤-hayun-song/"
     weight = 3
 
 
 [[main]]
 name = "전체 글"
+identifier = "menu_all_posts"
 url = "post/"
 weight = 3
 
 [[main]]
 name = "AI 트렌드"
+identifier = "menu_ai_trends"
 url = "categories/ai_트렌드/"
 weight = 4
 
 [[main]]
 name = "AI 분석"
+identifier = "menu_ai_analysis"
 url = "categories/ai_분석/"
 weight = 5
 
 [[main]]
 name = "AI 칼럼"
+identifier = "menu_ai_columns"
 url = "categories/ai_칼럼/"
 weight = 6
 
 [[main]]
 name = "문의"
+identifier = "menu_contact"
 url = "contact/"
 weight = 7
 
@@ -82,16 +91,19 @@ weight = 7
 # footer menu
 [[footer]]
 name = "연구소 소개"
+identifier = "menu_about"
 url = "about/"
 weight = 1
 
 [[footer]]
 name = "전체 글"
+identifier = "menu_all_posts"
 url = "post/"
 weight = 2
 
 [[footer]]
 name = "문의"
+identifier = "menu_contact"
 url = "contact/"
 weight = 3
 

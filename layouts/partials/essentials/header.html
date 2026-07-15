@@ -1,0 +1,80 @@
+{{ "<!-- navigation -->" | safeHTML }}
+<header class="sticky-top bg-white border-bottom border-default">
+  <div class="container">
+    <nav class="navbar navbar-expand-xl navbar-white" aria-label="주요 메뉴" data-ui-aria-label="main_navigation" data-ui-language-scope>
+      <a class="navbar-brand" href="{{ site.BaseURL | relLangURL }}">
+        {{ partial "images/logo.html" . }}
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation"
+        aria-controls="navigation" aria-expanded="false" aria-label="메뉴 열기 또는 닫기"
+        data-ui-aria-label="toggle_navigation">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <div class="collapse navbar-collapse text-center" id="navigation">
+        <ul class="navbar-nav ml-auto">
+          {{ $page := . }}
+          {{ range site.Menus.main }}
+          {{ $menuURL := .URL | absLangURL }}
+          {{ $isURLCurrent := and (ne .URL "") (eq $page.Permalink $menuURL) }}
+          {{ $isPostSection := and (eq .URL "post/") (eq $page.Section "post") }}
+          {{ $isMenuCurrent := and (not $page.IsHome) ($page.IsMenuCurrent "main" .) }}
+          {{ $isCurrent := or $isURLCurrent $isMenuCurrent $isPostSection }}
+          {{ if .HasChildren }}
+          {{ $hasCurrent := and (not $page.IsHome) ($page.HasMenuCurrent "main" .) }}
+          <li class="nav-item dropdown{{ if or $isCurrent $hasCurrent }} active{{ end }}">
+            <a class="nav-link{{ if or $isCurrent $hasCurrent }} active{{ end }}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <span data-ui-i18n="{{ .Identifier }}">{{ .Name }}</span> <i class="fas fa-angle-down ml-1" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu">
+              {{ range .Children }}
+              {{ $childURL := .URL | absLangURL }}
+              {{ $isChildCurrent := or (eq $page.Permalink $childURL) ($page.IsMenuCurrent "main" .) }}
+              <a class="dropdown-item{{ if $isChildCurrent }} active{{ end }}" href="{{ $childURL }}"{{ if $isChildCurrent }} aria-current="page"{{ end }}>
+                <span data-ui-i18n="{{ .Identifier }}">{{ .Name }}</span>
+              </a>
+              {{ end }}
+            </div>
+          </li>
+          {{ else }}
+          <li class="nav-item">
+            <a class="nav-link{{ if $isCurrent }} active{{ end }}" href="{{ $menuURL }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
+              <span data-ui-i18n="{{ .Identifier }}">{{ .Name }}</span>
+            </a>
+          </li>
+          {{ end }}
+          {{ end }}
+        </ul>
+
+        <div class="ui-language-switcher" role="group" aria-label="인터페이스 언어 선택" data-ui-aria-label="language_selector">
+          <button class="ui-language-button" type="button" data-ui-language-option="ko" data-ui-lang="ko"
+            aria-label="한국어" aria-pressed="true" lang="ko">KO</button>
+          <button class="ui-language-button" type="button" data-ui-language-option="en" data-ui-lang="en"
+            aria-label="English" aria-pressed="false" lang="en">EN</button>
+        </div>
+        <span class="sr-only" id="ui-language-status" role="status" aria-live="polite" aria-atomic="true"></span>
+
+        {{ if site.Params.search }}
+        {{ "<!-- search -->" | safeHTML }}
+        <div class="search pl-0 mt-3 mt-xl-0 pl-xl-4">
+          <button id="searchOpen" class="search-btn" type="button" aria-label="검색 열기"
+            data-ui-aria-label="open_search" aria-controls="site-search-wrapper" aria-expanded="false">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </button>
+          <div class="search-wrapper" id="site-search-wrapper" aria-hidden="true">
+            <form action="{{ `search`| relLangURL }}" class="h-100" role="search">
+              <label class="sr-only" for="site-search-query" data-ui-i18n="search">검색</label>
+              <input class="search-box pl-4" id="site-search-query" name="s" type="search"
+                placeholder="검색어를 입력하고 Enter를 누르세요" data-ui-placeholder="search_placeholder" autocomplete="off">
+            </form>
+            <button id="searchClose" class="search-close" type="button" aria-label="검색 닫기"
+              data-ui-aria-label="close_search"><i class="fas fa-times text-dark" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </nav>
+  </div>
+</header>
+{{ "<!-- /navigation -->" | safeHTML }}

@@ -8,33 +8,33 @@
         <p>{{ site.Params.footer_content }}</p>
       </div>
       <div class="col-lg-2 col-md-3 col-6 mb-4">
-        <h6 class="mb-4">{{ i18n "quick_links" }}</h6>
+        <h6 class="mb-4" data-ui-i18n="quick_links">{{ i18n "quick_links" }}</h6>
         <ul class="list-unstyled footer-list">
           {{ range site.Menus.footer }}
-          <li><a href="{{ .URL | absURL }}">{{ .Name }}</a></li>
+          <li><a href="{{ .URL | absURL }}"><span data-ui-i18n="{{ .Identifier }}">{{ .Name }}</span></a></li>
           {{ end }}
         </ul>
       </div>
       <div class="col-lg-2 col-md-3 col-6 mb-4">
-        <h6 class="mb-4">{{ i18n "social" }}</h6>
+        <h6 class="mb-4" data-ui-i18n="social">{{ i18n "social" }}</h6>
         <ul class="list-unstyled footer-list">
           {{ range site.Params.social }}
-          <li><a class="text-capitalize" href="{{ .link | safeURL }}">{{ .name }}</a></li>
+          <li><a href="{{ .link | safeURL }}"><span{{ with .ui_key }} data-ui-i18n="{{ . }}"{{ end }}>{{ .name }}</span></a></li>
           {{ end }}
         </ul>
       </div>
       {{ if site.Params.subscription.enable }}
       <div class="col-md-3 mb-4">
-        <h6 class="mb-4">{{ i18n "subscribe_newsletter" }}</h6>
+        <h6 class="mb-4" data-ui-i18n="subscribe_newsletter">{{ i18n "subscribe_newsletter" }}</h6>
         {{ with site.Params.subscription }}
         <form class="subscription" action="{{ .mailchimp_form_action }}" method="post" name="mc-embedded-subscribe-form"
           target="_blank">
           <div class="position-relative">
             <i class="fas fa-envelope email-icon" aria-hidden="true"></i>
-            <input type="email" class="form-control" placeholder="{{ i18n `email` }}" aria-label="{{ i18n `email` }}">
+            <input type="email" class="form-control" placeholder="{{ i18n `email` }}" data-ui-placeholder="email" aria-label="{{ i18n `email` }}" data-ui-aria-label="email">
           </div>
           <button class="btn btn-primary btn-block rounded" type="submit"
-            name="subscribe">{{ i18n "subscribe" }}</button>
+            name="subscribe" data-ui-i18n="subscribe">{{ i18n "subscribe" }}</button>
           <div style="position: absolute; left: -5000px;" aria-hidden="true">
             <input type="text" name="{{ .mailchimp_form_name }}" tabindex="-1">
           </div>
@@ -44,7 +44,7 @@
       {{ end }}
     </div>
     <div class="scroll-top">
-      <a href="#top" id="scrollTop" aria-label="페이지 맨 위로">
+      <a href="#top" id="scrollTop" aria-label="페이지 맨 위로" data-ui-aria-label="back_to_top">
         <i class="fas fa-angle-up" aria-hidden="true"></i>
       </a>
     </div>

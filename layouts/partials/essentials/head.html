@@ -8,9 +8,53 @@
   4. Adds RSS discovery and noindex for utility/error pages
 -->
 <meta charset="utf-8">
+<script>
+  (function () {
+    var root = document.documentElement;
+    try {
+      if (window.localStorage.getItem('aieconlab-ui-language') === 'en') {
+        root.setAttribute('data-ui-language', 'en');
+        root.classList.add('ui-language-pending');
+        window.__aieconlabUILanguageFallbackTimer = window.setTimeout(function () {
+          if (root.getAttribute('data-ui-language-ready') !== 'true') {
+            root.setAttribute('data-ui-language', 'ko');
+            root.classList.remove('ui-language-pending');
+          }
+        }, 2500);
+      }
+    } catch (_) {
+      root.setAttribute('data-ui-language', 'ko');
+    }
+  }());
+</script>
 {{ $displayTitle := .Title }}
 {{ if eq .Section "categories" }}{{ $displayTitle = replace $displayTitle "_" " " }}{{ end }}
-<title>{{ if .IsHome }}{{ site.Title }} | 인공지능경제연구소 - AI 경제 트렌드·분석·칼럼{{ else }}{{ with $displayTitle }}{{ . }} | {{ site.Title }}{{ else }}{{ site.Title }}{{ end }}{{ end }}</title>
+{{ $titleKey := "" }}
+{{ $titleCategory := "" }}
+{{ $standaloneTitle := false }}
+{{ if .IsHome }}
+  {{ $titleKey = "home_document_title" }}
+  {{ $standaloneTitle = true }}
+{{ else if eq .Layout "search" }}
+  {{ $titleKey = "search" }}
+{{ else if eq .Layout "404" }}
+  {{ $titleKey = "page_not_found" }}
+{{ else if and (eq .Section "post") (eq .Kind "section") }}
+  {{ $titleKey = "all_posts" }}
+{{ else if and (eq .Section "categories") (eq .Kind "taxonomy") }}
+  {{ $titleKey = "categories" }}
+{{ else if and (eq .Section "categories") (eq .Kind "term") }}
+  {{ $titleCategory = .Title }}
+{{ else if and (eq .Section "tags") (eq .Kind "taxonomy") }}
+  {{ $titleKey = "tags" }}
+{{ else if and (eq .Section "author") (eq .Kind "section") }}
+  {{ $titleKey = "menu_researchers" }}
+{{ else if eq .Layout "contact" }}
+  {{ $titleKey = "menu_contact" }}
+{{ else if eq .Layout "about" }}
+  {{ $titleKey = "menu_about" }}
+{{ end }}
+<title{{ with $titleKey }} data-ui-title-key="{{ . }}"{{ end }}{{ with $titleCategory }} data-ui-title-category="{{ . }}"{{ end }}{{ if or $titleKey $titleCategory }} data-ui-title-site="{{ site.Title }}"{{ end }}{{ if $standaloneTitle }} data-ui-title-standalone="true"{{ end }}>{{ if .IsHome }}{{ site.Title }} | 인공지능경제연구소 - AI 경제 트렌드·분석·칼럼{{ else }}{{ with $displayTitle }}{{ . }} | {{ site.Title }}{{ else }}{{ site.Title }}{{ end }}{{ end }}</title>
 
 <!-- base url -->
 {{ if or (eq site.BaseURL "/") (eq site.BaseURL "http://localhost:1313/") (eq site.BaseURL "http://examplesite.org/") (eq site.BaseURL "https://examplesite.org/") (eq site.BaseURL "http://examplesite.com/") (eq site.BaseURL "https://examplesite.com/")}}{{else}}

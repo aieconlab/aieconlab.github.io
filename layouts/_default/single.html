@@ -12,7 +12,7 @@
       <div class="{{ if $hasTOC }}col-lg-8{{ else }}col-lg-10{{ end }} mx-auto">
         <header class="article-header mb-4">
           <h1 class="h2 mb-3">{{ .Title }}</h1>
-          <ul class="list-inline post-meta article-meta mb-0" aria-label="글 정보">
+          <ul class="list-inline post-meta article-meta mb-0" aria-label="글 정보" data-ui-aria-label="post_information">
             {{ with .Params.author }}
             <li class="list-inline-item">
               <i class="fas fa-user mr-2" aria-hidden="true"></i>
@@ -21,16 +21,16 @@
             {{ end }}
             <li class="list-inline-item">
               <i class="far fa-calendar-alt mr-2" aria-hidden="true"></i>
-              <time datetime="{{ .PublishDate.Format `2006-01-02` }}">{{ .PublishDate.Format "2006년 1월 2일" }}</time>
+              <time datetime="{{ .PublishDate.Format `2006-01-02` }}" data-ui-date="{{ .PublishDate.Format `2006-01-02` }}">{{ .PublishDate.Format "2006년 1월 2일" }}</time>
             </li>
             <li class="list-inline-item">
               <i class="far fa-clock mr-2" aria-hidden="true"></i>
-              약 {{ .ReadingTime }}분
+              <span data-ui-i18n="reading_time_minutes" data-ui-param-minutes="{{ .ReadingTime }}">약 {{ .ReadingTime }}분</span>
             </li>
             {{ with .Params.categories }}
             <li class="list-inline-item">
               <i class="far fa-folder-open mr-2" aria-hidden="true"></i>
-              {{ range $index, $category := . }}{{ if $index }}, {{ end }}<a href="{{ `categories/` | relLangURL }}{{ $category | urlize }}/">{{ replace $category "_" " " }}</a>{{ end }}
+              {{ range $index, $category := . }}{{ if $index }}, {{ end }}<a href="{{ `categories/` | relLangURL }}{{ $category | urlize }}/" data-ui-category="{{ $category }}">{{ replace $category "_" " " }}</a>{{ end }}
             </li>
             {{ end }}
           </ul>
@@ -52,10 +52,10 @@
                   <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 767px)">
                   <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 991px)">
                   <source srcset="{{ $imageLG.RelPermalink }}" media="(max-width: 1200px)">
-                  <img {{ if eq $index 0 }}fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async" class="img-fluid w-100" src="{{ $imageFallback.RelPermalink }}" alt="{{ $.Title }} 대표 이미지">
+                  <img {{ if eq $index 0 }}fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async" class="img-fluid w-100" src="{{ $imageFallback.RelPermalink }}" alt="{{ $.Title }} 대표 이미지" data-ui-alt="featured_image_alt" data-ui-param-title="{{ $.Title | plainify }}">
                 </picture>
               {{ else }}
-                <img {{ if ne $index 0 }}loading="lazy"{{ end }} decoding="async" class="img-fluid w-100" src="{{ $source | relURL }}" alt="{{ $.Title }} 대표 이미지">
+                <img {{ if ne $index 0 }}loading="lazy"{{ end }} decoding="async" class="img-fluid w-100" src="{{ $source | relURL }}" alt="{{ $.Title }} 대표 이미지" data-ui-alt="featured_image_alt" data-ui-param-title="{{ $.Title | plainify }}">
               {{ end }}
             {{ end }}
           </div>
@@ -64,7 +64,7 @@
 
         {{ if $hasTOC }}
         <details class="article-toc article-toc--mobile d-lg-none mb-4">
-          <summary>이 글의 목차</summary>
+          <summary data-ui-i18n="table_of_contents">이 글의 목차</summary>
           <div class="article-toc__body">{{ $toc }}</div>
         </details>
         {{ end }}
@@ -72,22 +72,22 @@
         <div id="article-content" class="content article-content">{{ .Content }}</div>
 
         {{ with .Params.tags }}
-        <div class="article-tags mt-4" aria-label="태그">
+        <div class="article-tags mt-4" aria-label="태그" data-ui-aria-label="tags">
           {{ range . }}<a class="article-tag" href="{{ `tags/` | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>{{ end }}
         </div>
         {{ end }}
 
         {{ if or .PrevInSection .NextInSection }}
-        <nav class="article-navigation mt-5" aria-label="다른 글">
+        <nav class="article-navigation mt-5" aria-label="다른 글" data-ui-aria-label="other_posts">
           {{ with .PrevInSection }}
           <a class="article-navigation__link article-navigation__link--previous" href="{{ .RelPermalink }}">
-            <span>이전 글</span>
+            <span data-ui-i18n="previous_post">이전 글</span>
             <strong>{{ .Title }}</strong>
           </a>
           {{ end }}
           {{ with .NextInSection }}
           <a class="article-navigation__link article-navigation__link--next" href="{{ .RelPermalink }}">
-            <span>다음 글</span>
+            <span data-ui-i18n="next_post">다음 글</span>
             <strong>{{ .Title }}</strong>
           </a>
           {{ end }}
@@ -100,7 +100,7 @@
       {{ if $hasTOC }}
       <aside class="col-lg-4 d-none d-lg-block" aria-labelledby="article-toc-title">
         <div class="article-toc article-toc--desktop">
-          <p id="article-toc-title" class="article-toc__title">이 글의 목차</p>
+          <p id="article-toc-title" class="article-toc__title" data-ui-i18n="table_of_contents">이 글의 목차</p>
           <div class="article-toc__body">{{ $toc }}</div>
         </div>
       </aside>

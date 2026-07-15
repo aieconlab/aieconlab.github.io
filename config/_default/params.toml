@@ -136,15 +136,18 @@ sidebar = [
 ############################# social site ########################
 [[social]]
 name = "주영민 LinkedIn"
+ui_key = "social_ju"
 icon = "fab fa-linkedin-in"
 link = "https://www.linkedin.com/in/youngminju/"
 
 [[social]]
 name = "이정혁 LinkedIn"
+ui_key = "social_lee"
 icon = "fab fa-linkedin-in"
 link = "https://www.linkedin.com/in/jung-hyuk-lee-0516a719b/"
 
 [[social]]
 name = "송하윤 LinkedIn"
+ui_key = "social_song"
 icon = "fab fa-linkedin-in"
 link = "https://www.linkedin.com/in/hayunsong/"

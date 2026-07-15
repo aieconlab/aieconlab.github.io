@@ -20,9 +20,9 @@
 
 <h1 class="sr-only">
   {{ if eq $paginator.PageNumber 1 }}
-  인공지능경제연구소 AIEconLab
+  <span data-ui-i18n="home_heading">인공지능경제연구소 AIEconLab</span>
   {{ else }}
-  AIEconLab 최신 글 {{ $paginator.PageNumber }}페이지
+  <span data-ui-i18n="home_page_heading" data-ui-param-page="{{ $paginator.PageNumber }}">AIEconLab 최신 글 {{ $paginator.PageNumber }}페이지</span>
   {{ end }}
 </h1>
 

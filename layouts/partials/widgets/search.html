@@ -1,0 +1,11 @@
+{{ "<!-- Search -->" | safeHTML }}
+{{ if site.Params.search }}
+<div class="widget">
+  <h5 class="widget-title"><span data-ui-i18n="search">{{ i18n "search" }}</span></h5>
+  <form action="{{ `search`| relLangURL }}" class="widget-search" role="search">
+    <label class="sr-only" for="sidebar-search-query" data-ui-i18n="search">{{ i18n "search" }}</label>
+    <input id="sidebar-search-query" name="s" type="search" placeholder="{{ i18n `search_placeholder`}}" data-ui-placeholder="search_placeholder">
+    <button type="submit" class="btn btn-primary" aria-label="{{ i18n `search_submit` }}" data-ui-aria-label="search_submit"><i class="fas fa-search" aria-hidden="true"></i></button>
+  </form>
+</div>
+{{ end }}

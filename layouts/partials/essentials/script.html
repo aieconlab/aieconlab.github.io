@@ -43,6 +43,9 @@
 {{ $mainBundle := resources.Get "js/script.js" | minify | fingerprint "sha512" }}
 <script defer src="{{ $mainBundle.RelPermalink }}" integrity="{{ $mainBundle.Data.Integrity }}" crossorigin="anonymous"></script>
 
+{{ $uiLanguageBundle := resources.Get "js/ui-language.js" | resources.ExecuteAsTemplate "js/ui-language.js" . | minify | fingerprint "sha512" }}
+<script defer src="{{ $uiLanguageBundle.RelPermalink }}" integrity="{{ $uiLanguageBundle.Data.Integrity }}" crossorigin="anonymous"></script>
+
 {{ if $needsSearch }}
   {{ $searchScripts := slice (resources.Get "plugins/search/fuse.min.js") (resources.Get "plugins/search/mark.js") (resources.Get "plugins/search/search.js") }}
   {{ $searchBundle := $searchScripts | resources.Concat "js/search.js" | minify | fingerprint "sha512" }}

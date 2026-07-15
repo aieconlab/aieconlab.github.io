@@ -1,0 +1,48 @@
+{{ define "main" }}
+
+{{ if or (eq .Section "post") (eq .Section "posts") (eq .Section "blog") (eq .Section "blogs") (eq .Section "news") (eq .Section "categories") (eq .Section "tags") }}
+<section class="section-sm pb-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered">
+          {{ if eq .Section "post" }}
+          <h1 class="h4" data-ui-i18n="all_posts">{{ i18n "all_posts" }}</h1>
+          {{ else }}
+          <h1 class="h4"><span data-ui-i18n="showing_items_from">{{ i18n "showing_items_from" }}</span>
+            {{ if and (eq .Section "categories") (eq .Kind "taxonomy") }}
+            <span class="text-primary" data-ui-i18n="categories">{{ replace .Title "_" " " }}</span>
+            {{ else if eq .Section "categories" }}
+            <span class="text-primary" data-ui-category="{{ .Title }}">{{ replace .Title "_" " " }}</span>
+            {{ else if and (eq .Section "tags") (eq .Kind "taxonomy") }}
+            <span class="text-primary" data-ui-i18n="tags">{{ replace .Title "_" " " }}</span>
+            {{ else }}
+            <span class="text-primary">{{ replace .Title "_" " " }}</span>
+            {{ end }}
+          </h1>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ .Scratch.Set "where" .Data.Pages }}
+{{ partial "default.html" . }}
+
+{{ else }}
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered mb-5 d-flex align-items-center">
+          <h1 class="h4">{{ .Title }}</h1>
+        </div>
+        <div class="content">{{.Content}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ end }}

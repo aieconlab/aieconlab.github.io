@@ -1,0 +1,83 @@
+[strings]
+continue_reading = { ko = "계속 읽기", en = "Continue reading" }
+search_placeholder = { ko = "검색어를 입력하고 Enter를 누르세요", en = "Type a keyword and press Enter" }
+latest_article = { ko = "최신 글", en = "Latest posts" }
+categories = { ko = "카테고리", en = "Categories" }
+tags = { ko = "태그", en = "Tags" }
+search = { ko = "검색", en = "Search" }
+date = { ko = "작성일", en = "Published" }
+posted_by = { ko = "이 저자의 글", en = "Posts by this author" }
+send = { ko = "보내기", en = "Send" }
+name = { ko = "이름", en = "Name" }
+email = { ko = "이메일 주소", en = "Email address" }
+message = { ko = "메시지", en = "Message" }
+subscribe = { ko = "구독하기", en = "Subscribe" }
+write_email = { ko = "이메일로 문의하기", en = "Contact us by email" }
+subscribe_newsletter = { ko = "뉴스레터 구독", en = "Newsletter" }
+quick_links = { ko = "바로가기", en = "Quick links" }
+social = { ko = "소셜 링크", en = "Social links" }
+back_to_home = { ko = "홈으로 돌아가기", en = "Back to home" }
+about_me = { ko = "연구소 소개", en = "About AIEconLab" }
+page_not_found = { ko = "요청하신 페이지를 찾을 수 없습니다", en = "Page not found" }
+search_results_for = { ko = "검색 결과:", en = "Search results:" }
+no_search_results = { ko = "검색 결과가 없습니다", en = "No results found" }
+showing_items_from = { ko = "다음 분류의 글", en = "Showing posts in" }
+all_posts = { ko = "전체 글", en = "All posts" }
+toggle_navigation = { ko = "메뉴 열기 또는 닫기", en = "Open or close menu" }
+main_navigation = { ko = "주요 메뉴", en = "Main navigation" }
+open_search = { ko = "검색 열기", en = "Open search" }
+close_search = { ko = "검색 닫기", en = "Close search" }
+search_submit = { ko = "검색하기", en = "Search" }
+skip_to_content = { ko = "본문으로 건너뛰기", en = "Skip to content" }
+language_selector = { ko = "인터페이스 언어 선택", en = "Choose interface language" }
+language_changed = { ko = "인터페이스 언어가 한국어로 변경되었습니다.", en = "Interface language changed to English." }
+menu_about = { ko = "연구소 소개", en = "About" }
+menu_researchers = { ko = "연구진", en = "Researchers" }
+author_lee = { ko = "이정혁", en = "Jung-Hyuk Lee" }
+author_ju = { ko = "주영민", en = "Youngmin Ju" }
+author_song = { ko = "송하윤", en = "Hayun Song" }
+menu_all_posts = { ko = "전체 글", en = "All Posts" }
+menu_ai_trends = { ko = "AI 트렌드", en = "AI Trends" }
+menu_ai_analysis = { ko = "AI 분석", en = "AI Analysis" }
+menu_ai_columns = { ko = "AI 칼럼", en = "AI Columns" }
+menu_contact = { ko = "문의", en = "Contact" }
+social_ju = { ko = "주영민 LinkedIn", en = "Youngmin Ju on LinkedIn" }
+social_lee = { ko = "이정혁 LinkedIn", en = "Jung-Hyuk Lee on LinkedIn" }
+social_song = { ko = "송하윤 LinkedIn", en = "Hayun Song on LinkedIn" }
+featured_posts = { ko = "주요 글", en = "Featured posts" }
+post_information = { ko = "글 정보", en = "Post information" }
+home_heading = { ko = "인공지능경제연구소 AIEconLab", en = "AIEconLab, the AI Economics Lab" }
+home_page_heading = { ko = "AIEconLab 최신 글 {page}페이지", en = "AIEconLab latest posts, page {page}" }
+home_document_title = { ko = "AIEconLab | 인공지능경제연구소 - AI 경제 트렌드·분석·칼럼", en = "AIEconLab | AI Economics Research, Trends, Analysis & Columns" }
+back_to_top = { ko = "페이지 맨 위로", en = "Back to top" }
+reading_time_minutes = { ko = "약 {minutes}분", en = "{minutes} min read" }
+featured_image_alt = { ko = "{title} 대표 이미지", en = "Featured image for {title}" }
+table_of_contents = { ko = "이 글의 목차", en = "Table of contents" }
+other_posts = { ko = "다른 글", en = "Other posts" }
+previous_post = { ko = "이전 글", en = "Previous post" }
+next_post = { ko = "다음 글", en = "Next post" }
+comments_title = { ko = "운영진 코멘트", en = "Staff comments" }
+comments_description = { ko = "코멘트는 이 페이지에서 누구나 읽을 수 있습니다. 작성은 등록된 운영진 GitHub 계정만 가능합니다.", en = "Anyone can read comments on this page. Only registered staff GitHub accounts can post." }
+comments_help = { ko = "아래 입력창에서 GitHub로 로그인한 뒤 바로 작성하세요. 저장소 협업자 계정의 코멘트만 등록됩니다.", en = "Sign in with GitHub below to post. Only repository collaborators can submit comments." }
+comments_noscript = { ko = "운영진 코멘트를 이 페이지에서 읽으려면 브라우저에서 JavaScript를 활성화해 주세요.", en = "Enable JavaScript in your browser to read staff comments on this page." }
+required = { ko = "필수", en = "Required" }
+page_not_found_image_alt = { ko = "페이지를 찾을 수 없음", en = "Page not found" }
+pagination = { ko = "페이지 이동", en = "Pagination" }
+previous_page = { ko = "이전 페이지", en = "Previous page" }
+next_page = { ko = "다음 페이지", en = "Next page" }
+previous_image = { ko = "이전 이미지", en = "Previous image" }
+next_image = { ko = "다음 이미지", en = "Next image" }
+previous_featured_post = { ko = "이전 주요 글", en = "Previous featured post" }
+next_featured_post = { ko = "다음 주요 글", en = "Next featured post" }
+promotion_description = { ko = "인공지능경제연구소", en = "AI Economics Lab" }
+promotion_button = { ko = "연구소 소개", en = "About AIEconLab" }
+author_linkedin = { ko = "{name} LinkedIn", en = "{name} on LinkedIn" }
+author_website = { ko = "{name} 홈페이지", en = "{name}'s website" }
+author_institution = { ko = "{name} 소속기관 프로필", en = "{name}'s institutional profile" }
+author_external_profile = { ko = "{name} 외부 프로필", en = "{name}'s external profile" }
+
+[categories]
+"Categories" = { ko = "카테고리", en = "Categories" }
+"AI_트렌드" = { ko = "AI 트렌드", en = "AI Trends" }
+"AI_분석" = { ko = "AI 분석", en = "AI Analysis" }
+"AI_칼럼" = { ko = "AI 칼럼", en = "AI Columns" }

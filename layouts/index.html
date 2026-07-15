@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+{{ $featuredPosts := first 3 (where site.RegularPages "Type" "featured") }}
+{{ $featuredPermalinks := slice }}
+{{ range $featuredPosts }}
+  {{ $featuredPermalinks = $featuredPermalinks | append .RelPermalink }}
+{{ end }}
+
+{{ $postPages := where site.RegularPages "Section" "in" site.Params.mainSections }}
+{{ $latestPosts := where $postPages "RelPermalink" "not in" $featuredPermalinks }}
+{{ $paginator := .Paginate $latestPosts }}
+{{ $showFeatured := and site.Params.featured_post (eq $paginator.PageNumber 1) }}
+
+<h1 class="sr-only">
+  {{ if eq $paginator.PageNumber 1 }}
+  인공지능경제연구소 AIEconLab
+  {{ else }}
+  AIEconLab 최신 글 {{ $paginator.PageNumber }}페이지
+  {{ end }}
+</h1>
+
+{{ if $showFeatured }}
+  {{ partial "featured-post.html" . }}
+{{ end }}
+
+{{ partial "home-latest.html" (dict "Page" . "Paginator" $paginator "HasFeatured" $showFeatured) }}
+
+{{ end }}

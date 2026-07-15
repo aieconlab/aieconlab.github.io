@@ -6,13 +6,7 @@
       <div class="col-12 mb-5">
         <div class="title-bordered">
           <h1 class="h4">{{i18n `search_results_for`}}
-            <span class="text-primary">
-            <script>
-              var keyword = (window.location.search).substr(3);
-              var result = keyword.replaceAll("+", " ");
-              document.write(result);
-            </script>
-            </span>
+            <span class="text-primary" id="search-keyword"></span>
           </h1>
         </div>
       </div>
@@ -28,12 +22,17 @@
               <ul class="list-inline post-meta mb-2">
                 <li class="list-inline-item">{{ i18n "date" }} : ${date}</li>
                 ${ isset categories }<li class="list-inline-item">{{ i18n "categories" }} : ${categories}</li>${ end }
-                ${ isset tags }<li class="list-inline-item">{{i18n "tags"}} : ${tags}</li>${ end }
               </ul>
               <p>${snippet}</p>
               <a href="${link}" class="btn btn-outline-primary">{{ i18n "continue_reading"}}</a>
             </div>
           </article>
+        </script>
+        <script id="search-empty-template" type="text/x-js-template">
+          <div class="text-center">
+            <img class="img-fluid mb-5" src="{{ `no-search-found.png` | relURL }}" width="300" alt="">
+            <h3>{{ i18n "no_search_results" }}</h3>
+          </div>
         </script>
       </div>
     </div>
@@ -41,6 +40,6 @@
 </section>
 
 <!-- Search index -->
-<script>var indexURL = {{"index.json" | absLangURL}}</script>
+<script>var indexURL = {{"index.json" | absLangURL}};</script>
 
 {{ end }}

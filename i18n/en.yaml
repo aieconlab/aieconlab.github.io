@@ -1,62 +1,86 @@
 - id: continue_reading
-  translation: Continue Reading
+  translation: 계속 읽기
 
 - id: search_placeholder
-  translation: Type & Hit Enter...
+  translation: 검색어를 입력하고 Enter를 누르세요
 
 - id: latest_article
-  translation: Latest Article
+  translation: 최신 글
 
 - id: categories
-  translation: Categories
+  translation: 카테고리
 
 - id: tags
-  translation: Tags
+  translation: 태그
 
 - id: search
-  translation: Search
+  translation: 검색
 
 - id: date
-  translation: Date
+  translation: 작성일
 
 - id: posted_by
-  translation: Posted by this author
+  translation: 이 저자의 글
 
 - id: send
-  translation: Send Now
+  translation: 보내기
 
 - id: name
-  translation: Your Name
+  translation: 이름
 
 - id: email 
-  translation: Your Email Address
+  translation: 이메일 주소
 
 - id: message
-  translation: Your Message Here
+  translation: 메시지를 입력하세요
 
 - id: subscribe
-  translation: Subscribe now
+  translation: 구독하기
 
 - id: write_email
-  translation: Hate Forms? Write Us Email
+  translation: 이메일로 문의하기
 
 - id: subscribe_newsletter
-  translation: Subscribe Newsletter
+  translation: 뉴스레터 구독
 
 - id: quick_links
-  translation: Quick Links
+  translation: 바로가기
 
 - id: social
-  translation: Social Links
+  translation: 소셜 링크
 
 - id: back_to_home
-  translation: Back To Home
+  translation: 홈으로 돌아가기
 
 - id: about_me
-  translation: About Me
+  translation: 연구소 소개
 
 - id: page_not_found
-  translation: Ooops! This Page Is Not Available
+  translation: 요청하신 페이지를 찾을 수 없습니다
 
 - id: search_results_for
-  translation: Search results for
+  translation: "검색 결과:"
+
+- id: no_search_results
+  translation: 검색 결과가 없습니다
+
+- id: showing_items_from
+  translation: 다음 분류의 글
+
+- id: all_posts
+  translation: 전체 글
+
+- id: toggle_navigation
+  translation: 메뉴 열기 또는 닫기
+
+- id: main_navigation
+  translation: 주요 메뉴
+
+- id: open_search
+  translation: 검색 열기
+
+- id: close_search
+  translation: 검색 닫기
+
+- id: search_submit
+  translation: 검색하기

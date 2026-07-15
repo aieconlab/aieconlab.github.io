@@ -8,6 +8,9 @@
 -->
 {{ $description:= site.Params.metadata.description }}
 {{ $imagePath:= site.Params.metadata.image }}
+{{ $isArticle := and .IsPage (eq .Section "post") }}
+{{ $displayTitle := .Title }}
+{{ if eq .Section "categories" }}{{ $displayTitle = replace $displayTitle "_" " " }}{{ end }}
 
 <!-- if multiple images, get the first one -->
 {{ if .Params.images }}
@@ -71,15 +74,25 @@
 {{ end }} <!-- /if imagePath -->
 <!-- ######### /Opengraph and Twitter image meta ############## -->
 
+{{ if $imagePath }}
+<meta property="og:image:alt" content="{{ $displayTitle | default site.Title }}">
+<meta name="twitter:image:alt" content="{{ $displayTitle | default site.Title }}">
+{{ end }}
+
 
 <!-- ######### opengraph others meta ############## -->
-<meta property="og:title" content="{{ with .Title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
+<meta property="og:title" content="{{ with $displayTitle }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
 <meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with $description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="{{ if $isArticle }}article{{ else }}website{{ end }}" />
+<meta property="og:locale" content="ko_KR" />
 <meta property="og:url" content="{{.Permalink}}" />
+{{ if $isArticle }}
+<meta property="article:published_time" content="{{ .PublishDate.Format `2006-01-02T15:04:05Z07:00` }}" />
+{{ if ne .Lastmod .PublishDate }}<meta property="article:modified_time" content="{{ .Lastmod.Format `2006-01-02T15:04:05Z07:00` }}" />{{ end }}
+{{ end }}
 
 <!-- ########## twitter others meta ############### -->
-<meta name="twitter:title" content="{{ with .Title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
+<meta name="twitter:title" content="{{ with $displayTitle }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
 <meta name="twitter:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with $description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
 
 {{ with site.Social.twitter }}

@@ -22,6 +22,7 @@
         {{ if eq $layout "list" }}
         <!-- list article -->
         {{ range $paginator.Pages }}
+        {{ $postTitle := .Title }}
         <article class="row mb-5">
           {{with .Params.images}}
           <div class="col-md-4 mb-4 mb-md-0">
@@ -40,10 +41,10 @@
                 <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 991px)">
                 <source srcset="{{ $imageLG.RelPermalink }}" media="(max-width: 1200px)">
                 <source srcset="{{$imageLG.RelPermalink}}">
-                <img loading="lazy" class="img-fluid w-100" src="{{$imageLG.RelPermalink}}" alt="post-thumb" width="{{$image.Width}}" height="{{$image.Height}}">
+                <img loading="lazy" class="img-fluid w-100" src="{{$imageLG.RelPermalink}}" alt="{{ $postTitle }}" width="{{$image.Width}}" height="{{$image.Height}}">
               </picture>
               {{ else }}
-              <img loading="lazy" class="img-fluid" src="{{ $imageFallback.RelPermalink }}" alt="post-thumb" width="{{$image.Width}}" height="{{$image.Height}}">
+              <img loading="lazy" class="img-fluid" src="{{ $imageFallback.RelPermalink }}" alt="{{ $postTitle }}" width="{{$image.Width}}" height="{{$image.Height}}">
               {{ end }}
               {{ end }}
             </div>
@@ -53,16 +54,11 @@
           <div class="{{if .Params.Images}}col-md-8{{else}}col-12{{end}}">
             <h3 class="h5"><a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
             <ul class="list-inline post-meta mb-2">
-              <li class="list-inline-item"><i class="fas fa-user mr-2"></i><a
-                  href="{{ `author/` | relLangURL }}{{ .Params.Author | urlize }}/">{{ .Params.author }}</a></li>
-              <li class="list-inline-item">{{ i18n "date" }} : {{ .PublishDate.Format "January 2, 2006" }}</li>
               <li class="list-inline-item">{{ i18n "categories" }} :
                 {{ range $i,$p:= .Params.Categories }}{{if ne $i 0}},{{end}}<a
-                  href="{{ `categories/` | relLangURL }}{{ . | urlize }}/" class="ml-1">{{ . | upper }} </a>
+                  href="{{ `categories/` | relLangURL }}{{ . | urlize }}/" class="ml-1">{{ replace . "_" " " }} </a>
                 {{end}}</li>
-              <li class="list-inline-item">{{i18n "tags"}} : {{ range $i,$p:= .Params.Tags }}{{if ne $i 0}},{{end}}<a
-                  href="{{ `tags/` | relLangURL }}{{ . | urlize }}/" class="ml-1">{{ . | upper }} </a> {{end}}
-              </li>
+              <li class="list-inline-item">{{ i18n "date" }} : {{ .PublishDate.Format "2006년 1월 2일" }}</li>
             </ul>
             <p>
               {{ if .Params.Images }}
@@ -82,34 +78,27 @@
         <!-- grid article -->
         <div class="row">
           {{ range $paginator.Pages }}
+          {{ $postTitle := .Title }}
           <div class="{{if $hasbar}}col-md-6{{else}}col-lg-4 col-md-6{{end}}">
             <article class="card mb-4 border-0">
               <!-- post thumb -->
               {{ with .Params.images }}
               <div class="post-slider slider-sm">
                 {{ range . }}
-                {{ partial "images/image.html" (dict "Src" . "Class" "img-fluid w-100")}}
+                {{ partial "images/image.html" (dict "Src" . "Class" "img-fluid w-100" "Alt" $postTitle)}}
                 {{ end }}
               </div>
               {{ end }}
               <!-- /post thumb -->
               <div class="card-body">
                 <h3 class="h4"><a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-                <ul class="list-inline post-meta mb-4">
-                  <li class="list-inline-item"><i class="fas fa-user mr-2"></i>
-                    <a href="{{ `author/` | relLangURL }}{{ .Params.Author | urlize }}/">{{ .Params.author }}</a>
-                  </li>
-                  <li class="list-inline-item">{{ i18n "date"}} : {{ .PublishDate.Format "January 2, 2006" }}</li>
+                <ul class="list-inline post-meta mb-3">
                   <li class="list-inline-item">{{ i18n "categories" }} :
                     {{ range $i,$p:= .Params.Categories }}{{if ne $i 0}},{{end}}<a
-                      href="{{ `categories/` | relLangURL }}{{ . | urlize }}/" class="ml-1">{{ . | upper }}
+                      href="{{ `categories/` | relLangURL }}{{ . | urlize }}/" class="ml-1">{{ replace . "_" " " }}
                     </a>
                     {{end}}</li>
-                  <li class="list-inline-item">{{i18n "tags"}} :
-                    {{ range $i,$p:= .Params.Tags }}{{if ne $i 0}},{{end}}<a
-                      href="{{ `tags/` | relLangURL }}{{ . | urlize }}/" class="ml-1">{{ . | upper }} </a>
-                    {{end}}
-                  </li>
+                  <li class="list-inline-item">{{ i18n "date"}} : {{ .PublishDate.Format "2006년 1월 2일" }}</li>
                 </ul>
                 <p>{{ .Summary | truncate 150 }}</p>
                 <a href="{{ .RelPermalink }}" class="btn btn-outline-primary">{{ i18n "continue_reading"}}</a>
@@ -124,12 +113,13 @@
 
         <!-- full article -->
         {{ range $paginator.Pages }}
+        {{ $postTitle := .Title }}
         <article class="row mb-5">
           {{ with .Params.images }}
           <div class="col-12 mb-4">
             <div class="post-slider">
               {{ range .}}
-              {{ partial "images/image.html" (dict "Src" . "Class" "img-fluid w-100")}}
+              {{ partial "images/image.html" (dict "Src" . "Class" "img-fluid w-100" "Alt" $postTitle)}}
               {{ end }}
             </div>
           </div>
@@ -137,18 +127,12 @@
 
           <div class="{{if or (eq $sidebar `left`) (eq $sidebar `right`)}}col-12{{ else }}col-lg-10{{end}} mx-auto">
             <h3><a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-            <ul class="list-inline post-meta mb-4">
-              <li class="list-inline-item"><i class="fas fa-user mr-2"></i>
-                <a href="{{ `author/` | relLangURL }}{{ .Params.Author | urlize }}/">{{ .Params.author }}</a>
-              </li>
-              <li class="list-inline-item">{{ i18n "date"}} : {{ .PublishDate.Format "January 2, 2006" }}</li>
+            <ul class="list-inline post-meta mb-3">
               <li class="list-inline-item">{{ i18n "categories" }} :
                 {{ range $i,$p:= .Params.Categories }}{{if ne $i 0}},{{end}}<a
-                  href="{{ `categories/` | relLangURL }}{{ . | urlize }}/" class="ml-1">{{ . | upper }} </a>
+                  href="{{ `categories/` | relLangURL }}{{ . | urlize }}/" class="ml-1">{{ replace . "_" " " }} </a>
                 {{end}}</li>
-              <li class="list-inline-item">{{i18n "tags"}} : {{ range $i,$p:= .Params.Tags }}{{if ne $i 0}},{{end}}<a
-                  href="{{ `tags/` | relLangURL }}{{ . | urlize }}/" class="ml-1">{{ . | upper }} </a> {{end}}
-              </li>
+              <li class="list-inline-item">{{ i18n "date"}} : {{ .PublishDate.Format "2006년 1월 2일" }}</li>
             </ul>
             <p>{{ .Summary }}</p>
             <a href="{{ .RelPermalink }}" class="btn btn-outline-primary">{{ i18n "continue_reading"}}</a>

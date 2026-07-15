@@ -26,14 +26,29 @@ $(document).on("turbolinks:load", preloader);
 
 
 	//  Search Form Open
-	$('#searchOpen').on('click', function () {
-		$('.search-wrapper').addClass('open');
+	var $searchOpen = $('#searchOpen');
+	var $searchClose = $('#searchClose');
+	var $searchWrapper = $('#site-search-wrapper');
+
+	function openSearch() {
+		$searchWrapper.addClass('open').attr('aria-hidden', 'false');
+		$searchOpen.attr('aria-expanded', 'true');
 		setTimeout(function () {
-			$('.search-box').focus();
+			$('#site-search-query').trigger('focus');
 		}, 400);
-	});
-	$('#searchClose').on('click', function () {
-		$('.search-wrapper').removeClass('open');
+	}
+
+	function closeSearch() {
+		$searchWrapper.removeClass('open').attr('aria-hidden', 'true');
+		$searchOpen.attr('aria-expanded', 'false').trigger('focus');
+	}
+
+	$searchOpen.on('click', openSearch);
+	$searchClose.on('click', closeSearch);
+	$(document).on('keydown', function (event) {
+		if (event.key === 'Escape' && $searchWrapper.hasClass('open')) {
+			closeSearch();
+		}
 	});
 
 
@@ -91,41 +106,45 @@ $(document).on("turbolinks:load", preloader);
 		}, 1500, "easeInOutExpo");
 	});
 
-	//post slider
-	$('.post-slider').slick({
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		autoplay: true,
-		dots: false,
-		arrows: true,
-		prevArrow: '<button type=\'button\' class=\'prevArrow\'><i class=\'fas fa-angle-left\'></i></button>',
-		nextArrow: '<button type=\'button\' class=\'nextArrow\'><i class=\'fas fa-angle-right\'></i></button>'
-	});
+	// Slider code is safe on pages where the conditional Slick bundle is absent.
+	if ($.fn.slick) {
+		if ($('.post-slider').length) {
+			$('.post-slider').slick({
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				autoplay: true,
+				dots: false,
+				arrows: true,
+				prevArrow: '<button type=\'button\' class=\'prevArrow\' aria-label=\'이전 이미지\'><i class=\'fas fa-angle-left\' aria-hidden=\'true\'></i></button>',
+				nextArrow: '<button type=\'button\' class=\'nextArrow\' aria-label=\'다음 이미지\'><i class=\'fas fa-angle-right\' aria-hidden=\'true\'></i></button>'
+			});
+		}
 
-	
-	// featured post slider
-	$('.featured-post-slider').slick({
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		autoplay: true,
-		dots: true,
-		arrows: true,
-		vertical: false,
-		prevArrow: '<button type=\'button\' class=\'prevArrow\'><i class=\'fas fa-angle-left\'></i></button>',
-		nextArrow: '<button type=\'button\' class=\'nextArrow\'><i class=\'fas fa-angle-right\'></i></button>'
-	});
+		if ($('.featured-post-slider').length) {
+			$('.featured-post-slider').slick({
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				autoplay: true,
+				dots: true,
+				arrows: true,
+				vertical: false,
+				prevArrow: '<button type=\'button\' class=\'prevArrow\' aria-label=\'이전 글\'><i class=\'fas fa-angle-left\' aria-hidden=\'true\'></i></button>',
+				nextArrow: '<button type=\'button\' class=\'nextArrow\' aria-label=\'다음 글\'><i class=\'fas fa-angle-right\' aria-hidden=\'true\'></i></button>'
+			});
+		}
 
-
-  // product Slider
-  $('.single-product-slider').slick({
-    autoplay: false,
-    infinite: true,
-    arrows: false,
-    dots: true,
-    customPaging: function (slider, i) {
-      var image = $(slider.$slides[i]).data('image');
-      return '<img class="img-fluid" src="' + image + '" alt="product-img">';
-    }
-  });
+		if ($('.single-product-slider').length) {
+			$('.single-product-slider').slick({
+				autoplay: false,
+				infinite: true,
+				arrows: false,
+				dots: true,
+				customPaging: function (slider, i) {
+					var image = $(slider.$slides[i]).data('image');
+					return '<img class="img-fluid" src="' + image + '" alt="product-img">';
+				}
+			});
+		}
+	}
 
 })(jQuery);

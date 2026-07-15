@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ site.LanguageCode | default `ko-KR` }}" itemscope itemtype="https://schema.org/WebPage">
+<head>
+  {{ partial "essentials/head.html" . }}
+  {{ partial "essentials/style.html" . }}
+</head>
+
+<body id="top">
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+
+  {{ if hugo.IsProduction }}
+    {{ partialCached "components/preloader.html" . }}
+    {{ partialCached "datasets/gtm-noscript.html" . }}
+  {{ else }}
+    {{ partial "components/preloader.html" . }}
+  {{ end }}
+
+  {{ partial "essentials/header.html" . }}
+
+  <main id="main-content" tabindex="-1">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ if hugo.IsProduction }}
+    {{ partialCached "essentials/footer.html" . }}
+  {{ else }}
+    {{ partial "essentials/footer.html" . }}
+  {{ end }}
+
+  <!-- This partial is page-aware; do not partial-cache without variant keys. -->
+  {{ partial "essentials/script.html" . }}
+</body>
+</html>

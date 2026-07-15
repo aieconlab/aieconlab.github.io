@@ -2,9 +2,10 @@
 {{ if site.Params.search }}
 <div class="widget">
   <h5 class="widget-title"><span>{{ i18n "search" }}</span></h5>
-  <form action="{{ `search`| relLangURL }}" class="widget-search">
-    <input id="search-query" name="s" type="search" placeholder="{{ i18n `search_placeholder`}}">
-    <button type="submit" class="btn btn-primary" aria-label="Search Post"><i class="fas fa-search"></i></button>
+  <form action="{{ `search`| relLangURL }}" class="widget-search" role="search">
+    <label class="sr-only" for="sidebar-search-query">{{ i18n "search" }}</label>
+    <input id="sidebar-search-query" name="s" type="search" placeholder="{{ i18n `search_placeholder`}}">
+    <button type="submit" class="btn btn-primary" aria-label="{{ i18n `search_submit` }}"><i class="fas fa-search" aria-hidden="true"></i></button>
   </form>
 </div>
 {{ end }}

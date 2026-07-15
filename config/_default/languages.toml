@@ -1,10 +1,12 @@
-################################### English language #####################################
+################################### Korean language #####################################
+# Keep the internal language key (`en`) so existing URLs and content paths stay stable.
 [en]
-languageName = "En"
-languageCode = "en-us"
+languageName = "Ko"
+languageCode = "ko-KR"
 contentDir = "content/english"
 weight = 1
-# footer content
+
+[en.params]
 footer_content = ""
 
 
@@ -14,5 +16,6 @@ languageName = "Fr"
 languageCode = "fr-fr"
 contentDir = "content/french"
 weight = 2
-# footer content
+
+[fr.params]
 footer_content = ""

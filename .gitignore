@@ -12,3 +12,7 @@ Thumbs.db
 
 # Local-only analysis code (not published)
 analysis/
+
+# Local browser QA state and screenshots
+.playwright-cli/
+output/playwright/

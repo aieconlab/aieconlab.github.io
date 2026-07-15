@@ -1,0 +1,148 @@
+{{ define "main" }}
+{{ $sidebar := site.Params.sidebar }}
+{{ $isBlog := or (eq .Section "post") (eq .Section "posts") (eq .Section "blog") (eq .Section "blogs") (eq .Section "news") (eq .Section "categories") (eq .Section "tags") }}
+
+{{ if $isBlog }}
+{{ $hasTOC := and (gt .WordCount 600) (in .TableOfContents "<li>") }}
+{{ $toc := replace .TableOfContents ` id="TableOfContents"` "" | safeHTML }}
+
+<section class="section article-section">
+  <div class="container">
+    <article class="row mb-4">
+      <div class="{{ if $hasTOC }}col-lg-8{{ else }}col-lg-10{{ end }} mx-auto">
+        <header class="article-header mb-4">
+          <h1 class="h2 mb-3">{{ .Title }}</h1>
+          <ul class="list-inline post-meta article-meta mb-0" aria-label="글 정보">
+            {{ with .Params.author }}
+            <li class="list-inline-item">
+              <i class="fas fa-user mr-2" aria-hidden="true"></i>
+              <a href="{{ `author/` | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+            </li>
+            {{ end }}
+            <li class="list-inline-item">
+              <i class="far fa-calendar-alt mr-2" aria-hidden="true"></i>
+              <time datetime="{{ .PublishDate.Format `2006-01-02` }}">{{ .PublishDate.Format "2006년 1월 2일" }}</time>
+            </li>
+            <li class="list-inline-item">
+              <i class="far fa-clock mr-2" aria-hidden="true"></i>
+              약 {{ .ReadingTime }}분
+            </li>
+            {{ with .Params.categories }}
+            <li class="list-inline-item">
+              <i class="far fa-folder-open mr-2" aria-hidden="true"></i>
+              {{ range $index, $category := . }}{{ if $index }}, {{ end }}<a href="{{ `categories/` | relLangURL }}{{ $category | urlize }}/">{{ replace $category "_" " " }}</a>{{ end }}
+            </li>
+            {{ end }}
+          </ul>
+        </header>
+
+        {{ with .Params.images }}
+        <div class="mb-4">
+          <div class="post-slider">
+            {{ range $index, $source := . }}
+              {{ if fileExists (add "assets/" $source) }}
+                {{ $image := resources.Get $source }}
+                {{ $imageFallback := $image.Resize "750x" }}
+                {{ $imageLG := $image.Resize "750x webp" }}
+                {{ $imageMD := $image.Resize "710x webp" }}
+                {{ $imageSM := $image.Resize "540x webp" }}
+                {{ $imageXS := $image.Resize "400x webp" }}
+                <picture>
+                  <source srcset="{{ $imageXS.RelPermalink }}" media="(max-width: 575px)">
+                  <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 767px)">
+                  <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 991px)">
+                  <source srcset="{{ $imageLG.RelPermalink }}" media="(max-width: 1200px)">
+                  <img {{ if eq $index 0 }}fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async" class="img-fluid w-100" src="{{ $imageFallback.RelPermalink }}" alt="{{ $.Title }} 대표 이미지">
+                </picture>
+              {{ else }}
+                <img {{ if ne $index 0 }}loading="lazy"{{ end }} decoding="async" class="img-fluid w-100" src="{{ $source | relURL }}" alt="{{ $.Title }} 대표 이미지">
+              {{ end }}
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if $hasTOC }}
+        <details class="article-toc article-toc--mobile d-lg-none mb-4">
+          <summary>이 글의 목차</summary>
+          <div class="article-toc__body">{{ $toc }}</div>
+        </details>
+        {{ end }}
+
+        <div id="article-content" class="content article-content">{{ .Content }}</div>
+
+        {{ with .Params.tags }}
+        <div class="article-tags mt-4" aria-label="태그">
+          {{ range . }}<a class="article-tag" href="{{ `tags/` | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>{{ end }}
+        </div>
+        {{ end }}
+
+        {{ if or .PrevInSection .NextInSection }}
+        <nav class="article-navigation mt-5" aria-label="다른 글">
+          {{ with .PrevInSection }}
+          <a class="article-navigation__link article-navigation__link--previous" href="{{ .RelPermalink }}">
+            <span>이전 글</span>
+            <strong>{{ .Title }}</strong>
+          </a>
+          {{ end }}
+          {{ with .NextInSection }}
+          <a class="article-navigation__link article-navigation__link--next" href="{{ .RelPermalink }}">
+            <span>다음 글</span>
+            <strong>{{ .Title }}</strong>
+          </a>
+          {{ end }}
+        </nav>
+        {{ end }}
+
+        {{ partial "comments/giscus.html" . }}
+      </div>
+
+      {{ if $hasTOC }}
+      <aside class="col-lg-4 d-none d-lg-block" aria-labelledby="article-toc-title">
+        <div class="article-toc article-toc--desktop">
+          <p id="article-toc-title" class="article-toc__title">이 글의 목차</p>
+          <div class="article-toc__body">{{ $toc }}</div>
+        </div>
+      </aside>
+      {{ end }}
+    </article>
+  </div>
+</section>
+
+{{ $logoURL := site.Params.logo | absURL }}
+{{ with resources.Get site.Params.logo }}{{ $logoURL = .Permalink }}{{ end }}
+{{ $imageURL := site.Params.metadata.image | absURL }}
+{{ with .Params.images }}
+  {{ $firstImage := index . 0 }}
+  {{ $imageURL = $firstImage | absURL }}
+  {{ with resources.Get $firstImage }}{{ $imageURL = .Permalink }}{{ end }}
+{{ end }}
+{{ $schema := dict
+  "@context" "https://schema.org"
+  "@type" "Article"
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+  "headline" .Title
+  "description" (.Params.description | default site.Params.metadata.description | plainify)
+  "image" $imageURL
+  "author" (dict "@type" "Person" "name" (.Params.author | default site.Params.metadata.author))
+  "publisher" (dict "@type" "Organization" "name" "AIEconLab" "logo" (dict "@type" "ImageObject" "url" $logoURL))
+  "datePublished" (.PublishDate.Format "2006-01-02T15:04:05Z07:00")
+  "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+}}
+<script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+
+{{ else }}
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered mb-5 d-flex align-items-center">
+          <h1 class="h4">{{ .Title }}</h1>
+        </div>
+        <div class="content">{{ .Content }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

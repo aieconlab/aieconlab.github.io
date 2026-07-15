@@ -1,0 +1,81 @@
+<!-- Snipcart public key -->
+{{ if site.Params.snipcart.enable }}
+<div hidden id="snipcart" data-api-key="{{ site.Params.snipcart.snipcart_api }}" data-config-modal-style="side"></div>
+{{ end }}
+
+{{ $needsSearch := eq .Layout "search" }}
+{{ $imageCount := 0 }}
+{{ with .Params.images }}{{ $imageCount = len . }}{{ end }}
+{{ $needsSlick := or (eq .Section "shop") (gt $imageCount 1) }}
+{{ $renderedContent := "" }}
+{{ if .IsPage }}{{ $renderedContent = string .Content }}{{ end }}
+{{ $needsGallery := and site.Params.image_gallery (or (in $renderedContent "gallery-item") (in $renderedContent "glightbox") (in $renderedContent "popupable")) }}
+
+<!-- Common dependencies shared by every page. -->
+{{ $coreScripts := slice }}
+{{ range site.Params.plugins.js }}
+  {{ $link := .link }}
+  {{ $isConditional := or (in $link "plugins/slick/") (in $link "plugins/search/") (in $link "webfont-loader") }}
+  {{ if and (not $isConditional) (not (findRE "^http" $link)) }}
+    {{ $coreScripts = $coreScripts | append (resources.Get $link) }}
+  {{ else if and (not $isConditional) (findRE "^http" $link) }}
+<script defer src="{{ $link | relURL }}" {{ .attributes | safeHTMLAttr }}></script>
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $coreScripts) 0 }}
+  {{ $coreBundle := $coreScripts | resources.Concat "js/core.js" | minify | fingerprint "sha512" }}
+<script defer src="{{ $coreBundle.RelPermalink }}" integrity="{{ $coreBundle.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}
+
+{{ if $needsSlick }}
+  {{ $slickBundle := resources.Get "plugins/slick/slick.min.js" | minify | fingerprint "sha512" }}
+<script defer src="{{ $slickBundle.RelPermalink }}" integrity="{{ $slickBundle.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}
+
+{{ if $needsGallery }}
+  {{ $galleryScripts := slice (resources.Get "plugins/gallery/glightbox.js") (resources.Get "js/gallery-init.js") }}
+  {{ $galleryBundle := $galleryScripts | resources.Concat "js/gallery.js" | minify | fingerprint "sha512" }}
+<script defer src="{{ $galleryBundle.RelPermalink }}" integrity="{{ $galleryBundle.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}
+
+{{ $mainBundle := resources.Get "js/script.js" | minify | fingerprint "sha512" }}
+<script defer src="{{ $mainBundle.RelPermalink }}" integrity="{{ $mainBundle.Data.Integrity }}" crossorigin="anonymous"></script>
+
+{{ if $needsSearch }}
+  {{ $searchScripts := slice (resources.Get "plugins/search/fuse.min.js") (resources.Get "plugins/search/mark.js") (resources.Get "plugins/search/search.js") }}
+  {{ $searchBundle := $searchScripts | resources.Concat "js/search.js" | minify | fingerprint "sha512" }}
+<script defer src="{{ $searchBundle.RelPermalink }}" integrity="{{ $searchBundle.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}
+
+<!-- Cookie notice: retained for compatibility, currently disabled in params. -->
+{{ with site.Params.cookies }}
+{{ if .enable }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+<div id="js-cookie-box" class="cookie-box cookie-box-hide">
+  {{ .content | markdownify }}<span id="js-cookie-button" class="btn btn-sm btn-light ml-2">{{ .button }}</span>
+</div>
+<script>
+  (function ($) {
+    const cookieBox = document.getElementById('js-cookie-box');
+    const cookieButton = document.getElementById('js-cookie-button');
+    if (!Cookies.get('cookie-box')) {
+      cookieBox.classList.remove('cookie-box-hide');
+      cookieButton.onclick = function () {
+        Cookies.set('cookie-box', true, { expires: {{ .expire_days }} });
+        cookieBox.classList.add('cookie-box-hide');
+      };
+    }
+  })(jQuery);
+</script>
+<style>
+  .cookie-box { position: fixed; inset: auto 0 0; text-align: center; z-index: 9999; padding: 1rem 2rem; background: rgb(71, 71, 71); color: #fdfdfd; }
+  .cookie-box-hide { display: none; }
+</style>
+{{ end }}
+{{ end }}
+
+<!--
+  Pretendard is loaded once from the stylesheet in head.html. The former
+  WebFont loader and service-worker registration were intentionally removed.
+-->

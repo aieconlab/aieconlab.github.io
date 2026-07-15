@@ -1,7 +1,7 @@
 {{ $.Scratch.Add "index" slice }}
-{{ range site.RegularPages }}
+{{ range where site.RegularPages "Section" "in" site.Params.mainSections }}
 
-{{ $date:= time.Format ":date_long" .PublishDate }}
+{{ $date:= .PublishDate.Format "2006년 1월 2일" }}
 
 {{ with .Params.images }}
 {{ range first 1 . }}
@@ -16,6 +16,8 @@
 {{ end }}
 {{ $image:= $.Scratch.Get "image" }}
 
-{{ $.Scratch.Add "index" (dict "title" .Title "date" $date "image" $image "categories" .Params.categories "contents" .Plain "permalink" .RelPermalink) }}
+{{ $categories := slice }}
+{{ range .Params.categories }}{{ $categories = $categories | append (replace . "_" " ") }}{{ end }}
+{{ $.Scratch.Add "index" (dict "title" .Title "date" $date "image" $image "categories" $categories "tags" .Params.tags "contents" .Plain "permalink" .RelPermalink) }}
 {{ end }}
 {{ $.Scratch.Get "index" | jsonify }}

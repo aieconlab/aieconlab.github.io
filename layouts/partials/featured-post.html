@@ -1,0 +1,76 @@
+{{ $featuredPosts := first 3 (where site.RegularPages "Type" "featured") }}
+
+{{ with $featuredPosts }}
+<section class="home-featured section-sm pb-0" aria-labelledby="featured-heading">
+  <div class="container">
+    <div class="home-section-heading">
+      <h2 id="featured-heading">주요 글</h2>
+    </div>
+
+    <div class="row home-featured-grid">
+      {{ range $index, $post := . }}
+      {{ $isPriority := eq $index 0 }}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <article class="home-card home-featured-card">
+          {{ with $post.Params.images }}
+          {{ $imagePath := index . 0 }}
+          <a class="home-card-media" href="{{ $post.RelPermalink }}" tabindex="-1">
+            {{ if fileExists (add "assets/" $imagePath) }}
+              {{ $image := resources.Get $imagePath }}
+              {{ $imageFallback := $image.Fill "720x405 Center" }}
+              {{ $imageLG := $image.Fill "720x405 webp Center" }}
+              {{ $imageSM := $image.Fill "480x270 webp Center" }}
+              <picture>
+                <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 575px)">
+                <source srcset="{{ $imageLG.RelPermalink }}">
+                <img
+                  class="home-card-image"
+                  src="{{ $imageFallback.RelPermalink }}"
+                  alt="{{ $post.Title }}"
+                  width="{{ $imageLG.Width }}"
+                  height="{{ $imageLG.Height }}"
+                  loading="{{ if $isPriority }}eager{{ else }}lazy{{ end }}"
+                  decoding="async"
+                  {{ if $isPriority }}fetchpriority="high"{{ end }}>
+              </picture>
+            {{ else }}
+              <img
+                class="home-card-image"
+                src="{{ $imagePath | absURL }}"
+                alt="{{ $post.Title }}"
+                loading="{{ if $isPriority }}eager{{ else }}lazy{{ end }}"
+                decoding="async"
+                {{ if $isPriority }}fetchpriority="high"{{ end }}>
+            {{ end }}
+          </a>
+          {{ end }}
+
+          <div class="home-card-body">
+            <h3 class="home-card-title">
+              <a href="{{ $post.RelPermalink }}">{{ $post.Title | markdownify }}</a>
+            </h3>
+            <ul class="list-inline home-card-meta" aria-label="글 정보">
+              {{ with $post.Params.author }}
+              <li class="list-inline-item">
+                <i class="fas fa-user mr-1" aria-hidden="true"></i>
+                <a href="{{ `author/` | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+              </li>
+              {{ end }}
+              <li class="list-inline-item">
+                <time datetime="{{ $post.PublishDate.Format `2006-01-02` }}">{{ $post.PublishDate.Format "2006년 1월 2일" }}</time>
+              </li>
+              {{ range first 1 $post.Params.categories }}
+              <li class="list-inline-item">
+                <a href="{{ `categories/` | relLangURL }}{{ . | urlize }}/">{{ replace . "_" " " }}</a>
+              </li>
+              {{ end }}
+            </ul>
+            <p class="home-card-summary">{{ $post.Summary | plainify | htmlUnescape | truncate 115 }}</p>
+          </div>
+        </article>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,24 +1,38 @@
 <!--
-  Site override of themes/logbook-hugo/layouts/partials/essentials/style.html
-  Change over the theme version: appends the site-level assets/scss/custom.scss
-  (mobile slider fixes) after the theme stylesheet, inside the same
-  concat/minify/fingerprint pipeline.
+  Build cacheable, fingerprinted stylesheets instead of embedding the complete
+  CSS payload in every HTML document. Slick is emitted only where a slider can
+  be rendered.
 -->
-<!-- plugins + stylesheet -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="preconnect" href="https://app.snipcart.com">
-<link rel="preconnect" href="https://cdn.snipcart.com">
-{{ $styles := slice }}
+{{ $imageCount := 0 }}
+{{ with .Params.images }}{{ $imageCount = len . }}{{ end }}
+{{ $needsSlick := or (eq .Section "shop") (gt $imageCount 1) }}
+{{ $baseStyles := slice }}
+{{ $slickStyles := slice }}
+
 {{ range site.Params.plugins.css }}
-{{ if findRE "^http" .link }}
-<link crossorigin="anonymous" media="all" rel="stylesheet" href="{{ .link | absURL }}" {{.attributes | safeHTMLAttr}} >
-{{ else }}
-{{ $styles = $styles | append (resources.Get .link) }}
+  {{ $link := .link }}
+  {{ if findRE "^http" $link }}
+<link rel="stylesheet" href="{{ $link | absURL }}" {{ .attributes | safeHTMLAttr }}>
+  {{ else }}
+    {{ $resource := resources.Get $link }}
+    {{ if in $link "plugins/slick/" }}
+      {{ $slickStyles = $slickStyles | append $resource }}
+    {{ else }}
+      {{ $baseStyles = $baseStyles | append $resource }}
+    {{ end }}
+  {{ end }}
 {{ end }}
-{{ end }}
-{{ $styles := $styles | append (resources.Get "scss/style.scss" | resources.ExecuteAsTemplate "style.scss" . | toCSS) }}
+
+{{ $themeStyle := resources.Get "scss/style.scss" | resources.ExecuteAsTemplate "scss/style.scss" . | toCSS }}
+{{ $baseStyles = $baseStyles | append $themeStyle }}
 {{ with resources.Get "scss/custom.scss" }}
-{{ $styles = $styles | append (. | toCSS) }}
+  {{ $baseStyles = $baseStyles | append (. | toCSS) }}
 {{ end }}
-{{ $styles := $styles | resources.Concat "/css/style.css" | minify  | fingerprint "sha512"}}
-<style crossorigin="anonymous" media="all" type="text/css" integrity="{{ $styles.Data.Integrity }}">{{$styles.Content | safeCSS}}</style>
+
+{{ $siteStyles := $baseStyles | resources.Concat "css/site.css" | minify | fingerprint "sha512" }}
+<link rel="stylesheet" href="{{ $siteStyles.RelPermalink }}" integrity="{{ $siteStyles.Data.Integrity }}" crossorigin="anonymous">
+
+{{ if and $needsSlick (gt (len $slickStyles) 0) }}
+  {{ $sliderStyles := $slickStyles | resources.Concat "css/slider.css" | minify | fingerprint "sha512" }}
+<link rel="stylesheet" href="{{ $sliderStyles.RelPermalink }}" integrity="{{ $sliderStyles.Data.Integrity }}" crossorigin="anonymous">
+{{ end }}

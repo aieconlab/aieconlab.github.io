@@ -1,7 +1,5 @@
 /* ==========================================================================
    AIEconLab site-level style overrides (loaded after the theme styles)
-   Scope: mobile fixes for the featured-post slick slider — no visual change
-   on desktop, no content change.
    ========================================================================== */
 
 /* KaTeX display equations: horizontal scroll on narrow screens instead of page overflow */
@@ -28,49 +26,469 @@
   text-align: center;
 }
 
-/* Korean typography: never break inside a word (applies at every width) */
-.featured-post-content h2,
-.featured-post-content .post-title {
+/* Keyboard users should never lose the current focus position. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1100;
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 600;
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  color: #ffffff;
+  transform: translateY(0);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 3px solid #2563eb !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+}
+
+#main-content:focus {
+  outline: 0;
+}
+
+/* Homepage hierarchy and static editorial cards. */
+.home-featured {
+  padding-top: 3.5rem;
+}
+
+.home-latest {
+  padding-top: 3.75rem;
+}
+
+.home-section-heading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.home-section-heading h2 {
+  position: relative;
+  margin-bottom: 0;
+  padding-bottom: 0.75rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.home-section-heading h2::after {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 3rem;
+  height: 3px;
+  border-radius: 3px;
+  background: #2563eb;
+  content: "";
+}
+
+.home-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.11);
+}
+
+.home-card-media {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #f1f5f9;
+}
+
+.home-card-media picture {
+  display: block;
+  height: 100%;
+}
+
+.home-card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.home-card:hover .home-card-image {
+  transform: scale(1.025);
+}
+
+.home-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.25rem;
+}
+
+.home-card-title {
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.45;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
 
-@media (max-width: 767px) {
+.home-card-title a {
+  color: #0f172a;
+}
 
-  /* 1) Slider dots: the theme positions them absolutely at the slider's
-     bottom edge; with 14 slides the dot list wraps to two rows and lands
-     on top of the tag line. Let them flow below the slide instead. */
-  .featured-post-slider .slick-dots {
-    position: static !important;
-    left: auto;
-    bottom: auto;
-    transform: none;
-    display: flex !important;
-    flex-wrap: wrap;
+.home-card-title a:hover {
+  color: #2563eb;
+}
+
+.home-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  margin-bottom: 0.8rem;
+  color: #64748b;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.home-card-meta .list-inline-item {
+  margin-right: 0;
+}
+
+.home-card-meta a {
+  color: #64748b;
+  border-bottom: 1px dotted #cbd5e1;
+}
+
+.home-card-summary {
+  margin-bottom: 1.1rem;
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.home-latest-card .btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.home-pagination {
+  margin-top: 1rem;
+}
+
+.home-pagination .page-item.active .page-link {
+  display: inline-block;
+}
+
+/* Long-form article navigation and staff-only commenting. */
+.article-section {
+  padding-top: 3.75rem;
+}
+
+.article-header h1 {
+  line-height: 1.4;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.article-meta .list-inline-item {
+  margin-right: 0;
+}
+
+.article-meta a {
+  color: #475569;
+}
+
+.article-content h2,
+.article-content h3 {
+  scroll-margin-top: 7rem;
+}
+
+.article-content h2 {
+  margin-top: 3.25rem;
+}
+
+.article-toc {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+}
+
+.article-toc--desktop {
+  position: sticky;
+  top: 7rem;
+  max-height: calc(100vh - 9rem);
+  padding: 1.25rem;
+  overflow-y: auto;
+}
+
+.article-toc--mobile {
+  padding: 0;
+}
+
+.article-toc--mobile summary {
+  padding: 1rem 1.1rem;
+  color: #0f172a;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.article-toc--mobile[open] summary {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.article-toc--mobile .article-toc__body {
+  padding: 1rem 1.1rem;
+}
+
+.article-toc__title {
+  margin-bottom: 0.85rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.article-toc__body nav > ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.article-toc__body ul ul {
+  margin-top: 0.35rem;
+  padding-left: 1rem;
+}
+
+.article-toc__body li + li {
+  margin-top: 0.55rem;
+}
+
+.article-toc__body a {
+  display: block;
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.article-toc__body a:hover {
+  color: #2563eb;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.article-tag {
+  display: inline-flex;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.84rem;
+}
+
+.article-navigation {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.article-navigation__link {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #ffffff;
+}
+
+.article-navigation__link span {
+  margin-bottom: 0.35rem;
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.article-navigation__link strong {
+  color: #0f172a;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+.article-navigation__link--next {
+  text-align: right;
+}
+
+.staff-comments {
+  scroll-margin-top: 7rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.staff-comments__header {
+  padding: 1.15rem 1.25rem;
+  border-left: 4px solid #2563eb;
+  border-radius: 0 0.6rem 0.6rem 0;
+  background: #f8fafc;
+}
+
+.staff-comments__eyebrow {
+  margin-bottom: 0.25rem;
+  color: #2563eb;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.staff-comments__description {
+  color: #64748b;
+  line-height: 1.65;
+}
+
+.staff-comments__help {
+  margin: 0.75rem 0 0;
+  color: #64748b;
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.staff-comments .giscus-frame {
+  width: 100%;
+  min-height: 180px;
+}
+
+@media (max-width: 1199px) {
+  /* Keep the logo and menu trigger on one row while allowing the opened menu below. */
+  header .navbar {
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+  }
+
+  header .navbar-brand {
+    display: flex;
+    align-items: center;
+    max-width: calc(100% - 64px);
+    margin-right: 0;
+  }
+
+  header .navbar-brand img {
+    width: 240px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  header .navbar-toggler {
+    display: inline-flex;
+    flex: 0 0 44px;
+    align-items: center;
     justify-content: center;
-    width: 100%;
-    margin: 0.25rem auto 0;
-    padding: 0;
-  }
-  .featured-post-slider .slick-dots li {
-    margin: 0 2px;
+    width: 44px;
+    min-height: 44px;
+    margin-left: auto;
   }
 
-  /* 2) With the dots out of the overlap zone the huge reserved margin
-     under the meta line is dead space — tighten it. */
-  .featured-post-content .post-meta {
-    margin-bottom: 1rem !important;
+  header .navbar-collapse {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .article-section {
+    padding-top: 2rem;
   }
 
-  /* 3) Slightly smaller hero title on phones so long Korean titles
-     fit in two lines. */
-  .featured-post-content h2 {
-    font-size: 1.5rem;
-    line-height: 1.4;
+  .article-meta {
+    gap: 0.3rem 0.75rem;
+    font-size: 0.84rem;
   }
 
-  /* 4) Trim the tall empty band between the header and the slider. */
-  section:has(.featured-post-slider) {
-    padding-top: 1.25rem;
+  .article-navigation {
+    grid-template-columns: 1fr;
+  }
+
+  .article-navigation__link--next {
+    text-align: left;
+  }
+
+  .staff-comments__header {
+    padding: 1rem;
+  }
+
+  .home-featured {
+    padding-top: 1.75rem;
+  }
+
+  .home-latest {
+    padding-top: 2.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .home-section-heading {
+    margin-bottom: 1.25rem;
+  }
+
+  .home-section-heading h2 {
+    font-size: 1.4rem;
+  }
+
+  .home-card-body {
+    padding: 1.1rem;
+  }
+
+  .home-card-title {
+    font-size: 1.12rem;
+  }
+}
+
+@media (max-width: 575px) {
+  header .navbar-brand img {
+    width: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link,
+  .home-card,
+  .home-card-image {
+    transition: none;
+  }
+
+  .home-card:hover,
+  .home-card:hover .home-card-image {
+    transform: none;
   }
 }

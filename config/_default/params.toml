@@ -27,7 +27,7 @@ sidebar = "right" # sidebar value (left, right or false)
 # custom script on header
 custom_script = ""
 # copyright
-copyright = "Design By AIEconLab"
+copyright = "© AIEconLab"
 
 # customize your color and font from here.
 [variables]
@@ -72,8 +72,8 @@ currency = "$"
 title = "AIEconLab"
 content = "인공지능경제연구소"
 image = "images/Group1.png"
-button_label = "Get Started"
-button_link = "https://www.aieconlab.com/"
+button_label = "연구소 소개"
+button_link = "https://www.aieconlab.com/about/"
 
 # seo meta data for OpenGraph / Twitter Card
 [metadata]

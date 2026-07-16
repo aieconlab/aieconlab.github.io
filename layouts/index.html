@@ -4,17 +4,9 @@
 {{ if site.Params.featured_post }}
   {{ $featuredPosts = first 3 (where site.RegularPages "Type" "featured") }}
 {{ end }}
-{{ $featuredPermalinks := slice }}
-{{ range $featuredPosts }}
-  {{ $featuredPermalinks = $featuredPermalinks | append .RelPermalink }}
-{{ end }}
 
 {{ $postPages := where site.RegularPages "Section" "in" site.Params.mainSections }}
-{{ $listPosts := $postPages }}
-{{ if gt (len $featuredPermalinks) 0 }}
-  {{ $listPosts = where $postPages "RelPermalink" "not in" $featuredPermalinks }}
-{{ end }}
-{{ .Scratch.Set "where" $listPosts }}
+{{ .Scratch.Set "where" $postPages }}
 {{ $paginator := .Paginate (where (.Scratch.Get "where") "Section" "in" site.Params.mainSections) }}
 {{ $showFeatured := and (gt (len $featuredPosts) 0) (eq $paginator.PageNumber 1) }}
 

@@ -1,0 +1,5 @@
+# 커밋된 그림을 생성한 검증 환경 (Python 3.13.9, macOS/arm64, 2026-07-22)
+# 사용: python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+pandas==2.3.3
+numpy==2.3.5
+matplotlib==3.10.6

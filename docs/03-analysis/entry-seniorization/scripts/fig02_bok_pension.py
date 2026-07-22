@@ -37,6 +37,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=HERE / "out" / "fig02_bok_pension.png")
     ap.add_argument("--font", default="Apple SD Gothic Neo")
+    ap.add_argument("--access-date", default=None,
+                    help="푸터 조회일(YYYY-MM-DD). 커밋본 재현 시 2026-07-22. 기본: 오늘")
     a = ap.parse_args()
 
     plt.rcParams["font.family"] = a.font
@@ -87,10 +89,10 @@ def main():
               bbox_to_anchor=(0.0, 0.02), handlelength=1.4)
 
     fig.subplots_adjust(left=0.15, right=0.97, top=0.85, bottom=0.17)
-    today = dt.date.today().isoformat()
+    access = a.access_date or dt.date.today().isoformat()
     fig.text(0.06, 0.075, "주: 산업 중분류·연령대별 가입자수(계절조정), 2022.7월 대비 2025.7월. 노출도 산정 방법은 본문 참조.",
              fontsize=12, color=NOTE, va="top")
-    fig.text(0.06, 0.035, f"자료: BOK 이슈노트 No.2025-30(한진수·오삼일)에서 인용, <그림 4> ({today} 조회)  |  재구성: AIEconLab",
+    fig.text(0.06, 0.035, f"자료: BOK 이슈노트 No.2025-30(한진수·오삼일)에서 인용, <그림 4> ({access} 조회)  |  재구성: AIEconLab",
              fontsize=12, color=NOTE, va="top")
 
     a.out.parent.mkdir(parents=True, exist_ok=True)

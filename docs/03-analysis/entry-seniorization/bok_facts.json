@@ -82,7 +82,7 @@
     "재구성 각주의 조회일: 과업 템플릿의 '(undefined 조회)'는 기존 사이트 그림들의 '(YYYY-MM-DD 조회)' 형식의 미치환 슬롯으로 판단, '(2026-07-22 조회)'로 기입"
   ],
   "figure_output": {
-    "png": "/Users/hayun/Documents/Github_AIEconLab/.claude/worktrees/ai-trends-july-17-1ce616/static/images/post/entry_seniorization/fig02_bok_pension.png",
+    "png": "static/images/post/entry_seniorization/fig02_bok_pension.png (저장소 상대경로)",
     "script": "(세션 스크래치패드)/entry_seniorization/scripts/fig02_bok_pension.py",
     "numbers_used": "BOK 이슈노트 그림 4(p.6)에 인쇄된 수치만 사용"
   }

@@ -1,7 +1,7 @@
 # entry-seniorization 재현성 기록
 
 게시글 [`analysis_entry_seniorization.md`](../../../content/english/post/analysis_entry_seniorization.md)
-("첫 계단은 높아졌나: 신입 일자리 시니어화의 증거와 빈칸", 2026-07-24 게시)의
+("첫 계단은 높아졌나: 신입 일자리 시니어화의 증거와 빈칸", 게시 예정일 2026-07-24)의
 그림 생성 스크립트와 원자료 출처·다운로드 시점·해시 기록.
 
 > **관행 안내**: `docs/03-analysis/`는 원래 사이트 개선 문서 폴더였다. 이 폴더는
@@ -31,32 +31,41 @@
 
 ## 재실행 방법
 
-스크립트는 실행 위치와 무관하게 동작한다(`Path(__file__)` 기준 상대경로).
+스크립트는 실행 위치와 무관하게 동작하지만(`Path(__file__)` 기준 상대경로),
+아래 명령은 이 디렉토리에서 그대로 복사해 실행할 수 있게 작성했다.
 기본 출력은 `scripts/out/`, 다운로드 캐시는 `scripts/data/`이며(둘 다 커밋 제외),
-`--out` 인자로 최종 경로를 지정한다. 게시용 그림은 다음과 같이 재생성했다:
+`--out` 인자로 최종 경로를 지정한다.
 
 ```bash
-python3 scripts/fig01_us_recent_grads.py --out <repo>/static/images/post/entry_seniorization/fig01_us_recent_grads.png
-python3 scripts/fig02_bok_pension.py     --out <repo>/static/images/post/entry_seniorization/fig02_bok_pension.png
-python3 scripts/fig03_sim.py             --out <repo>/static/images/post/entry_seniorization/fig03_pipeline_arithmetic.png
-python3 scripts/make_cover.py            --out <repo>/assets/images/post/entry_seniorization_cover.png
+cd docs/03-analysis/entry-seniorization   # 저장소 루트 기준
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.lock
+
+.venv/bin/python scripts/fig01_us_recent_grads.py --access-date 2026-07-22 \
+  --out ../../../static/images/post/entry_seniorization/fig01_us_recent_grads.png
+.venv/bin/python scripts/fig02_bok_pension.py --access-date 2026-07-22 \
+  --out ../../../static/images/post/entry_seniorization/fig02_bok_pension.png
+.venv/bin/python scripts/fig03_sim.py --json sim_results.json \
+  --out ../../../static/images/post/entry_seniorization/fig03_pipeline_arithmetic.png
+.venv/bin/python scripts/make_cover.py \
+  --out ../../../assets/images/post/entry_seniorization_cover.png
 ```
 
+- **버전 고정**: `requirements.lock`이 커밋 그림을 생성한 검증 환경
+  (Python 3.13.9, pandas 2.3.3, numpy 2.3.5, matplotlib 3.10.6)을 잠근다.
+  `requirements.txt`(하한만 지정)로 설치하면 렌더링이 커밋본과 미세하게 달라질 수 있다.
+- **조회일 고정**: `fig01`·`fig02`의 푸터 조회일은 기본값이 실행일이므로,
+  커밋본과 동일한 PNG를 원하면 `--access-date 2026-07-22`를 지정한다.
 - `fig01`은 실행 시 NY Fed CSV를 재다운로드해 SHA-256을 위 표의 값과 대조하고,
   **해시가 다르면 기본값으로 중단**한다(갱신 데이터로 계속하려면 `--allow-updated-data`).
   `--data`로 로컬 CSV를 쓸 수 있다. 역전 에피소드(2021-01 시작, 63개월)는
   하드코딩이 아니라 매 실행 때 데이터에서 계산된다.
 - `fig02`의 수치는 BOK 노트 그림 4에서 전사한 상수이며 출처·해시가 스크립트 머리말에 있다.
-- `fig03`은 외부 자료가 없고, −0.6δ 산술을 assert로 자체 검증한다.
-
-의존성은 `requirements.txt`에 고정되어 있다(pandas, numpy, matplotlib):
-
-```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-```
+- `fig03`은 외부 자료가 없고, −0.6δ 산술을 assert로 자체 검증하며, 위 명령은
+  이 폴더의 `sim_results.json`을 같은 스키마로 재생성한다.
 
 그림 폰트 기본값은 macOS의 `Apple SD Gothic Neo`이며 다른 환경에서는
-`--font`로 한글 폰트를 지정한다.
+`--font`로 한글 폰트를 지정한다(폰트가 다르면 PNG는 당연히 커밋본과 달라진다).
 
 **JSON 파일의 성격**: 스크립트가 재생성하는 것은 그림 4장과
 `scripts/out/nyfed_facts_regen.json`·`sim_results.json`뿐이다. 그 밖의

@@ -80,14 +80,25 @@ def main():
         assert r["peak_years"] == [2033, 2034, 2035]
     print("sanity check passed: flat-weight peak = -0.6*delta over 2033-2035")
 
+    spread = {}
+    for delta in DELTAS:
+        dl = f"delta={int(delta*100)}%"
+        peaks = {pn: results[dl][pn]["peak_deviation_pct"] for pn in WEIGHT_PROFILES}
+        spread[dl] = {"peaks_by_profile": peaks,
+                      "min_peak_pct": min(peaks.values()),
+                      "max_peak_pct": max(peaks.values()),
+                      "spread_pp": round(max(peaks.values()) - min(peaks.values()), 4)}
+
     a.json.parent.mkdir(parents=True, exist_ok=True)
     a.json.write_text(json.dumps({
         "model": "conditional arithmetic cohort model (not calibrated)",
-        "spec": {"baseline_hires": 100, "shock_years": sorted(SHOCK_YEARS),
-                 "deltas": DELTAS, "tenure_window": [5, 9],
-                 "weight_profiles": {p: {str(k): v for k, v in w.items()}
-                                     for p, w in WEIGHT_PROFILES.items()}},
+        "spec": {"years": [2010, 2040], "baseline_hires": 100,
+                 "shock_years": sorted(SHOCK_YEARS), "deltas": DELTAS,
+                 "tenure_window": [5, 9],
+                 "weight_profiles": {pn: {str(k): v for k, v in w.items()}
+                                     for pn, w in WEIGHT_PROFILES.items()}},
         "results": results,
+        "sensitivity_spread": spread,
     }, ensure_ascii=False, indent=2))
     print("wrote", a.json)
 

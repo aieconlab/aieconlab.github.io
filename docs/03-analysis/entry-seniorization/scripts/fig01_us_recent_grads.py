@@ -8,11 +8,13 @@
 
 사용법:
     python3 fig01_us_recent_grads.py [--data CSV] [--out PNG] [--facts JSON]
+                                     [--access-date YYYY-MM-DD] [--allow-updated-data]
 
 의존성: pandas, matplotlib. 한글 폰트 기본값은 macOS 'Apple SD Gothic Neo'(--font로 변경).
 2026-05-05 갱신분 CSV SHA-256:
     bc1014335fe1dade67994c15f0182526c468160b3df40c76610a903e3c40e39e
-(해시가 다르면 뉴욕 연은이 데이터를 갱신했다는 뜻일 뿐 오류가 아니다.)
+해시가 이 값과 다르면(=뉴욕 연은이 데이터를 갱신했으면) 기본값으로 중단한다.
+갱신 데이터로 계속하려면 --allow-updated-data를 지정한다.
 """
 import argparse
 import datetime as dt
@@ -75,6 +77,8 @@ def main():
     ap.add_argument("--out", type=Path, default=HERE / "out" / "fig01_us_recent_grads.png")
     ap.add_argument("--facts", type=Path, default=HERE / "out" / "nyfed_facts_regen.json")
     ap.add_argument("--font", default="Apple SD Gothic Neo")
+    ap.add_argument("--access-date", default=None,
+                    help="푸터 조회일(YYYY-MM-DD). 커밋본 재현 시 2026-07-22. 기본: 오늘")
     ap.add_argument("--allow-updated-data", action="store_true",
                     help="원자료 해시가 기록과 달라도 계속 진행")
     a = ap.parse_args()
@@ -130,10 +134,10 @@ def main():
                  loc="left", fontsize=23, fontweight="bold", color=NAVY, pad=18)
 
     fig.subplots_adjust(left=0.075, right=0.72, top=0.90, bottom=0.15)
-    today = dt.date.today().isoformat()
+    access = a.access_date or dt.date.today().isoformat()
     fig.text(0.075, 0.062, "주: 계절조정·3개월 이동평균(월별), 재학생 제외. 음영은 12개월 이상 연속 역전 구간. 계열 정의는 본문 참조.",
              fontsize=12.5, color=NOTE)
-    fig.text(0.075, 0.028, f"자료: 뉴욕 연방준비은행 College Labor Market ({today} 조회)  |  계산: AIEconLab",
+    fig.text(0.075, 0.028, f"자료: 뉴욕 연방준비은행 College Labor Market ({access} 조회)  |  계산: AIEconLab",
              fontsize=12.5, color=NOTE)
 
     a.out.parent.mkdir(parents=True, exist_ok=True)

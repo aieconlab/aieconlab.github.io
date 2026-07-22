@@ -1,0 +1,85 @@
+{
+  "source_page": "https://www.newyorkfed.org/research/college-labor-market",
+  "data_url": "https://www.newyorkfed.org/medialibrary/research/interactives/data/college-labor-market/college-labor-unemployment-data.csv",
+  "meta_url": "https://www.newyorkfed.org/medialibrary/research/interactives/data/college-labor-market/college-labor-chart-meta.json",
+  "download_timestamp_utc": "2026-07-21T23:58:44Z",
+  "sha256_csv": "bc1014335fe1dade67994c15f0182526c468160b3df40c76610a903e3c40e39e",
+  "sha256_meta_json": "af1074fa206e066bd70a7bf40d5ca7f81194342b09027707784a42ce78f14290",
+  "release_date_info": "May 5, 2026, with 2026:Q1 data",
+  "frequency_smoothing": "Monthly; rates are seasonally adjusted and smoothed with a three-month moving average (per NY Fed notes). October 2025 results are estimated due to missing data.",
+  "series_definitions_verbatim": "All workers are those aged 16 to 65; college graduates are those aged 22 to 65 with a bachelor's degree or higher; recent college graduates are those aged 22 to 27 with a bachelor's degree or higher; young workers are those aged 22 to 27 without a bachelor's degree. All figures exclude those currently enrolled in school.",
+  "notes_verbatim": "Notes: Rates are seasonally adjusted and smoothed with a three-month moving average. All workers are those aged 16 to 65; college graduates are those aged 22 to 65 with a bachelor's degree or higher; recent college graduates are those aged 22 to 27 with a bachelor's degree or higher; young workers are those aged 22 to 27 without a bachelor's degree. All figures exclude those currently enrolled in school. Shaded areas indicate periods designated recessions by the National Bureau of Economic Research. Click on the labels in the chart legend to show and hide trend lines in the display. October 2025 results are estimated due to missing data.",
+  "source_verbatim": "Source: U.S. Census Bureau and U.S. Bureau of Labor Statistics, Current Population Survey (IPUMS).",
+  "data_range": {
+    "first_month": "1990-01",
+    "last_month": "2026-03"
+  },
+  "latest_month": "2026-03",
+  "latest_values_pct": {
+    "recent_graduates": 5.628,
+    "all_workers": 4.227,
+    "young_workers": 7.244,
+    "college_graduates": 3.073
+  },
+  "current_gap_pp": 1.401,
+  "episodes_gap_positive_ge12m": [
+    {
+      "start": "2021-01",
+      "end": null,
+      "length_months": 63,
+      "ongoing": true,
+      "max_gap_pp": 1.761,
+      "mean_gap_pp": 0.806
+    }
+  ],
+  "all_positive_gap_runs_any_length": [
+    {
+      "start": "2001-09",
+      "end": "2001-09",
+      "length_months": 1
+    },
+    {
+      "start": "2014-12",
+      "end": "2015-02",
+      "length_months": 3
+    },
+    {
+      "start": "2017-04",
+      "end": "2017-04",
+      "length_months": 1
+    },
+    {
+      "start": "2018-10",
+      "end": "2019-02",
+      "length_months": 5
+    },
+    {
+      "start": "2019-05",
+      "end": "2020-03",
+      "length_months": 11
+    },
+    {
+      "start": "2020-06",
+      "end": "2020-09",
+      "length_months": 4
+    },
+    {
+      "start": "2021-01",
+      "end": "2026-03",
+      "length_months": 63
+    }
+  ],
+  "q1_2026_quarterly_averages_pct": {
+    "Recent graduates": 5.719,
+    "All workers": 4.245,
+    "Young workers": 7.446,
+    "College graduates": 3.094
+  },
+  "q1_2026_crosscheck": {
+    "press_claim": "5.7% recent grads vs 4.3% all workers",
+    "computed_recent_grads": 5.719,
+    "computed_all_workers": 4.245,
+    "recent_grads_match_5.7": true,
+    "all_workers_match_4.3": false
+  }
+}

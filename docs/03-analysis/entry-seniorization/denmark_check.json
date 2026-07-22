@@ -1,0 +1,67 @@
+{
+  "paper": {
+    "title": "Still Waters, Rapid Currents: Early Labor Market Transformation under Generative AI",
+    "authors": "Anders Humlum, Emilie Vestergaard",
+    "version_date": "March 13, 2026",
+    "series": "RFBerlin Discussion Paper No. 078/26",
+    "previous_title": "Large Language Models, Small Labor Market Effects",
+    "previous_title_note_quote": "This paper was previously circulated under the title “Large Language Models, Small Labor Market Effects.”",
+    "pdf_source": "https://www.rfberlin.com/wp-content/uploads/2026/03/26078.pdf",
+    "local_pdf": "/private/tmp/claude-501/-Users-hayun-Documents-Github-AIEconLab--claude-worktrees-ai-trends-july-17-1ce616/ae37edf6-cc22-4044-ad92-2e5d4cc51c0e/scratchpad/entry_seniorization/src/humlum_2026.pdf",
+    "pdf_pages_total": 132,
+    "page_numbering_note": "PDF page = manuscript page + 3 (RFBerlin cover pages). E.g., manuscript p. 30 = PDF page 33."
+  },
+  "q1_hiring_separation_margins": {
+    "answer": "YES. The March 2026 revision analyzes workplace-level employment and worker flows directly, not just incumbent earnings/hours. Section 3.4 'Workplace Employment' (manuscript pp. 30-31, PDF pp. 33-34) and Figure 8 (manuscript p. 46, PDF p. 49) cover: (a) log total employment, (b) employment share of early-career workers (ages 22-25), (c) log hours of incumbent workers, (d) job creation and destruction rates defined as hires and separations as shares of total employment. Wage bills are in Appendix F.4 (footnote 20: 'Appendix F.4 shows that wage bills are similarly flat.'). Composition of hires/separations (worker sorting) is also examined (footnote 23: 'Appendix F.4 similarly shows null results for job churn and worker sorting.').",
+    "intro_quote": "Workplaces that encourage chatbot use exhibit no differential changes in employment or wage bills, job creation or destruction, or the composition of hires or separations, including among early-career workers.",
+    "intro_quote_page": "manuscript p. 4 (PDF p. 6)",
+    "flow_definition_quote": "Panel (d), job creation and destruction rates (measured as the share of hires and separations, respectively, in total employment).",
+    "flow_definition_page": "Figure 8 notes, manuscript p. 46 (PDF p. 49)",
+    "job_churn_bound_quote": "Panel (d) examines overall rates of job creation and destruction, showing that job churn at workplaces that encourage AI chatbots has remained stable, with confidence bands ruling out effects on monthly job churn rates greater than 0.5% of employment.",
+    "job_churn_bound_page": "manuscript p. 31 (PDF p. 34)",
+    "incumbent_displacement_quote": "Hence, while Section 3.3 shows that workers' use of AI chatbots has helped them move into new occupations, employers' adoption of AI chatbots has not displaced workers out of their original occupations.",
+    "incumbent_displacement_page": "manuscript p. 31 (PDF p. 34)"
+  },
+  "q2_early_career_share": {
+    "answer": "YES, CONFIRMED. The paper directly examines the employment share of early-career workers (defined as ages 22-25, following Brynjolfsson, Chandar and Chen 2025) at adopting workplaces (encouraged-use workplaces vs. non-encouraged, DiD indexed to November 2022). It finds NO differential decline, with estimates precise enough to rule out effects greater than a third of a percentage point (0.33 pp). The reviewer's claim is accurate: unit is percentage points of the workplace employment share of workers aged 22-25; comparison is workplaces that encourage chatbot use vs. workplaces without encouragement, two years after ChatGPT's launch (through December 2024).",
+    "main_quote": "Crucially, Panel (b) shows that the decline in early-career jobs is not driven by firms adopting AI chatbots. Difference-in-differences estimates show no differential changes in the employment share of early-career workers at adopting workplaces, with estimates precise enough to rule out effects greater than a third of a percentage point.",
+    "main_quote_page": "Section 3.4, manuscript p. 30 (PDF p. 33)",
+    "exact_number_quote": "About 43% of workplaces encourage chatbot use (Figure 1). Even if all encouraged workplaces experienced the largest decline consistent with our confidence intervals, chatbots would account for at most a 0.43 × 0.33 ≈ 0.14 percentage point decline in the aggregate early-career share—small relative to the baseline share of about 8% (Table D.1) and the aggregate decline of about 0.6 percentage points between October 2022 and December 2024 implied by Figure D.2.",
+    "exact_number_quote_page": "footnote 21, manuscript p. 30 (PDF p. 33)",
+    "age_definition_quote": "Early-career workers are defined as workers aged 22-25; see Appendix D.2 for details.",
+    "age_definition_page": "Figure 6 notes, manuscript p. 44 (PDF p. 47); also Figure 8 notes (PDF p. 49): 'Panel (b), the employment share of early-career workers (aged 22-25)'",
+    "aggregate_replication_quote": "Importantly, however, our difference-in-differences analysis in Section 3.4 shows that the declines are not driven by firms adopting Generative AI.",
+    "aggregate_replication_page": "Appendix D.2, manuscript p. 35 (PDF p. 86); the paper replicates the Danish aggregate early-career declines (about 0.6 pp between Oct 2022 and Dec 2024) but attributes them to forces other than firm AI adoption",
+    "interpretation_quote": "These bounds imply that AI adoption can account for at most a small fraction of the aggregate declines in early-career employment documented in Appendix D.2—declines whose connection to generative AI is itself debated (Frank et al., 2026; Iscenko and Curto Millet, 2026).",
+    "interpretation_quote_page": "manuscript p. 30 (PDF p. 33)"
+  },
+  "q3_headline_null_and_data": {
+    "answer": "CONFIRMED. Headline bound is 2% on earnings and recorded hours at both worker and workplace levels, two years post-ChatGPT. Data: two large-scale surveys (Nov-Dec 2023 and Nov-Dec 2024) linked to Danish administrative records; the late-2024 round covers 25,000 workers across 7,000 workplaces in 11 highly exposed occupations.",
+    "abstract_quote": "using difference-in-differences, we estimate precise null effects on earnings and recorded hours at both the worker and workplace levels, ruling out effects larger than 2% two years after the launch of ChatGPT.",
+    "abstract_quote_page": "Abstract, manuscript p. 1 (PDF p. 3)",
+    "data_quote": "Our latest survey round, conducted in late 2024, includes responses from 25,000 workers across 7,000 workplaces.",
+    "data_quote_page": "Introduction, manuscript p. 1 (PDF p. 4); same page: 'we conducted a series of large-scale, representative surveys of AI chatbot adoption in 11 highly exposed occupations'",
+    "occupations_quote": "Our list of occupations is accountants, customer support specialists, financial advisors, HR professionals, IT support specialists, journalists, legal professionals, marketing professionals, office clerks, software developers, and teachers.",
+    "occupations_quote_page": "footnote 2, manuscript p. 1 (PDF p. 4)",
+    "ci_detail_quote": "Difference-in-differences estimates for earnings, recorded hours, and wages all center on zero, with confidence intervals ruling out average effects larger than 2%.",
+    "ci_detail_quote_page": "manuscript p. 3 (PDF p. 5)"
+  },
+  "q4_nber_landing_page": {
+    "answer": "The NBER w33777 landing page (checked 2026-07-22) already shows the NEW March 2026 revision: new title 'Still Waters, Rapid Currents: Early Labor Market Transformation under Generative AI', Issue Date May 2025, Revision Date March 2026, and the new abstract ('We study the early labor market impacts of AI chatbots... ruling out effects larger than 2% two years after the launch of ChatGPT...').",
+    "url": "https://www.nber.org/papers/w33777",
+    "observed": {
+      "citation_title": "Still Waters, Rapid Currents: Early Labor Market Transformation under Generative AI",
+      "issue_date": "May 2025",
+      "revision_date": "March 2026",
+      "abstract_matches_march_2026_version": true
+    }
+  },
+  "blog_implications": {
+    "verdict": "The external reviewer's claim checks out. If the blog paragraph says the Denmark paper only looked at incumbents' earnings/hours and did not examine hiring/entry-level margins, it MUST be rewritten: the March 2026 revision directly tests employment, hiring/separation (job creation/destruction) rates, hire/separation composition, and the 22-25 early-career employment share at adopting workplaces, finding precise nulls (early-career share bound: 0.33 pp; job churn bound: 0.5% of employment monthly; employment/hours/earnings bound: 2%).",
+    "caveats": [
+      "The workplace 'adoption' treatment is employer-encouraged chatbot use (self-reported by workers, robust to coworker reports), not direct enterprise-tool telemetry.",
+      "The 0.33 pp bound is per encouraged workplace (differential vs. non-encouraged); scaled to the aggregate it caps AI's contribution at ~0.14 pp of the ~0.6 pp Danish aggregate early-career decline.",
+      "Denmark replicates the aggregate early-career decline seen in the US (Brynjolfsson, Chandar and Chen 2025), but the DiD shows it is not driven by adopting firms."
+    ]
+  }
+}

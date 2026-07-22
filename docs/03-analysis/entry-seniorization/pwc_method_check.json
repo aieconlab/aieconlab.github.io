@@ -1,0 +1,122 @@
+{
+  "source_pdf": {
+    "url": "https://www.pwc.com/gx/en/issues/artificial-intelligence/job-barometer/2026/2026-global-ai-jobs-barometer-global-findings.pdf",
+    "local_path": "/private/tmp/claude-501/-Users-hayun-Documents-Github-AIEconLab--claude-worktrees-ai-trends-july-17-1ce616/ae37edf6-cc22-4044-ad92-2e5d4cc51c0e/scratchpad/entry_seniorization/src/pwc_2026_global_findings.pdf",
+    "pages_total": 45,
+    "title": "Two futures for jobs in an AI era - 2026 Global AI Jobs Barometer (global findings)"
+  },
+  "separate_methodology_pdf": {
+    "url": "https://www.pwc.com/gx/en/issues/artificial-intelligence/job-barometer/2026/2026-global-ai-jobs-barometer-methodology.pdf",
+    "local_path": "/private/tmp/claude-501/-Users-hayun-Documents-Github-AIEconLab--claude-worktrees-ai-trends-july-17-1ce616/ae37edf6-cc22-4044-ad92-2e5d4cc51c0e/scratchpad/entry_seniorization/src/pwc_2026_methodology.pdf",
+    "pages_total": 20,
+    "note": "Covers AI exposure index, skills change, net skill change (Deming-Noray) and productivity/Orbis methodology. Contains NO additional detail on the entry-level 7x / seniorisation analysis beyond the global-findings deck. Entry-level definitions appear only in the notes and Methodology boxes on pages 20-22 of the global findings PDF."
+  },
+  "checks": {
+    "q1_7x_unit_of_analysis": {
+      "verdict": "REVIEWER CONFIRMED — interpretation (b)",
+      "explanation": "The 7x is NOT a probability per individual job posting. It is the ratio of two quartile-level shares: among UNIQUE 'new' skills (skills that newly emerged 2019->2025 in an occupation's US entry-level postings), the share that qualifies as 'traditionally senior' is 52% in the top AI-exposure quartile vs 7% in the bottom quartile (52/7 ≈ 7.4x, rounded to '7x'). Each unique skill is counted once in this historical comparison. Note the chart's own volume comparison (avg number of new skills per occupation, 207 vs 144) is only 1.4x, confirming 7x refers to the senior-share of new skills, not posting-level likelihood.",
+      "quotes": [
+        {
+          "page": 20,
+          "location": "slide title",
+          "text": "The most AI-exposed entry level jobs are 7x more likely than the least AI-exposed entry level jobs to now demand traditionally senior skills"
+        },
+        {
+          "page": 20,
+          "location": "chart subtitle",
+          "text": "Average number of “new” skills per occupation, by AI exposure quartile, 2025 relative to 2019, entry-level job postings, US"
+        },
+        {
+          "page": 20,
+          "location": "chart callouts",
+          "text": "52% of new skills are traditionally senior-level* [Top 25%] ... 7% of new skills are traditionally senior-level* [Bottom 25%] ... Top Quartile Average / Bottom Quartile Average: 1.4x"
+        },
+        {
+          "page": 20,
+          "location": "note (4)",
+          "text": "*The 52% and 7% are calculated based on unique new skills, rather than total skill occurrences. In the bar charts, skills are counted each time they appear within an occupation (capturing how widely they are used), whereas for the historical comparison each skill is counted only once. As a result, the percentages are not directly comparable to the average new skill values."
+        },
+        {
+          "page": 20,
+          "location": "Methodology box",
+          "text": "Methodology: We identify early-career postings as roles requiring 0-2 years’ experience, then count ‘new’ skills for each occupation where the skill appears more than 10 times in 2025 but five or fewer times in 2019. To assess seniorisation, we flag new skills as traditionally senior if they were common in experienced postings in 2019 but rare in early-career postings, then compare the share of these skills across AI exposure quartiles."
+        }
+      ]
+    },
+    "q2_new_skill_definition": {
+      "verdict": "REVIEWER CONFIRMED — occupation-level counts, >10 mentions in 2025 AND ≤5 mentions in 2019",
+      "explanation": "'New' is defined at the occupation level (mention counts pooled across that occupation's entry-level postings), not per individual posting. Thresholds: greater than 10 mentions in 2025 AND five or fewer (≤5) mentions in the same occupation in 2019.",
+      "quotes": [
+        {
+          "page": 20,
+          "location": "note (2)",
+          "text": "A skill is classified as “new” if it has greater than 10 mentions in 2025 but five or fewer mentions in that same occupation in 2019"
+        },
+        {
+          "page": 22,
+          "location": "note (1), second sentence",
+          "text": "A skill is defined as new for a given occupation if it has >10 mentions in entry-level postings in 2025 but ≤5 mentions in entry-level postings for the same occupation in 2019."
+        }
+      ]
+    },
+    "q3_seniorised_definition": {
+      "verdict": "QUOTED — defining sentence found on page 22",
+      "explanation": "The +35% (seniorised) vs -10% (non-seniorised) statistic uses this posting-level classification, layered on the occupation-level 'new' and quartile-level 'traditionally senior' skill definitions. Caveat: the note literally says a posting is seniorised 'if it contains ≥10 mentions of a skill' — a threshold that reads more naturally as an occupation/role-level count; the source text itself carries this posting-vs-role ambiguity (the Methodology box speaks of seniorised 'early-career roles').",
+      "quotes": [
+        {
+          "page": 22,
+          "location": "note (1), full",
+          "text": "(1) An entry-level job posting is classified as “seniorised” if it contains ≥10 mentions of a skill that is both new and traditionally senior. A skill is defined as new for a given occupation if it has >10 mentions in entry-level postings in 2025 but ≤5 mentions in entry-level postings for the same occupation in 2019. A skill is defined as traditionally senior if, within the same AI exposure quartile, it had >50 mentions in experienced (non-entry-level) job postings in 2019 and ≤5 mentions in entry-level postings in 2019."
+        },
+        {
+          "page": 22,
+          "location": "Methodology box",
+          "text": "Methodology: We focus on early-career postings in the top AI exposure quartile and classify them as ‘seniorised’ if they contain newly emerging skills that were traditionally concentrated in experienced roles in 2019. We then compare posting growth from 2019 to 2025 for seniorised versus non-seniorised early-career roles."
+        },
+        {
+          "page": 20,
+          "location": "note (3) - traditionally senior definition (identical logic)",
+          "text": "A skill is defined as traditionally senior if, within the same AI exposure quartile, it had >50 mentions in experienced (non-entry-level) job postings in 2019 and ≤5 mentions in entry-level postings in 2019"
+        }
+      ]
+    },
+    "q4_scope_confirmations": {
+      "lightcast_data": {
+        "verdict": "CONFIRMED",
+        "quotes": [
+          {"page": 20, "location": "source line", "text": "Source: PwC analysis, PwC AI Occupational Exposure Index, Lightcast data"},
+          {"page": 22, "location": "source line", "text": "Source: PwC analysis, Lightcast data"},
+          {"page": 21, "location": "notes", "text": "The “Years of Experience” variable from Lightcast is used as a proxy for early-career jobs. A posting is defined as an early-career job if its years of experience listed is between 0-2 years."}
+        ]
+      },
+      "top_quartile_us_scope_for_35_minus10": {
+        "verdict": "CONFIRMED",
+        "quotes": [
+          {"page": 22, "location": "chart subtitle", "text": "Change in entry-level job postings between 2019 and 2025, seniorised vs non-seniorised roles, top AI exposure quartile, US"},
+          {"page": 22, "location": "chart values", "text": "Seniorised 35% ... Non-Seniorised -10%"}
+        ]
+      },
+      "2_4_million_us_entry_level_postings": {
+        "verdict": "CONFIRMED, BUT NOT IN THE PDF — figure appears only in the PwC global press release",
+        "explanation": "The string '2.4 million' appears nowhere in the 45-page global findings PDF nor the 20-page methodology PDF (verified by full-text search). The global findings PDF reports 449.1m total US postings analysed (all levels/years, p40). The 2.4 million entry-level figure comes from the PwC global press release.",
+        "quotes": [
+          {
+            "source": "PwC global press release, 15 June 2026",
+            "url": "https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-jobs-barometer.html",
+            "text": "Based on 2.4 million entry-level jobs analysed in the US, entry-level roles most exposed to AI are now seven times more likely to require traditionally senior-level ‘human-intensive’ skills like leadership, creativity or face-to-face interactions. Job openings for these ‘seniorised’ entry-level roles have grown 35% since 2019, while other entry-level roles shrank 10%."
+          },
+          {
+            "source": "2026 global findings PDF",
+            "page": 40,
+            "text": "United States 449.1 m [postings analysed, all levels] / 'We analyse over 1 billion job advertisements globally'"
+          }
+        ]
+      }
+    }
+  },
+  "reviewer_claims_assessment": {
+    "claim_1_equals_b": "CONFIRMED. The 7x is the ratio of quartile-level shares of unique new skills that are traditionally senior (52% top quartile vs 7% bottom quartile), not a per-posting probability. PwC's own headline and press release re-frame this as jobs being '7x more likely to demand' senior skills, which is a looser role-level framing than the underlying skill-share calculation.",
+    "claim_2_occupation_level_thresholds": "CONFIRMED. Occupation-level mention counts within entry-level postings: >10 mentions in 2025 AND ≤5 mentions in 2019 for the same occupation (p20 note 2; p22 note 1)."
+  },
+  "verified_on": "2026-07-22"
+}

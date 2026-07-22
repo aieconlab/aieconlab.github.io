@@ -13,7 +13,7 @@
 
 | 그림 | 스크립트 | 원자료 | 다운로드(UTC) | SHA-256 |
 |---|---|---|---|---|
-| fig01 (미국 신규 대졸자 실업률) | `scripts/analyze_nyfed.py` (분석) + `scripts/plot_fig01.py` (플롯) | [NY Fed College Labor Market CSV](https://www.newyorkfed.org/medialibrary/research/interactives/data/college-labor-market/college-labor-unemployment-data.csv) (1990-01~2026-03, 2026-05-05 갱신분) | 2026-07-21T23:58:44Z | `bc1014335fe1dade67994c15f0182526c468160b3df40c76610a903e3c40e39e` |
+| fig01 (미국 신규 대졸자 실업률) | `scripts/fig01_us_recent_grads.py` (다운로드·역전 에피소드 계산·플롯 통합) | [NY Fed College Labor Market CSV](https://www.newyorkfed.org/medialibrary/research/interactives/data/college-labor-market/college-labor-unemployment-data.csv) (1990-01~2026-03, 2026-05-05 갱신분) | 2026-07-21T23:58:44Z | `bc1014335fe1dade67994c15f0182526c468160b3df40c76610a903e3c40e39e` |
 | fig01 보조 (계열 정의 메타) | 〃 | [chart-meta JSON](https://www.newyorkfed.org/medialibrary/research/interactives/data/college-labor-market/college-labor-chart-meta.json) | 2026-07-21T23:58:44Z | `af1074fa206e066bd70a7bf40d5ca7f81194342b09027707784a42ce78f14290` |
 | fig02 (BOK 연령×노출도 분해) | `scripts/fig02_bok_pension.py` | [BOK 이슈노트 제2025-30호 PDF](https://www.bok.or.kr/fileSrc/portal/0181982e745449ca93456319a31cc0e6/1/47d99348479249c1a5ff48e9adf38ec9.pdf) (한진수·오삼일, 2025-10-30) — 수치는 노트 그림 4에 인쇄된 값만 사용 | 2026-07-21T23:49:53Z | `4939c0e355c63d17d44a9b82da2b1013cfec568a70658f27dd7089214dfd0e96` |
 | fig03 (조건부 산수) | `scripts/fig03_sim.py` | 외부 자료 없음 (모형 정의는 스크립트와 `sim_results.json` 참조) | — | — |
@@ -24,21 +24,32 @@
 - `nyfed_facts.json` — NY Fed 계열 정의(원문), 역전 에피소드 목록, 최신치·분기 평균, 교차검증 결과
 - `bok_facts.json` — BOK 2025-30호 서지·방법·전체 분해 수치·저자 명시 한계(페이지 인용 포함)
 - `sim_results.json` — 시나리오×가중 프로파일별 연도별 편차 전체 표
-- `citation_checks.json` — 게시글 인용 8건의 1차 출처 대조 결과(확인/교정 판정 포함)
+- `citation_checks.json` — 게시글 인용의 1차 출처 대조 결과(확인/교정 판정 포함)
+- `pwc_method_check.json` — PwC ‘7배’·‘신규 스킬’·‘시니어화’ 정의의 원문(PDF 페이지·인용) 검증
+- `denmark_check.json` — Humlum·Vestergaard 2026 개정판의 채용·이직/초기경력 비중 분석 범위 검증
+- `anthropic_metric_check.json` — Anthropic 14% 지표(월간 신규 취업 이행률) 정의 검증
 
 ## 재실행 방법
 
+스크립트는 실행 위치와 무관하게 동작한다(`Path(__file__)` 기준 상대경로).
+기본 출력은 `scripts/out/`, 다운로드 캐시는 `scripts/data/`이며(둘 다 커밋 제외),
+`--out` 인자로 최종 경로를 지정한다. 게시용 그림은 다음과 같이 재생성했다:
+
 ```bash
-python3 scripts/analyze_nyfed.py   # CSV 재다운로드·재계산 (해시 변동 시 데이터 갱신분)
-python3 scripts/plot_fig01.py
-python3 scripts/fig02_bok_pension.py
-python3 scripts/fig03_sim.py
-python3 scripts/make_cover.py
+python3 scripts/fig01_us_recent_grads.py --out <repo>/static/images/post/entry_seniorization/fig01_us_recent_grads.png
+python3 scripts/fig02_bok_pension.py     --out <repo>/static/images/post/entry_seniorization/fig02_bok_pension.png
+python3 scripts/fig03_sim.py             --out <repo>/static/images/post/entry_seniorization/fig03_pipeline_arithmetic.png
+python3 scripts/make_cover.py            --out <repo>/assets/images/post/entry_seniorization_cover.png
 ```
 
-의존성: `python3` + `pandas`, `matplotlib`, `openpyxl`. 그림 폰트는 macOS의
-`Apple SD Gothic Neo`를 사용한다(다른 환경에서는 나눔고딕 등으로 대체 필요).
-스크립트 내 경로는 작성 당시 세션의 절대경로이므로 재실행 시 경로 상수를 수정할 것.
+- `fig01`은 실행 시 NY Fed CSV를 재다운로드해 SHA-256을 출력하고 위 표의 값과 대조한다
+  (해시가 다르면 뉴욕 연은의 데이터 갱신을 뜻함). `--data`로 로컬 CSV를 쓸 수 있다.
+  역전 에피소드(2021-01 시작, 63개월)는 하드코딩이 아니라 매 실행 때 데이터에서 계산된다.
+- `fig02`의 수치는 BOK 노트 그림 4에서 전사한 상수이며 출처·해시가 스크립트 머리말에 있다.
+- `fig03`은 외부 자료가 없고, −0.6δ 산술을 assert로 자체 검증한다.
+
+의존성: `python3` + `pandas`, `matplotlib`. 그림 폰트 기본값은 macOS의
+`Apple SD Gothic Neo`이며 다른 환경에서는 `--font`로 한글 폰트를 지정한다.
 
 ## 주의
 

@@ -1,0 +1,31 @@
+{
+  "source": {
+    "title": "Labor market impacts of AI: A new measure and early evidence",
+    "publisher": "Anthropic",
+    "date": "2026-03-05",
+    "url": "https://www.anthropic.com/research/labor-market-impacts",
+    "verified_on": "2026-07-22",
+    "verification_method": "Fetched page HTML directly (curl) and extracted the relevant passages verbatim from the rendered text."
+  },
+  "question": "Is the ~14% decline for younger workers (22-25) measured on (a) a job-seeker success rate, (b) the monthly rate at which individuals start new jobs (job-finding rate from CPS), or (c) something else?",
+  "answer": "(b) — the monthly job-finding rate / new-job start rate from the CPS panel. It is defined at the individual-month level as a worker reporting a job that they did not hold in the previous month, measured among all young workers (not conditional on being an active job seeker). It is NOT a job-seeker success rate (구직 성공률) — calling it that would misstate the denominator. Figure 7 is explicitly titled as new job starts among workers age 22-25.",
+  "defining_quote": {
+    "note": "Key definitional fragment quoted verbatim (Figure 7 discussion); the surrounding sentence explains that Figure 7 shows the monthly job finding rate for young workers, defined parenthetically as:",
+    "quote": "when a worker reports a job that they did not have in the previous month",
+    "context_paraphrase": "The post says it uses the panel dimension of the CPS to count the percent of young (22-25 year old) workers who begin a new job in a more vs. less exposed occupation over time. Figure 7 plots this monthly job finding rate split by whether the worker is entering a high- vs. low-exposure occupation. Figure 7's caption labels the series as new job starts among workers age 22-25 in high-observed-exposure vs. no-AI-exposure occupations, Current Population Survey."
+  },
+  "fourteen_percent_claim": {
+    "paraphrase": "The averaged post-ChatGPT-era estimate is a 14% drop in the job finding rate in the exposed occupations compared to the 2022 level, and the post says this is just barely statistically significant. It also notes there is no such decrease for workers older than 25.",
+    "magnitude_detail": "Job finding rates in less-exposed occupations remain stable at about 2% per month, while entry into the most exposed jobs decreases by about half a percentage point."
+  },
+  "comparison_group_and_baseline": {
+    "time_baseline": "Relative to 2022 (pre-ChatGPT baseline year); the 14% figure is the averaged post-ChatGPT-era estimate versus the 2022 rate in exposed occupations.",
+    "cross_sectional_comparison": "High observed-exposure occupations vs. zero/no AI-exposure occupations, with the bottom panel of Figure 7 measuring the gap between the two series in a difference-in-differences framework.",
+    "note": "So the design is both: the raw 14% is within exposed occupations relative to 2022, and the identification comes from the DiD gap against low/no-exposure occupations. The post also notes the CPS unemployment rate for young workers in exposed occupations is flat, motivating the switch to the hiring-side (job-finding) measure."
+  },
+  "age_band": "22-25 year olds; the post explicitly states there is no such decrease for workers older than 25.",
+  "data_source": "Current Population Survey (CPS), using its panel (month-to-month linked) dimension.",
+  "caveats_in_source": "The post lists alternative interpretations: young workers who are not hired may be staying at existing jobs, taking different jobs, or returning to school; a further data-related caveat about CPS is mentioned.",
+  "working_paper": "No separate working-paper PDF with this metric was needed; the definitional text appears directly in the research post (the passage around Figure 7).",
+  "implication_for_our_post": "When describing this result in Korean, use '신규 취업률/월간 새 일자리 시작률(job finding rate)' — i.e., the monthly rate at which 22-25세 workers start jobs they did not have the previous month — not '구직 성공률'. The denominator is young workers in the CPS panel, not job seekers."
+}

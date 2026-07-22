@@ -1,10 +1,21 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""커버 이미지(1600x800) 생성. 사용법: python3 make_cover.py [--out PNG] [--font FONT]"""
+import argparse
+from pathlib import Path
+
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-plt.rcParams["font.family"] = "Apple SD Gothic Neo"
+HERE = Path(__file__).resolve().parent
+ap = argparse.ArgumentParser()
+ap.add_argument("--out", type=Path, default=HERE / "out" / "entry_seniorization_cover.png")
+ap.add_argument("--font", default="Apple SD Gothic Neo")
+args = ap.parse_args()
+
+plt.rcParams["font.family"] = args.font
 
 NAVY = "#1b2a4a"
 BLUE = "#2563eb"
@@ -86,5 +97,6 @@ ax.plot([x0 - 100, x0 - 4], [base_y + heights[0], base_y + heights[0]],
 ax.plot([x0 - 100, x0 - 44], [base_y + old_h, base_y + old_h],
         color=BLUE, lw=1.2, ls=(0, (2, 3)), zorder=5, alpha=0)
 
-fig.savefig("/Users/hayun/Documents/Github_AIEconLab/.claude/worktrees/ai-trends-july-17-1ce616/assets/images/post/entry_seniorization_cover.png")
-print("saved")
+args.out.parent.mkdir(parents=True, exist_ok=True)
+fig.savefig(args.out)
+print("wrote", args.out)

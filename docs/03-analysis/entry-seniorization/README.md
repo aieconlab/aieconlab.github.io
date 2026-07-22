@@ -51,8 +51,10 @@ python3 -m venv .venv
   --out ../../../assets/images/post/entry_seniorization_cover.png
 ```
 
-- **버전 고정**: `requirements.lock`이 커밋 그림을 생성한 검증 환경
-  (Python 3.13.9, pandas 2.3.3, numpy 2.3.5, matplotlib 3.10.6)을 잠근다.
+- **버전 고정**: `requirements.lock`은 직접 의존성 3개(pandas 2.3.3, numpy 2.3.5,
+  matplotlib 3.10.6)를 고정한다. Python 버전 자체는 잠그지 않는다 — 커밋 그림은
+  Python 3.13.9에서 생성했고, 검증 시점 기준 3.13.9와 3.14.5 모두에서 그림 4장과
+  JSON이 바이트 단위로 동일하게 재생성됨이 확인됐다.
   `requirements.txt`(하한만 지정)로 설치하면 렌더링이 커밋본과 미세하게 달라질 수 있다.
 - **조회일 고정**: `fig01`·`fig02`의 푸터 조회일은 기본값이 실행일이므로,
   커밋본과 동일한 PNG를 원하면 `--access-date 2026-07-22`를 지정한다.

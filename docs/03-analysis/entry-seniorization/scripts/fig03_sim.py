@@ -23,7 +23,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 HERE = Path(__file__).resolve().parent
-BLUE, MID, LIGHT, NAVY, NOTE, SPINE = ("#2563eb", "#8290a6", "#aab6c6",
+BLUE, MID, LIGHT, NAVY, NOTE, SPINE = ("#2563eb", "#8290a6", "#7f8da3",
                                        "#1b2a4a", "#5a6472", "#c8cdd6")
 
 SHOCK_YEARS = {2026, 2027, 2028}

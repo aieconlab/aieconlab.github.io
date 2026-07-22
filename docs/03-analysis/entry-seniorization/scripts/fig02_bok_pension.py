@@ -25,7 +25,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 HERE = Path(__file__).resolve().parent
-BLUE, GRAY, NAVY, NOTE, SPINE = "#2563eb", "#9aa5b8", "#1b2a4a", "#5a6472", "#c8cdd6"
+BLUE, GRAY, NAVY, NOTE, SPINE = "#2563eb", "#8290a6", "#1b2a4a", "#5a6472", "#c8cdd6"
 
 AGES = ["청년층\n(15~29세)", "30대", "40대", "50대"]
 HIGH = [-20.8, 7.6, -6.1, 14.6]   # AI 고노출(상위 3~4분위) 업종

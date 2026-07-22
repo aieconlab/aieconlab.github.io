@@ -32,7 +32,7 @@ URL = ("https://www.newyorkfed.org/medialibrary/research/interactives/"
        "data/college-labor-market/college-labor-unemployment-data.csv")
 KNOWN_SHA256 = "bc1014335fe1dade67994c15f0182526c468160b3df40c76610a903e3c40e39e"
 
-BLUE, MID, LIGHT, NAVY, NOTE, SPINE = ("#2563eb", "#9aa5b8", "#aab6c6",
+BLUE, MID, LIGHT, NAVY, NOTE, SPINE = ("#2563eb", "#8290a6", "#7f8da3",
                                        "#1b2a4a", "#5a6472", "#c8cdd6")
 
 
@@ -102,9 +102,10 @@ def main():
               ("Recent graduates", BLUE, 3.4, "신규 대졸자(22-27세)"),
               ("All workers", NAVY, 2.2, "전체 근로자(16-65세)"),
               ("College graduates", LIGHT, 2.2, "대졸 전체(22-65세)")]
+    styles = {"All workers": "--", "College graduates": ":"}
     for col, c, lw, _ in series:
         ax.plot(df.Date, df[col], color=c, linewidth=lw,
-                linestyle="--" if col == "All workers" else "-", zorder=3)
+                linestyle=styles.get(col, "-"), zorder=3)
     if cur:
         ax.axvspan(cur["start"], cur["end"], color=BLUE, alpha=0.08, zorder=1)
         ax.annotate(f"{cur['start'].year}년 {cur['start'].month}월 이후\n{cur['n']}개월 연속 역전",

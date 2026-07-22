@@ -90,7 +90,7 @@ def main():
     today = dt.date.today().isoformat()
     fig.text(0.06, 0.075, "주: 산업 중분류·연령대별 가입자수(계절조정), 2022.7월 대비 2025.7월. 노출도 산정 방법은 본문 참조.",
              fontsize=12, color=NOTE, va="top")
-    fig.text(0.06, 0.035, f"자료: 한국은행, BOK 이슈노트 제2025-30호 <그림 4> ({today} 조회)  |  재구성: AIEconLab",
+    fig.text(0.06, 0.035, f"자료: BOK 이슈노트 No.2025-30(한진수·오삼일)에서 인용, <그림 4> ({today} 조회)  |  재구성: AIEconLab",
              fontsize=12, color=NOTE, va="top")
 
     a.out.parent.mkdir(parents=True, exist_ok=True)

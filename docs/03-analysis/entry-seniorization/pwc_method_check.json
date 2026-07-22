@@ -1,13 +1,13 @@
 {
   "source_pdf": {
     "url": "https://www.pwc.com/gx/en/issues/artificial-intelligence/job-barometer/2026/2026-global-ai-jobs-barometer-global-findings.pdf",
-    "local_path": "/private/tmp/claude-501/-Users-hayun-Documents-Github-AIEconLab--claude-worktrees-ai-trends-july-17-1ce616/ae37edf6-cc22-4044-ad92-2e5d4cc51c0e/scratchpad/entry_seniorization/src/pwc_2026_global_findings.pdf",
+    "local_path": "(세션 스크래치패드)/entry_seniorization/src/pwc_2026_global_findings.pdf",
     "pages_total": 45,
     "title": "Two futures for jobs in an AI era - 2026 Global AI Jobs Barometer (global findings)"
   },
   "separate_methodology_pdf": {
     "url": "https://www.pwc.com/gx/en/issues/artificial-intelligence/job-barometer/2026/2026-global-ai-jobs-barometer-methodology.pdf",
-    "local_path": "/private/tmp/claude-501/-Users-hayun-Documents-Github-AIEconLab--claude-worktrees-ai-trends-july-17-1ce616/ae37edf6-cc22-4044-ad92-2e5d4cc51c0e/scratchpad/entry_seniorization/src/pwc_2026_methodology.pdf",
+    "local_path": "(세션 스크래치패드)/entry_seniorization/src/pwc_2026_methodology.pdf",
     "pages_total": 20,
     "note": "Covers AI exposure index, skills change, net skill change (Deming-Noray) and productivity/Orbis methodology. Contains NO additional detail on the entry-level 7x / seniorisation analysis beyond the global-findings deck. Entry-level definitions appear only in the notes and Methodology boxes on pages 20-22 of the global findings PDF."
   },

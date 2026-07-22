@@ -1,0 +1,4 @@
+# entry-seniorization 그림 재생성 의존성 (python3 -m venv .venv && pip install -r requirements.txt)
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.8

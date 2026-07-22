@@ -10,7 +10,7 @@
     "page_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?menuNo=200433&nttId=10094258",
     "pdf_url": "https://www.bok.or.kr/fileSrc/portal/0181982e745449ca93456319a31cc0e6/1/47d99348479249c1a5ff48e9adf38ec9.pdf",
     "sha256": "4939c0e355c63d17d44a9b82da2b1013cfec568a70658f27dd7089214dfd0e96",
-    "pdf_local": "/private/tmp/claude-501/-Users-hayun-Documents-Github-AIEconLab--claude-worktrees-ai-trends-july-17-1ce616/ae37edf6-cc22-4044-ad92-2e5d4cc51c0e/scratchpad/entry_seniorization/data/bok_issuenote_2025-30.pdf",
+    "pdf_local": "(세션 스크래치패드)/entry_seniorization/data/bok_issuenote_2025-30.pdf",
     "accessed": "2026-07-22",
     "pages": 16,
     "disclaimer_p1": "본 자료의 내용은 한국은행의 공식견해가 아니라 집필자 개인의 견해라는 점을 밝힙니다.",
@@ -74,7 +74,7 @@
   "critical_reading_observations": [
     "산업 단위 노출도의 한계: 직업별 AIOE를 업종 내 직업분포(2024년 상반기 지역별고용조사)로 가중평균해 75개 중분류 업종에 부여 — 같은 업종 내에서도 직업별 노출도 이질성이 뭉개지고, 노출도 순위는 사실상 IT·출판·전문서비스·금융 등 특정 업종군을 지목한다. 저자들도 '업종별 AI 노출도 또한 업종 고유 특성을 일정 부분 내포'(p.11)한다고 인정",
     "경기·업종 사이클과의 식별: 2022년 하반기는 ChatGPT 출시 시점이자 글로벌 금리 인상·테크 업황 조정기와 겹침. DDD의 시점 고정효과는 전 업종 공통 충격만 흡수하고, 고노출 업종(IT 등)에 특유한 업황 충격과 AI 효과는 분리되지 않음 — 저자들 스스로 '인과관계를 확정적으로 식별한 것이 아니다'(p.11)라고 명시",
-    "국민연금 커버리지 공백: 가입자수는 임금 근로자의 71.8%(상용의 96.7%)만 포괄(p.4 각주3) — 플랫폼·특수고용·초단시간·일용직 등 청년 비중이 높은 비가입 일자리의 변동은 관측되지 않으며, 상용직 중심 통계라는 점에서 '청년 일자리 감소 21.1만개'는 사실상 상용직 중심의 감소",
+    "국민연금 커버리지 공백: 가입자수는 임금 근로자의 71.8%(상용의 96.7%)만 포괄(p.4 각주3) — 초단시간·비임금 플랫폼 종사 등 가입자로 충분히 포착되지 않는 일자리의 변동은 관측되지 않으며(일용근로자도 근로일수·소득 요건 충족 시 가입 대상이므로 '일용직 전체 미포착'은 아님) [2026-07-22 정정], 상용직 중심 통계라는 점에서 '청년 일자리 감소 21.1만개'는 사실상 상용직 중심의 감소",
     "청년 인구 감소 효과의 처리: 노트는 인구효과를 명시적으로 통제하지 않음. 다만 저노출 업종 청년 감소가 -0.4만개에 그친다는 분해와 업종·시점 고정효과 DDD가, 인구 감소 같은 연령대 공통 추세만으로는 노출도별 격차를 설명하기 어렵다는 간접 증거를 제공(인구 효과라면 저노출 업종에서도 감소해야 함). 그러나 청년 취업 희망 업종 구성 변화 등은 배제 못 함",
     "수치 반올림: 그림 4에서 15~29세 상위(-20.8)+하위(-0.4)=-21.2 vs 전체 표기 -21.1, 30대 7.6+11.7=19.3 vs 19.4 — 원문 반올림에 따른 0.1만명 불일치",
     "임금 반증 미해결: AI가 노동수요를 줄였다면 임금 하락 압력이 있어야 하나 노출도별 임금 격차가 관찰되지 않음(p.9) — 저자들은 임금 경직성·구성효과로 해석하지만 자료 제약으로 확정 판단 불가라고 유보",
@@ -83,7 +83,7 @@
   ],
   "figure_output": {
     "png": "/Users/hayun/Documents/Github_AIEconLab/.claude/worktrees/ai-trends-july-17-1ce616/static/images/post/entry_seniorization/fig02_bok_pension.png",
-    "script": "/private/tmp/claude-501/-Users-hayun-Documents-Github-AIEconLab--claude-worktrees-ai-trends-july-17-1ce616/ae37edf6-cc22-4044-ad92-2e5d4cc51c0e/scratchpad/entry_seniorization/scripts/fig02_bok_pension.py",
+    "script": "(세션 스크래치패드)/entry_seniorization/scripts/fig02_bok_pension.py",
     "numbers_used": "BOK 이슈노트 그림 4(p.6)에 인쇄된 수치만 사용"
   }
 }

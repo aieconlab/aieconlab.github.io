@@ -30,11 +30,11 @@ URL = ("https://www.newyorkfed.org/medialibrary/research/interactives/"
        "data/college-labor-market/college-labor-unemployment-data.csv")
 KNOWN_SHA256 = "bc1014335fe1dade67994c15f0182526c468160b3df40c76610a903e3c40e39e"
 
-BLUE, MID, LIGHT, NAVY, NOTE, SPINE = ("#2563eb", "#9aa5b8", "#cfd6e0",
+BLUE, MID, LIGHT, NAVY, NOTE, SPINE = ("#2563eb", "#9aa5b8", "#aab6c6",
                                        "#1b2a4a", "#5a6472", "#c8cdd6")
 
 
-def fetch(data_path):
+def fetch(data_path, allow_updated_data=False):
     if data_path:
         raw = Path(data_path).read_bytes()
         src = str(data_path)
@@ -48,7 +48,11 @@ def fetch(data_path):
     sha = hashlib.sha256(raw).hexdigest()
     print(f"source: {src}\nsha256: {sha}")
     if sha != KNOWN_SHA256:
-        print("주의: 해시가 2026-05-05 갱신분과 다름 — 뉴욕 연은이 데이터를 갱신했을 수 있음")
+        msg = ("해시가 2026-05-05 갱신분과 다름 — 뉴욕 연은이 데이터를 갱신했을 수 있음. "
+               "게시글 수치와 달라질 수 있으므로 기본값은 중단. 계속하려면 --allow-updated-data.")
+        if not allow_updated_data:
+            raise SystemExit("중단: " + msg)
+        print("주의(계속 진행): " + msg)
     from io import BytesIO
     return pd.read_csv(BytesIO(raw), parse_dates=["Date"]).sort_values("Date").reset_index(drop=True)
 
@@ -71,9 +75,11 @@ def main():
     ap.add_argument("--out", type=Path, default=HERE / "out" / "fig01_us_recent_grads.png")
     ap.add_argument("--facts", type=Path, default=HERE / "out" / "nyfed_facts_regen.json")
     ap.add_argument("--font", default="Apple SD Gothic Neo")
+    ap.add_argument("--allow-updated-data", action="store_true",
+                    help="원자료 해시가 기록과 달라도 계속 진행")
     a = ap.parse_args()
 
-    df = fetch(a.data)
+    df = fetch(a.data, a.allow_updated_data)
     df["gap"] = df["Recent graduates"] - df["All workers"]
     eps = episodes(df)
     cur = next((e for e in eps if e["ongoing"]), None)

@@ -42,14 +42,27 @@ python3 scripts/fig03_sim.py             --out <repo>/static/images/post/entry_s
 python3 scripts/make_cover.py            --out <repo>/assets/images/post/entry_seniorization_cover.png
 ```
 
-- `fig01`은 실행 시 NY Fed CSV를 재다운로드해 SHA-256을 출력하고 위 표의 값과 대조한다
-  (해시가 다르면 뉴욕 연은의 데이터 갱신을 뜻함). `--data`로 로컬 CSV를 쓸 수 있다.
-  역전 에피소드(2021-01 시작, 63개월)는 하드코딩이 아니라 매 실행 때 데이터에서 계산된다.
+- `fig01`은 실행 시 NY Fed CSV를 재다운로드해 SHA-256을 위 표의 값과 대조하고,
+  **해시가 다르면 기본값으로 중단**한다(갱신 데이터로 계속하려면 `--allow-updated-data`).
+  `--data`로 로컬 CSV를 쓸 수 있다. 역전 에피소드(2021-01 시작, 63개월)는
+  하드코딩이 아니라 매 실행 때 데이터에서 계산된다.
 - `fig02`의 수치는 BOK 노트 그림 4에서 전사한 상수이며 출처·해시가 스크립트 머리말에 있다.
 - `fig03`은 외부 자료가 없고, −0.6δ 산술을 assert로 자체 검증한다.
 
-의존성: `python3` + `pandas`, `matplotlib`. 그림 폰트 기본값은 macOS의
-`Apple SD Gothic Neo`이며 다른 환경에서는 `--font`로 한글 폰트를 지정한다.
+의존성은 `requirements.txt`에 고정되어 있다(pandas, numpy, matplotlib):
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+```
+
+그림 폰트 기본값은 macOS의 `Apple SD Gothic Neo`이며 다른 환경에서는
+`--font`로 한글 폰트를 지정한다.
+
+**JSON 파일의 성격**: 스크립트가 재생성하는 것은 그림 4장과
+`scripts/out/nyfed_facts_regen.json`·`sim_results.json`뿐이다. 그 밖의
+`*_facts.json`·`*_check.json`은 게시 전 검증 세션에서 리뷰 에이전트가 1차 자료
+(PDF·웹페이지)를 정독해 추출·기록한 **검증 기록**으로, 스크립트만으로는 재생성되지
+않는다(추출 근거는 각 파일의 인용문·페이지 표기 참조).
 
 ## 주의
 

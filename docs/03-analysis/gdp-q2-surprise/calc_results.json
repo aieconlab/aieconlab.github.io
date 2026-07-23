@@ -1,0 +1,21 @@
+{
+  "data_source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NGDPRSAXDCKRQ",
+  "sha256": "02c1cf857933937b127c7d0819fe9cf77ca21acbd04e242ce5b09db48337d6d0",
+  "cache_path_repo_relative": "docs/03-analysis/gdp-q2-surprise/scripts/data/krgdp.csv",
+  "from_cache": true,
+  "cache_mtime_utc": "2026-07-23T08:28:40+00:00",
+  "cache_mtime_note": "캐시 파일의 수정 시각. 다운로드 시각의 공식 기록은 README 표 참조.",
+  "verified_at_utc": "2026-07-23T11:47:22+00:00",
+  "q2_qoq_applied": 0.0062,
+  "q1_qoq_pct": 1.831,
+  "q1_yoy_pct_fred": 3.7755,
+  "q2_yoy_pct_implied": 3.745,
+  "growth_2025_pct": 1.14,
+  "old_flat_pct": 2.601,
+  "old_g_for_3.0_pct": 0.259,
+  "new_flat_pct": 3.078,
+  "new_minus0.1_pct": 3.001,
+  "new_g_for_3.0_pct": -0.101,
+  "new_g_for_2.6_pct": -0.619,
+  "new_q2pace_pct": 3.559
+}

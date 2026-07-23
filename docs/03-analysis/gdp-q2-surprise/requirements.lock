@@ -1,0 +1,13 @@
+# python 3.13.9 - 게시 PNG 생성 환경의 렌더링 의존성 전체 고정(전이 의존성 포함, 바이트 재현용)
+# 시스템 요건: macOS의 Apple SD Gothic Neo 글꼴(그림 한글 렌더링)
+matplotlib==3.10.6
+numpy==2.3.5
+Pillow==12.0.0
+contourpy==1.3.3
+cycler==0.10.0
+fonttools==4.60.1
+kiwisolver==1.4.9
+packaging==25.0
+pyparsing==3.2.5
+python-dateutil==2.9.0.post0
+six==1.17.0

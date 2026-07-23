@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-07-23T20:00+09:00",
+  "primary_source": {
+    "name": "한국은행 2026년 2/4분기 실질 국내총생산(속보), 공보 2026-07-23호",
+    "page": "https://www.bok.or.kr/portal/bbs/B0000501/view.do?menuNo=201264&nttId=11063107",
+    "pdf": "https://www.bok.or.kr/fileSrc/portal/5da95fdb53e84fdda0195ea72aea9f51/2/8afc636f6dd444f29725d9420df1f832.pdf",
+    "pdf_sha256": "ecab52e61aa3c02685d95a9766cb348ff2b642edf110e793e8f4a77d5e721448",
+    "pdf_checked_utc": "2026-07-23T10:45Z",
+    "note": "게시판이 7/23 저녁 한때 '콘텐츠 준비중'이었으나 같은 날 복구되어 PDF 원문 대조 완료."
+  },
+  "claims": [
+    {"claim": "2026Q2 실질 GDP 전기비 0.6%, 전년동기비 3.7%", "sources": ["속보 PDF p.1-2", "newspim", "etoday", "businesspost"], "status": "confirmed-primary"},
+    {"claim": "2026Q2 전기비 비반올림치 0.62% (기자설명회 확인)", "sources": ["edaily 03535846645517472", "newsprime 741240"], "cross_check": "0.62% 적용 시 전년동기비 원값 3.7450%. 원값에서 한 자리로 곧장 반올림하면 3.7%로 공표치와 정합. 두 자리 저장값(3.75%)을 다시 반올림하면 3.8%가 되는 이중 반올림을 피하기 위해 원값 기준으로 기록.", "status": "cross-checked-2-outlets"},
+    {"claim": "한국은행 5월 전망의 2분기 전기비 0.2% (실적이 3배)", "sources": ["newspim 20260723000436", "etoday 2606538"], "status": "cross-checked"},
+    {"claim": "한국은행 5월 전망 연간 2.6% (2월 2.0%에서 상향)", "sources": ["KDI eiec 281803 (경제전망 2026년 5월 요약)", "BOK 경제전망보고서 nttId=10098209"], "status": "confirmed"},
+    {"claim": "지출항목: 민간소비 +0.4%(재화·서비스), 정부소비 +0.2%(건강보험급여비), 건설투자 -0.2%(토목), 설비투자 +0.2%(기계류·반도체제조용기계), 지식재산생산물투자 +3.3%(연구개발·소프트웨어), 수출 +1.4%(반도체·기계장비), 수입 +0.8%", "sources": ["속보 PDF p.2"], "status": "confirmed-primary"},
+    {"claim": "성장기여도: 내수 +0.3%p, 순수출 +0.3%p, 지식재산생산물투자 +0.2%p", "sources": ["속보 PDF p.4 성장기여도 차트"], "status": "confirmed-primary"},
+    {"claim": "제조업 +1.2%(컴퓨터·전자·광학기기, 기계·장비 중심)", "sources": ["속보 PDF p.3"], "status": "confirmed-primary"},
+    {"claim": "2026Q1 건설투자 전기비 +1.4% (2분기에 다시 감소)", "sources": ["속보 PDF p.2 표"], "status": "confirmed-primary"},
+    {"claim": "실질 GDI 전기비 +3.6%, 전년동기비 +15.6%", "sources": ["속보 PDF p.1-3"], "status": "confirmed-primary"},
+    {"claim": "GDI 전년동기비 15.6%는 1988Q1(16.4%) 이후 38년 3개월 만 최고(전년동기비 기준)", "sources": ["etoday", "newspim"], "note": "속보 PDF에는 '38년' 서술 없음(1988Q1 수치는 매체 보도). 본문에 전년동기비 기준 명시.", "status": "cross-checked"},
+    {"claim": "한국은행 설명회(이동원 경제통계2국장): 하반기 두 분기 평균 -0.1%여도 연간 3% 가능", "sources": ["newspim 20260723000436", "etoday 2606538", "edaily(발언자 확인)"], "cross_check": "독립 재계산 -0.1% 적용 시 3.001% (calc_results.json)", "status": "confirmed-by-recalculation"},
+    {"claim": "2026Q1 전기비 1.8%(공표)/1.831%(FRED), 전년동기비 3.8%(공표)/3.7755%(FRED); 2025 분기 경로 -0.2/0.6/1.4/-0.1", "sources": ["속보 PDF p.2 표", "FRED NGDPRSAXDCKRQ"], "cross_check": "FRED 계열의 원값이 공표 반올림치와 모두 일치함을 확인(한 자리 직접 반올림 기준)", "status": "confirmed-primary"},
+    {"claim": "2025년 연간 성장률 1.1%(잠정)", "sources": ["BOK 2025년 국민계정(잠정) nttId=10098382"], "cross_check": "FRED 기준 필자 계산 1.14%", "status": "confirmed-primary"},
+    {"claim": "이슈노트 2026-16호(2026.7.19): 1분기 GDI 전년동기비 13.2%, 교역조건 개선 원인은 반도체 가격 상승, '가계 구매력과 기업 투자여력 확충 → 내수 회복 뒷받침' 기대", "sources": ["BOK nttId=11062977 (원문 페이지 요지 확인)"], "cross_check": "속보 PDF p.3 표의 2026Q1 GDI (13.2%)와 일치", "status": "confirmed-primary"},
+    {"claim": "기준금리 2.50% → 2.75% 인상 (2026.7.16 금통위)", "sources": ["BOK nttId=11062942 (통화정책방향 원문)"], "status": "confirmed-primary"},
+    {"claim": "6월 소비자물가 상승률 전년 동월 대비 3.2%, 석유류 오름세", "sources": ["BOK 물가상황점검회의 (2026.7.2) 요지"], "status": "confirmed-primary"},
+    {"claim": "미국·이란 충돌에 따른 고유가가 2분기에 본격 반영", "sources": ["businesspost 442921", "BOK 5월 전망 표제 '중동발 물가 충격'(KDI eiec)"], "status": "cross-checked"},
+    {"claim": "IMF 7월 한국 2026년 전망 2.6%", "sources": ["IMF WEO Update July 2026", "게시글 trend10/trend11"], "status": "confirmed (기존 글에서 원문 확인)"},
+    {"claim": "정부 전망 3.0% (2026.7.14 하반기 경제성장전략)", "sources": ["게시글 trend11 (원문 확인 완료)"], "status": "confirmed"},
+    {"claim": "미국 2026Q1 성장률 2.1%(전기비 연율) 중 정보처리장비·지식재산생산물 투자 기여 약 1.5%p (광의 근사·구조물 제외 한계 본문 명시)", "sources": ["게시글 column4 (BEA 기여도 계열, 필자 계산)"], "status": "confirmed (기존 글 계산 재인용)"},
+    {"claim": "청년 고용률 전년 동월 대비 26개월 연속 하락 (2026.6 고용동향 기준)", "sources": ["게시글 trend11 (국가데이터처 6월 고용동향)"], "status": "confirmed (기존 글에서 원문 확인)"},
+    {"claim": "trend11의 산수: 1분기만 반영 시 정체 → 2.6%, 3.0% 필요 성장률 매 분기 약 0.26%", "sources": ["게시글 trend11"], "cross_check": "재계산 2.601% / 0.259% (calc_results.json)", "status": "confirmed-by-recalculation"},
+    {"claim": "0.62% 지속 시 연간 3.559%(약 3.6%), 연간 2.6% 등가는 매 분기 -0.619%(약 -0.6%), 정체 시 3.078%(약 3.1%)", "sources": ["calc_results.json"], "status": "author-calculation"}
+  ],
+  "excluded_details": [
+    {"detail": "지식재산생산물투자 '14개월 만 최고' 표현", "reason": "이투데이 요약에서만 확인되고 분기 통계와 기간 표현이 어긋나 보임. +3.3%와 기여도 +0.2%p는 속보 PDF로 확인되어 본문에 반영했으나 '14개월' 표현은 미사용."},
+    {"detail": "삼성전자 상품권 환급 가전 3조 원대 소비", "reason": "단일 매체 요약에서만 확인. 사실관계(주체·성격) 불명확하여 제외."}
+  ]
+}

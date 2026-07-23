@@ -1,7 +1,7 @@
 # entry-seniorization 재현성 기록
 
 게시글 [`analysis_entry_seniorization.md`](../../../content/english/post/analysis_entry_seniorization.md)
-("첫 계단은 높아졌나: 신입 일자리 시니어화의 증거와 빈칸", 게시 예정일 2026-07-24)의
+("첫 계단은 높아졌나: 신입 일자리 시니어화의 증거와 빈칸", 2026-07-23 게시)의
 그림 생성 스크립트와 원자료 출처·다운로드 시점·해시 기록.
 
 > **관행 안내**: `docs/03-analysis/`는 원래 사이트 개선 문서 폴더였다. 이 폴더는

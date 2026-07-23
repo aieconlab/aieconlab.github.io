@@ -4,7 +4,9 @@
 
 {{ if $isBlog }}
 {{ $hasTOC := and (gt .WordCount 600) (in .TableOfContents "<li>") }}
-{{ $toc := replace .TableOfContents ` id="TableOfContents"` "" | safeHTML }}
+{{ $toc := replace .TableOfContents ` id="TableOfContents"` "" }}
+{{/* The site-wide base URL makes hash-only links resolve against the homepage. */}}
+{{ $toc = replace $toc `href="#` (printf `href="%s#` .RelPermalink) | safeHTML }}
 
 <section class="section article-section">
   <div class="container">

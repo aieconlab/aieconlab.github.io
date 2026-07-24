@@ -8,7 +8,8 @@
 
 검산(assert):
 - 설비투자 2.00배, 감가상각 1.42배
-- 2026년 2분기 감가상각/설비투자 = 15.8% (약 6분의 1)
+- 두 항목은 서로 다른 시점의 자산을 가리키므로 비율(당기 감가상각/당기 설비투자)을
+  '당기 지출의 비용 반영률'로 해석하지 않는다(그림·주석에도 그렇게 표기하지 않음)
 
 사용법: python3 fig02_capex_depreciation.py [--out PNG] [--font FONT]
 의존성: matplotlib
@@ -29,8 +30,6 @@ DEP = {"2025 2분기": 4_998, "2026 2분기": 7_104}
 
 assert abs(CAPEX["2026 2분기"] / CAPEX["2025 2분기"] - 2.0) < 0.01
 assert abs(DEP["2026 2분기"] / DEP["2025 2분기"] - 1.42) < 0.01
-ratio = DEP["2026 2분기"] / CAPEX["2026 2분기"]
-assert abs(ratio - 1 / 6.32) < 0.005  # 약 6분의 1
 
 
 def main():
@@ -64,7 +63,7 @@ def main():
                     fontsize=15.5, fontweight="bold", ha="center", va="bottom",
                     color=BLUE if v in cap else "#57647a"))
 
-    ann = ax.annotate("지출의 약 6분의 1만\n지금 비용으로 반영",
+    ann = ax.annotate("지출은 2배로 뛰는 동안\n비용화(감가상각)는 +42%",
                       xy=(xs[1] + bw / 2 + 0.13, dep[1] * 0.55),
                       xytext=(1.36, 245), fontsize=13.5, fontweight="bold",
                       color=NAVY, ha="center", va="center",
@@ -89,7 +88,7 @@ def main():
         t.set_color(NAVY)
 
     fig.subplots_adjust(left=0.10, right=0.97, top=0.89, bottom=0.17)
-    note1 = fig.text(0.10, 0.068, "주: 설비투자는 취득 시점이 아니라 이후 수년에 걸쳐 감가상각으로 비용화된다. 두 항목 모두 분기 기준.",
+    note1 = fig.text(0.10, 0.068, "주: 감가상각은 과거에 취득한 자산에서 발생해 당기 설비투자와 1대 1로 대응하지 않는다. 두 항목 모두 분기 기준.",
                      fontsize=11.8, color=NOTE)
     note2 = fig.text(0.10, 0.028, "자료: Alphabet 2026년 2분기 실적 발표문(2026.7.22) 현금흐름표  |  계산: AIEconLab",
                      fontsize=11.8, color=NOTE)

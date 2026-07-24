@@ -103,7 +103,7 @@ def main():
     fig.subplots_adjust(left=0.10, right=0.97, top=0.90, bottom=0.235)
     note1 = fig.text(0.10, 0.112, "주: 잉여현금흐름(-58.55억 달러, 표기 -59) = 영업활동 현금흐름 - 유형자산 취득(비GAAP).",
                      fontsize=11.8, color=NOTE)
-    note2 = fig.text(0.10, 0.070, "‘상장 후 첫 마이너스’는 현지 보도의 집계이며, 막대 표기는 억 달러 반올림.",
+    note2 = fig.text(0.10, 0.070, "‘상장 후 첫 마이너스’는 FactSet 집계(현지 보도 인용)이며, 막대 표기는 억 달러 반올림.",
                      fontsize=11.8, color=NOTE)
     note3 = fig.text(0.10, 0.028, "자료: Alphabet 2026년 2분기 실적 발표문(2026.7.22) 현금흐름표  |  계산: AIEconLab",
                      fontsize=11.8, color=NOTE)

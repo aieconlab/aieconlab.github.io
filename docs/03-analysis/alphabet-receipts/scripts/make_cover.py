@@ -49,20 +49,19 @@ ax.add_patch(Rectangle((0, 760), 1600, 40, color=BLUE, zorder=5))
 
 # ---- left text column ----
 LX = 183
-ax.text(LX, 555, "이익 +298%, 주가 -7%", fontsize=42, color=NAVY,
-        fontweight="bold", va="center", ha="left")
-ax.text(LX, 442, "알파벳 2분기, ‘AI 영수증’ 읽기", fontsize=21,
-        color=BLUE, va="center", ha="left", fontweight="medium")
-
-ax.text(LX, 300, "사상 최대 순이익의 대부분은 Anthropic·SpaceX 평가이익\n"
-                 "자사주 매입을 멈추고 증자로 마련한 설비투자 청구서",
-        fontsize=16.5, color=GRAY, va="center", ha="left", linespacing=1.9)
-
-ax.text(LX, 185, "2026년 2분기 알파벳 실적 읽기", fontsize=14,
-        color=LGRAY, va="center", ha="left")
-
-ax.text(LX, 78, "AIEconLab · 인공지능경제연구소", fontsize=15.5,
-        color=BLUE, va="center", ha="left", fontweight="medium")
+left_texts = [
+    ax.text(LX, 555, "이익 +298%, 주가 -7%", fontsize=42, color=NAVY,
+            fontweight="bold", va="center", ha="left"),
+    ax.text(LX, 442, "알파벳 2분기, ‘AI 영수증’ 읽기", fontsize=21,
+            color=BLUE, va="center", ha="left", fontweight="medium"),
+    ax.text(LX, 300, "사상 최대 순이익의 대부분은 영업 밖 지분 평가이익\n"
+                     "분기 잉여현금흐름은 상장 후 첫 마이너스(FactSet 집계)",
+            fontsize=16.5, color=GRAY, va="center", ha="left", linespacing=1.9),
+    ax.text(LX, 185, "2026년 2분기 알파벳 실적 읽기", fontsize=14,
+            color=LGRAY, va="center", ha="left"),
+    ax.text(LX, 78, "AIEconLab · 인공지능경제연구소", fontsize=15.5,
+            color=BLUE, va="center", ha="left", fontweight="medium"),
+]
 
 # ---- right graphic: quarterly capex, doubled in a year ----
 ax.text(1190, 706, "분기 설비투자 (억 달러)", fontsize=16, color=GRAY,
@@ -99,6 +98,14 @@ ax.annotate("", xy=(bx2 + bw + 44, base_y + h_now),
             arrowprops=dict(arrowstyle="<->", color=BLUE, lw=1.6), zorder=5)
 ax.text(bx2 + bw + 62, base_y + (h_prev + h_now) / 2, "2배", fontsize=16,
         color=BLUE, ha="left", va="center", fontweight="bold")
+
+# 렌더링 후 잘림·침범 검사: 좌측 텍스트가 우측 그래픽 영역(x=930~)을 넘지 않는지
+fig.canvas.draw()
+rend = fig.canvas.get_renderer()
+for t in left_texts:
+    x1 = t.get_window_extent(renderer=rend).x1
+    assert x1 < 930, ("좌측 텍스트가 그래픽 영역 침범", t.get_text()[:14], round(x1))
+print("layout checks passed: left column clear of graphic area")
 
 args.out.parent.mkdir(parents=True, exist_ok=True)
 fig.savefig(args.out)

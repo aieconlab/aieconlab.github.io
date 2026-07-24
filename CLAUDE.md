@@ -9,6 +9,7 @@ AIEconLab (인공지능경제연구소) - A Hugo static site for an AI Economics
 - **Site URL**: https://www.aieconlab.com/
 - **Theme**: logbook-hugo
 - **Deployment**: GitHub Pages via GitHub Actions (`.github/workflows/hugo.yml`, Hugo 0.124.0 extended). Every push to `main` builds and deploys automatically — do NOT commit the `public/` build output.
+- **Scheduled posts**: the build has no `--buildFuture` and the config sets no `buildFuture`, so a post whose frontmatter `date` is later than the build clock (UTC on the runner) is dropped silently — no error, and it is missing from the page, home, list, RSS and sitemap alike. The only triggers are `push` to `main` and `workflow_dispatch`, so nothing rebuilds it later on its own. Merge a scheduled post to `main` **after** its publish time, or if it was merged early, run the "Deploy Hugo site to Pages" workflow manually once that time passes. Do not add `--buildFuture` globally — it would expose every future-dated draft.
 
 ## Common Commands
 

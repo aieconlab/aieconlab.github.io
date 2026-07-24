@@ -88,7 +88,9 @@ def main():
     ax.set_xticklabels(["영업활동\n현금흐름", "설비투자\n(유형자산 취득)", "잉여현금흐름"],
                        fontsize=14.5, color=NAVY)
     ax.set_xlim(-0.65, 2.65)
-    ax.set_ylim(-90, 480)
+    # 하단 여백을 넉넉히 둬 '-59' 값 라벨이 x축 스파인에 걸리지 않게 한다
+    ax.set_ylim(-125, 480)
+    ax.set_yticks([0, 100, 200, 300, 400])  # 축 확장이 -100 눈금을 새로 만들지 않도록 고정
     ax.set_ylabel("2026년 2분기, 억 달러", fontsize=15.5, color=NAVY)
     ax.tick_params(colors=NAVY, labelsize=14)
     for s in ("top", "right"):
@@ -119,6 +121,10 @@ def main():
     gap23 = bb(note2).y0 - bb(note3).y1
     assert gap12 >= 2 and gap23 >= 2, ("주석 줄간 겹침", round(gap12, 1), round(gap23, 1))
     assert not bb(note_capex).overlaps(bb(ax.title)), "주석-제목 겹침"
+    # 값 라벨이 x축 스파인 아래로 삐져나가 취소선처럼 보이지 않는지 검사
+    ax_y0 = ax.get_window_extent(renderer=rend).y0
+    for t in ax.texts:
+        assert bb(t).y0 > ax_y0 + 3, ("값 라벨-축선 겹침", t.get_text())
     print(f"layout checks passed: note gaps {gap12:.1f}/{gap23:.1f}px, width ok")
 
     a.out.parent.mkdir(parents=True, exist_ok=True)

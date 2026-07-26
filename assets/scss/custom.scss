@@ -23,7 +23,17 @@
   font-size: 0.875rem;
   color: #64748b;
   line-height: 1.6;
-  text-align: center;
+  text-align: justify;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Long-form Korean body text: justified alignment, no mid-word breaks */
+.article-content p,
+.article-content li {
+  text-align: justify;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* Keyboard users should never lose the current focus position. */

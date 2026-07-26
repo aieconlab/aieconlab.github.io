@@ -1,0 +1,18 @@
+{{- /*
+  Search-index text for a standalone HTML post.
+
+  .Plain strips tags but keeps whatever sat *inside* <style> and <script>, so a
+  self-contained document would push ~200KB of CSS/JS into index.json. Drop
+  those blocks, keep only <body>, then flatten what is left to one line.
+*/ -}}
+{{- $raw := .RawContent -}}
+{{- $raw = replaceRE `(?s)<script\b[^>]*>.*?</script>` " " $raw -}}
+{{- $raw = replaceRE `(?s)<style\b[^>]*>.*?</style>` " " $raw -}}
+{{- $raw = replaceRE `(?s)<!--.*?-->` " " $raw -}}
+{{- /* head holds the document <title> and meta tags — already indexed as fields */ -}}
+{{- $raw = replaceRE `(?s)^.*?<body\b[^>]*>` " " $raw -}}
+{{- $raw = replaceRE `(?s)</body>.*$` " " $raw -}}
+{{- $raw = replaceRE `(?i)<!doctype[^>]*>` " " $raw -}}
+{{- $text := $raw | plainify | htmlUnescape -}}
+{{- $text = replaceRE `\s+` " " $text -}}
+{{- trim $text " " -}}

@@ -1,0 +1,74 @@
+{{- /*
+  Injected right after <body> of a standalone HTML post. Keeps the document
+  connected to the rest of the site (home, post list, its category) and shows
+  the front-matter author/date, which is what the site — not the document —
+  treats as authoritative.
+
+  It sticks to the top so the way back is always visible. A standalone document
+  may carry its own sticky header at top:0 (this one has a language/tab bar), so
+  the script below measures this bar and pushes any other top-stuck element down
+  by that much, and keeps in-page #anchors from landing underneath it.
+
+  Styling is namespaced under .aieconlab-sitebar and inherits the document's own
+  custom properties when they exist (var(--paper, …)), so it blends into the
+  article's palette instead of fighting it.
+*/ -}}
+<style>
+:root{--aiel-bar-h:36px}
+html{scroll-padding-top:var(--aiel-bar-h)}
+.aieconlab-sitebar{position:sticky;top:0;z-index:2147483000;box-sizing:border-box;width:100%;
+  background:var(--paper, #fff);border-bottom:1px solid var(--line, rgba(0,0,0,.16));
+  font-family:var(--f-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size:11.5px;line-height:1.4;letter-spacing:.02em;color:var(--ink-3, #6B7A80)}
+.aieconlab-sitebar__inner{box-sizing:border-box;max-width:880px;margin:0 auto;padding:0 22px;
+  min-height:36px;display:flex;align-items:center;justify-content:space-between;gap:8px 20px}
+.aieconlab-sitebar__links,.aieconlab-sitebar__meta{display:flex;align-items:center;gap:2px 14px;
+  margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aieconlab-sitebar a{color:inherit;text-decoration:none;padding:2px 0;border-bottom:1px solid transparent}
+.aieconlab-sitebar a:hover,.aieconlab-sitebar a:focus-visible{color:var(--magenta, #D71362);border-bottom-color:currentColor}
+.aieconlab-sitebar__home{color:var(--ink, #14181B);font-weight:700}
+@media (max-width:600px){.aieconlab-sitebar__meta{display:none}}
+</style>
+<nav class="aieconlab-sitebar" aria-label="AIEconLab 사이트 이동">
+  <div class="aieconlab-sitebar__inner">
+    <div class="aieconlab-sitebar__links">
+      <a class="aieconlab-sitebar__home" href="{{ absURL "" }}">← AIEconLab</a>
+      <a href="{{ absURL "post/" }}">전체 글</a>
+      {{ range first 1 .Params.categories }}<a href="{{ absURL (printf "categories/%s/" (. | urlize)) }}">{{ replace . "_" " " }}</a>{{ end }}
+    </div>
+    <div class="aieconlab-sitebar__meta">
+      {{ with .Params.author }}<span>{{ . }}</span>{{ end }}
+      <time datetime="{{ .PublishDate.Format `2006-01-02` }}">{{ .PublishDate.Format "2006년 1월 2일" }}</time>
+    </div>
+  </div>
+</nav>
+<script>
+(function () {
+  var bar = document.currentScript && document.currentScript.previousElementSibling;
+  function apply() {
+    bar = bar || document.querySelector('.aieconlab-sitebar');
+    if (!bar) return;
+    var h = bar.offsetHeight;
+    document.documentElement.style.setProperty('--aiel-bar-h', h + 'px');
+    var els = document.body.getElementsByTagName('*');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el === bar || bar.contains(el)) continue;
+      // already offset once: computed top is no longer 0, so re-detection would fail
+      if (el.getAttribute('data-aiel-offset')) { el.style.top = h + 'px'; continue; }
+      var cs = window.getComputedStyle(el);
+      if ((cs.position === 'sticky' || cs.position === 'fixed') && cs.top === '0px') {
+        el.setAttribute('data-aiel-offset', '1');
+        el.style.top = h + 'px';
+      }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply);
+  } else {
+    apply();
+  }
+  var t;
+  window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(apply, 200); });
+}());
+</script>

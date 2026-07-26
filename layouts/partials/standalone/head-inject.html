@@ -1,0 +1,43 @@
+{{- /*
+  Injected before </head> of a standalone HTML post by
+  layouts/_default/standalone.html. Mirrors the parts of
+  partials/essentials/head.html that matter for SEO, sharing and analytics —
+  and nothing that would restyle the document (no theme CSS, no <base>: a
+  <base> tag would break the document's own in-page #anchors).
+  charset / viewport / fonts stay the author's responsibility.
+*/ -}}
+{{- $description := .Params.description | default (.Summary | plainify) | plainify | truncate 200 -}}
+
+<!-- injected by AIEconLab (layouts/_default/standalone.html) -->
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="description" content="{{ $description }}">
+{{ with .Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+{{ with .Params.keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
+{{ if .Params.private }}<meta name="robots" content="noindex,follow">{{ end }}
+{{ partialCached "images/favicon" . }}
+{{ partial "datasets/og-twitter.html" . }}
+
+{{- $logoURL := site.Params.logo | absURL -}}
+{{- with resources.Get site.Params.logo }}{{ $logoURL = .Permalink }}{{ end -}}
+{{- $imageURL := site.Params.metadata.image | absURL -}}
+{{- with .Params.images -}}
+  {{- $firstImage := index . 0 -}}
+  {{- $imageURL = $firstImage | absURL -}}
+  {{- with resources.Get $firstImage }}{{ $imageURL = .Permalink }}{{ end -}}
+{{- end -}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "Article"
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+  "headline" .Title
+  "description" $description
+  "image" $imageURL
+  "author" (dict "@type" "Person" "name" (.Params.author | default site.Params.metadata.author))
+  "publisher" (dict "@type" "Organization" "name" "AIEconLab" "logo" (dict "@type" "ImageObject" "url" $logoURL))
+  "datePublished" (.PublishDate.Format "2006-01-02T15:04:05Z07:00")
+  "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+-}}
+<script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+
+{{ template "_internal/google_analytics.html" . }}
+{{ partialCached "datasets/gtm.html" . }}

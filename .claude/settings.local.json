@@ -13,7 +13,17 @@
       "Bash(git commit:*)",
       "Bash(git mv:*)",
       "Bash(timeout:*)",
-      "Bash(ping:*)"
+      "Bash(ping:*)",
+      "Bash(hugo version *)",
+      "PowerShell(Get-Command hugo -ErrorAction SilentlyContinue)",
+      "Bash(cd \"c:/github/aieconlab.github.io\" && grep -oE \"<h[12][^>]*>.*|<div class=\\\\\"dek\\\\\">.*|class=\\\\\"eyebrow\\\\\"\" content/english/post/html/uber-delivery-hero-aieconlab.html | head -40; echo \"=== DEK/HERO ===\"; sed -n '/<header class=\"hero\"/,/<\\\\/header>/p' content/english/post/html/uber-delivery-hero-aieconlab.html | head -60)",
+      "Bash(xargs -I{} sh -c 'echo \"--- {}\"; head -18 \"{}\"')",
+      "PowerShell($sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; $url=\"https://github.com/gohugoio/hugo/releases/download/v0.124.0/hugo_extended_0.124.0_windows-amd64.zip\"; try { Invoke-WebRequest -Uri $url -OutFile \"$sp\\\\hugo.zip\" -UseBasicParsing -TimeoutSec 180; Expand-Archive -Path \"$sp\\\\hugo.zip\" -DestinationPath \"$sp\\\\hugo\" -Force; & \"$sp\\\\hugo\\\\hugo.exe\" version } catch { \"DOWNLOAD FAILED: $\\($_.Exception.Message\\)\" })",
+      "PowerShell($sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; & \"$sp\\\\hugo\\\\hugo.exe\" --minify --gc --destination \"$sp\\\\public\" --logLevel info 2>&1 | Select-Object -Last 40)",
+      "PowerShell($sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; & \"$sp\\\\hugo\\\\hugo.exe\" -s \"c:\\\\github\\\\aieconlab.github.io\" --minify --gc --destination \"$sp\\\\public\" 2>&1 | Select-Object -Last 40)"
+    ],
+    "additionalDirectories": [
+      "C:\\github\\aieconlab.github.io\\content\\english\\post\\html"
     ]
   }
 }

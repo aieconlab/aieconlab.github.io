@@ -15,6 +15,16 @@ googleAnalytics = "" # Ex: UA-123-45
 # disable language
 disableLanguages = ["fr"] # desable language from here
 
+############################# Cascade ##############################
+# Standalone HTML posts: every file under content/<lang>/post/html/ is a
+# complete HTML document and is rendered as-is by
+# layouts/_default/standalone.html instead of being wrapped in the theme.
+# Front matter in each file still supplies title / date / author / taxonomies.
+[[cascade]]
+layout = "standalone"
+[cascade._target]
+path = "/post/html/**"
+
 ############################# Modules ##############################
 [module]
 [module.hugoVersion]

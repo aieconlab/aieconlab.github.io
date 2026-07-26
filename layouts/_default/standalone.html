@@ -1,0 +1,41 @@
+{{- /*
+  Standalone HTML post — the second publishing path (see CLAUDE.md).
+
+  A file under content/english/post/html/*.html is a COMPLETE HTML document
+  (its own <html>/<head>/<style>/<script>). Wrapping it in baseof.html would
+  make its global CSS (body, h1, section, footer …) collide with the theme's,
+  so this template deliberately defines no "main" block: Hugo then skips
+  baseof.html and this file emits the whole page on its own.
+
+  The page still lives in section "post", so home, /post/, categories, tags,
+  RSS, sitemap and search pick it up from front matter like any other post.
+
+  What is injected into the author's document:
+    - <title>          replaced from front matter (front matter is the source of truth)
+    - </head>          canonical, description, author, favicon, OG/Twitter, analytics, JSON-LD
+    - after <body>     a sticky bar linking back into the site
+*/ -}}
+{{- $out := .RawContent -}}
+
+{{- $newTitle := printf "<title>%s | %s</title>" (.Title | htmlEscape) (site.Title | htmlEscape) -}}
+{{- with findRE `(?s)<title[^>]*>.*?</title>` $out 1 -}}
+  {{- $out = replace $out (index . 0) $newTitle 1 -}}
+{{- else -}}
+  {{- $out = replace $out "</head>" (printf "%s\n</head>" $newTitle) 1 -}}
+{{- end -}}
+
+{{- $head := partial "standalone/head-inject.html" . -}}
+{{- if in $out "</head>" -}}
+  {{- $out = replace $out "</head>" (printf "%s\n</head>" $head) 1 -}}
+{{- end -}}
+
+{{- /* The bar sticks to the top, so it goes first inside <body>. */ -}}
+{{- $bar := partial "standalone/site-bar.html" . -}}
+{{- with findRE `<body\b[^>]*>` $out 1 -}}
+  {{- $open := index . 0 -}}
+  {{- $out = replace $out $open (printf "%s\n%s" $open $bar) 1 -}}
+{{- else -}}
+  {{- $out = printf "%s\n%s" $bar $out -}}
+{{- end -}}
+
+{{ $out | safeHTML }}

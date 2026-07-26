@@ -1,0 +1,37 @@
+{{- /*
+  Site override of themes/logbook-hugo/layouts/_default/index.json (search index).
+  Changes over the theme version:
+  1. Standalone HTML posts index their prose only — the theme's .Plain keeps the
+     text inside <style>/<script>, which would dump the whole stylesheet into the index
+  2. The thumbnail is a scoped variable instead of .Scratch, which leaked the previous
+     post's image onto every image-less post
+  3. "image" is omitted entirely when the post has none (search.html uses `isset image`)
+*/ -}}
+{{- $index := slice -}}
+{{- range where site.RegularPages "Section" "in" site.Params.mainSections -}}
+
+  {{- $date := .PublishDate.Format "2006년 1월 2일" -}}
+
+  {{- $image := "" -}}
+  {{- with .Params.images -}}
+    {{- range first 1 . -}}
+      {{- if fileExists (add `assets/` .) -}}
+        {{- $thumb := (resources.Get .).Fill "460x200" -}}
+        {{- $image = $thumb.Permalink -}}
+      {{- else -}}
+        {{- $image = . | absURL -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $categories := slice -}}
+  {{- range .Params.categories }}{{ $categories = $categories | append (replace . "_" " ") }}{{ end -}}
+
+  {{- $contents := .Plain -}}
+  {{- if eq .Layout "standalone" }}{{ $contents = partial "standalone/plaintext.html" . }}{{ end -}}
+
+  {{- $entry := dict "title" .Title "date" $date "categories" $categories "tags" .Params.tags "contents" $contents "permalink" .RelPermalink -}}
+  {{- with $image }}{{ $entry = merge $entry (dict "image" .) }}{{ end -}}
+  {{- $index = $index | append $entry -}}
+{{- end -}}
+{{- $index | jsonify -}}

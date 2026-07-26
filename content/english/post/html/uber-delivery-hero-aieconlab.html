@@ -1,0 +1,1820 @@
+---
+title: "밀도의 덫 — 우버×딜리버리히어로를 경제학과 AI로 읽다"
+date: 2026-07-26T09:00:00+09:00
+# post thumb
+images:
+  - "images/post/uber_dh.jpeg"
+#author
+author: "주영민 (Youngmin Ju)"
+# description
+description: "우버의 딜리버리히어로 148억 달러 인수를 배달 밀도·멀티호밍·경매 알고리즘으로 해부합니다"
+# 목록/검색/RSS에 쓰이는 요약 (완성형 HTML은 자동 요약이 불가능하므로 직접 지정)
+summary: "우버는 99개 시장을 샀습니다. 그런데 배달의 네트워크 효과는 반경 3km 안에서 끝나고, 국경을 넘는 인수는 그 밀도를 단 1건도 늘려주지 못합니다. 그렇다면 148억 달러는 무엇을 산 값인가. 3면 시장과 멀티호밍, 알고리즘 규모의 경제, 공정위 심사 쟁점, 그리고 반증 가능한 예측 다섯 개까지 따라갑니다."
+# Taxonomies
+categories: ["AI_칼럼"]
+tags: ["AI","ECONOMICS","PLATFORM","KOREA","POLICY"]
+type: "featured" # available type (regular or featured)
+# 완성형 HTML 문서 게시 방식 (layouts/_default/standalone.html)
+layout: "standalone"
+url: "/post/uber-delivery-hero-aieconlab/"
+draft: false
+---
+<!DOCTYPE html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>밀도의 덫 — 우버×딜리버리히어로를 경제학과 AI로 읽다 | AIEconLab</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDF0EE; --paper-2:#F6F8F6; --ink:#14181B; --ink-2:#3C474C; --ink-3:#6B7A80;
+  --line:#C7D0CC; --line-2:#DDE4E0;
+  --mint:#1FA8A3; --mint-deep:#0E6B68; --mint-soft:#D6EFEE;
+  --magenta:#D71362; --magenta-soft:#FBDCE8;
+  --amber:#C97A0B; --amber-soft:#FAEBD2;
+  --violet:#5B4BC4; --violet-soft:#E4E1F7;
+  --f-display:"Fraunces",Georgia,serif;
+  --f-body:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --maxw:880px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);
+  font-size:17px;line-height:1.78;letter-spacing:-0.005em;font-feature-settings:"tnum" 1}
+
+/* ---- language switching: applies to prose, table cells and SVG labels alike ---- */
+body[data-lang="ko"] .en, body[data-lang="en"] .ko{display:none}
+body[data-lang="en"]{font-size:16.5px}
+
+.lattice{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:.5}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+header.hero{position:relative;padding:64px 0 44px;border-bottom:1.5px solid var(--ink);overflow:hidden}
+.eyebrow{font-family:var(--f-mono);font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.eyebrow b{color:var(--magenta);font-weight:700}
+h1{font-family:var(--f-display);font-weight:900;font-size:clamp(44px,9vw,86px);line-height:.96;
+  letter-spacing:-.03em;margin:20px 0 0;font-variation-settings:"opsz" 120}
+h1 .sub{display:block;font-family:var(--f-body);font-weight:800;font-size:clamp(24px,4.6vw,40px);
+  letter-spacing:-.04em;line-height:1.12;margin-top:10px;color:var(--ink)}
+.dek{font-size:clamp(17px,2.3vw,21px);line-height:1.6;color:var(--ink-2);margin:26px 0 0;max-width:36em;font-weight:450}
+.byline{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--f-mono);
+  font-size:11.5px;color:var(--ink-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+.langbar{position:sticky;top:0;z-index:40;background:rgba(237,240,238,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line-2)}
+.langbar .wrap{display:flex;justify-content:space-between;align-items:center;height:46px}
+.mark{font-family:var(--f-mono);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--ink)}
+.toggle{display:flex;border:1.5px solid var(--ink);border-radius:2px;overflow:hidden}
+.toggle button{font-family:var(--f-mono);font-size:11px;font-weight:700;letter-spacing:.1em;
+  padding:5px 13px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.toggle button:focus-visible{outline:2px solid var(--magenta);outline-offset:-4px}
+
+main{padding:0 0 90px}
+section{padding:52px 0 0}
+.sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:6px}
+.sec-num{font-family:var(--f-mono);font-size:11px;font-weight:700;color:var(--magenta);letter-spacing:.1em;flex:0 0 auto;padding-top:6px}
+h2{font-family:var(--f-body);font-weight:800;font-size:clamp(25px,4vw,33px);letter-spacing:-.035em;line-height:1.2;margin:0}
+h2 em{font-family:var(--f-display);font-style:italic;font-weight:400;letter-spacing:-.01em}
+h3{font-weight:750;font-size:19.5px;letter-spacing:-.025em;margin:38px 0 8px;line-height:1.35}
+h3::before{content:"";display:inline-block;width:15px;height:2px;background:var(--mint);vertical-align:middle;margin-right:9px;margin-top:-2px}
+p{margin:0 0 17px}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--mint);text-underline-offset:3px;text-decoration-thickness:1.5px}
+strong{font-weight:750}
+.lede{font-size:19px;line-height:1.7;color:var(--ink-2);border-left:2.5px solid var(--mint);padding-left:18px;margin:22px 0 28px}
+code,.num{font-family:var(--f-mono);font-size:.9em;font-weight:500;background:var(--paper-2);
+  border:1px solid var(--line-2);padding:1px 5px;border-radius:2px;white-space:nowrap}
+pre{background:var(--paper-2);border:1px solid var(--line);border-radius:2px;padding:16px 18px;overflow-x:auto;
+  font-family:var(--f-mono);font-size:12.5px;line-height:1.75;margin:20px 0}
+
+.chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-mono);font-size:10px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;padding:2.5px 8px;border-radius:2px;vertical-align:middle;white-space:nowrap}
+.chip.fact{background:var(--ink);color:var(--paper)}
+.chip.derived{background:var(--violet-soft);color:var(--violet);border:1px solid var(--violet)}
+.chip.reported{background:var(--mint-soft);color:var(--mint-deep);border:1px solid var(--mint-deep)}
+.chip.claim{background:var(--amber-soft);color:var(--amber);border:1px solid var(--amber)}
+.chip.concept{background:var(--paper-2);color:var(--ink-3);border:1px dashed var(--ink-3)}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+
+.callout{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--magenta);padding:20px 22px;margin:26px 0;border-radius:2px}
+.callout .kicker{font-family:var(--f-mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--magenta);margin-bottom:8px}
+.callout p:last-child{margin-bottom:0}
+.callout.quiet{border-left-color:var(--ink-3)}
+.callout.quiet .kicker{color:var(--ink-3)}
+
+.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);background:var(--paper-2);border-radius:2px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:540px}
+th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top}
+thead th{background:var(--ink);color:var(--paper);font-family:var(--f-mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;border-bottom:0}
+tbody tr:last-child td{border-bottom:0}
+td.n{font-family:var(--f-mono);font-weight:500;white-space:nowrap}
+td.src{font-size:11.5px;color:var(--ink-3);font-family:var(--f-mono)}
+
+figure{margin:34px 0;padding:0}
+.figbox{background:var(--paper-2);border:1px solid var(--line);border-radius:2px;padding:20px 18px 12px}
+.figtitle{font-family:var(--f-mono);font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:14px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.figtitle b{color:var(--ink);font-weight:700}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:13.5px;line-height:1.62;color:var(--ink-3);margin-top:12px;padding-top:10px;border-top:1px solid var(--line-2)}
+
+/* ---- figure type scale (also injected into standalone SVG exports) ---- */
+svg text{font-family:var(--f-mono),"JetBrains Mono",monospace}
+svg .fx-xl{font-size:30px;font-weight:700}
+svg .fx-h{font-size:18px;font-weight:700}
+svg .fx-n{font-size:16px;font-weight:700}
+svg .fx-b{font-size:14.5px}
+svg .fx-bb{font-size:14.5px;font-weight:700}
+svg .fx-s{font-size:13px}
+svg .fx-sb{font-size:13px;font-weight:700}
+svg .fx-xs{font-size:12px}
+
+.preds{display:grid;gap:12px;margin:24px 0}
+.pred{background:var(--paper-2);border:1px solid var(--line);border-radius:2px;padding:16px 18px;
+  display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.pred .id{font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--paper);background:var(--violet);
+  width:30px;height:30px;display:grid;place-items:center;border-radius:2px}
+.pred h4{margin:0 0 6px;font-size:16px;font-weight:750;letter-spacing:-.02em;line-height:1.35}
+.pred p{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+.pred .metric{margin-top:8px;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:7px}
+
+ul,ol{margin:0 0 17px;padding-left:22px}
+li{margin-bottom:7px}
+li::marker{color:var(--mint)}
+.sources{font-size:12.5px;line-height:1.65;color:var(--ink-3)}
+.sources li{margin-bottom:5px;word-break:break-word}
+.sources a{color:var(--ink-2);text-decoration-color:var(--line)}
+footer{border-top:1.5px solid var(--ink);padding:26px 0 60px;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);line-height:1.8}
+
+
+/* ---- view tabs ---- */
+.tabs{display:flex;gap:2px}
+.tab{font-family:var(--f-mono);font-size:11px;font-weight:700;letter-spacing:.08em;
+  padding:6px 13px;border:1.5px solid var(--line);border-bottom:0;background:transparent;
+  color:var(--ink-3);cursor:pointer;border-radius:2px 2px 0 0;position:relative;top:1px}
+.tab[aria-selected="true"]{background:var(--paper-2);color:var(--ink);border-color:var(--ink);
+  border-bottom:1.5px solid var(--paper-2)}
+.tab:focus-visible{outline:2px solid var(--magenta);outline-offset:-4px}
+.view[hidden]{display:none!important}
+
+/* ---- primer ---- */
+.primer-hero{padding:52px 0 30px;border-bottom:1.5px solid var(--ink);margin-bottom:8px}
+.primer-h1{font-family:var(--f-body);font-weight:800;font-size:clamp(32px,6vw,52px);
+  line-height:1.05;letter-spacing:-.04em;margin:16px 0 0}
+.primer-h1 .sub{display:block;font-family:var(--f-display);font-style:italic;font-weight:400;
+  font-size:clamp(17px,2.6vw,24px);letter-spacing:-.01em;margin-top:12px;color:var(--ink-3)}
+.pnav{display:flex;flex-wrap:wrap;gap:6px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.pnav a{font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.03em;
+  padding:4px 9px;border:1px solid var(--line);border-radius:2px;color:var(--ink-2);
+  text-decoration:none;background:var(--paper-2)}
+.pnav a:hover,.pnav a:focus-visible{border-color:var(--ink);color:var(--ink)}
+#view-primer .xref{font-family:var(--f-mono);font-size:11.5px;color:var(--magenta);
+  border-top:1px dashed var(--line);padding-top:9px;margin-top:18px}
+#view-primer .note{background:var(--paper-2);border:1px solid var(--line);
+  border-left:3px solid var(--mint);padding:15px 18px;margin:18px 0;border-radius:2px;
+  font-size:15px;line-height:1.7}
+#view-primer h3{margin-top:34px}
+#view-primer section{scroll-margin-top:60px}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .sec-head{gap:10px}
+  .pred{grid-template-columns:1fr}
+  .pred .id{width:auto;display:inline-grid;padding:2px 9px;height:auto}
+  .tab{font-size:10px;padding:6px 9px;letter-spacing:.04em}
+  .langbar .wrap{gap:8px}
+}
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .langbar{display:none}
+  .pnav{display:none}
+  .view[hidden]{display:none!important}
+  section{page-break-inside:auto;padding-top:26px}
+  figure,.pred,.callout,.tw{page-break-inside:avoid}
+  h2,h3{page-break-after:avoid}
+  header.hero{padding-top:0}
+  .figbox{background:#fff}
+  a{text-decoration:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-lang="ko">
+
+<div class="langbar">
+  <div class="wrap">
+    <div class="tabs" role="tablist" aria-label="보기 전환">
+      <button type="button" class="tab" data-view="article" role="tab" aria-selected="true" aria-controls="view-article">분석 · ANALYSIS</button>
+      <button type="button" class="tab" data-view="primer" role="tab" aria-selected="false" aria-controls="view-primer">배경지식 · PRIMER</button>
+    </div>
+    <div class="toggle" role="group" aria-label="Language">
+      <button type="button" data-set="ko" aria-pressed="true">한국어</button>
+      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</div>
+
+<header class="hero view" id="hero-article">
+  <svg class="lattice" viewBox="0 0 880 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><pattern id="hexpat" width="42" height="48.5" patternUnits="userSpaceOnUse">
+      <path d="M21 0 L42 12.1 L42 36.4 L21 48.5 L0 36.4 L0 12.1 Z" fill="none" stroke="#C7D0CC" stroke-width="1"/>
+    </pattern></defs>
+    <rect width="880" height="420" fill="url(#hexpat)"/>
+    <g fill="#1FA8A3" opacity=".16">
+      <path d="M357 96 L378 108 L378 132 L357 145 L336 132 L336 108 Z"/>
+      <path d="M399 120 L420 132 L420 157 L399 169 L378 157 L378 132 Z"/>
+      <path d="M357 145 L378 157 L378 181 L357 193 L336 181 L336 157 Z"/>
+      <path d="M441 96 L462 108 L462 132 L441 145 L420 132 L420 108 Z"/>
+    </g>
+  </svg>
+  <div class="wrap" style="position:relative">
+    <div class="eyebrow"><span>AIEconLab</span><span>·</span><b>Deal Teardown</b><span>·</span><span>2026.07.26</span></div>
+    <h1>The Density<br>Trap<span class="sub ko">밀도의 덫 — 우버는 무엇을 산 것인가</span><span class="sub en">What Uber Actually Bought</span></h1>
+    <p class="dek ko">우버는 99개 시장을 샀습니다. 그런데 배달의 네트워크 효과는 반경 3km 안에서 끝납니다. 국경을 넘는 인수는 이 밀도를 단 1건도 늘려주지 못합니다. 그렇다면 148억 달러는 대체 무엇을 산 값일까요. 그 답을 따라가다 보면 이 거래가 사실은 <em>AI 딜</em>이라는 결론에 닿게 됩니다.</p>
+    <p class="dek en">Uber bought 99 markets. But delivery's network effects die at a three-kilometre radius, and a cross-border acquisition adds exactly zero orders to that radius. So what did $14.8 billion buy? The answer is what makes this an <em>AI deal</em>.</p>
+    <div class="byline">
+      <span class="ko">AIEconLab 자체 분석입니다 · 딜 사실관계는 1차 공시를 기준으로 했습니다</span>
+      <span class="en">Original AIEconLab analysis · deal facts from primary filings</span>
+      <span>≈ 22 min</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+<div id="view-article" class="view">
+
+<!-- ============ 00 ============ -->
+<section id="tldr">
+  <div class="sec-head"><span class="sec-num">00</span><h2><span class="ko">먼저, 다섯 줄</span><span class="en">Five lines first</span></h2></div>
+  <div class="ko"><ul>
+      <li><strong>규모라는 말은 세 가지를 뭉뚱그린 표현입니다.</strong> 배달에서 수익이 늘어나는 경로는 ① 지역 밀도 ② 전역 고정비 분산 ③ 멀티호밍 절단, 이렇게 성격이 전혀 다른 셋으로 나뉩니다. 그리고 국경을 넘는 인수는 ①을 조금도 늘려주지 못합니다.</li>
+      <li><strong>그래서 이 딜의 근거는 ②와 ③, 그리고 실물옵션에 전부 얹혀 있습니다.</strong> ②에서 가장 큰 항목이 AI R&amp;D 고정비입니다. 경제학과 AI가 만나는 지점이 바로 여기입니다.</li>
+      <li><strong>발표된 시너지는 지불한 프리미엄을 거의 다 써버립니다.</strong> 런레이트 <span class="num">$1.2B</span>를 8~10배로 자본화하면 <span class="num">$9.6~12B</span>가 나옵니다. 그런데 미영향 주가 대비 실제로 얹어준 프리미엄이 약 <span class="num">€7.3B(≈$8.4B)</span>입니다. 남는 가치는 발표되지 않은 매출 시너지와 배제(preemption) 옵션에서 나와야 한다는 뜻입니다.</li>
+      <li><strong>한국에는 수평 중첩이 없습니다.</strong> 우버이츠가 2019년에 철수했기 때문입니다. 그래서 공정위 심사는 매각 같은 구조적 시정조치보다 <em>혼합결합·생태계 이론</em>으로 갈 가능성이 높고, 조건이 붙는다면 데이터 결합 제한이나 자기우대 금지, 알고리즘 투명성 같은 행태적 조건이 될 것입니다.</li>
+      <li><strong>점주에게 진짜 위험한 것은 수수료율이 아니라 경매입니다.</strong> 명목 수수료를 올리는 일은 정치적으로 대단히 비쌉니다. 반면 CPC 광고 경매는 그런 비용 없이 점주 잉여를 훨씬 정밀하게 회수합니다. 그래서 지켜봐야 할 지표는 수수료율이 아니라 <em>광고매출 비중</em>입니다.</li>
+    </ul></div>
+  <div class="en">
+    <ul>
+      <li><strong>"Scale" is three different things.</strong> Increasing returns in delivery come from ① local density, ② global fixed-cost amortisation, ③ severing multihoming. A cross-border deal adds nothing to ①.</li>
+      <li><strong>So the case rests entirely on ②, ③ and option value</strong> — and the largest line in ② is AI R&amp;D fixed cost. That is where economics and AI meet.</li>
+      <li><strong>Announced synergies nearly exhaust the premium.</strong> Capitalise <span class="num">$1.2B</span> of run-rate synergies at 8–10× and you get <span class="num">$9.6–12B</span>. The premium over the unaffected price is roughly <span class="num">€7.3B (≈$8.4B)</span>. Residual value must come from unannounced revenue synergies and a preemption option.</li>
+      <li><strong>There is no horizontal overlap in Korea.</strong> Uber Eats exited in 2019. Korea's KFTC therefore has to reach for <em>conglomerate/ecosystem</em> theories rather than divestiture, which points to behavioural remedies: data-combination limits, self-preferencing bans, algorithmic disclosure.</li>
+      <li><strong>The risk to merchants is the auction, not the commission rate.</strong> Raising headline commissions is politically expensive; a CPC ad auction is not, and it extracts merchant surplus far more precisely. Watch <em>advertising revenue share</em>, not the take rate.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 01 ============ -->
+<section id="facts">
+  <div class="sec-head"><span class="sec-num">01</span><h2><span class="ko">사실관계 원장</span><span class="en">The fact ledger</span></h2></div>
+  <p class="lede ko">분석에 들어가기 전에 숫자부터 고정해 두겠습니다. 아래 수치는 우버 공식 발표와 독일 인수합병법상 공개매수 공시를 1차 기준으로 삼았고, 항목마다 어느 수준까지 확인된 것인지 표시해 두었습니다. 태그가 붙어 있으니 인용하실 때 참고하시면 좋겠습니다.</p>
+  <p class="lede en">Pin the numbers before analysing them. Everything below is anchored to Uber's official release and the German takeover filing, with a verification tag on each line.</p>
+
+  <div class="legend">
+    <span class="chip fact">confirmed</span><span class="chip reported">reported</span>
+    <span class="chip derived">derived</span><span class="chip claim">unverified</span><span class="chip concept">conceptual</span>
+  </div>
+
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th><span class="ko">항목</span><span class="en">Item</span></th>
+      <th><span class="ko">값</span><span class="en">Value</span></th>
+      <th><span class="ko">구분</span><span class="en">Tag</span></th>
+      <th><span class="ko">출처</span><span class="en">Source</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="ko">주당 인수가</span><span class="en">Offer price</span></td><td class="n">€41.50 <span class="ko">현금</span><span class="en">cash</span></td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR 2026-07-16</td></tr>
+      <tr><td><span class="ko">지분가치 (100%)</span><span class="en">Equity value (100%)</span></td><td class="n">$14.8B<br>≈ €13.0B <span class="ko">완전희석</span><span class="en">fully diluted</span></td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR</td></tr>
+      <tr><td><span class="ko">기취득분 조정 후</span><span class="en">Adjusted for prior stake</span></td><td class="n">$13.7B</td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR</td></tr>
+      <tr><td><span class="ko">사전 보유 의결권</span><span class="en">Prior voting stake</span></td><td class="n">24.77%</td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR</td></tr>
+      <tr><td><span class="ko">파생상품 경제적 익스포저</span><span class="en">Derivative exposure</span></td><td class="n">11.74%</td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR</td></tr>
+      <tr><td><span class="ko">Prosus 응모 확약 → 총 경제적 지분</span><span class="en">Prosus irrevocable → total economic interest</span></td><td class="n">~17% → ~53%</td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR</td></tr>
+      <tr><td><span class="ko">최소 응모 요건</span><span class="en">Minimum acceptance</span></td><td class="n">50% + 1<span class="ko">주</span><span class="en"> share</span></td><td><span class="chip reported">reported</span></td><td class="src">Reuters</td></tr>
+      <tr><td><span class="ko">5월 최초 제안 (거부됨)</span><span class="en">Initial May offer (rejected)</span></td><td class="n">€33</td><td><span class="chip reported">reported</span></td><td class="src"><span class="ko">보도 종합</span><span class="en">press</span></td></tr>
+      <tr><td><span class="ko">발표 직전 종가</span><span class="en">Close before announcement</span></td><td class="n">€38.18</td><td><span class="chip reported">reported</span></td><td class="src">Reuters</td></tr>
+      <tr><td><span class="ko">프리미엄 (발표 직전 3M VWAP)</span><span class="en">Premium (3M VWAP pre-announcement)</span></td><td class="n">~34%</td><td><span class="chip reported">reported</span></td><td class="src">Uber / Reuters</td></tr>
+      <tr><td><span class="ko">프리미엄 (5월 이전 미영향 3M VWAP)</span><span class="en">Premium (unaffected 3M VWAP pre-May)</span></td><td class="n">~127%</td><td><span class="chip reported">reported</span></td><td class="src"><span class="ko">보도 종합</span><span class="en">press</span></td></tr>
+      <tr><td><span class="ko">SSW Partners 분리매각</span><span class="en">Carve-out to SSW Partners</span></td><td class="n">14 <span class="ko">개 시장</span><span class="en">markets</span> / ~$1.6B</td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR</td></tr>
+      <tr><td><span class="ko">매각 대상 2025 총거래액</span><span class="en">2025 GB of carve-out</span></td><td class="n">$11B</td><td><span class="chip reported">reported</span></td><td class="src"><span class="ko">거래 요약자료</span><span class="en">deal summaries</span></td></tr>
+      <tr><td><span class="ko">결합 후 시장 수</span><span class="en">Markets combined</span></td><td class="n">99</td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR</td></tr>
+      <tr><td><span class="ko">결합 pro-forma 총거래액 (2025)</span><span class="en">Pro-forma gross bookings (2025)</span></td><td class="n">$236B</td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR</td></tr>
+      <tr><td><span class="ko">시너지 (18개월 런레이트)</span><span class="en">Run-rate synergies (18 months)</span></td><td class="n">$1.2B</td><td><span class="chip reported">reported</span></td><td class="src"><span class="ko">거래 요약자료</span><span class="en">deal summaries</span></td></tr>
+      <tr><td><span class="ko">자금조달</span><span class="en">Financing</span></td><td><span class="ko">보유현금 + €14B 브리지 / 총레버리지 2배 미만</span><span class="en">Cash + €14B bridge / gross leverage &lt;2×</span></td><td><span class="chip reported">reported</span></td><td class="src"><span class="ko">거래 요약자료</span><span class="en">deal summaries</span></td></tr>
+      <tr><td><span class="ko">EPS 효과</span><span class="en">EPS effect</span></td><td><span class="ko">클로징 시 Non-GAAP EPS 증가, 3년차 한 자릿수 후반 %</span><span class="en">Accretive at close; high-single-digit % by year 3</span></td><td><span class="chip fact">confirmed</span></td><td class="src">Uber PR</td></tr>
+      <tr><td><span class="ko">배민 국내 배달앱 점유율</span><span class="en">Baemin share, Korean delivery apps</span></td><td class="n">~58–60%</td><td><span class="chip reported">reported</span></td><td class="src"><span class="ko">국내 보도 2026-07</span><span class="en">Korean press, Jul 2026</span></td></tr>
+      <tr><td><span class="ko">DH의 우아한형제들 인수 (2019)</span><span class="en">DH's 2019 Woowa acquisition</span></td><td class="n">≈ ₩4.7<span class="ko">조</span><span class="en">tn</span></td><td><span class="chip reported">reported</span></td><td class="src"><span class="ko">당시 보도</span><span class="en">press at the time</span></td></tr>
+      <tr><td><span class="ko">공정위 2020 조건부 승인</span><span class="en">KFTC 2020 conditional approval</span></td><td><span class="ko">요기요 매각 조건</span><span class="en">Required divestiture of Yogiyo</span></td><td><span class="chip fact">confirmed</span></td><td class="src"><span class="ko">공정위 2020-12 의결</span><span class="en">KFTC decision, Dec 2020</span></td></tr>
+      <tr><td><span class="ko">우버이츠 한국 철수</span><span class="en">Uber Eats exit from Korea</span></td><td class="n">2019-09</td><td><span class="chip fact">confirmed</span></td><td class="src">Uber Newsroom</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout quiet">
+    <div class="kicker"><span class="ko">보도 상 혼선 하나</span><span class="en">One reporting discrepancy</span></div>
+    <p class="ko">일부 매체가 인수 규모를 "137억 <strong>유로</strong>(약 23조 원)"로 표기했습니다. 그런데 1차 공시에 적힌 숫자는 <span class="num">$13.7B</span>(달러 기준, 우버가 이미 사둔 지분을 조정한 값)와 <span class="num">$14.8B</span>(100% 기준, ≈€13.0B)입니다. 달러로 적힌 값을 유로로 옮기는 과정에서 생긴 환산 오류로 보이며, 이 글은 공시 수치를 따르겠습니다.</p>
+    <p class="en">Several outlets reported the size as "€13.7bn (₩23tn)". The filing says <span class="num">$13.7B</span> (dollars, adjusted for the prior stake) and <span class="num">$14.8B</span> for 100% (≈€13.0B) — a dollar-to-euro transcription error. This piece follows the filing.</p>
+  </div>
+
+  <figure>
+    <div class="figbox">
+      <div class="figtitle"><b>FIG 1</b><span>·</span><span class="ko">자산 재배치 구조</span><span class="en">Deal architecture</span><span class="chip fact">confirmed</span></div>
+      <svg id="fig1" viewBox="0 0 900 490" role="img" aria-label="Deal architecture">
+        <defs>
+          <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3.6" orient="auto"><path d="M0,0 L8.5,3.6 L0,7.2 Z" fill="#3C474C"/></marker>
+          <marker id="arM" markerWidth="10" markerHeight="10" refX="8" refY="3.6" orient="auto"><path d="M0,0 L8.5,3.6 L0,7.2 Z" fill="#D71362"/></marker>
+          <marker id="arG" markerWidth="10" markerHeight="10" refX="8" refY="3.6" orient="auto"><path d="M0,0 L8.5,3.6 L0,7.2 Z" fill="#1FA8A3"/></marker>
+        </defs>
+
+        <text x="20" y="26" class="fx-sb" fill="#6B7A80"><tspan class="ko">결합 후</tspan><tspan class="en">COMBINED</tspan></text>
+        <line x1="20" y1="40" x2="880" y2="40" stroke="#C7D0CC" stroke-width="1"/>
+        <text x="20" y="80" class="fx-xl" fill="#14181B">99</text>
+        <text x="58" y="80" class="fx-s" fill="#6B7A80"><tspan class="ko">개 시장</tspan><tspan class="en">markets</tspan></text>
+        <text x="200" y="80" class="fx-xl" fill="#14181B">$236B</text>
+        <text x="308" y="80" class="fx-s" fill="#6B7A80"><tspan class="ko">pro-forma 총거래액 (2025)</tspan><tspan class="en">pro-forma gross bookings (2025)</tspan></text>
+        <text x="620" y="80" class="fx-xl" fill="#5B4BC4">$1.2B</text>
+        <text x="712" y="80" class="fx-s" fill="#6B7A80"><tspan class="ko">런레이트 시너지</tspan><tspan class="en">run-rate synergies</tspan></text>
+
+        <rect x="20" y="150" width="180" height="120" rx="2" fill="#16181D"/>
+        <text x="40" y="184" class="fx-h" fill="#EDF0EE">Uber</text>
+        <text x="40" y="210" class="fx-s" fill="#9AA5AA"><tspan class="ko">의결권</tspan><tspan class="en">voting</tspan> 24.77%</text>
+        <text x="40" y="232" class="fx-s" fill="#9AA5AA"><tspan class="ko">파생</tspan><tspan class="en">derivatives</tspan> 11.74%</text>
+        <text x="40" y="256" class="fx-sb" fill="#1FA8A3">+ Prosus 17% → ~53%</text>
+
+        <line x1="200" y1="210" x2="286" y2="210" stroke="#3C474C" stroke-width="2" marker-end="url(#ar)"/>
+        <text x="208" y="198" class="fx-sb" fill="#14181B">€41.50 <tspan class="ko">현금</tspan><tspan class="en">cash</tspan></text>
+        <text x="208" y="230" class="fx-xs" fill="#6B7A80"><tspan class="ko">최소응모 50%+1</tspan><tspan class="en">min. 50%+1</tspan></text>
+
+        <rect x="290" y="140" width="205" height="140" rx="2" fill="#FBDCE8" stroke="#D71362" stroke-width="1.6"/>
+        <text x="310" y="174" class="fx-h" fill="#D71362">Delivery Hero</text>
+        <text x="310" y="202" class="fx-s" fill="#14181B">$14.8B (100%)</text>
+        <text x="310" y="224" class="fx-s" fill="#14181B">$13.7B <tspan class="ko">조정 후</tspan><tspan class="en">adjusted</tspan></text>
+        <text x="310" y="246" class="fx-s" fill="#14181B">≈ €13.0B <tspan class="ko">완전희석</tspan><tspan class="en">diluted</tspan></text>
+        <text x="310" y="268" class="fx-xs" fill="#6B7A80"><tspan class="ko">직전 종가 €38.18</tspan><tspan class="en">prior close €38.18</tspan></text>
+
+        <line x1="392" y1="280" x2="392" y2="342" stroke="#D71362" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arM)"/>
+        <text x="404" y="316" class="fx-sb" fill="#D71362"><tspan class="ko">수평 중첩 제거</tspan><tspan class="en">overlap removed</tspan></text>
+        <rect x="262" y="346" width="270" height="110" rx="2" fill="#F6F8F6" stroke="#D71362" stroke-width="1.3" stroke-dasharray="5 4"/>
+        <text x="282" y="378" class="fx-n" fill="#D71362">SSW Partners</text>
+        <text x="282" y="404" class="fx-s" fill="#14181B">14 <tspan class="ko">개 시장 · ~$1.6B</tspan><tspan class="en">markets · ~$1.6B</tspan></text>
+        <text x="282" y="426" class="fx-s" fill="#14181B"><tspan class="ko">2025 총거래액 $11B</tspan><tspan class="en">2025 bookings $11B</tspan></text>
+        <text x="282" y="446" class="fx-xs" fill="#6B7A80">foodora · efood · Yemeksepeti …</text>
+
+        <line x1="495" y1="210" x2="562" y2="210" stroke="#3C474C" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="566" y="160" width="185" height="100" rx="2" fill="#FFFFFF" stroke="#C7D0CC" stroke-width="1.3"/>
+        <text x="586" y="194" class="fx-n" fill="#14181B"><tspan class="ko">우아한형제들</tspan><tspan class="en">Woowa Brothers</tspan></text>
+        <text x="586" y="220" class="fx-xs" fill="#6B7A80"><tspan class="ko">Woowa Brothers</tspan><tspan class="en">우아한형제들</tspan></text>
+        <text x="586" y="244" class="fx-xs" fill="#6B7A80"><tspan class="ko">DH 2019 인수 · 약 4.7조 원</tspan><tspan class="en">acquired by DH 2019 · ₩4.7tn</tspan></text>
+
+        <line x1="751" y1="210" x2="800" y2="210" stroke="#1FA8A3" stroke-width="2"/>
+        <path d="M800 210 L800 300" stroke="#1FA8A3" stroke-width="2" fill="none" marker-end="url(#arG)"/>
+        <rect x="700" y="306" width="180" height="100" rx="2" fill="#D6EFEE" stroke="#1FA8A3" stroke-width="1.6"/>
+        <text x="720" y="340" class="fx-n" fill="#0E6B68"><tspan class="ko">배달의민족</tspan><tspan class="en">Baemin</tspan></text>
+        <text x="720" y="366" class="fx-s" fill="#14181B"><tspan class="ko">국내 점유율 ~58–60%</tspan><tspan class="en">~58–60% share</tspan></text>
+        <text x="720" y="390" class="fx-xs" fill="#6B7A80"><tspan class="ko">브랜드 유지 방침</tspan><tspan class="en">brand retained</tspan></text>
+      </svg>
+      <figcaption>
+        <span class="ko">우버는 DH 전체를 사되, 우버이츠와 겹치는 14개 시장은 인수 완료와 동시에 SSW로 분리합니다. 즉 <strong>수평 중첩을 사기 전에 미리 잘라내는 것</strong>입니다. 한국은 애초에 잘라낼 중첩이 없다는 점, 여기가 이 글의 출발점입니다.</span>
+        <span class="en">Uber buys all of DH but carves the 14 overlapping markets out to SSW at closing — <strong>the horizontal overlap is removed before it ever exists</strong>. Korea has no overlap to remove, and that is where this analysis starts.</span>
+      </figcaption>
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 02 ============ -->
+<section id="density">
+  <div class="sec-head"><span class="sec-num">02</span><h2><span class="ko">"규모가 생명"은 <em>어떤</em> 규모인가</span><span class="en">"Scale wins" — but <em>which</em> scale?</span></h2></div>
+
+  <p class="ko">배달 플랫폼을 두고 규모의 경제를 이야기하는 것은 흔한 일입니다. 문제는 해상도입니다. 배달에서 수익이 늘어나는 경로는 성격이 완전히 다른 <strong>세 개의 메커니즘</strong>으로 나뉘는데, 국경을 넘는 인수는 그중 하나에만, 그것도 간접적으로 작용합니다. 이 구분을 해두지 않으면 148억 달러가 무엇을 산 값인지 끝내 설명할 수 없습니다.</p>
+  <p class="en">Calling delivery a scale business is easy. The problem is resolution. Increasing returns here come from <strong>three mechanically distinct sources</strong>, and a cross-border acquisition touches only one of them, indirectly. Without that distinction there is no way to say what $14.8 billion actually bought.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th><span class="ko">메커니즘</span><span class="en">Mechanism</span></th>
+      <th><span class="ko">작동 단위</span><span class="en">Unit of operation</span></th>
+      <th><span class="ko">국경 간 M&amp;A로 개선되는가</span><span class="en">Improved by cross-border M&amp;A?</span></th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="ko">① 지역 밀도</span><span class="en">① Local density</span></strong></td>
+        <td class="n"><span class="ko">반경 2~3km · 시간대</span><span class="en">2–3 km radius, time slot</span></td>
+        <td><span class="ko">❌ 전혀 아닙니다. 국경까지 갈 것도 없습니다. 서울의 주문 밀도는 부산 사업을 통째로 사와도 1건도 늘지 않습니다.</span><span class="en">❌ Not at all — and you need not even cross a border. Seoul's order density does not rise by one order if you buy the entire Busan business.</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="ko">② 고정비 분산</span><span class="en">② Fixed-cost amortisation</span></strong></td>
+        <td class="n"><span class="ko">글로벌</span><span class="en">Global</span></td>
+        <td><span class="ko">✅ 직접적으로 개선됩니다. R&amp;D, ML 인프라, 결제, 사기탐지, 법무가 해당합니다.</span><span class="en">✅ Directly. R&amp;D, ML infrastructure, payments, fraud, legal.</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="ko">③ 멀티호밍 절단</span><span class="en">③ Severing multihoming</span></strong></td>
+        <td class="n"><span class="ko">이용자 계정 · 구독</span><span class="en">User accounts, subscriptions</span></td>
+        <td><span class="ko">△ 간접적입니다. 번들과 구독의 도달범위를 넓혀야 비로소 작동합니다.</span><span class="en">△ Indirectly — only if bundle reach widens.</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="ko">① 밀도는 왜 비선형인가</span><span class="en">Why density is non-linear</span></h3>
+  <p class="ko">라이더 한 명이 시간당 몇 건을 처리하느냐를 결정하는 것은 주문 건수 자체가 아니라 <strong>묶음배송(batching)이 가능한 주문 쌍의 수</strong>입니다. 일정한 시간창 안에 픽업지와 배송지가 충분히 가까운 주문 두 건이 동시에 존재해야 묶을 수 있기 때문입니다. 여기서 재미있는 산수가 나옵니다. 밀도가 <span class="num">n</span>배가 되면 짝지을 수 있는 후보 쌍은 대략 <span class="num">n²</span>에 비례해 늘어납니다. 배차 알고리즘이 뒤져볼 수 있는 탐색 공간 자체가 제곱으로 커지는 셈입니다. 그래서 건당 비용 곡선은 밀도에 대해 <em>볼록하게 감소</em>합니다.</p>
+  <p class="en">What sets a courier's deliveries-per-hour is not the order count but the number of <strong>batchable order pairs</strong>: orders whose pickup and drop-off points are close enough within a time window. Multiply density by <span class="num">n</span> and candidate pairs grow roughly as <span class="num">n²</span> — the dispatcher's search space itself expands quadratically. Cost per order therefore falls <em>convexly</em> in density.</p>
+
+  <p class="ko">여기서 첫 번째 결론이 나옵니다. <strong>밀도의 경제는 철저하게 지역적입니다.</strong> 그리고 우버가 사들인 것은 이미 각 지역에서 밀도를 확보해 둔 사업체들입니다. 즉 우버는 밀도를 <em>만든</em> 것이 아니라 <em>구매</em>한 것입니다. 구매한 밀도는 피인수 기업의 재무제표에 이미 반영되어 있으니, 그 자체로는 프리미엄을 정당화해 주지 못합니다.</p>
+  <p class="en">The first conclusion follows. <strong>Density economics is entirely local.</strong> What Uber bought are businesses that already have density in their own cities. Uber did not <em>create</em> density; it <em>purchased</em> it — and purchased density is already in the target's accounts, so on its own it cannot justify a premium.</p>
+
+  <figure>
+    <div class="figbox">
+      <div class="figtitle"><b>FIG 2</b><span>·</span><span class="ko">밀도의 경제</span><span class="en">Density economics</span><span class="chip concept">conceptual</span></div>
+      <svg id="fig2" viewBox="0 0 900 450" role="img" aria-label="Density economics">
+        <text x="24" y="28" class="fx-sb" fill="#6B7A80"><tspan class="ko">저밀도</tspan><tspan class="en">LOW DENSITY</tspan></text>
+        <text x="264" y="28" class="fx-sb" fill="#0E6B68"><tspan class="ko">고밀도</tspan><tspan class="en">HIGH DENSITY</tspan></text>
+        <text x="524" y="28" class="fx-sb" fill="#6B7A80"><tspan class="ko">건당 비용</tspan><tspan class="en">COST PER ORDER</tspan></text>
+
+        <g transform="translate(10,15)">
+          <g stroke="#C7D0CC" stroke-width="1" fill="none">
+            <path d="M40 40 L61 52 L61 76 L40 88 L19 76 L19 52 Z"/><path d="M82 40 L103 52 L103 76 L82 88 L61 76 L61 52 Z"/><path d="M124 40 L145 52 L145 76 L124 88 L103 76 L103 52 Z"/>
+            <path d="M61 88 L82 100 L82 124 L61 136 L40 124 L40 100 Z"/><path d="M103 88 L124 100 L124 124 L103 136 L82 124 L82 100 Z"/><path d="M145 88 L166 100 L166 124 L145 136 L124 124 L124 100 Z"/>
+            <path d="M40 136 L61 148 L61 172 L40 184 L19 172 L19 148 Z"/><path d="M82 136 L103 148 L103 172 L82 184 L61 172 L61 148 Z"/><path d="M124 136 L145 148 L145 172 L124 184 L103 172 L103 148 Z"/>
+          </g>
+          <g fill="#D71362"><circle cx="40" cy="64" r="5"/><circle cx="124" cy="160" r="5"/><circle cx="103" cy="112" r="5"/></g>
+        </g>
+        <text x="24" y="232" class="fx-b" fill="#14181B"><tspan class="ko">주문 3건 · 묶음 후보 쌍 </tspan><tspan class="en">3 orders · batchable pairs </tspan><tspan font-weight="700">3</tspan></text>
+        <text x="24" y="254" class="fx-s" fill="#6B7A80"><tspan class="ko">라이더 시간당 1.4건 (예시입니다)</tspan><tspan class="en">1.4 deliveries per hour (illustrative)</tspan></text>
+
+        <g transform="translate(250,15)">
+          <g stroke="#C7D0CC" stroke-width="1" fill="none">
+            <path d="M40 40 L61 52 L61 76 L40 88 L19 76 L19 52 Z"/><path d="M82 40 L103 52 L103 76 L82 88 L61 76 L61 52 Z"/><path d="M124 40 L145 52 L145 76 L124 88 L103 76 L103 52 Z"/>
+            <path d="M61 88 L82 100 L82 124 L61 136 L40 124 L40 100 Z"/><path d="M103 88 L124 100 L124 124 L103 136 L82 124 L82 100 Z"/><path d="M145 88 L166 100 L166 124 L145 136 L124 124 L124 100 Z"/>
+            <path d="M40 136 L61 148 L61 172 L40 184 L19 172 L19 148 Z"/><path d="M82 136 L103 148 L103 172 L82 184 L61 172 L61 148 Z"/><path d="M124 136 L145 148 L145 172 L124 184 L103 172 L103 148 Z"/>
+          </g>
+          <g fill="#1FA8A3" opacity=".16">
+            <path d="M61 88 L82 100 L82 124 L61 136 L40 124 L40 100 Z"/><path d="M103 88 L124 100 L124 124 L103 136 L82 124 L82 100 Z"/><path d="M82 40 L103 52 L103 76 L82 88 L61 76 L61 52 Z"/>
+          </g>
+          <g stroke="#1FA8A3" stroke-width="1.6" opacity=".9">
+            <line x1="40" y1="64" x2="82" y2="64"/><line x1="61" y1="112" x2="103" y2="112"/><line x1="82" y1="64" x2="61" y2="112"/><line x1="103" y1="112" x2="82" y2="160"/><line x1="82" y1="160" x2="124" y2="160"/>
+          </g>
+          <g fill="#D71362"><circle cx="40" cy="64" r="5"/><circle cx="82" cy="64" r="5"/><circle cx="124" cy="160" r="5"/><circle cx="61" cy="112" r="5"/><circle cx="103" cy="112" r="5"/><circle cx="82" cy="160" r="5"/></g>
+        </g>
+        <text x="264" y="232" class="fx-b" fill="#14181B"><tspan class="ko">주문 6건(2×) · 후보 쌍 </tspan><tspan class="en">6 orders (2×) · pairs </tspan><tspan font-weight="700" fill="#0E6B68">15 (5×)</tspan></text>
+        <text x="264" y="254" class="fx-s" fill="#6B7A80"><tspan class="ko">라이더 시간당 2.6건 (예시입니다)</tspan><tspan class="en">2.6 deliveries per hour (illustrative)</tspan></text>
+
+        <line x1="540" y1="230" x2="880" y2="230" stroke="#14181B" stroke-width="1.4"/>
+        <line x1="540" y1="230" x2="540" y2="48" stroke="#14181B" stroke-width="1.4"/>
+        <path d="M540 66 C 620 66, 640 168, 880 200" fill="none" stroke="#D71362" stroke-width="2.8"/>
+        <circle cx="574" cy="78" r="5.5" fill="#6B7A80"/><text x="586" y="72" class="fx-s" fill="#6B7A80"><tspan class="ko">저밀도</tspan><tspan class="en">low</tspan></text>
+        <circle cx="676" cy="152" r="5.5" fill="#1FA8A3"/><text x="688" y="146" class="fx-s" fill="#0E6B68"><tspan class="ko">밀도 2배 → 비용 급감</tspan><tspan class="en">2× density → cost collapses</tspan></text>
+        <circle cx="828" cy="194" r="5.5" fill="#6B7A80"/><text x="700" y="220" class="fx-s" fill="#6B7A80"><tspan class="ko">포화 · 수익체감</tspan><tspan class="en">saturation</tspan></text>
+        <text x="540" y="254" class="fx-s" fill="#6B7A80"><tspan class="ko">주문 밀도 (건 / km² · 시간)</tspan><tspan class="en">order density (per km² · hour)</tspan></text>
+        <text x="556" y="62" class="fx-s" fill="#6B7A80"><tspan class="ko">₩ / 건</tspan><tspan class="en">cost / order</tspan></text>
+
+        <line x1="24" y1="300" x2="880" y2="300" stroke="#DDE4E0" stroke-width="1"/>
+        <text x="24" y="336" class="fx-bb" fill="#14181B"><tspan class="ko">밀도는 반경 2~3km 안에서 결정됩니다. 국경을 넘는 인수로는 이 곡선 위의 위치가 바뀌지 않습니다.</tspan><tspan class="en">Density is decided inside a 2–3 km radius. A cross-border acquisition does not move you along this curve.</tspan></text>
+        <text x="24" y="366" class="fx-s" fill="#6B7A80"><tspan class="ko">묶음 후보 쌍은 주문 수의 조합수로 늘어납니다 — 3건이면 3쌍, 6건이면 15쌍입니다.</tspan><tspan class="en">Batchable pairs grow combinatorially — 3 orders → 3 pairs, 6 orders → 15.</tspan></text>
+        <text x="24" y="396" class="fx-xs" fill="#6B7A80"><tspan class="ko">개념도입니다. 주문 건수와 시간당 처리량은 메커니즘 설명을 위한 예시이며 실제 운영 데이터가 아닙니다.</tspan><tspan class="en">Conceptual. Order counts and throughput are illustrative, not operating data.</tspan></text>
+      </svg>
+      <figcaption>
+        <span class="ko">주문이 2배가 되면 최적화 대상은 5배가 됩니다. 이것이 밀도가 선형이 아닌 이유이고, 동시에 <strong>왜 이 이득이 도시 밖으로는 이전되지 않는지</strong>에 대한 답이기도 합니다.</span>
+        <span class="en">Double the orders and the optimiser gets 5× the material. That is why density is non-linear — and why the gain does not travel across cities.</span>
+      </figcaption>
+    </div>
+  </figure>
+
+  <h3><span class="ko">② 그렇다면 무엇이 국경을 넘는가</span><span class="en">So what does travel?</span></h3>
+  <p class="ko">답은 고정비입니다. 그리고 2026년의 배달 플랫폼에서 가장 큰 고정비 항목은 인건비도 마케팅비도 아닌 <strong>알고리즘 개발·운영 스택</strong>입니다. 배차 최적화, 도착시간 예측, 수요·공급 예측, 조리시간 예측, 사기탐지, 광고 랭킹, 지도·경로 인프라가 여기에 들어갑니다. 이 스택은 개발 비용이 거의 전부 고정비이고 한 번 만들어두면 복제하는 데 드는 추가 비용이 0에 가깝습니다. 경제학 교과서에 나오는 <strong>자연독점적 비용구조</strong>가 바로 이런 모양입니다.</p>
+  <p class="en">Fixed cost. And in 2026 the largest fixed-cost line in a delivery platform is neither headcount nor marketing but the <strong>algorithmic stack</strong>: dispatch optimisation, ETA prediction, demand and supply forecasting, prep-time estimation, fraud detection, ad ranking, mapping. Development cost is almost entirely fixed and marginal replication cost is near zero — a textbook natural-monopoly cost structure.</p>
+
+  <div class="callout">
+    <div class="kicker">The pivot</div>
+    <p class="ko">바로 여기서 이 딜의 성격이 바뀝니다. 밀도가 지역적이어서 그 자체로는 프리미엄을 정당화하지 못한다면, 남는 질문은 하나뿐입니다. <strong>"똑같은 AI 스택을 몇 개의 주문 위에 얹을 수 있는가."</strong> 같은 배차 R&amp;D 예산을 연간 총거래액 $130B 위에 얹을 때와 $236B 위에 얹을 때를 비교하면, 주문 한 건이 부담하는 알고리즘 비용은 45% 줄어듭니다. <em>이 거래는 배달 M&amp;A의 옷을 입은 AI 인프라 통합이라고 보는 편이 정확합니다.</em></p>
+    <p class="en">This is where the deal changes character. If density is local and cannot on its own justify a premium, the question becomes <strong>"how many orders can one AI stack be spread across?"</strong> Amortise the same dispatch R&amp;D budget over $236B of bookings instead of $130B and the algorithmic cost borne per order falls by ~45%. <em>This is an AI-infrastructure consolidation wearing the costume of a delivery merger.</em></p>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section id="multihoming">
+  <div class="sec-head"><span class="sec-num">03</span><h2><span class="ko">3면 시장과 멀티호밍의 절단</span><span class="en">Three sides, and where multihoming gets cut</span></h2></div>
+
+  <p class="ko">배달은 흔히 양면시장이라고 불리지만, 실제로는 <strong>3면 시장</strong>입니다. 소비자와 음식점, 그리고 라이더가 있고 세 변의 성질이 서로 전혀 다릅니다. 여기서 Armstrong(2006)의 <em>경쟁병목(competitive bottleneck)</em> 개념이 정확히 들어맞습니다. 한쪽이 플랫폼 하나만 쓰고(single-home) 다른 쪽은 여러 플랫폼을 동시에 쓴다면(multi-home), 플랫폼은 싱글호밍하는 쪽에 닿는 유일한 통로를 쥐게 됩니다. 그리고 그 독점적 접근권을 멀티호밍하는 쪽에 비싸게 팔아 지대를 뽑습니다.</p>
+  <p class="en">Delivery is usually called two-sided; it is actually <strong>three-sided</strong> — consumers, restaurants, couriers — and the three sides behave differently. Armstrong's (2006) <em>competitive bottleneck</em> applies exactly: when one side single-homes and the other multi-homes, the platform holds monopoly access to the multi-homing side and extracts rent there.</p>
+
+  <p class="ko">한국 배달시장의 구조는 아주 분명합니다. <strong>소비자는 점점 싱글호밍 쪽으로 가고(구독과 쿠폰으로 묶이니까요), 음식점은 사실상 전부 멀티호밍합니다.</strong> 배민과 쿠팡이츠, 요기요에 동시에 입점하지 않는 식당은 찾기 어렵습니다. 그 결과 병목의 반대편, 즉 <em>음식점이 지대의 부담자</em>가 됩니다. 매출은 느는데 영업이익률은 떨어진다는 이른바 성장의 역설은 정서적인 하소연이 아니라, 이 구조에서 산술적으로 따라 나오는 결과입니다.</p>
+  <p class="en">Korea's structure is clear: <strong>consumers increasingly single-home</strong> (subscriptions, coupon lock-in) while <strong>restaurants universally multi-home</strong> — almost no kitchen lists on only one app. So the burden of the rent falls on the restaurants. The familiar pattern of rising revenue and falling operating margin is not sentiment; it is the arithmetic consequence of this structure.</p>
+
+  <figure>
+    <div class="figbox">
+      <div class="figtitle"><b>FIG 3</b><span>·</span><span class="ko">3면 시장과 절단점</span><span class="en">Three-sided market &amp; the cut points</span><span class="chip concept">conceptual</span></div>
+      <svg id="fig3" viewBox="0 0 900 500" role="img" aria-label="Three-sided market">
+        <polygon points="380,110 175,370 585,370" fill="none" stroke="#C7D0CC" stroke-width="1.6"/>
+
+        <circle cx="380" cy="110" r="58" fill="#D6EFEE" stroke="#1FA8A3" stroke-width="1.8"/>
+        <text x="380" y="106" class="fx-n" fill="#0E6B68" text-anchor="middle"><tspan class="ko">소비자</tspan><tspan class="en">CONSUMERS</tspan></text>
+        <text x="380" y="128" class="fx-xs" fill="#0E6B68" text-anchor="middle"><tspan class="ko">CONSUMERS</tspan><tspan class="en">소비자</tspan></text>
+        <text x="380" y="34" class="fx-bb" fill="#14181B" text-anchor="middle"><tspan class="ko">싱글호밍 ↑ (구독 락인)</tspan><tspan class="en">single-homing ↑ (subscription lock-in)</tspan></text>
+
+        <circle cx="175" cy="370" r="58" fill="#FBDCE8" stroke="#D71362" stroke-width="1.8"/>
+        <text x="175" y="366" class="fx-n" fill="#D71362" text-anchor="middle"><tspan class="ko">음식점</tspan><tspan class="en">MERCHANTS</tspan></text>
+        <text x="175" y="388" class="fx-xs" fill="#D71362" text-anchor="middle"><tspan class="ko">MERCHANTS</tspan><tspan class="en">음식점</tspan></text>
+        <text x="175" y="454" class="fx-bb" fill="#14181B" text-anchor="middle"><tspan class="ko">멀티호밍 (≈100%)</tspan><tspan class="en">multihoming (≈100%)</tspan></text>
+        <text x="175" y="478" class="fx-sb" fill="#D71362" text-anchor="middle"><tspan class="ko">→ 지대의 부담자</tspan><tspan class="en">→ bears the rent</tspan></text>
+
+        <circle cx="585" cy="370" r="58" fill="#FAEBD2" stroke="#C97A0B" stroke-width="1.8"/>
+        <text x="585" y="366" class="fx-n" fill="#C97A0B" text-anchor="middle"><tspan class="ko">라이더</tspan><tspan class="en">COURIERS</tspan></text>
+        <text x="585" y="388" class="fx-xs" fill="#C97A0B" text-anchor="middle"><tspan class="ko">COURIERS</tspan><tspan class="en">라이더</tspan></text>
+        <text x="585" y="454" class="fx-bb" fill="#14181B" text-anchor="middle"><tspan class="ko">멀티호밍 (앱 동시 구동)</tspan><tspan class="en">multihoming (apps run together)</tspan></text>
+        <text x="585" y="478" class="fx-sb" fill="#C97A0B" text-anchor="middle"><tspan class="ko">→ 수요독점 노출</tspan><tspan class="en">→ monopsony exposure</tspan></text>
+
+        <text x="228" y="228" class="fx-s" fill="#6B7A80"><tspan class="ko">교차 외부성 (+)</tspan><tspan class="en">cross-side (+)</tspan></text>
+        <text x="470" y="228" class="fx-s" fill="#6B7A80"><tspan class="ko">교차 외부성 (+)</tspan><tspan class="en">cross-side (+)</tspan></text>
+        <text x="380" y="396" class="fx-s" fill="#6B7A80" text-anchor="middle"><tspan class="ko">밀도 ↑ → 대기시간 ↓ → 밀도 ↑</tspan><tspan class="en">density ↑ → wait ↓ → density ↑</tspan></text>
+
+        <line x1="290" y1="110" x2="470" y2="110" stroke="#5B4BC4" stroke-width="2.6" stroke-dasharray="7 5"/>
+        <line x1="470" y1="110" x2="654" y2="110" stroke="#5B4BC4" stroke-width="1" stroke-dasharray="3 3"/>
+        <rect x="658" y="80" width="232" height="62" rx="2" fill="#E4E1F7" stroke="#5B4BC4" stroke-width="1.3"/>
+        <text x="676" y="106" class="fx-sb" fill="#5B4BC4"><tspan class="ko">절단 A · 구독 번들</tspan><tspan class="en">Cut A · subscription bundle</tspan></text>
+        <text x="676" y="128" class="fx-s" fill="#14181B">Uber One × <tspan class="ko">배민클럽</tspan><tspan class="en">Baemin Club</tspan></text>
+
+        <line x1="643" y1="348" x2="700" y2="300" stroke="#5B4BC4" stroke-width="2.6" stroke-dasharray="7 5"/>
+        <rect x="658" y="220" width="232" height="62" rx="2" fill="#E4E1F7" stroke="#5B4BC4" stroke-width="1.3"/>
+        <text x="676" y="246" class="fx-sb" fill="#5B4BC4"><tspan class="ko">절단 B · 통합 라이더 풀</tspan><tspan class="en">Cut B · unified courier pool</tspan></text>
+        <text x="676" y="268" class="fx-s" fill="#14181B"><tspan class="ko">이동 + 배달 단일 배차</tspan><tspan class="en">one dispatch for rides + delivery</tspan></text>
+
+        <rect x="10" y="212" width="222" height="78" rx="2" fill="#F6F8F6" stroke="#C7D0CC" stroke-width="1.3" stroke-dasharray="5 4"/>
+        <text x="28" y="238" class="fx-sb" fill="#6B7A80"><tspan class="ko">절단되지 않는 변</tspan><tspan class="en">The side left uncut</tspan></text>
+        <text x="28" y="260" class="fx-s" fill="#14181B"><tspan class="ko">음식점 멀티호밍은 유지된다</tspan><tspan class="en">merchant multihoming persists</tspan></text>
+        <text x="28" y="280" class="fx-sb" fill="#D71362"><tspan class="ko">— 그래서 여기서 회수한다</tspan><tspan class="en">— so extraction happens here</tspan></text>
+        <line x1="132" y1="290" x2="150" y2="318" stroke="#C7D0CC" stroke-width="1.2" stroke-dasharray="3 3"/>
+      </svg>
+      <figcaption>
+        <span class="ko">이 딜이 실제로 바꾸는 것은 <strong>절단 A와 B</strong>입니다. 구독 번들은 소비자 싱글호밍을 강화하고, 이동과 배달을 통합한 배차는 라이더 공급을 단일 풀로 흡수합니다. 음식점 변은 절단되지 않는데, 사실 절단할 필요도 없습니다. 병목의 반대편에 남아 있는 한 지대는 자동으로 그쪽에서 나오기 때문입니다.</span>
+        <span class="en">What the deal actually changes is <strong>cuts A and B</strong>: bundling deepens consumer single-homing, and unified rides-plus-delivery dispatch absorbs courier supply into one pool. The merchant side is not cut — and does not need to be. So long as it sits opposite the bottleneck, the rent comes from there automatically.</span>
+      </figcaption>
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 04 ============ -->
+<section id="valuation">
+  <div class="sec-head"><span class="sec-num">04</span><h2><span class="ko">가격의 해부 — 시너지가 프리미엄을 다 먹는다</span><span class="en">Anatomy of the price</span></h2></div>
+
+  <p class="ko">지분을 미리 싸게 쌓아두고 프리미엄은 마지막 물량에만 지불하는 것은 대형 공개매수의 표준 전술입니다. 흥미로운 질문은 그다음에 있습니다. <strong>지불한 프리미엄 총액과 발표한 시너지의 현재가치를 나란히 놓고 보면 무엇이 남을까요.</strong></p>
+  <p class="en">Accumulating a cheap stake in advance and paying the premium only on the final tranche is standard tender-offer craft. The interesting question comes after: <strong>put the total premium paid next to the present value of the announced synergies, and what is left?</strong></p>
+
+  <p class="ko">다행히 공개된 수치만으로도 계산이 가능합니다.</p>
+  <p class="en">The disclosed figures are enough.</p>
+
+<pre class="ko">완전희석 주식수  = €13.0B ÷ €41.50        ≈ 3.13억 주
+미영향 주가      = €41.50 ÷ 2.27           ≈ €18.28   (127% 프리미엄 역산)
+미영향 시가총액  = €18.28 × 313M           ≈ €5.7B
+발표 전 3M VWAP  = €41.50 ÷ 1.34           ≈ €30.97   → 시총 ≈ €9.7B
+총 지불 프리미엄 = (41.50 − 18.28) × 313M  ≈ €7.3B    (≈ $8.4B)</pre>
+<pre class="en">Fully diluted shares   = €13.0B ÷ €41.50         ≈ 313M
+Unaffected price       = €41.50 ÷ 2.27           ≈ €18.28   (from the 127% premium)
+Unaffected equity      = €18.28 × 313M           ≈ €5.7B
+Pre-announcement VWAP  = €41.50 ÷ 1.34           ≈ €30.97   → ≈ €9.7B
+Total premium paid     = (41.50 − 18.28) × 313M  ≈ €7.3B    (≈ $8.4B)</pre>
+
+  <p class="ko">이제 반대편을 보겠습니다. 런레이트 시너지 <span class="num">$1.2B</span>를 세전 기준 8~10배로 자본화하면 <span class="num">$9.6~12.0B</span>가 나옵니다. 여기에 세금과 실현 확률, 실현까지 걸리는 시차 할인을 반영하면 이 값은 빠르게 프리미엄 근처까지 내려옵니다.</p>
+  <p class="en">Now the other side. Capitalising <span class="num">$1.2B</span> of run-rate synergies at 8–10× pre-tax gives <span class="num">$9.6–12.0B</span>. Adjust for tax, execution probability and the delay to realisation and it drops quickly toward the premium.</p>
+
+  <div class="callout">
+    <div class="kicker"><span class="ko">계산이 말하는 것</span><span class="en">What the arithmetic says</span></div>
+    <p class="ko"><strong>우버는 발표한 비용 시너지의 대부분을 DH 주주에게 프리미엄으로 넘겨준 셈입니다.</strong> M&amp;A 문헌에서 반복해서 확인되는 표준적인 결과입니다. 인수 프리미엄은 시너지의 상당 부분을 피인수 기업 주주에게 이전시킵니다. 그렇다면 우버 주주 입장에서 이 딜의 순현재가치는 <em>발표되지 않은 것들</em>에 전부 걸려 있게 됩니다. ⓐ 매출 시너지(구독 번들, 광고, 크로스셀), ⓑ 경쟁자가 이 자산을 갖지 못하게 막는 <em>배제 옵션</em>, ⓒ 시너지 $1.2B가 사실은 보수적으로 잡은 가이던스일 가능성, 이 셋입니다.</p>
+    <p class="en"><strong>Uber handed most of the announced cost synergies to DH shareholders as premium.</strong> That is the standard finding in the M&amp;A literature — premiums transfer much of the synergy to the target. So for Uber's shareholders the NPV rests entirely on what was <em>not</em> announced: ⓐ revenue synergies (bundling, advertising, cross-sell), ⓑ the <em>preemption option</em> of keeping the asset away from DoorDash or Grab, ⓒ the possibility that $1.2B is deliberately conservative guidance.</p>
+  </div>
+
+  <figure>
+    <div class="figbox">
+      <div class="figtitle"><b>FIG 4</b><span>·</span><span class="ko">프리미엄 vs 시너지</span><span class="en">Premium against synergy</span><span class="chip derived">derived</span></div>
+      <svg id="fig4" viewBox="0 0 900 470" role="img" aria-label="Premium against synergy">
+        <text x="24" y="28" class="fx-sb" fill="#6B7A80">A · <tspan class="ko">지분가치 워터폴 (€B, 완전희석)</tspan><tspan class="en">Equity value waterfall (€B, fully diluted)</tspan></text>
+
+        <line x1="30" y1="300" x2="520" y2="300" stroke="#14181B" stroke-width="1.4"/>
+        <rect x="60" y="234" width="80" height="66" fill="#6B7A80"/>
+        <text x="100" y="224" class="fx-n" fill="#14181B" text-anchor="middle">5.7</text>
+        <text x="100" y="324" class="fx-s" fill="#6B7A80" text-anchor="middle"><tspan class="ko">미영향 시총</tspan><tspan class="en">unaffected</tspan></text>
+        <text x="100" y="344" class="fx-xs" fill="#6B7A80" text-anchor="middle">€18.28 × 313M</text>
+
+        <rect x="170" y="188" width="80" height="46" fill="#C7D0CC"/>
+        <text x="210" y="178" class="fx-n" fill="#14181B" text-anchor="middle">+4.0</text>
+        <text x="210" y="324" class="fx-s" fill="#6B7A80" text-anchor="middle"><tspan class="ko">거래설 · 재평가</tspan><tspan class="en">re-rating</tspan></text>
+        <text x="210" y="344" class="fx-xs" fill="#6B7A80" text-anchor="middle">→ €30.97</text>
+
+        <rect x="280" y="150" width="80" height="38" fill="#D71362"/>
+        <text x="320" y="140" class="fx-n" fill="#D71362" text-anchor="middle">+3.3</text>
+        <text x="320" y="324" class="fx-s" fill="#D71362" text-anchor="middle"><tspan class="ko">발표 프리미엄</tspan><tspan class="en">announced premium</tspan></text>
+        <text x="320" y="344" class="fx-xs" fill="#6B7A80" text-anchor="middle">+34%</text>
+
+        <rect x="390" y="150" width="80" height="150" fill="#16181D"/>
+        <text x="430" y="140" class="fx-n" fill="#14181B" text-anchor="middle">13.0</text>
+        <text x="430" y="324" class="fx-s" fill="#14181B" text-anchor="middle"><tspan class="ko">오퍼 지분가치</tspan><tspan class="en">offer equity value</tspan></text>
+        <text x="430" y="344" class="fx-xs" fill="#6B7A80" text-anchor="middle">€41.50</text>
+
+        <g stroke="#6B7A80" stroke-width="1.2" stroke-dasharray="3 3">
+          <line x1="140" y1="234" x2="170" y2="234"/><line x1="250" y1="188" x2="280" y2="188"/><line x1="360" y1="150" x2="390" y2="150"/>
+        </g>
+        <path d="M42 226 L32 226 L32 116 L42 116" fill="none" stroke="#D71362" stroke-width="1.4"/>
+        <text x="32" y="102" class="fx-sb" fill="#D71362"><tspan class="ko">총 프리미엄 ≈ €7.3B (≈$8.4B)</tspan><tspan class="en">total premium ≈ €7.3B (≈$8.4B)</tspan></text>
+
+        <line x1="548" y1="14" x2="548" y2="380" stroke="#DDE4E0" stroke-width="1"/>
+        <text x="570" y="28" class="fx-sb" fill="#6B7A80">B · <tspan class="ko">자본화 시너지 ($B)</tspan><tspan class="en">capitalised synergies ($B)</tspan></text>
+        <line x1="570" y1="300" x2="880" y2="300" stroke="#14181B" stroke-width="1.4"/>
+        <rect x="590" y="214" width="50" height="86" fill="#E4E1F7" stroke="#5B4BC4" stroke-width="1.3"/>
+        <text x="615" y="204" class="fx-sb" fill="#5B4BC4" text-anchor="middle">7.2</text>
+        <text x="615" y="324" class="fx-s" fill="#6B7A80" text-anchor="middle">6×</text>
+        <rect x="660" y="185" width="50" height="115" fill="#E4E1F7" stroke="#5B4BC4" stroke-width="1.3"/>
+        <text x="685" y="175" class="fx-sb" fill="#5B4BC4" text-anchor="middle">9.6</text>
+        <text x="685" y="324" class="fx-s" fill="#6B7A80" text-anchor="middle">8×</text>
+        <rect x="730" y="156" width="50" height="144" fill="#5B4BC4"/>
+        <text x="755" y="146" class="fx-sb" fill="#5B4BC4" text-anchor="middle">12.0</text>
+        <text x="755" y="324" class="fx-s" fill="#6B7A80" text-anchor="middle">10×</text>
+        <rect x="800" y="127" width="50" height="173" fill="#E4E1F7" stroke="#5B4BC4" stroke-width="1.3"/>
+        <text x="825" y="117" class="fx-sb" fill="#5B4BC4" text-anchor="middle">14.4</text>
+        <text x="825" y="324" class="fx-s" fill="#6B7A80" text-anchor="middle">12×</text>
+        <line x1="570" y1="199" x2="880" y2="199" stroke="#D71362" stroke-width="1.6" stroke-dasharray="5 4"/>
+        <text x="878" y="192" class="fx-sb" fill="#D71362" text-anchor="end"><tspan class="ko">지불 프리미엄 ≈ $8.4B</tspan><tspan class="en">premium paid ≈ $8.4B</tspan></text>
+        <text x="570" y="352" class="fx-xs" fill="#6B7A80"><tspan class="ko">런레이트 $1.2B × 배수 (세전이며 실현확률은 반영하지 않았습니다)</tspan><tspan class="en">$1.2B run-rate × multiple (pre-tax, no probability weighting)</tspan></text>
+
+        <line x1="24" y1="392" x2="880" y2="392" stroke="#DDE4E0" stroke-width="1"/>
+        <text x="24" y="424" class="fx-bb" fill="#14181B"><tspan class="ko">발표된 비용 시너지의 대부분은 프리미엄으로 이미 지불되었습니다.</tspan><tspan class="en">Announced cost synergies are largely paid away in the premium.</tspan></text>
+        <text x="24" y="448" class="fx-s" fill="#6B7A80"><tspan class="ko">남는 가치는 매출 시너지와 배제 옵션에 있습니다.</tspan><tspan class="en">The residual sits in revenue synergies and the preemption option.</tspan></text>
+        <text x="24" y="466" class="fx-xs" fill="#6B7A80"><tspan class="ko">입력값은 공시 수치이고, 주식수·미영향주가·프리미엄 금액은 직접 계산한 값입니다. 배수 6~12배는 예시입니다.</tspan><tspan class="en">Inputs disclosed; share count, unaffected price and premium derived here. The 6–12× range is illustrative.</tspan></text>
+      </svg>
+      <figcaption>
+        <span class="ko">입력값(€13.0B, €41.50, 127%/34% 프리미엄, $1.2B 시너지)은 공개된 수치이고, 주식수 3.13억 주와 미영향주가 €18.28, 프리미엄 €7.3B는 이 글에서 직접 계산한 값입니다. 자본화 배수는 이해를 돕기 위한 예시일 뿐 회사가 제시한 숫자가 아니라는 점을 밝혀 둡니다.</span>
+        <span class="en">Inputs (€13.0B, €41.50, the 127%/34% premia, $1.2B) are disclosed; the 313M share count, €18.28 unaffected price and €7.3B premium are derived here. The capitalisation range is illustrative, not company guidance.</span>
+      </figcaption>
+    </div>
+  </figure>
+
+  <h3><span class="ko">실물옵션으로서의 방어적 인수</span><span class="en">Defensive M&amp;A as a real option</span></h3>
+  <p class="ko">"내가 안 사면 경쟁자가 산다"는 직관은 실물옵션 이론으로 깔끔하게 정식화됩니다. 다만 정확히 말하면 <em>취득 옵션</em>이 아니라 <strong>배제 옵션(preemption option)</strong>입니다. 이 옵션의 가치는 인수한 뒤 벌어들일 현금흐름의 현재가치가 아니라, <em>경쟁자가 그 자산을 가졌을 때 우버가 잃게 될 미래 현금흐름</em>의 현재가치입니다. 그래서 방어적 인수는 DCF로 계산하면 언제나 비싸 보입니다. DCF는 반사실적 손실을 계산해 주지 않으니까요.</p>
+  <p class="en">"If I don't buy it, a rival will" formalises as a real option — precisely, not an <em>acquisition</em> option but a <strong>preemption option</strong>. Its value is not the PV of the acquired cash flows but the PV of the cash flows Uber would <em>lose</em> if a rival held the asset. Defensive deals always look expensive on a DCF, because a DCF never prices the counterfactual loss.</p>
+  <p class="ko">물론 이 논리에도 분명한 한계가 있습니다. 옵션은 <strong>불확실성이 해소될 때까지 기다릴 수 있을 때만</strong> 가치를 갖습니다(Dixit–Pindyck). 인수를 끝내는 순간 옵션은 사라지고 남는 것은 매몰비용뿐입니다. 저스트잇 테이크어웨이가 그럽허브를 73억 달러에 사서 3년 뒤 6.5억 달러에 되판 것이 그 사례입니다. 옵션을 행사한 다음 그 자산에서 밀도를 만들어내지 못했기 때문입니다. <strong>배제 옵션은 실행 역량이 뒷받침되지 않으면 그냥 비싼 보험일 뿐입니다.</strong></p>
+  <p class="en">The logic has a hard limit. An option is only valuable while you can <em>wait</em> (Dixit–Pindyck); exercise it and all that remains is sunk cost. Just Eat Takeaway paid $7.3B for Grubhub and sold three years later for $650M because, having exercised, it never built density in the asset. <strong>A preemption option without execution capability is just expensive insurance.</strong></p>
+</section>
+
+<!-- ============ 05 ============ -->
+<section id="policy">
+  <div class="sec-head"><span class="sec-num">05</span><h2><span class="ko">공정위는 무엇을 심사하는가</span><span class="en">What the KFTC actually has to review</span></h2></div>
+
+  <p class="ko">한국 사례의 특수성이 여기서 드러납니다. <strong>이 결합에는 한국 내 수평 중첩이 없습니다.</strong> 우버이츠는 2019년 9월에 한국에서 철수했고, 지금 우버의 한국 사업은 이동(택시 호출)뿐입니다. 배달앱 시장에서 우버의 점유율은 0입니다. 따라서 전통적인 수평결합 심사의 문법, 그러니까 시장을 획정하고 HHI 증분을 계산한 뒤 구조적 시정조치를 부과하는 순서가 <em>아예 적용되지 않습니다</em>.</p>
+  <p class="en">Here is what makes Korea unusual: <strong>there is no horizontal overlap.</strong> Uber Eats left Korea in September 2019, and Uber's Korean business is mobility only. Its delivery-app share is zero. The standard horizontal playbook — define the market, compute the HHI delta, order divestiture — simply <em>does not apply</em>.</p>
+
+  <p class="ko">당사자 입장에서는 좋은 소식처럼 들리실 겁니다. 그런데 규제당국 입장에서는 오히려 <em>더 까다로운</em> 사건이 됩니다. 남아 있는 이론은 세 가지입니다.</p>
+  <p class="en">That sounds like good news for the parties, but it makes the case <em>harder</em> for the regulator, not easier. Three theories remain.</p>
+
+  <ul class="ko"><li><strong>혼합결합 / 생태계 효과.</strong> 이동과 배달, 구독을 묶은 꾸러미가 배달앱 시장으로의 신규 진입과 확장을 봉쇄하느냐는 질문입니다. 시장을 획정할 때 이동과 배달을 분리하면 봉쇄 이론을 세우기 어렵고, "일상 앱(everyday app)"으로 한데 묶으면 세우기가 쉬워집니다. 결국 <strong>시장획정 자체가 이 사건의 승부처</strong>입니다.</li>
+    <li><strong>데이터 결합.</strong> 우버의 이동 데이터와 배민의 주문 데이터를 합쳤을 때 생기는 예측력 우위가 경쟁상 진입장벽이 되느냐는 질문입니다. 경쟁법과 개인정보보호법이 겹치는 지점이기도 합니다.</li>
+    <li><strong>자기우대.</strong> 통합된 라이더 풀이나 검색 랭킹에서 자사 서비스를 우대할 유인이 생기느냐는 질문입니다.</li></ul>
+  <ul class="en">
+    <li><strong>Conglomerate / ecosystem effects.</strong> Does bundling rides + delivery + subscription foreclose entry into delivery apps? If the market is defined narrowly (delivery apps only), foreclosure is hard to establish; if defined as an "everyday app" ecosystem, it is easy. <strong>Market definition is the whole case.</strong></li>
+    <li><strong>Data combination.</strong> Does merging Uber's mobility data with Baemin's order data create a predictive advantage that functions as an entry barrier? Competition law meets privacy law here.</li>
+    <li><strong>Self-preferencing.</strong> Unified courier dispatch and search ranking both create incentives to favour own services.</li>
+  </ul>
+
+  <p class="ko">2020년 선례가 이 대비를 아주 잘 보여줍니다. DH가 우아한형제들을 인수할 당시에는 <em>요기요와 배민이 같은 시장에서 직접 경쟁</em>하고 있었습니다. 누가 봐도 명백한 수평 중첩이었고, 공정위는 요기요를 매각하라는 구조적 시정조치를 부과했습니다. 그런데 2026년에는 잘라낼 중첩 자체가 없습니다. 그래서 이번에 시정조치가 나온다면 <strong>행태적 조건</strong>일 가능성이 높습니다.</p>
+  <p class="en">The 2020 precedent shows the contrast precisely. When DH bought Woowa, Yogiyo and Baemin competed head-on — an unambiguous horizontal overlap, and the KFTC ordered a structural remedy (sell Yogiyo). In 2026 there is no overlap to sever, so any remedy is more likely to be <strong>behavioural</strong>.</p>
+
+  <figure>
+    <div class="figbox">
+      <div class="figtitle"><b>FIG 5</b><span>·</span><span class="ko">피해이론 좌표</span><span class="en">Theory-of-harm map</span><span class="chip concept">conceptual</span></div>
+      <svg id="fig5" viewBox="0 0 900 500" role="img" aria-label="Theory of harm map">
+        <line x1="110" y1="410" x2="870" y2="410" stroke="#14181B" stroke-width="1.4"/>
+        <line x1="110" y1="410" x2="110" y2="50" stroke="#14181B" stroke-width="1.4"/>
+        <line x1="490" y1="50" x2="490" y2="410" stroke="#DDE4E0" stroke-width="1"/>
+        <line x1="110" y1="230" x2="870" y2="230" stroke="#DDE4E0" stroke-width="1"/>
+
+        <text x="490" y="440" class="fx-s" fill="#6B7A80" text-anchor="middle"><tspan class="ko">수평 중첩 →</tspan><tspan class="en">HORIZONTAL OVERLAP →</tspan></text>
+        <text x="86" y="230" class="fx-s" fill="#6B7A80" text-anchor="middle" transform="rotate(-90 86 230)"><tspan class="ko">생태계 인접성 →</tspan><tspan class="en">ECOSYSTEM ADJACENCY →</tspan></text>
+        <text x="200" y="434" class="fx-xs" fill="#6B7A80" text-anchor="middle"><tspan class="ko">없음</tspan><tspan class="en">none</tspan></text>
+        <text x="790" y="434" class="fx-xs" fill="#6B7A80" text-anchor="middle"><tspan class="ko">높음</tspan><tspan class="en">high</tspan></text>
+
+        <circle cx="270" cy="150" r="70" fill="#D6EFEE" stroke="#1FA8A3" stroke-width="2.2"/>
+        <text x="270" y="144" class="fx-h" fill="#0E6B68" text-anchor="middle"><tspan class="ko">한국 2026</tspan><tspan class="en">KOREA 2026</tspan></text>
+        <text x="270" y="168" class="fx-s" fill="#0E6B68" text-anchor="middle"><tspan class="ko">우버 배달 점유율 0</tspan><tspan class="en">Uber delivery share = 0</tspan></text>
+        <text x="270" y="248" class="fx-bb" fill="#14181B" text-anchor="middle"><tspan class="ko">→ 행태적 조건 유력</tspan><tspan class="en">→ behavioural remedy likely</tspan></text>
+        <text x="270" y="270" class="fx-xs" fill="#6B7A80" text-anchor="middle"><tspan class="ko">데이터 결합 제한 · 자기우대 금지 · 알고리즘 공시</tspan><tspan class="en">data limits · no self-preferencing · disclosure</tspan></text>
+
+        <circle cx="710" cy="150" r="62" fill="#FBDCE8" stroke="#D71362" stroke-width="2.2"/>
+        <text x="710" y="144" class="fx-n" fill="#D71362" text-anchor="middle"><tspan class="ko">유럽 14개 시장</tspan><tspan class="en">EUROPE 14</tspan></text>
+        <text x="710" y="166" class="fx-s" fill="#D71362" text-anchor="middle"><tspan class="ko">우버이츠 × foodora</tspan><tspan class="en">Uber Eats × foodora</tspan></text>
+        <text x="710" y="240" class="fx-bb" fill="#14181B" text-anchor="middle"><tspan class="ko">→ 사전 분리매각 (SSW)</tspan><tspan class="en">→ pre-emptive carve-out</tspan></text>
+        <text x="710" y="262" class="fx-xs" fill="#6B7A80" text-anchor="middle"><tspan class="ko">심사 이전에 문제를 제거</tspan><tspan class="en">problem removed before review</tspan></text>
+
+        <circle cx="700" cy="330" r="58" fill="#FAEBD2" stroke="#C97A0B" stroke-width="2.2"/>
+        <text x="700" y="324" class="fx-n" fill="#C97A0B" text-anchor="middle"><tspan class="ko">한국 2020</tspan><tspan class="en">KOREA 2020</tspan></text>
+        <text x="700" y="346" class="fx-s" fill="#C97A0B" text-anchor="middle"><tspan class="ko">DH × 우아한형제들</tspan><tspan class="en">DH × Woowa</tspan></text>
+        <text x="700" y="406" class="fx-bb" fill="#14181B" text-anchor="middle"><tspan class="ko">→ 요기요 매각 조건</tspan><tspan class="en">→ Yogiyo divestiture</tspan></text>
+
+        <circle cx="230" cy="330" r="52" fill="#F6F8F6" stroke="#C7D0CC" stroke-width="1.8"/>
+        <text x="230" y="326" class="fx-sb" fill="#6B7A80" text-anchor="middle"><tspan class="ko">중동·중남미</tspan><tspan class="en">MENA · LATAM</tspan></text>
+        <text x="230" y="348" class="fx-xs" fill="#6B7A80" text-anchor="middle"><tspan class="ko">중첩·인접성 모두 낮음</tspan><tspan class="en">low overlap, low adjacency</tspan></text>
+        <text x="230" y="404" class="fx-s" fill="#6B7A80" text-anchor="middle"><tspan class="ko">→ 통상 승인</tspan><tspan class="en">→ routine clearance</tspan></text>
+
+        <text x="878" y="478" class="fx-xs" fill="#6B7A80" text-anchor="end"><tspan class="ko">두 축은 정성적 분류이며 지수화된 척도가 아닙니다.</tspan><tspan class="en">Axes are qualitative, not indexed scales.</tspan></text>
+      </svg>
+      <figcaption>
+        <span class="ko">우버는 오른쪽 위 사분면(수평 중첩 + 높은 인접성)을 <strong>거래를 설계하는 단계에서 아예 제거</strong>했습니다. SSW 매각의 진짜 기능은 자산 최적화가 아니라 <em>심사 대상을 줄이는 것</em>입니다. 한국은 왼쪽 위에 남는데, 이 사분면에서는 구조적 시정조치를 쓸 수 없어 행태적 조건으로 처리됩니다. 그리고 행태적 조건은 감시 비용이 높고 우회하기도 쉽습니다.</span>
+        <span class="en">Uber removed the top-right quadrant <em>by deal design</em>. The real function of the SSW carve-out is not asset optimisation but shrinking the reviewable surface. Korea sits top-left, where structural remedies are unavailable and behavioural conditions follow — and those are costly to monitor and easy to route around.</span>
+      </figcaption>
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 06 ============ -->
+<section id="ai-scale">
+  <div class="sec-head"><span class="sec-num">06</span><h2><span class="ko">AI ① 알고리즘 규모의 경제는 어디까지 이전되는가</span><span class="en">AI ① How far do algorithmic returns travel?</span></h2></div>
+
+  <p class="lede ko">"글로벌 기술 플랫폼에 얹으면 더 싸고 효율적"이라는 주장은 검증이 가능한 명제입니다. 그리고 그 답은 층위마다 다릅니다.</p>
+  <p class="lede en">"Put it on a global tech platform and it gets cheaper" is a testable claim — and the answer differs by layer.</p>
+
+  <p class="ko">AI 스택을 이전 가능성 기준으로 분해해 보면 세 개의 층이 나옵니다. <strong>가장 위층은 국경을 자유롭게 넘나들고, 가장 아래층은 절대 넘지 못합니다.</strong> 그리고 발표된 시너지의 대부분은 위층에서 나옵니다.</p>
+  <p class="en">Decompose the stack by transferability and you get three layers. <strong>The top layer crosses borders freely; the bottom layer never does.</strong> Most of the announced synergy lives at the top.</p>
+
+  <figure>
+    <div class="figbox">
+      <div class="figtitle"><b>FIG 6</b><span>·</span><span class="ko">AI 스택의 이전 가능성</span><span class="en">Transferability of the AI stack</span><span class="chip concept">conceptual</span></div>
+      <svg id="fig6" viewBox="0 0 900 500" role="img" aria-label="AI stack transferability">
+        <defs><linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5B4BC4"/><stop offset="50%" stop-color="#1FA8A3"/><stop offset="100%" stop-color="#D71362"/>
+        </linearGradient></defs>
+        <rect x="24" y="52" width="16" height="376" fill="url(#grad)" rx="2"/>
+        <text x="50" y="44" class="fx-sb" fill="#5B4BC4"><tspan class="ko">이전율 100%</tspan><tspan class="en">100% transferable</tspan></text>
+        <text x="50" y="450" class="fx-sb" fill="#D71362"><tspan class="ko">이전율 0%</tspan><tspan class="en">0% transferable</tspan></text>
+
+        <rect x="200" y="52" width="676" height="118" rx="2" fill="#E4E1F7" stroke="#5B4BC4" stroke-width="1.5"/>
+        <text x="222" y="82" class="fx-h" fill="#5B4BC4"><tspan class="ko">전역 · 즉시 이전</tspan><tspan class="en">Global · transfers immediately</tspan></text>
+        <text x="222" y="110" class="fx-s" fill="#14181B"><tspan class="ko">모델 아키텍처 · ML 플랫폼 · ETA 모델 구조 · 사기탐지 · 결제·정산 인프라</tspan><tspan class="en">model architectures · ML platform · ETA structure · fraud · payments</tspan></text>
+        <text x="222" y="132" class="fx-s" fill="#14181B"><tspan class="ko">지도·경로 엔진 · 광고 랭킹 모델 · 연구인력 · 컴퓨트 조달 단가</tspan><tspan class="en">mapping and routing · ad ranking · research staff · compute procurement</tspan></text>
+        <text x="222" y="158" class="fx-sb" fill="#5B4BC4"><tspan class="ko">→ 시너지 $1.2B의 대부분이 여기서 나옵니다 (고정비 분산)</tspan><tspan class="en">→ most of the $1.2B lives here (fixed-cost amortisation)</tspan></text>
+
+        <rect x="200" y="182" width="676" height="112" rx="2" fill="#D6EFEE" stroke="#1FA8A3" stroke-width="1.5"/>
+        <text x="222" y="212" class="fx-h" fill="#0E6B68"><tspan class="ko">준지역 · 재학습 필요</tspan><tspan class="en">Semi-local · needs retraining</tspan></text>
+        <text x="222" y="240" class="fx-s" fill="#14181B"><tspan class="ko">수요예측 · 조리시간 예측 · 라이더 이탈 예측 · 프로모션 타게팅 · 개인화</tspan><tspan class="en">demand forecasting · prep time · courier churn · promo targeting · personalisation</tspan></text>
+        <text x="222" y="262" class="fx-s" fill="#14181B"><tspan class="ko">구조는 이전되지만 파라미터는 각 도시 데이터로 다시 맞춰야 합니다</tspan><tspan class="en">structure transfers, parameters must be refit on each city's data</tspan></text>
+        <text x="222" y="284" class="fx-sb" fill="#0E6B68"><tspan class="ko">→ 이전되는 것은 방법론이지 학습된 지식이 아닙니다</tspan><tspan class="en">→ what moves is method, not learned knowledge</tspan></text>
+
+        <rect x="200" y="306" width="676" height="122" rx="2" fill="#FBDCE8" stroke="#D71362" stroke-width="1.5"/>
+        <text x="222" y="336" class="fx-h" fill="#D71362"><tspan class="ko">지역 종속 · 이전 불가</tspan><tspan class="en">Local · non-transferable</tspan></text>
+        <text x="222" y="364" class="fx-s" fill="#14181B"><tspan class="ko">배차 최적화의 실효 성능 · 묶음배송 성립률 · 라이더 공급 밀도 · 상권 수요</tspan><tspan class="en">realised dispatch performance · batch success rate · courier density · local demand</tspan></text>
+        <text x="222" y="386" class="fx-s" fill="#14181B"><tspan class="ko">도로·건물 구조 · 오토바이 비중 · 아파트 단지 배송 관행 · 지역 규제</tspan><tspan class="en">road and building structure · two-wheeler mix · local delivery norms · regulation</tspan></text>
+        <text x="222" y="412" class="fx-sb" fill="#D71362"><tspan class="ko">→ 제약은 데이터가 아니라 밀도입니다</tspan><tspan class="en">→ the constraint is density, not data</tspan></text>
+
+        <text x="24" y="476" class="fx-bb" fill="#14181B"><tspan class="ko">배차 품질은 모델만의 함수가 아니라 (모델 × 밀도)의 함수입니다. 인수는 앞의 항만 개선해 줍니다.</tspan><tspan class="en">Dispatch quality is a function of (model × density). The acquisition improves only the first term.</tspan></text>
+      </svg>
+      <figcaption>
+        <span class="ko">"AI 시너지"라는 말이 실제로 가리키는 것은 대부분 <strong>중복 R&amp;D를 없애는 일</strong>이지 모델 성능 향상이 아닙니다. DH가 자체적으로 유지하던 배차팀과 ML 플랫폼, 지도 인프라를 우버 스택으로 대체하면 비용은 줄어듭니다. 하지만 서울에서 라이더 한 명이 시간당 처리하는 건수가 그것만으로 늘어나지는 않습니다.</span>
+        <span class="en">What "AI synergy" mostly means is <strong>eliminating duplicated R&amp;D</strong>, not improving model performance. Replacing DH's own dispatch team, ML platform and mapping stack with Uber's cuts cost — but it does not, by itself, raise deliveries per courier-hour in Seoul.</span>
+      </figcaption>
+    </div>
+  </figure>
+
+  <div class="callout">
+    <div class="kicker"><span class="ko">단, 하나의 예외</span><span class="en">One exception</span></div>
+    <p class="ko">이전이 불가능한 층에도 예외가 하나 있습니다. <strong>이동과 배달의 공급을 하나의 풀로 묶으면, 같은 도시 안에서 실효 밀도가 실제로 올라갑니다.</strong> 점심 피크(배달)와 출퇴근 피크(이동)는 시간대가 서로 어긋나 있어서, 두 수요를 한 공급으로 받으면 유휴시간이 줄어들기 때문입니다. 이것은 국경을 넘는 시너지가 아니라 <em>도시 안에서 수직으로 발생하는</em> 시너지이고, 아마 이 딜에서 가장 실질적인 AI 시너지는 이것 하나일 것입니다. 다만 한국에서는 우버가 이동 쪽 공급을 거의 갖고 있지 않다는 점이 결정적인 제약으로 작용합니다.</p>
+    <p class="en">One exception. <strong>Pool courier and driver supply across rides and delivery and effective density genuinely rises within a city.</strong> Lunch peaks (delivery) and commute peaks (mobility) are offset in time, so one supply pool serving both has less idle time. This is a <em>vertical, within-city</em> synergy, not a cross-border one — and it is probably the most real AI synergy in the deal. In Korea the binding constraint is that Uber has very little mobility supply to pool.</p>
+  </div>
+</section>
+
+<!-- ============ 07 ============ -->
+<section id="ai-data">
+  <div class="sec-head"><span class="sec-num">07</span><h2><span class="ko">AI ② 데이터 네트워크 효과의 조건</span><span class="en">AI ② When data actually creates advantage</span></h2></div>
+
+  <p class="ko">"데이터가 쌓이면 이긴다"는 명제는 대부분의 경우 사실이 아닙니다. Hagiu와 Wright가 정리했듯, 데이터가 지속가능한 경쟁우위가 되려면 네 가지 조건이 <em>동시에</em> 충족되어야 합니다. 하나라도 빠지면 해자가 되지 못합니다.</p>
+  <p class="en">"More data wins" is usually false. As Hagiu and Wright set out, data becomes a durable advantage only when four conditions hold simultaneously.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th><span class="ko">조건</span><span class="en">Condition</span></th>
+      <th><span class="ko">배달 데이터 단독</span><span class="en">Delivery data alone</span></th>
+      <th><span class="ko">이동 × 배달 결합 시</span><span class="en">Combined with mobility</span></th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="ko">학습 수익이 체감하지 않을 것</span><span class="en">Learning returns do not diminish</span></td>
+        <td><span class="ko">❌ 수요예측은 수개월치면 대부분 포화됩니다</span><span class="en">❌ Demand forecasting saturates within months</span></td>
+        <td><span class="ko">△ 결합해도 크게 달라지지 않습니다</span><span class="en">△ Little change</span></td>
+      </tr>
+      <tr>
+        <td><span class="ko">데이터가 빠르게 진부화되지 않을 것</span><span class="en">Data does not go stale</span></td>
+        <td><span class="ko">❌ 상권과 취향이 빠르게 변합니다</span><span class="en">❌ Neighbourhoods and tastes shift fast</span></td>
+        <td><span class="ko">❌ 마찬가지입니다</span><span class="en">❌ Same</span></td>
+      </tr>
+      <tr>
+        <td><span class="ko">사용자별 데이터가 개인화로 직결될 것</span><span class="en">Per-user data drives personalisation</span></td>
+        <td><span class="ko">✅ 강한 편입니다</span><span class="en">✅ Strong</span></td>
+        <td><span class="ko">✅✅ 이동 이력이 붙으면 매우 강해집니다</span><span class="en">✅✅ Very strong with trip history</span></td>
+      </tr>
+      <tr>
+        <td><span class="ko">경쟁자가 유사 데이터를 얻기 어려울 것</span><span class="en">Rivals cannot obtain similar data</span></td>
+        <td><span class="ko">❌ 음식점 멀티호밍 때문에 데이터가 확산됩니다</span><span class="en">❌ Merchant multihoming leaks it</span></td>
+        <td><span class="ko">✅ 이동 이력은 배달 경쟁자가 얻을 수 없습니다</span><span class="en">✅ Trip history is unobtainable for delivery-only rivals</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="ko">해석이 조금 미묘합니다. <strong>배달 데이터 그 자체는 강력한 해자가 아닙니다.</strong> 음식점이 모든 앱에 동시 입점하는 한 메뉴와 가격, 조리시간 데이터는 경쟁자에게도 흘러가기 때문입니다. 그런데 <strong>이동 이력과 결합되는 순간 성질이 달라집니다.</strong> "이 사람이 어디에 살고, 어디로 출근하고, 주말에는 어디를 가고, 몇 시에 귀가하는가"는 배달만 하는 경쟁자가 원리적으로 접근할 수 없는 정보이고, 그것이 배달 수요 예측과 광고 타게팅의 정확도를 직접 끌어올립니다.</p>
+  <p class="en">The reading is subtle. <strong>Delivery data alone is not a strong moat</strong> — as long as restaurants list everywhere, menu, price and prep-time data leak to rivals. But <strong>combined with mobility history it changes character.</strong> Where someone lives, commutes, goes on weekends and returns home is information a delivery-only rival cannot obtain in principle, and it feeds directly into demand prediction and ad targeting.</p>
+
+  <p class="ko">그래서 이 사건의 경쟁법적 핵심은 수수료가 아니라 <strong>데이터 결합을 어디까지 허용할 것인가</strong>에 있습니다. 한국에서는 개인정보보호법이 여기에 곧바로 작동합니다. 계열사 간 개인정보 공유는 원칙적으로 별도 동의가 필요하고, 목적 외 이용도 제한됩니다. 즉 <em>기술적으로 가능한 결합과 법적으로 허용되는 결합 사이에 상당한 간극이 있습니다.</em> 공정위와 개인정보보호위원회가 사실상 같은 행위를 서로 다른 법으로 들여다보게 되는 구조입니다.</p>
+  <p class="en">So the competition-law heart of this case is not commissions but <strong>how far data may be combined.</strong> In Korea PIPA bites directly: sharing personal data across affiliates generally requires separate consent, and secondary use is constrained. There is a wide gap between what is technically possible and what is lawful — and the KFTC and the PIPC end up regulating the same conduct under different statutes.</p>
+</section>
+
+<!-- ============ 08 ============ -->
+<section id="ai-pricing">
+  <div class="sec-head"><span class="sec-num">08</span><h2><span class="ko">AI ③ 경매가 수수료보다 위험한 이유</span><span class="en">AI ③ Why the auction beats the commission</span></h2></div>
+
+  <p class="ko">소유주가 바뀌면 수수료가 오를 것이라는 예상이 흔합니다. 그런데 경제학적으로 더 정확한 예측은 <strong>명목 수수료율은 오르지 않는다</strong>는 쪽입니다. 수수료율은 눈에 잘 보이고, 정치적으로 비싸며, 이미 상생협의체 합의라는 앵커가 걸려 있습니다. 올리는 순간 국회와 언론이 즉시 반응할 것입니다.</p>
+  <p class="en">The common expectation is that a change of owner brings higher commissions. The sharper prediction is that <strong>headline commission rates will not rise.</strong> They are visible, politically expensive, and already anchored by a negotiated rate agreement. Raising them draws immediate parliamentary and press response.</p>
+
+  <p class="ko">대신 회수는 <strong>경매</strong> 쪽으로 옮겨갑니다. CPC 검색광고 경매는 경제학적으로 훨씬 강력한 도구인데, 이유는 세 가지입니다.</p>
+  <p class="en">Extraction moves to the <strong>auction</strong> instead. A CPC search-ad auction is a far more powerful instrument, for three reasons.</p>
+
+  <ul class="ko"><li><strong>가격차별이 자동으로 일어납니다.</strong> 수수료율은 모든 점주에게 똑같이 적용되지만, 경매는 각 점주가 스스로 지불의사를 드러내게 만듭니다. 노출 한 건의 가치가 높은 점주가 알아서 더 냅니다. 사실상 3차 가격차별에 가까운 회수 방식입니다.</li>
+    <li><strong>지대가 점주들끼리의 경쟁에서 나옵니다.</strong> 상위 노출 자리는 개수가 정해진 고정 자원입니다. 노출 총량이 늘지 않는 한, 점주들이 서로 입찰가를 올려도 <em>순위만 바뀌고 총 주문량은 그대로입니다</em>. 늘어난 광고비는 전부 플랫폼으로 갑니다. 점주 집단 전체로 보면 순수한 지대 이전인 셈입니다.</li>
+    <li><strong>정치적으로 보이지 않습니다.</strong> "광고는 자율적 선택"이라는 프레임이 성립하기 때문입니다. 실제로는 노출 없이 주문이 들어오지 않으니 선택이라고 하기 어렵지만, 규제 대상으로 삼기는 훨씬 까다롭습니다.</li></ul>
+  <ul class="en">
+    <li><strong>Price discrimination happens automatically.</strong> A commission rate is uniform; an auction makes each merchant reveal willingness to pay. Merchants for whom an impression is worth more, pay more.</li>
+    <li><strong>The rent comes from merchants competing with each other.</strong> Top placement is a fixed resource. Unless total impressions grow, merchants bidding each other up <em>reorders the ranking without adding orders</em> — the extra spend is a pure transfer to the platform.</li>
+    <li><strong>It is politically invisible</strong>, because "advertising is voluntary" is a sustainable frame. It is not voluntary if there are no orders without impressions, but it is much harder to regulate.</li>
+  </ul>
+
+  <figure>
+    <div class="figbox">
+      <div class="figtitle"><b>FIG 7</b><span>·</span><span class="ko">점주 실질 부담률의 구조</span><span class="en">Where merchant cost actually sits</span><span class="chip claim">unverified</span></div>
+      <svg id="fig7" viewBox="0 0 900 440" role="img" aria-label="Merchant take structure">
+        <text x="24" y="28" class="fx-sb" fill="#6B7A80"><tspan class="ko">매출 대비 % (구조 예시)</tspan><tspan class="en">% of merchant revenue (illustrative structure)</tspan></text>
+        <line x1="150" y1="330" x2="880" y2="330" stroke="#14181B" stroke-width="1.4"/>
+        <g class="fx-s" fill="#6B7A80">
+          <text x="140" y="335" text-anchor="end">0%</text><text x="140" y="265" text-anchor="end">10%</text>
+          <text x="140" y="195" text-anchor="end">20%</text><text x="140" y="125" text-anchor="end">30%</text>
+        </g>
+        <g stroke="#DDE4E0" stroke-width="1">
+          <line x1="150" y1="260" x2="880" y2="260"/><line x1="150" y1="190" x2="880" y2="190"/><line x1="150" y1="120" x2="880" y2="120"/>
+        </g>
+
+        <rect x="220" y="275" width="130" height="55" fill="#16181D"/>
+        <text x="285" y="308" class="fx-n" fill="#EDF0EE" text-anchor="middle">2.0 – 7.8%</text>
+        <text x="285" y="360" class="fx-bb" fill="#14181B" text-anchor="middle"><tspan class="ko">명목 중개수수료</tspan><tspan class="en">headline commission</tspan></text>
+        <text x="285" y="382" class="fx-s" fill="#6B7A80" text-anchor="middle"><tspan class="ko">공개 · 규제 대상 · 정치적으로 비쌈</tspan><tspan class="en">visible · regulated · politically costly</tspan></text>
+
+        <rect x="500" y="275" width="150" height="55" fill="#16181D"/>
+        <rect x="500" y="243" width="150" height="32" fill="#6B7A80"/>
+        <rect x="500" y="185" width="150" height="58" fill="#C97A0B"/>
+        <rect x="500" y="123" width="150" height="62" fill="#D71362"/>
+        <text x="575" y="308" class="fx-sb" fill="#EDF0EE" text-anchor="middle"><tspan class="ko">중개수수료</tspan><tspan class="en">commission</tspan></text>
+        <text x="575" y="265" class="fx-s" fill="#EDF0EE" text-anchor="middle"><tspan class="ko">결제·부가세</tspan><tspan class="en">payments · VAT</tspan></text>
+        <text x="575" y="220" class="fx-sb" fill="#FFFFFF" text-anchor="middle"><tspan class="ko">배달비 분담</tspan><tspan class="en">delivery-fee share</tspan></text>
+        <text x="575" y="152" class="fx-bb" fill="#FFFFFF" text-anchor="middle"><tspan class="ko">광고 (CPC 경매)</tspan><tspan class="en">advertising (CPC)</tspan></text>
+        <text x="575" y="174" class="fx-s" fill="#FBDCE8" text-anchor="middle"><tspan class="ko">← 여기가 커집니다</tspan><tspan class="en">← this is what expands</tspan></text>
+        <text x="575" y="360" class="fx-bb" fill="#14181B" text-anchor="middle"><tspan class="ko">실질 종합 부담률</tspan><tspan class="en">all-in take</tspan></text>
+        <text x="575" y="382" class="fx-s" fill="#6B7A80" text-anchor="middle"><tspan class="ko">비공개 · 미규제 · "자율적 선택"</tspan><tspan class="en">undisclosed · unregulated · "voluntary"</tspan></text>
+
+        <path d="M356 210 L490 165" stroke="#D71362" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#ar2)"/>
+        <defs><marker id="ar2" markerWidth="10" markerHeight="10" refX="8" refY="3.6" orient="auto"><path d="M0,0 L8.5,3.6 L0,7.2 Z" fill="#D71362"/></marker></defs>
+        <text x="690" y="128" class="fx-sb" fill="#D71362"><tspan class="ko">감시해야 할 지표</tspan><tspan class="en">The metric to watch</tspan></text>
+        <text x="690" y="152" class="fx-s" fill="#14181B"><tspan class="ko">광고매출 / 중개매출 비율</tspan><tspan class="en">ad revenue ÷ commission revenue</tspan></text>
+        <text x="690" y="174" class="fx-s" fill="#14181B"><tspan class="ko">(감사보고서 공시 항목)</tspan><tspan class="en">(disclosed in the audit report)</tspan></text>
+
+        <text x="24" y="422" class="fx-xs" fill="#6B7A80"><tspan class="ko">구간별 수수료율과 20~30% 종합부담률은 업계에서 통용되는 수치로 독립 검증은 되지 않았습니다. 구조 설명용이며 실측 분포가 아닙니다.</tspan><tspan class="en">Tiered rates and the 20–30% all-in band are industry figures, not independently verified. Structural illustration, not a measured distribution.</tspan></text>
+      </svg>
+      <figcaption>
+        <span class="ko">규제의 조명은 검은색 막대, 즉 명목 수수료에만 비칩니다. 그런데 회수가 실제로 늘어나는 곳은 자홍색 막대인 광고 경매입니다. 그래서 이 딜이 점주에게 미칠 영향을 추적하시려면 수수료율 뉴스가 아니라 <strong>우아한형제들 감사보고서의 매출 구성</strong>을 보셔야 합니다.</span>
+        <span class="en">Regulatory attention shines only on the black bar. The incremental extraction happens in the magenta one. To track merchant impact after this deal, read <strong>Woowa Brothers' revenue mix in its audit report</strong> — not the commission headlines.</span>
+      </figcaption>
+    </div>
+  </figure>
+
+  <h3><span class="ko">허브앤스포크 위험</span><span class="en">The hub-and-spoke risk</span></h3>
+  <p class="ko">한 가지만 더 짚겠습니다. 알고리즘 담합 문헌(Calvano 외, 2020)이 보여준 것은, 서로 대화하지 않고 독립적으로 학습하는 가격 알고리즘들이 명시적 합의 없이도 초경쟁적 가격에 수렴할 수 있다는 사실입니다. 이 딜은 그보다 구조적으로 더 민감한 형태를 만듭니다. <strong>하나의 소유주가 인접 시장에서 여러 브랜드를 서로 다른 알고리즘으로 운영하되, 같은 데이터와 같은 팀, 같은 목적함수를 공유하는 구조</strong>이기 때문입니다. 명시적 담합이 없어도 정보 흐름 자체가 허브 역할을 할 수 있습니다. 한국에서 당장 문제가 되지는 않습니다. 우버가 배달 쪽에 다른 브랜드를 갖고 있지 않으니까요. 다만 이동과 배달이 같은 라이더 공급을 두고 경쟁하기 시작하면, 이 문제는 노동시장 쪽에서 먼저 모습을 드러낼 것입니다.</p>
+  <p class="en">One more. The algorithmic-collusion literature (Calvano et al., 2020) shows independently learning pricing algorithms can converge on supra-competitive prices without any explicit agreement. This deal creates a structurally more sensitive version: <strong>one owner running multiple brands in adjacent markets on distinct algorithms that nonetheless share data, teams and objective functions.</strong> The information flow itself can act as the hub. It is not an immediate issue in Korea — Uber has no second delivery brand here — but it surfaces first on the labour side, where mobility and delivery bid for the same courier supply.</p>
+</section>
+
+<!-- ============ 09 ============ -->
+<section id="labour">
+  <div class="sec-head"><span class="sec-num">09</span><h2><span class="ko">라이더 — 수요독점과 알고리즘 임금</span><span class="en">Couriers — monopsony and algorithmic pay</span></h2></div>
+
+  <p class="ko">라이더 노동시장은 이미 <strong>수요독점(monopsony)</strong>에 가깝습니다. 노동력을 파는 사람은 많은데 사는 사람, 즉 플랫폼은 몇 개 되지 않고, 다른 지역으로 옮겨가는 데에도 비용이 듭니다. 수요독점에서는 임금이 한계생산가치보다 낮게 형성되고 고용량도 경쟁적 수준보다 적어집니다. 플랫폼 통합은 구매자 수를 줄이는 일이므로 이 격차를 더 벌립니다.</p>
+  <p class="en">Courier labour is already close to <strong>monopsony</strong>: few effective buyers, and relocation is costly. Under monopsony wages sit below marginal revenue product and employment below the competitive level. Consolidation reduces the number of buyers and widens the gap.</p>
+
+  <figure>
+    <div class="figbox">
+      <div class="figtitle"><b>FIG 8</b><span>·</span><span class="ko">수요독점과 알고리즘 임금</span><span class="en">Monopsony &amp; algorithmic pay</span><span class="chip concept">conceptual</span></div>
+      <svg id="fig8" viewBox="0 0 900 440" role="img" aria-label="Monopsony and algorithmic pay">
+        <line x1="110" y1="350" x2="770" y2="350" stroke="#14181B" stroke-width="1.4"/>
+        <line x1="110" y1="350" x2="110" y2="40" stroke="#14181B" stroke-width="1.4"/>
+        <text x="770" y="376" class="fx-s" fill="#6B7A80" text-anchor="end"><tspan class="ko">라이더 노동공급량 L</tspan><tspan class="en">courier labour L</tspan></text>
+        <text x="110" y="30" class="fx-s" fill="#6B7A80"><tspan class="ko">임금 w</tspan><tspan class="en">wage w</tspan></text>
+
+        <line x1="130" y1="325" x2="700" y2="110" stroke="#1FA8A3" stroke-width="2.6"/>
+        <text x="712" y="108" class="fx-sb" fill="#0E6B68">S</text>
+        <line x1="130" y1="318" x2="500" y2="60" stroke="#C97A0B" stroke-width="2.4" stroke-dasharray="7 5"/>
+        <text x="510" y="58" class="fx-sb" fill="#C97A0B">MFC</text>
+        <line x1="130" y1="80" x2="720" y2="320" stroke="#D71362" stroke-width="2.6"/>
+        <text x="732" y="324" class="fx-sb" fill="#D71362">MRP</text>
+
+        <path d="M130 325 L346 244 L346 168 L130 80 Z" fill="#5B4BC4" opacity=".08"/>
+        <text x="180" y="150" class="fx-sb" fill="#5B4BC4"><tspan class="ko">라이더 잉여</tspan><tspan class="en">courier surplus</tspan></text>
+
+        <circle cx="346" cy="168" r="6" fill="#C97A0B"/>
+        <line x1="346" y1="168" x2="346" y2="350" stroke="#6B7A80" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <text x="346" y="372" class="fx-s" fill="#6B7A80" text-anchor="middle">L*</text>
+        <circle cx="346" cy="244" r="6" fill="#1FA8A3"/>
+        <line x1="110" y1="244" x2="346" y2="244" stroke="#1FA8A3" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <text x="102" y="249" class="fx-sb" fill="#0E6B68" text-anchor="end">w</text>
+        <line x1="110" y1="168" x2="346" y2="168" stroke="#D71362" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <text x="102" y="173" class="fx-sb" fill="#D71362" text-anchor="end">MRP</text>
+
+        <path d="M366 168 L366 244" stroke="#D71362" stroke-width="2.4"/>
+        <path d="M361 173 L366 165 L371 173" fill="#D71362"/><path d="M361 239 L366 247 L371 239" fill="#D71362"/>
+        <text x="380" y="212" class="fx-sb" fill="#D71362"><tspan class="ko">수요독점 격차</tspan><tspan class="en">monopsony gap</tspan></text>
+
+        <rect x="500" y="222" width="384" height="122" rx="2" fill="#E4E1F7" stroke="#5B4BC4" stroke-width="1.4"/>
+        <text x="522" y="252" class="fx-h" fill="#5B4BC4"><tspan class="ko">알고리즘 개인화 임금</tspan><tspan class="en">Algorithmic personalised pay</tspan></text>
+        <text x="522" y="280" class="fx-s" fill="#14181B"><tspan class="ko">개별 라이더의 유보임금을 추정해 건별로</tspan><tspan class="en">Estimate each courier's reservation wage and</tspan></text>
+        <text x="522" y="302" class="fx-s" fill="#14181B"><tspan class="ko">다른 단가를 제시하면 공급곡선 아래 잉여를 직접 회수하게 됩니다.</tspan><tspan class="en">offer a different rate per job: the surplus under S is captured.</tspan></text>
+        <text x="522" y="330" class="fx-sb" fill="#5B4BC4"><tspan class="ko">= 노동시장의 1차 가격차별</tspan><tspan class="en">= first-degree discrimination in a labour market</tspan></text>
+
+        <text x="24" y="424" class="fx-xs" fill="#6B7A80"><tspan class="ko">개념도입니다. 실제 파라미터가 아니라 메커니즘 설명을 위한 것입니다.</tspan><tspan class="en">Conceptual. Not fitted parameters; mechanism illustration only.</tspan></text>
+      </svg>
+      <figcaption>
+        <span class="ko">통합의 효과는 두 갈래로 나타납니다. ① 밀도가 좋아져 라이더의 시간당 처리건수가 오르면 <strong>시간당 소득은 올라갈 수 있습니다</strong>. ② 그런데 처리건수가 오른 만큼 <strong>건당 단가를 낮출 여지</strong>도 함께 생깁니다. 두 효과의 순합은 협상력에 달려 있고, 구매자 수가 줄면 그 순합은 라이더에게 불리해집니다.</span>
+        <span class="en">Consolidation cuts two ways: better density raises deliveries per hour (hourly earnings can rise), and that same increase creates room to cut the per-delivery rate. The net depends on bargaining power — and fewer buyers moves the net against couriers.</span>
+      </figcaption>
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 10 ============ -->
+<section id="predictions">
+  <div class="sec-head"><span class="sec-num">10</span><h2><span class="ko">반증 가능한 예측 다섯 개</span><span class="en">Five falsifiable predictions</span></h2></div>
+  <p class="lede ko">분석은 틀릴 수 있어야 분석입니다. 그래서 각 예측에 관찰 지표와 시한을 함께 붙였습니다.</p>
+  <p class="lede en">Analysis has to be capable of being wrong. Each prediction carries a metric and a horizon.</p>
+
+  <div class="preds">
+    <div class="pred"><div class="id">P1</div><div>
+      <h4><span class="ko">명목 중개수수료율은 오르지 않는다</span><span class="en">Headline commission rates do not rise</span></h4>
+      <p class="ko">대신 광고매출이 중개매출보다 빠르게 늘어납니다. 정치적으로 덜 보이는 채널로 회수가 옮겨가기 때문입니다.</p>
+      <p class="en">Advertising revenue grows faster than commission revenue instead: extraction migrates to the less visible channel.</p>
+      <div class="metric"><span class="ko">지표 · 우아한형제들 감사보고서 매출 구성 (광고/중개 비율) — 24개월</span><span class="en">Metric · Woowa revenue mix (ad ÷ commission) — 24 months</span></div>
+    </div></div>
+
+    <div class="pred"><div class="id">P2</div><div>
+      <h4><span class="ko">배민 브랜드는 유지되고 백엔드는 교체된다</span><span class="en">The brand survives; the backend is replaced</span></h4>
+      <p class="ko">앞단은 배민 그대로 두고, 배차·ETA·사기탐지 스택은 단계적으로 우버 것으로 바뀔 것입니다. 브랜드 유지 방침과 모순되지 않습니다. 원래 그것이 설계이기 때문입니다.</p>
+      <p class="en">Baemin stays on the front; dispatch, ETA and fraud stacks migrate to Uber's. This does not contradict the brand pledge — it is the design.</p>
+      <div class="metric"><span class="ko">지표 · ML 인프라 직군 채용공고 감소, 라이더앱 배차정책 변경 공지 — 18~30개월</span><span class="en">Metric · fewer ML-infra job postings; dispatch-policy notices — 18–30 months</span></div>
+    </div></div>
+
+    <div class="pred"><div class="id">P3</div><div>
+      <h4><span class="ko">구독 번들이 나온다</span><span class="en">A subscription bundle ships</span></h4>
+      <p class="ko">우버원과 배민클럽을 결합한 형태가 될 것입니다. 소비자 싱글호밍을 강화하는 일이 이 딜의 매출 시너지 중 가장 빨리 실현 가능한 항목이기 때문입니다.</p>
+      <p class="en">Some Uber One × Baemin Club combination — the fastest-realisable revenue synergy in the deal.</p>
+      <div class="metric"><span class="ko">지표 · 구독 요금제 개편 공지 — 12~24개월 (한국 이동 공급 부족이 지연 요인)</span><span class="en">Metric · subscription pricing restructure — 12–24 months (thin Korean mobility supply delays it)</span></div>
+    </div></div>
+
+    <div class="pred"><div class="id">P4</div><div>
+      <h4><span class="ko">공정위 조치는 구조적이 아니라 행태적이다</span><span class="en">The KFTC remedy is behavioural, not structural</span></h4>
+      <p class="ko">수평 중첩이 없으니 매각 명령을 내릴 법적 기초가 약합니다. 데이터 결합 제한과 자기우대 금지, 알고리즘 공시 쪽으로 갈 가능성이 높고, 개인정보보호위원회가 함께 관여할 수도 있습니다.</p>
+      <p class="en">With no horizontal overlap, divestiture has a weak basis. Expect data-combination limits, self-preferencing bans and algorithmic disclosure — with the PIPC involved in parallel.</p>
+      <div class="metric"><span class="ko">지표 · 기업결합 심사 의결서의 시정조치 유형 — 심사 종결 시</span><span class="en">Metric · remedy type in the merger decision — at case closure</span></div>
+    </div></div>
+
+    <div class="pred"><div class="id">P5</div><div>
+      <h4><span class="ko">라이더 시간당 소득과 건당 단가가 반대로 움직인다</span><span class="en">Courier hourly pay and per-delivery pay diverge</span></h4>
+      <p class="ko">통합 배차로 시간당 처리건수가 오르면 건당 단가를 낮출 여지가 생깁니다. 그래서 플랫폼은 "시간당 소득이 올랐다"고 말하고 라이더 단체는 "건당 단가가 떨어졌다"고 말하게 되는데, 두 이야기 모두 사실일 것입니다.</p>
+      <p class="en">Unified dispatch raises deliveries per hour, which creates room to cut the per-delivery rate. The platform will cite hourly earnings, unions will cite per-delivery rates, and both will be correct.</p>
+      <div class="metric"><span class="ko">지표 · 건당 배달단가 공시 vs 시간당 소득 조사 — 24~36개월</span><span class="en">Metric · published per-delivery rates vs hourly earnings surveys — 24–36 months</span></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ 11 ============ -->
+<section id="merchants">
+  <div class="sec-head"><span class="sec-num">11</span><h2><span class="ko">점주의 대응 — 어떤 변수를 건드리는가</span><span class="en">The merchant playbook, by variable</span></h2></div>
+  <p class="ko">점주 대응책은 대체로 목록 형태로 제시됩니다. 그런데 각 항목이 <em>플랫폼의 어떤 경제학적 변수를 실제로 움직이는지</em> 따져보면 우선순위가 확연히 달라집니다.</p>
+  <p class="en">Merchant advice usually arrives as a list. Ranking it by <em>which economic variable each option actually moves</em> makes the priorities obvious.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th><span class="ko">대응</span><span class="en">Option</span></th>
+      <th><span class="ko">건드리는 변수</span><span class="en">Variable it moves</span></th>
+      <th><span class="ko">실효성 평가</span><span class="en">Assessment</span></th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="ko">집단 교섭</span><span class="en">Collective bargaining</span></td>
+        <td><span class="ko">플랫폼의 <strong>수요 탄력성</strong> — 개별 이탈은 무시 가능하지만 상권 단위 이탈은 밀도를 직접 타격한다</span><span class="en">The platform's <strong>demand elasticity</strong> — individual exit is negligible, district-level exit hits density directly</span></td>
+        <td><span class="ko"><strong>가장 강력합니다.</strong> 밀도가 수익성의 핵심 변수이므로, 밀도를 인질로 잡는 것이 유일하게 대칭적인 위협이 됩니다.</span><span class="en"><strong>Strongest.</strong> Density is the profitability variable, so holding density hostage is the only symmetric threat.</span></td>
+      </tr>
+      <tr>
+        <td><span class="ko">멀티호밍 유지</span><span class="en">Maintain multihoming</span></td>
+        <td><span class="ko">병목의 위치</span><span class="en">Position of the bottleneck</span></td>
+        <td><span class="ko">필요하지만 그것만으로는 부족합니다. 이미 거의 모든 점주가 멀티호밍하고 있고, 바로 그래서 지대가 점주 쪽에서 나옵니다.</span><span class="en">Necessary but insufficient — nearly everyone already multi-homes, which is <em>why</em> the rent falls on merchants.</span></td>
+      </tr>
+      <tr>
+        <td><span class="ko">자체 채널 · 고객 데이터</span><span class="en">Own channel + customer data</span></td>
+        <td><span class="ko"><strong>전환비용의 방향</strong> — 소비자를 플랫폼이 소유하느냐, 점포가 소유하느냐</span><span class="en"><strong>Direction of switching costs</strong> — who owns the consumer relationship</span></td>
+        <td><span class="ko">구조적으로 가장 근본적인 대응입니다. 다만 개별 점주 단위로는 회수까지 시간이 오래 걸립니다.</span><span class="en">Most fundamental structurally; slow payback per merchant.</span></td>
+      </tr>
+      <tr>
+        <td><span class="ko">공동 배달 풀</span><span class="en">Shared courier pool</span></td>
+        <td><span class="ko">라이더 공급의 대체재 창출</span><span class="en">Creates a substitute for platform courier supply</span></td>
+        <td><span class="ko">밀도 임계치를 넘는 상권에서만 성립합니다. 전통시장이나 대학가처럼 밀집도가 높은 곳이 후보가 됩니다.</span><span class="en">Only works above a density threshold — traditional markets, campus districts.</span></td>
+      </tr>
+      <tr>
+        <td><span class="ko">정책 참여</span><span class="en">Policy engagement</span></td>
+        <td><span class="ko">규제의 <strong>관측 대상</strong></span><span class="en">What the regulator <strong>observes</strong></span></td>
+        <td><span class="ko">수수료 상한보다 <em>종합부담률 공시 의무화</em>가 훨씬 효과적입니다. 회수가 광고로 옮겨가는 것을 막을 수 있는 유일한 방법이기 때문입니다.</span><span class="en">Mandatory disclosure of the all-in take beats a commission cap — it is the only way to stop extraction migrating to advertising.</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <div class="kicker"><span class="ko">한 줄로</span><span class="en">In one line</span></div>
+    <p class="ko">수수료 상한제를 요구하면 플랫폼은 광고 쪽으로 옮겨갑니다. <strong>반면 공시 의무화를 요구하면 옮겨갈 곳이 없어집니다.</strong> 규제를 설계할 때 가격 통제보다 정보 공개가 우월한 경우가 많은데, 이 사건이 바로 그 전형입니다.</p>
+    <p class="en">Demand a commission cap and the platform moves to advertising. <strong>Demand disclosure of the all-in take and there is nowhere to move.</strong> Information remedies often dominate price controls, and this is a textbook case.</p>
+  </div>
+</section>
+
+<!-- ============ 12 ============ -->
+<section id="close">
+  <div class="sec-head"><span class="sec-num">12</span><h2><span class="ko">맺음 — 밀도의 덫</span><span class="en">Close — the density trap</span></h2></div>
+  <p class="ko">이 딜의 아이러니는 여기에 있습니다. 우버는 <strong>규모가 이긴다</strong>는 믿음으로 148억 달러를 썼는데, 정작 배달에서 이기게 해주는 그 규모는 국경을 넘지 못합니다. 그래서 우버가 실제로 산 것은 밀도가 아니라 <em>밀도 위에 얹을 알고리즘 층의 분모</em>입니다. 같은 AI 스택을 두 배의 주문 위에 얹는 것, 그것이 이 거래의 실질입니다.</p>
+  <p class="en">The irony sits here. Uber spent $14.8 billion on the belief that <strong>scale wins</strong> — but the scale that actually wins in delivery does not cross borders. What Uber bought is not density; it is <em>a bigger denominator for the algorithmic layer sitting on top of density</em>. The same AI stack spread over twice the orders. That is the deal.</p>
+  <p class="ko">이 논리가 옳다면 두 가지가 따라 나옵니다. 첫째, 시너지는 실현될 가능성이 높습니다. 고정비 분산은 실행 리스크가 낮은 종류의 시너지이기 때문입니다. 둘째, <strong>그렇게 아낀 돈이 소비자에게 자동으로 흘러가지는 않습니다.</strong> 경쟁압력이 없는 시장에서 비용 절감은 가격 인하가 아니라 마진 확대로 귀결됩니다. 지금으로서는 한국 배달앱 시장에 쿠팡이츠라는 실질적 경쟁자가 남아 있다는 사실이 점주와 소비자에게 가장 유효한 안전장치입니다.</p>
+  <p class="en">If that logic holds, two things follow. First, the synergies will probably land — fixed-cost amortisation is the low-execution-risk kind. Second, <strong>the gains do not flow to consumers automatically.</strong> Without competitive pressure, cost savings become margin, not price cuts. The most effective safeguard for Korean merchants and consumers right now is simply that Coupang Eats is still a real competitor.</p>
+  <p class="ko">그리고 협상력의 원천은 결국 <em>플랫폼이 필요로 하는 밀도를 누가 통제하는가</em>에 있습니다. 점주 한 명은 플랫폼에게 아무것도 아니지만, 상권 단위로 묶인 점주 집단은 밀도 그 자체입니다. 이 딜을 실용적으로 읽는 방법은 바로 그 지점에서 시작합니다.</p>
+  <p class="en">And the source of bargaining power is precisely <em>who controls the density the platform needs.</em> One merchant is nothing to the platform; at the level of a commercial district, merchants <em>are</em> the density. That is where the practical reading of this deal begins.</p>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section id="sources">
+  <div class="sec-head"><span class="sec-num">—</span><h2><span class="ko">출처 및 참고</span><span class="en">Sources &amp; references</span></h2></div>
+  <h3><span class="ko">1차 자료</span><span class="en">Primary</span></h3>
+  <ul class="sources">
+    <li>Uber Technologies, "Uber Announces Acquisition Offer for Delivery Hero," <span class="ko">보도자료</span><span class="en">press release</span>, 2026-07-16 — <a href="https://investor.uber.com/news-events/news/press-release-details/2026/Uber-Announces-Acquisition-Offer-for-Delivery-Hero/default.aspx">investor.uber.com</a></li>
+    <li><span class="ko">공정거래위원회, 딜리버리히어로–우아한형제들 기업결합 조건부 승인 의결, 2020-12</span><span class="en">Korea Fair Trade Commission, conditional approval of Delivery Hero / Woowa Brothers, Dec 2020</span></li>
+    <li><span class="ko">Uber Newsroom Korea, 우버이츠 국내 운영 종료 안내, 2019-09-09</span><span class="en">Uber Newsroom Korea, notice of Uber Eats Korea closure, 9 Sep 2019</span></li>
+    <li>Reuters / Bloomberg <span class="ko">거래 보도 (2026-07-15~16)</span><span class="en">deal coverage, 15–16 Jul 2026</span></li>
+  </ul>
+  <h3><span class="ko">이론 참고</span><span class="en">Theory</span></h3>
+  <ul class="sources">
+    <li>Rochet &amp; Tirole (2003), <em>Platform Competition in Two-Sided Markets</em>, JEEA</li>
+    <li>Armstrong (2006), <em>Competition in Two-Sided Markets</em>, RAND — <span class="ko">경쟁병목</span><span class="en">competitive bottlenecks</span></li>
+    <li>Hagiu &amp; Wright (2020), <em>When Data Creates Competitive Advantage</em>, HBR</li>
+    <li>Dixit &amp; Pindyck (1994), <em>Investment under Uncertainty</em> — <span class="ko">실물옵션</span><span class="en">real options</span></li>
+    <li>Calvano, Calzolari, Denicolò &amp; Pastorelli (2020), <em>Artificial Intelligence, Algorithmic Pricing and Collusion</em>, AER</li>
+    <li>Manning (2003), <em>Monopsony in Motion</em>; Azar, Marinescu &amp; Steinbaum — <span class="ko">노동시장 집중도</span><span class="en">labour market concentration</span></li>
+    <li>Whinston (1990), <em>Tying, Foreclosure and Exclusion</em>, AER</li>
+  </ul>
+  <div class="callout quiet">
+    <div class="kicker"><span class="ko">데이터 상태 고지</span><span class="en">Data status</span></div>
+    <p class="ko"><span class="chip fact">confirmed</span>는 우버 공식 발표를 기준으로 한 것입니다. <span class="chip reported">reported</span>는 통신사와 업계 보도 기준이며 1차 확인은 되지 않았습니다. <span class="chip derived">derived</span>는 공개 수치로부터 계산한 값이고, 계산 과정은 본문에 그대로 적어 두었습니다. <span class="chip claim">unverified</span>는 업계에서 통용되는 수치로 독립적인 검증이 필요합니다. 한국 배달앱 점유율과 시장규모, 구간별 수수료율은 모두 이 마지막 범주에 속하니 인용하실 때 원자료를 한 번 확인해 주시기 바랍니다.</p>
+    <p class="en"><span class="chip fact">confirmed</span> comes from Uber's official release. <span class="chip reported">reported</span> means wire or trade press, not primary-verified. <span class="chip derived">derived</span> are calculations from disclosed figures, with the arithmetic shown in the text. <span class="chip claim">unverified</span> are industry figures needing independent checking — Korean market share, market size and tiered commission rates all fall here.</p>
+  </div>
+</section>
+
+</div>
+
+<div id="view-primer" class="view" hidden>
+
+<header class="primer-hero">
+  <div class="eyebrow"><span>AIEconLab</span><span>·</span><b>Primer</b><span>·</span><span class="ko">본문을 읽기 위한 사전 지식</span><span class="en">Background for the analysis</span></div>
+  <h1 class="primer-h1"><span class="ko">배경지식 노트<span class="sub">본문을 읽기 위한 사전 지식</span></span><span class="en">Background Notes<span class="sub">what the analysis assumes you know</span></span></h1>
+  <p class="dek ko">본문에서 설명 없이 쓰인 개념들을 따로 모았습니다. 순서대로 읽으실 필요는 없고, 막히는 부분만 찾아보셔도 됩니다. 각 항목 끝의 <b>→ 본문 연결</b>은 그 개념이 기사 어디에서 쓰이는지 표시한 것입니다.</p>
+  <p class="dek en">Every concept the analysis uses without explaining. No need to read in order — jump to whatever is blocking you. The <b>→ In the analysis</b> line at the end of each part points to where the concept is used.</p>
+  <nav class="pnav" aria-label="Contents">
+    <a href="#p0"><span class="ko">0 등장인물</span><span class="en">0 Cast</span></a>
+    <a href="#p1"><span class="ko">1 M&amp;A 용어</span><span class="en">1 M&amp;A terms</span></a>
+    <a href="#p2"><span class="ko">2 밸류에이션 산수</span><span class="en">2 The arithmetic</span></a>
+    <a href="#p3"><span class="ko">3 플랫폼 경제학</span><span class="en">3 Platform economics</span></a>
+    <a href="#p4"><span class="ko">4 경쟁법</span><span class="en">4 Competition law</span></a>
+    <a href="#p5"><span class="ko">5 AI · ML</span><span class="en">5 AI · ML</span></a>
+    <a href="#p6"><span class="ko">6 노동경제학</span><span class="en">6 Labour economics</span></a>
+    <a href="#p7"><span class="ko">7 한국 제도</span><span class="en">7 Korean rules</span></a>
+    <a href="#p8"><span class="ko">8 헷갈림 방지</span><span class="en">8 Easily confused</span></a>
+    <a href="#p9"><span class="ko">9 논증 구조</span><span class="en">9 Argument map</span></a>
+    <a href="#p10"><span class="ko">10 읽을 순서</span><span class="en">10 Further reading</span></a>
+    <a href="#p11"><span class="ko">용어 찾기</span><span class="en">Glossary</span></a>
+  </nav>
+</header>
+
+<!-- ===== P0 ===== -->
+<section id="p0">
+  <div class="sec-head"><span class="sec-num">00</span><h2><span class="ko">등장인물 지도</span><span class="en">The cast</span></h2></div>
+  <p class="ko">먼저 누가 누구인지부터 정리하겠습니다. 이 딜은 회사가 많이 나와서 이것만 헷갈려도 글이 잘 안 읽힙니다.</p>
+  <p class="en">Start with who is who. This deal involves enough companies that confusing them alone will make the analysis unreadable.</p>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="ko">이름</span><span class="en">Name</span></th>
+      <th><span class="ko">정체</span><span class="en">What it is</span></th>
+      <th><span class="ko">이 딜에서의 역할</span><span class="en">Role in the deal</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><strong>Uber</strong></td><td><span class="ko">미국 모빌리티·배달 플랫폼</span><span class="en">US mobility and delivery platform</span></td><td><span class="ko">인수자</span><span class="en">Acquirer</span></td></tr>
+      <tr><td><strong>Delivery Hero (DH)</strong></td><td><span class="ko">독일 베를린 상장사, 전 세계 배달앱 지주회사</span><span class="en">Berlin-listed holding company for delivery apps worldwide</span></td><td><span class="ko">피인수 대상</span><span class="en">Target</span></td></tr>
+      <tr><td><strong><span class="ko">우아한형제들</span><span class="en">Woowa Brothers</span></strong></td><td><span class="ko">배달의민족 운영사 (한국)</span><span class="en">Korean operator of the Baemin app</span></td><td><span class="ko">DH의 자회사 → 우버의 손자회사가 됩니다</span><span class="en">DH subsidiary → becomes Uber's grandchild company</span></td></tr>
+      <tr><td><strong><span class="ko">배달의민족</span><span class="en">Baemin</span></strong></td><td><span class="ko">우아한형제들이 운영하는 배달앱</span><span class="en">The delivery app Woowa runs</span></td><td><span class="ko">실제 사업 브랜드</span><span class="en">The consumer-facing brand</span></td></tr>
+      <tr><td><strong>Prosus</strong></td><td><span class="ko">네덜란드·남아공계 대형 기술투자사</span><span class="en">Large Dutch/South African tech investor</span></td><td><span class="ko">DH 최대주주(~17%), 우버에 응모 확약</span><span class="en">DH's largest holder (~17%), committed to tender</span></td></tr>
+      <tr><td><strong>SSW Partners</strong></td><td><span class="ko">뉴욕 투자사</span><span class="en">New York investment firm</span></td><td><span class="ko">겹치는 14개 시장을 따로 인수</span><span class="en">Buys the 14 overlapping markets separately</span></td></tr>
+      <tr><td><strong><span class="ko">쿠팡이츠</span><span class="en">Coupang Eats</span></strong></td><td><span class="ko">쿠팡의 배달 서비스</span><span class="en">Coupang's delivery arm</span></td><td><span class="ko">한국 내 실질 경쟁자</span><span class="en">The real competitor in Korea</span></td></tr>
+      <tr><td><strong>DoorDash / Grab</strong></td><td><span class="ko">미국 / 동남아 배달 플랫폼</span><span class="en">US / Southeast Asian delivery platforms</span></td><td><span class="ko">우버가 견제하는 잠재 인수 경쟁자</span><span class="en">Rival bidders Uber is pre-empting</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3><span class="ko">"손자회사"가 무슨 뜻인가</span><span class="en">What "grandchild company" means</span></h3>
+  <p class="ko">지배구조가 사슬로 이어져 있습니다.</p>
+  <p class="en">Ownership runs as a chain.</p>
+  <pre class="ko">Uber  ──지분 인수──▶  Delivery Hero  ──기존 보유──▶  우아한형제들  ──운영──▶  배달의민족
+(모회사)              (자회사)                       (손자회사)              (서비스 브랜드)</pre>
+  <pre class="en">Uber  ──acquires──▶  Delivery Hero  ──already owns──▶  Woowa Brothers  ──operates──▶  Baemin
+(parent)             (subsidiary)                      (grandchild)                    (brand)</pre>
+  <p class="ko">즉 우버가 배민을 직접 사는 것이 아니라, 배민의 할아버지 회사를 사는 구조입니다. 이것이 중요한 이유는 <strong>한국 공정거래위원회의 심사 대상이 "우버의 배민 인수"가 아니라 "우버의 DH 인수"이기 때문</strong>입니다. 해외 기업 간 결합이라도 국내 시장에 영향을 주면 심사 대상이 됩니다. 이를 역외적용이라고 부릅니다.</p>
+  <p class="en">Uber is not buying Baemin directly; it is buying Baemin's grandparent. This matters because <strong>what the Korea Fair Trade Commission reviews is "Uber acquiring DH," not "Uber acquiring Baemin."</strong> A foreign-to-foreign merger still falls under review if it affects the Korean market — extraterritorial application.</p>
+</section>
+
+<!-- ===== P1 ===== -->
+<section id="p1">
+  <div class="sec-head"><span class="sec-num">01</span><h2><span class="ko">M&amp;A 용어 — 이 글에 나오는 것만</span><span class="en">M&amp;A terms — only the ones used here</span></h2></div>
+
+  <h3><span class="ko">공개매수 (tender offer)</span><span class="en">Tender offer</span></h3>
+  <p class="ko">상장회사를 인수할 때, 개별 주주들에게 "여러분 주식을 이 가격에 사겠습니다"라고 공개적으로 제안하는 방식입니다. 주주 각자가 팔지 말지 결정합니다.</p>
+  <p class="en">A public offer to every shareholder of a listed company: "we will buy your shares at this price." Each holder decides individually whether to sell.</p>
+  <ul class="ko">
+    <li><strong>자발적 공개매수(voluntary)</strong> — 법이 강제해서가 아니라 인수자가 스스로 하는 것입니다.</li>
+    <li><strong>최소 응모 요건(minimum acceptance threshold)</strong> — "전체 주식의 50%+1주 이상이 응모하지 않으면 거래를 취소하겠다"는 조건입니다. 어중간하게 30%만 확보하고 경영권도 못 잡는 상황을 피하기 위한 안전장치입니다.</li>
+    <li><strong>응모 확약(irrevocable undertaking)</strong> — 대주주가 미리 "우리는 무조건 응모하겠다"고 서면으로 약속하는 것입니다. Prosus가 이걸 해줬기 때문에 우버는 발표 시점에 이미 승부를 사실상 결정지은 상태였습니다.</li>
+  </ul>
+  <ul class="en">
+    <li><strong>Voluntary</strong> — made by choice, not because law compels it.</li>
+    <li><strong>Minimum acceptance threshold</strong> — "if fewer than 50% + 1 share are tendered, we walk away." It prevents ending up with an awkward 30% stake and no control.</li>
+    <li><strong>Irrevocable undertaking</strong> — a large holder commits in writing to tender. Prosus gave one, which is why the outcome was effectively settled before the announcement.</li>
+  </ul>
+  <p class="xref"><span class="ko">→ 본문 연결 · 01장 사실관계 원장, FIG 1</span><span class="en">→ In the analysis · §01 fact ledger, FIG 1</span></p>
+
+  <h3><span class="ko">지분가치(equity value) vs 기업가치(EV)</span><span class="en">Equity value vs enterprise value</span></h3>
+  <ul class="ko">
+    <li><strong>지분가치</strong> = 주가 × 주식수. 주주에게 돌아가는 몫입니다.</li>
+    <li><strong>기업가치(Enterprise Value)</strong> = 지분가치 + 순차입금. 회사 전체를 사업 단위로 볼 때의 값입니다.</li>
+  </ul>
+  <ul class="en">
+    <li><strong>Equity value</strong> = price × shares. What accrues to shareholders.</li>
+    <li><strong>Enterprise value</strong> = equity value + net debt. The business as a whole.</li>
+  </ul>
+  <p class="ko">이 딜의 $14.8B는 <strong>지분가치</strong>입니다. DH의 부채까지 합치면 EV는 더 큽니다. 본문에서 EV/EBITDA 같은 배수를 쓰지 않고 지분가치만으로 계산한 이유는, 공시에서 확정적으로 확인되는 값이 지분가치이기 때문입니다.</p>
+  <p class="en">The $14.8B here is <strong>equity value</strong>; EV is larger once DH's debt is added. The analysis works in equity value rather than EV/EBITDA multiples because equity value is what the filing states definitively.</p>
+
+  <h3><span class="ko">완전희석 (fully diluted)</span><span class="en">Fully diluted</span></h3>
+  <p class="ko">스톡옵션이나 전환사채 등이 전부 주식으로 바뀐다고 가정했을 때의 주식수입니다. 실제 발행주식수보다 큽니다. 본문의 3.13억 주는 완전희석 기준입니다.</p>
+  <p class="en">The share count assuming every option and convertible converts. Larger than shares outstanding. The 313M figure in the analysis is fully diluted.</p>
+
+  <h3><span class="ko">VWAP와 "미영향 주가"</span><span class="en">VWAP and the "unaffected price"</span></h3>
+  <ul class="ko">
+    <li><strong>VWAP (Volume-Weighted Average Price)</strong> — 거래량 가중 평균 주가입니다. 단순 평균보다 실제 체결 상황을 잘 반영합니다.</li>
+    <li><strong>미영향 주가(unaffected price)</strong> — 인수설이 시장에 알려지기 <em>전</em>의 주가입니다. 인수 소문이 돌기 시작하면 주가가 미리 오르기 때문에, 진짜 프리미엄을 재려면 소문 이전 가격과 비교해야 합니다.</li>
+  </ul>
+  <ul class="en">
+    <li><strong>VWAP</strong> — volume-weighted average price. Reflects where trading actually happened better than a simple mean.</li>
+    <li><strong>Unaffected price</strong> — the price <em>before</em> the market knew a bid was coming. Rumours push the price up in advance, so measuring the real premium requires comparing against the pre-rumour level.</li>
+  </ul>
+  <p class="ko">이 딜에서 프리미엄이 두 개 나오는 이유가 바로 이것입니다.</p>
+  <p class="en">That is why this deal has two premium figures.</p>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="ko">기준</span><span class="en">Benchmark</span></th>
+      <th><span class="ko">프리미엄</span><span class="en">Premium</span></th>
+      <th><span class="ko">의미</span><span class="en">Meaning</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="ko">발표 직전 3개월 VWAP</span><span class="en">3-month VWAP before announcement</span></td><td class="n">~34%</td><td><span class="ko">이미 소문이 반영된 가격 대비</span><span class="en">Against a price that already priced in rumours</span></td></tr>
+      <tr><td><span class="ko">5월 이전 미영향 3개월 VWAP</span><span class="en">Unaffected 3-month VWAP, pre-May</span></td><td class="n">~127%</td><td><span class="ko">소문 이전 진짜 시작점 대비</span><span class="en">Against the true pre-rumour starting point</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="ko">회사는 보통 작아 보이는 34%를 앞세우고, 분석하는 쪽은 127%를 봐야 합니다.</p>
+  <p class="en">Companies lead with the smaller 34%. Analysts should look at the 127%.</p>
+  <p class="xref"><span class="ko">→ 본문 연결 · 04장, FIG 4</span><span class="en">→ In the analysis · §04, FIG 4</span></p>
+
+  <h3><span class="ko">파생상품 익스포저와 "야금야금 매집"</span><span class="en">Derivative exposure and creeping acquisition</span></h3>
+  <p class="ko">우버는 발표 전에 의결권 24.77%를 직접 갖고 있었고, 추가로 11.74%를 <strong>파생상품(주로 총수익스왑, TRS)</strong>으로 확보해 뒀습니다.</p>
+  <p class="en">Before announcing, Uber directly held 24.77% of the votes plus another 11.74% of economic exposure through <strong>derivatives, mainly total return swaps (TRS)</strong>.</p>
+  <p class="ko">TRS는 쉽게 말해 "주식을 직접 갖지는 않지만 주가 손익은 내가 가져가는" 계약입니다. 이렇게 하면 공시 의무를 늦추거나 피할 수 있고, 주가를 미리 밀어올리지 않으면서 경제적 지분을 쌓을 수 있습니다. 이렇게 조용히 지분을 모으는 것을 <strong>creeping acquisition</strong>이라고 부릅니다. 핵심 효과는 <strong>평균 취득단가가 헤드라인 가격보다 훨씬 낮아진다</strong>는 점입니다.</p>
+  <p class="en">A TRS means you do not hold the shares but you take the gain and loss on them. It can defer or avoid disclosure obligations and lets you build economic ownership without pushing the price up in advance. Accumulating quietly this way is called <strong>creeping acquisition</strong>. The point is that <strong>the average cost of the stake ends up far below the headline offer price</strong>.</p>
+
+  <h3><span class="ko">런레이트 시너지 (run-rate synergy)</span><span class="en">Run-rate synergy</span></h3>
+  <p class="ko">"18개월 뒤 시점에서 연간으로 환산하면 $1.2B만큼 비용이 줄어든다"는 뜻입니다. 누적 절감액이 아니라 <strong>연간 반복되는 절감액</strong>입니다. 그래서 이것을 기업가치로 환산하려면 배수를 곱해야 합니다.</p>
+  <p class="en">"By month 18, annualised savings reach $1.2B." It is a <strong>recurring annual</strong> figure, not a cumulative total — which is why converting it into value requires multiplying by a multiple.</p>
+
+  <h3><span class="ko">EPS accretion / dilution</span><span class="en">EPS accretion / dilution</span></h3>
+  <p class="ko">인수 후 주당순이익(EPS)이 늘면 accretive, 줄면 dilutive입니다. 우버는 "클로징 시점부터 accretive, 3년차에 한 자릿수 후반 %"라고 밝혔습니다. 다만 이건 <strong>회계상 EPS</strong>이지 가치 창출과 같은 말이 아닙니다. 현금을 싸게 빌려 이익이 나는 회사를 사면 EPS는 거의 항상 오릅니다.</p>
+  <p class="en">If earnings per share rise after the deal it is accretive, if they fall it is dilutive. Uber guided to accretion at close and high-single-digit accretion by year three. But this is <strong>accounting EPS</strong>, not value creation: borrow cheaply to buy a profitable company and EPS almost always rises.</p>
+
+  <h3><span class="ko">브리지 파이낸싱 / 총레버리지</span><span class="en">Bridge financing and leverage</span></h3>
+  <ul class="ko">
+    <li><strong>브리지(bridge)</strong> — 인수대금을 일단 단기 대출로 조달하고 나중에 회사채 발행 등으로 갈아타는 방식입니다. €14B 브리지가 그것입니다.</li>
+    <li><strong>총레버리지 2배 미만</strong> — 총차입금 ÷ EBITDA &lt; 2. 신용등급을 지키기 위한 자체 목표선입니다.</li>
+  </ul>
+  <ul class="en">
+    <li><strong>Bridge</strong> — fund the purchase with short-term debt first, then refinance into bonds. That is the €14B facility.</li>
+    <li><strong>Gross leverage below 2×</strong> — total debt ÷ EBITDA &lt; 2, a self-imposed line to protect the credit rating.</li>
+  </ul>
+
+  <h3><span class="ko">분리매각 (carve-out / divestiture)</span><span class="en">Carve-out / divestiture</span></h3>
+  <p class="ko">인수 대상 중 일부 사업을 떼어내 제3자에게 파는 것입니다. 보통 두 가지 이유로 합니다. 첫째는 <strong>반독점 대응</strong>으로, 겹치는 사업을 미리 없애면 경쟁당국이 문제 삼을 것이 줄어듭니다. 둘째는 <strong>자기잠식 방지</strong>로, 같은 회사 브랜드끼리 서로 고객을 뺏는 상황을 피하기 위함입니다.</p>
+  <p class="en">Selling part of the target to a third party. Two usual motives: <strong>antitrust</strong> — removing overlaps before review leaves the regulator less to object to — and <strong>avoiding cannibalisation</strong> between brands under one owner.</p>
+  <p class="ko">SSW로 넘기는 14개 시장이 정확히 이 경우이고, 이것이 <strong>클로징 조건</strong>으로 묶여 있습니다. 즉 우버 인수가 완료되어야 SSW 거래도 성립합니다.</p>
+  <p class="en">The 14 markets going to SSW are exactly this, and the sale is a <strong>closing condition</strong>: it only completes if Uber's takeover does.</p>
+  <p class="xref"><span class="ko">→ 본문 연결 · 05장, FIG 5</span><span class="en">→ In the analysis · §05, FIG 5</span></p>
+</section>
+
+<!-- ===== P2 ===== -->
+<section id="p2">
+  <div class="sec-head"><span class="sec-num">02</span><h2><span class="ko">밸류에이션 산수 직접 따라해보기</span><span class="en">Working the arithmetic yourself</span></h2></div>
+  <p class="ko">본문 04장의 계산을 한 줄씩 풀어보겠습니다.</p>
+  <p class="en">Here is §04's calculation, line by line.</p>
+
+  <h3><span class="ko">① 주식수 역산</span><span class="en">① Back out the share count</span></h3>
+  <pre class="ko">완전희석 지분가치 €13.0B ÷ 주당 €41.50 = 약 3.13억 주</pre>
+  <pre class="en">fully diluted equity €13.0B ÷ €41.50 per share = ~313 million shares</pre>
+  <p class="ko">공시가 "€41.50에 사면 전체가 €13.0B"라고 했으니, 나눠보면 주식수가 나옵니다.</p>
+  <p class="en">The filing says €41.50 per share values the whole company at €13.0B, so division gives the share count.</p>
+
+  <h3><span class="ko">② 미영향 주가 역산</span><span class="en">② Back out the unaffected price</span></h3>
+  <p class="ko">프리미엄 127%는 "미영향 주가보다 127% 더 준다"는 뜻이므로 이렇게 됩니다.</p>
+  <p class="en">A 127% premium means paying 127% <em>more than</em> the unaffected price, so:</p>
+  <pre class="ko">€41.50 = 미영향주가 × (1 + 1.27) = 미영향주가 × 2.27
+미영향주가 = 41.50 ÷ 2.27 ≈ €18.28</pre>
+  <pre class="en">€41.50 = unaffected × (1 + 1.27) = unaffected × 2.27
+unaffected = 41.50 ÷ 2.27 ≈ €18.28</pre>
+  <div class="note ko">여기서 자주 실수하는 지점이 있습니다. 127% 프리미엄은 <strong>2.27배</strong>이지 1.27배가 아닙니다.</div>
+  <div class="note en">A common slip: a 127% premium is <strong>2.27×</strong>, not 1.27×.</div>
+
+  <h3><span class="ko">③ 총 프리미엄</span><span class="en">③ Total premium</span></h3>
+  <pre class="ko">(41.50 − 18.28) × 3.13억 주 ≈ €7.3B  (≈ $8.4B)</pre>
+  <pre class="en">(41.50 − 18.28) × 313M shares ≈ €7.3B  (≈ $8.4B)</pre>
+  <p class="ko">이것이 "소문 이전 가치 대비 우버가 더 얹어준 총액"입니다.</p>
+  <p class="en">That is the total Uber added on top of the pre-rumour value.</p>
+
+  <h3><span class="ko">④ 시너지를 가치로 환산하기</span><span class="en">④ Turn synergies into value</span></h3>
+  <p class="ko">연간 $1.2B가 영원히 반복된다면 그 가치는 얼마일까요. 영구연금 공식으로 계산합니다.</p>
+  <p class="en">What is $1.2B a year worth if it repeats forever? Use the perpetuity formula.</p>
+  <pre class="ko">가치 = 연간 현금흐름 ÷ 할인율
+     = $1.2B ÷ 0.10  = $12B    (할인율 10%  → 배수 10배)
+     = $1.2B ÷ 0.125 = $9.6B   (할인율 12.5% → 배수 8배)</pre>
+  <pre class="en">value = annual cash flow ÷ discount rate
+      = $1.2B ÷ 0.10  = $12B    (10% rate   → 10× multiple)
+      = $1.2B ÷ 0.125 = $9.6B   (12.5% rate →  8× multiple)</pre>
+  <p class="ko">즉 <strong>배수 N배 = 할인율 1/N</strong>입니다. 8~10배를 쓴 이유는 이 정도가 성숙한 사업의 통상 범위이기 때문입니다. 여기에 세금과 실현 확률, 실현까지 걸리는 시간 할인을 반영하면 값은 더 내려갑니다.</p>
+  <p class="en">So <strong>an N× multiple is a 1/N discount rate</strong>. The 8–10× range is used because that is typical for a mature business. Adjusting for tax, execution probability and the delay to realisation pushes the figure lower still.</p>
+
+  <h3><span class="ko">⑤ 그래서 결론이 무엇인가</span><span class="en">⑤ So what is the conclusion</span></h3>
+  <pre class="ko">지불한 프리미엄     ≈ $8.4B
+발표 시너지의 가치  ≈ $9.6~12B (세전, 낙관적)</pre>
+  <pre class="en">premium paid            ≈ $8.4B
+value of announced      ≈ $9.6–12B (pre-tax, optimistic)
+synergies</pre>
+  <p class="ko">거의 같습니다. 이것이 본문의 핵심 주장입니다. <strong>우버가 아낀 돈의 대부분을 DH 주주에게 미리 지불했다</strong>는 것입니다. M&amp;A 연구에서 반복 확인되는 현상으로, "인수 프리미엄이 시너지를 피인수 기업 주주에게 이전한다"고 표현합니다.</p>
+  <p class="en">They are nearly the same. That is the analysis's central claim: <strong>Uber paid away most of its savings to DH's shareholders up front.</strong> The M&amp;A literature calls this the transfer of synergies to the target through the premium.</p>
+  <p class="ko">그렇다면 우버 주주는 왜 이 거래를 할까요. 발표하지 않은 것들, 즉 매출 시너지와 배제 옵션에 걸고 있는 것입니다.</p>
+  <p class="en">So why would Uber's shareholders want this? They are betting on what was not announced: revenue synergies and the preemption option.</p>
+  <p class="xref"><span class="ko">→ 본문 연결 · 04장 전체, FIG 4</span><span class="en">→ In the analysis · all of §04, FIG 4</span></p>
+</section>
+
+<!-- ===== P3 ===== -->
+<section id="p3">
+  <div class="sec-head"><span class="sec-num">03</span><h2><span class="ko">플랫폼 경제학</span><span class="en">Platform economics</span></h2></div>
+
+  <h3><span class="ko">다면시장(multi-sided market)이란</span><span class="en">What a multi-sided market is</span></h3>
+  <p class="ko">여러 집단을 중개하면서, <strong>한쪽에 매기는 가격이 다른 쪽의 참여에 영향을 주는</strong> 시장입니다. Rochet &amp; Tirole의 핵심 통찰은 "가격의 총합(level)이 아니라 가격의 구조(structure)가 중요하다"는 것입니다.</p>
+  <p class="en">A market intermediating several groups where <strong>the price charged to one side affects participation on another</strong>. Rochet &amp; Tirole's insight: what matters is the price <em>structure</em>, not the price <em>level</em>.</p>
+  <p class="ko">배달앱은 3면입니다. 소비자에게는 배달비를 깎아주고 음식점에게 수수료를 받는 식으로, <strong>한쪽을 보조하고 다른 쪽에서 회수</strong>하는 구조가 전형적입니다.</p>
+  <p class="en">Delivery apps are three-sided. Discount the consumer's delivery fee and charge the restaurant a commission: <strong>subsidise one side, recover from another</strong>.</p>
+
+  <h3><span class="ko">직접 vs 간접 네트워크 효과</span><span class="en">Direct vs indirect network effects</span></h3>
+  <ul class="ko">
+    <li><strong>직접(direct)</strong> — 같은 집단이 늘수록 좋아집니다. 카카오톡은 친구가 많을수록 좋습니다.</li>
+    <li><strong>간접(indirect / cross-side)</strong> — <em>다른</em> 집단이 늘수록 좋아집니다. 소비자가 많으면 음식점에게 좋고, 음식점이 많으면 소비자에게 좋습니다.</li>
+  </ul>
+  <ul class="en">
+    <li><strong>Direct</strong> — more of the <em>same</em> group is better. A messaging app is better with more friends on it.</li>
+    <li><strong>Indirect / cross-side</strong> — more of the <em>other</em> group is better. More diners helps restaurants; more restaurants helps diners.</li>
+  </ul>
+  <p class="ko">배달앱은 간접 효과가 지배적입니다. 그리고 본문의 논점은 <strong>그 간접 효과가 전국 단위가 아니라 동네 단위에서만 작동한다</strong>는 것입니다. 부산 사람이 많아져도 강남 소비자의 선택지는 늘지 않습니다.</p>
+  <p class="en">Delivery is dominated by indirect effects — and the analysis's point is that <strong>they operate at neighbourhood scale, not national scale</strong>. More users in Busan does not widen the choice set for a diner in Gangnam.</p>
+
+  <h3><span class="ko">싱글호밍 / 멀티호밍 / 경쟁병목</span><span class="en">Single-homing, multihoming, competitive bottleneck</span></h3>
+  <p class="ko">싱글호밍은 한 플랫폼만 쓰는 것, 멀티호밍은 여러 플랫폼을 동시에 쓰는 것입니다. Armstrong(2006)의 <strong>경쟁병목(competitive bottleneck)</strong> 논리는 이렇습니다.</p>
+  <p class="en">Single-homing means using one platform; multihoming means using several at once. Armstrong's (2006) <strong>competitive bottleneck</strong> runs as follows.</p>
+  <div class="note ko">A쪽이 싱글호밍하면, 그 A 고객에게 닿는 길은 그 플랫폼 하나뿐입니다. 따라서 B쪽 입장에서 그 플랫폼은 <strong>대체 불가능</strong>해집니다. 플랫폼들은 A를 유치하려고 치열하게 경쟁하고(그래서 A는 혜택을 받습니다), 확보한 A에 대한 독점적 접근권을 B에게 비싸게 팝니다.</div>
+  <div class="note en">If side A single-homes, the only route to those A customers is through that one platform. To side B the platform therefore becomes <strong>non-substitutable</strong>. Platforms compete fiercely for A — so A gets the benefits — and then sell exclusive access to A dearly to B.</div>
+  <p class="ko">한국 배달시장에 대입하면 소비자가 싱글호밍 쪽이라 혜택을 받고, 음식점이 멀티호밍 쪽이라 <strong>비용을 냅니다</strong>. 그래서 "매출은 느는데 남는 게 없다"는 점주들의 체감은 감정이 아니라 구조의 결과입니다.</p>
+  <p class="en">In Korea, consumers are the single-homing side and receive the benefits; restaurants are the multihoming side and <strong>bear the cost</strong>. "Revenue keeps growing but nothing is left over" is not a feeling; it is what the structure produces.</p>
+
+  <h3><span class="ko">지대(rent)라는 말</span><span class="en">What "rent" means here</span></h3>
+  <p class="ko">경제학에서 지대는 "경쟁이 충분했다면 존재하지 않았을 초과 이익"을 뜻합니다. 부동산 임대료와는 다른 개념입니다. 본문에서 "지대를 뽑는다", "지대 이전"이라고 쓸 때는 <strong>경쟁 부족에서 나오는 초과 몫이 누구에게 가는가</strong>를 말하는 것입니다.</p>
+  <p class="en">In economics, rent is surplus profit that would not exist under sufficient competition — not property rent. When the analysis says "extracts rent" or "rent transfer," it is asking <strong>who captures the excess that competitive pressure would have eliminated</strong>.</p>
+
+  <h3><span class="ko">밀도의 경제 — nC2 산수</span><span class="en">Density economics — the nC2 arithmetic</span></h3>
+  <p class="ko">본문 FIG 2의 핵심입니다. 묶음배송을 하려면 <strong>가까운 두 주문이 동시에 존재</strong>해야 합니다. 주문이 n개일 때 짝지을 수 있는 조합의 수는 이렇습니다.</p>
+  <p class="en">The core of FIG 2. Batching requires <strong>two nearby orders existing at the same time</strong>. With n orders, the number of pairs is:</p>
+  <pre>nC2 = n(n−1)/2
+
+n=3 →  3 × 2 / 2 =  3
+n=6 →  6 × 5 / 2 = 15</pre>
+  <p class="ko">주문이 2배가 되면 조합은 5배가 됩니다. 이것이 "밀도가 비선형으로 효과를 낸다"는 말의 실체입니다. 알고리즘이 아무리 좋아도 <strong>고를 수 있는 후보가 없으면 최적화할 것이 없습니다.</strong></p>
+  <p class="en">Double the orders and the pairs go up five-fold. That is what "density works non-linearly" actually means. However good the algorithm, <strong>with no candidates there is nothing to optimise.</strong></p>
+
+  <h3><span class="ko">번들링과 봉쇄</span><span class="en">Bundling and foreclosure</span></h3>
+  <p class="ko">두 상품을 묶어 팔면 경쟁자가 하나만으로는 대항하기 어려워집니다(Whinston 1990). 우버원과 배민클럽 결합이 나오면, 배달만 하는 경쟁자는 "배달 + 이동"이라는 묶음과 싸워야 합니다. 이것이 경쟁법에서 <strong>혼합결합의 봉쇄 이론</strong>으로 다뤄지는 이유입니다.</p>
+  <p class="en">Sell two products together and a rival with only one struggles to match the offer (Whinston 1990). If Uber One and Baemin Club combine, a delivery-only competitor has to fight a "delivery + rides" bundle. This is what competition law treats as <strong>conglomerate foreclosure</strong>.</p>
+
+  <h3><span class="ko">전환비용과 락인(lock-in)</span><span class="en">Switching costs and lock-in</span></h3>
+  <p class="ko">바꾸는 데 드는 비용입니다. 구독료를 이미 냈거나, 쿠폰이 쌓여 있거나, 주소와 결제수단이 저장돼 있으면 전환비용이 올라갑니다. 락인은 이 전환비용이 충분히 커져서 사실상 떠나지 못하는 상태를 말합니다.</p>
+  <p class="en">The cost of changing. A subscription already paid, accumulated coupons, saved addresses and payment methods all raise it. Lock-in is when that cost gets high enough that leaving stops being realistic.</p>
+  <p class="xref"><span class="ko">→ 본문 연결 · 02~03장, FIG 2·3</span><span class="en">→ In the analysis · §02–03, FIG 2 &amp; 3</span></p>
+</section>
+
+<!-- ===== P4 ===== -->
+<section id="p4">
+  <div class="sec-head"><span class="sec-num">04</span><h2><span class="ko">경쟁법(반독점) 기초</span><span class="en">Competition law basics</span></h2></div>
+
+  <h3><span class="ko">기업결합의 세 유형</span><span class="en">Three types of merger</span></h3>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="ko">유형</span><span class="en">Type</span></th>
+      <th><span class="ko">정의</span><span class="en">Definition</span></th>
+      <th><span class="ko">예시</span><span class="en">Example</span></th>
+      <th><span class="ko">심사 난이도</span><span class="en">Difficulty</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><strong><span class="ko">수평</span><span class="en">Horizontal</span></strong></td><td><span class="ko">같은 시장의 경쟁자끼리</span><span class="en">Competitors in the same market</span></td><td><span class="ko">배민 + 요기요</span><span class="en">Baemin + Yogiyo</span></td><td><span class="ko">가장 명확하고 제재도 쉽습니다</span><span class="en">Clearest; easiest to remedy</span></td></tr>
+      <tr><td><strong><span class="ko">수직</span><span class="en">Vertical</span></strong></td><td><span class="ko">공급망 상하 관계</span><span class="en">Up and down a supply chain</span></td><td><span class="ko">배달앱 + 라이더 대행사</span><span class="en">Delivery app + courier agency</span></td><td><span class="ko">중간</span><span class="en">Moderate</span></td></tr>
+      <tr><td><strong><span class="ko">혼합</span><span class="en">Conglomerate</span></strong></td><td><span class="ko">다른 시장, 인접 관계</span><span class="en">Different but adjacent markets</span></td><td><span class="ko">이동 + 배달</span><span class="en">Rides + delivery</span></td><td><span class="ko">가장 어렵습니다</span><span class="en">Hardest</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="ko">이 딜의 한국 부분이 <strong>혼합결합</strong>이라는 것이 본문 05장의 출발점입니다. 우버이츠가 2019년에 철수했으므로 한국 배달앱 시장에서 우버의 점유율은 0이고, 따라서 겹치는 부분이 없습니다.</p>
+  <p class="en">§05 starts from the fact that the Korean side of this deal is <strong>conglomerate</strong>. Uber Eats left in 2019, so Uber's share of Korean delivery apps is zero and nothing overlaps.</p>
+
+  <h3><span class="ko">시장획정과 SSNIP</span><span class="en">Market definition and SSNIP</span></h3>
+  <p class="ko">경쟁법의 첫 단계는 "이 사건의 시장은 무엇인가"를 정하는 것입니다. 시장을 좁게 잡으면 점유율이 높아 보이고 넓게 잡으면 낮아 보입니다. 그래서 <strong>시장획정이 곧 결론</strong>인 경우가 많습니다.</p>
+  <p class="en">Step one in any case is defining the market. Define it narrowly and shares look high; define it broadly and they look low. Very often <strong>market definition decides the case</strong>.</p>
+  <p class="ko">전통적 방법이 <strong>SSNIP 테스트</strong>입니다. "가상의 독점기업이 가격을 작지만 유의미하게(보통 5~10%) 지속적으로 올렸을 때, 고객이 다른 데로 도망가서 손해를 볼까?"를 묻습니다. 도망가지 않으면 그 범위가 하나의 시장입니다.</p>
+  <p class="en">The traditional tool is the <strong>SSNIP test</strong>: would a hypothetical monopolist lose money by raising prices a small but significant amount (usually 5–10%) on a lasting basis? If customers do not leave, that set of products is one market.</p>
+  <div class="note ko"><strong>문제.</strong> 플랫폼은 소비자에게 사실상 0원이거나 오히려 보조금을 주는 경우가 많습니다. 0에서 5%를 올린다는 게 무의미하므로 SSNIP이 잘 작동하지 않습니다. 이것이 플랫폼 반독점의 오래된 난제입니다.</div>
+  <div class="note en"><strong>The problem.</strong> Platforms often charge consumers nothing, or subsidise them. Raising a price of zero by 5% is meaningless, so SSNIP breaks down — a long-standing difficulty in platform antitrust.</div>
+
+  <h3><span class="ko">HHI</span><span class="en">HHI</span></h3>
+  <p class="ko">시장 집중도 지표입니다. 각 사업자 점유율(%)을 제곱해서 더합니다.</p>
+  <p class="en">A concentration index: square each firm's percentage share and add them up.</p>
+  <pre class="ko">예: 60%, 30%, 10% → 60² + 30² + 10² = 3600 + 900 + 100 = 4600</pre>
+  <pre class="en">e.g. 60%, 30%, 10% → 60² + 30² + 10² = 3600 + 900 + 100 = 4600</pre>
+  <p class="ko">수평결합에서는 결합 후 HHI와 그 <strong>증가분</strong>을 보고 심사합니다. 혼합결합에서는 겹치는 것이 없어 HHI가 올라가지 않으므로 이 도구를 쓸 수 없습니다.</p>
+  <p class="en">Horizontal review looks at post-merger HHI and the <strong>delta</strong>. In a conglomerate merger nothing overlaps, so HHI does not move and the tool is unusable.</p>
+
+  <h3><span class="ko">구조적 vs 행태적 시정조치</span><span class="en">Structural vs behavioural remedies</span></h3>
+  <div class="tw"><table>
+    <thead><tr>
+      <th></th>
+      <th><span class="ko">구조적</span><span class="en">Structural</span></th>
+      <th><span class="ko">행태적</span><span class="en">Behavioural</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="ko">내용</span><span class="en">What it is</span></td><td><span class="ko">사업 매각, 분할</span><span class="en">Divestiture, separation</span></td><td><span class="ko">하지 마라 / 하라는 의무 부과</span><span class="en">Obligations to do or not do things</span></td></tr>
+      <tr><td><span class="ko">예</span><span class="en">Example</span></td><td><span class="ko">2020년 요기요 매각 명령</span><span class="en">The 2020 Yogiyo divestiture order</span></td><td><span class="ko">데이터 결합 금지, 자기우대 금지, 가격 공시</span><span class="en">No data merging, no self-preferencing, price disclosure</span></td></tr>
+      <tr><td><span class="ko">장점</span><span class="en">Upside</span></td><td><span class="ko">한 번에 끝나고 감시가 필요 없습니다</span><span class="en">One-off; no ongoing monitoring</span></td><td><span class="ko">사업을 쪼개지 않아도 됩니다</span><span class="en">No need to break the business up</span></td></tr>
+      <tr><td><span class="ko">단점</span><span class="en">Downside</span></td><td><span class="ko">강력해서 근거가 확실해야 합니다</span><span class="en">Drastic, so the evidence must be solid</span></td><td><span class="ko"><strong>감시 비용이 높고 우회가 쉽습니다</strong></span><span class="en"><strong>Costly to monitor, easy to route around</strong></span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="ko">본문의 예측 P4는 "2026년에는 구조적 조치의 법적 근거가 약하므로 행태적 조건으로 갈 것"이라는 내용입니다.</p>
+  <p class="en">Prediction P4 in the analysis says the legal basis for a structural remedy is weak in 2026, so the outcome will be behavioural.</p>
+
+  <h3><span class="ko">생태계 이론 · 자기우대 · killer acquisition</span><span class="en">Ecosystem theory, self-preferencing, killer acquisitions</span></h3>
+  <ul class="ko">
+    <li><strong>생태계(ecosystem) 이론</strong> — 개별 시장에서는 문제가 없어도, 여러 서비스를 묶은 생태계 전체가 진입을 봉쇄한다는 논리입니다.</li>
+    <li><strong>자기우대(self-preferencing)</strong> — 플랫폼이 심판이면서 선수일 때, 자기 서비스를 검색 상위에 올리는 행위입니다.</li>
+    <li><strong>killer acquisition</strong> — 잠재적 경쟁자가 될 스타트업을 미리 사서 없애는 것입니다.</li>
+  </ul>
+  <ul class="en">
+    <li><strong>Ecosystem theory</strong> — no single market shows a problem, but the bundle of services as a whole forecloses entry.</li>
+    <li><strong>Self-preferencing</strong> — when the platform is both referee and player, ranking its own services above others.</li>
+    <li><strong>Killer acquisition</strong> — buying a startup that would have become a competitor, in order to shut it down.</li>
+  </ul>
+
+  <h3><span class="ko">2020년 선례 요약</span><span class="en">The 2020 precedent</span></h3>
+  <pre class="ko">2019.12  DH, 우아한형제들 인수 발표 (약 4.7조 원)
+2020.12  공정위 조건부 승인
+         조건: DH가 보유한 요기요를 6개월 내 매각
+         이유: 배민 + 요기요 합산 점유율이 압도적 → 명백한 수평 중첩
+2021.08  요기요, GS리테일 등 컨소시엄에 매각</pre>
+  <pre class="en">Dec 2019  DH announces acquisition of Woowa Brothers (~KRW 4.7tn)
+Dec 2020  KFTC clears it conditionally
+          Condition: DH must sell Yogiyo within six months
+          Reason: Baemin + Yogiyo combined share overwhelming — clear overlap
+Aug 2021  Yogiyo sold to a GS Retail-led consortium</pre>
+  <p class="ko">2026년 사건과의 결정적 차이는 <strong>그때는 겹쳤고 지금은 겹치지 않는다</strong>는 점입니다.</p>
+  <p class="en">The decisive difference from 2026: <strong>then there was an overlap; now there is none.</strong></p>
+  <p class="xref"><span class="ko">→ 본문 연결 · 05장, FIG 5</span><span class="en">→ In the analysis · §05, FIG 5</span></p>
+</section>
+
+<!-- ===== P5 ===== -->
+<section id="p5">
+  <div class="sec-head"><span class="sec-num">05</span><h2><span class="ko">AI · ML 배경</span><span class="en">AI and ML background</span></h2></div>
+
+  <h3><span class="ko">배차(dispatch)란 어떤 문제인가</span><span class="en">What dispatch actually is</span></h3>
+  <p class="ko">"지금 들어온 주문들을 대기 중인 라이더들에게 어떻게 배정할 것인가"입니다. 수학적으로는 <strong>할당 문제(assignment problem)</strong> 혹은 그 확장형이고, 실시간으로 계속 풀어야 합니다. 목적함수는 보통 여러 개를 섞습니다. 총 배달시간 최소화, 라이더 소득 균형, 음식 품질, 취소율 같은 것들입니다.</p>
+  <p class="en">"How do we assign the orders arriving now to the couriers waiting now?" Mathematically an <strong>assignment problem</strong> or an extension of one, solved continuously in real time. The objective usually blends several goals: total delivery time, fairness of courier earnings, food quality, cancellation rate.</p>
+
+  <h3><span class="ko">ETA 예측</span><span class="en">ETA prediction</span></h3>
+  <p class="ko">Estimated Time of Arrival, 즉 "이 주문은 몇 분 뒤 도착할까"를 예측하는 회귀 문제입니다. 정확도가 중요한 이유는 소비자 만족도에 직결될 뿐 아니라, <strong>배차 알고리즘의 입력값</strong>이기 때문입니다. ETA가 부정확하면 묶음배송 판단이 전부 틀어집니다.</p>
+  <p class="en">Estimated time of arrival — a regression problem. Accuracy matters not only for customer satisfaction but because ETA is <strong>an input to the dispatcher</strong>. Get it wrong and every batching decision downstream is wrong too.</p>
+
+  <h3><span class="ko">묶음배송(batching)</span><span class="en">Batching</span></h3>
+  <p class="ko">한 라이더가 두 건 이상을 한 번에 처리하는 것입니다. 시간당 처리건수를 올리는 가장 강력한 수단이지만, 두 번째 손님의 대기시간이 늘어나므로 <strong>효율과 품질의 트레이드오프</strong>가 있습니다.</p>
+  <p class="en">One courier carrying two or more orders at once. The strongest lever on deliveries per hour, but the second customer waits longer — an <strong>efficiency-versus-quality trade-off</strong>.</p>
+
+  <h3><span class="ko">왜 알고리즘이 아니라 밀도가 제약인가</span><span class="en">Why density, not the algorithm, is the constraint</span></h3>
+  <p class="ko">본문 AI 파트의 핵심 주장입니다. 배차 품질은 대략 이렇게 생각하실 수 있습니다.</p>
+  <p class="en">The central claim of the AI sections. Think of dispatch quality roughly like this:</p>
+  <pre class="ko">실제 성능 ≈ f(알고리즘 품질) × g(선택 가능한 후보의 양)</pre>
+  <pre class="en">realised performance ≈ f(algorithm quality) × g(available candidates)</pre>
+  <p class="ko">두 번째 항이 0에 가까우면 첫 번째 항이 아무리 좋아도 소용이 없습니다. 그래서 본문은 <strong>"(모델 × 밀도)의 함수"</strong>라고 표현했습니다. 인수는 앞의 항만 개선합니다.</p>
+  <p class="en">If the second term is near zero, the first term does not matter. Hence the phrasing <strong>"a function of (model × density)"</strong> — and an acquisition only improves the first term.</p>
+
+  <h3><span class="ko">전이(transfer)가 되는 것과 안 되는 것</span><span class="en">What transfers and what does not</span></h3>
+  <p class="ko">머신러닝에서 모델을 다른 환경에 가져다 쓸 때 <strong>분포 이동(distribution shift)</strong> 문제가 생깁니다. 서울과 자카르타는 도로 구조, 이동수단(오토바이 비중), 건물 형태, 주문 시간대 분포가 전부 다릅니다.</p>
+  <p class="en">Moving a model to a new environment runs into <strong>distribution shift</strong>. Seoul and Jakarta differ in road layout, vehicle mix, building types and the distribution of order times.</p>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="ko">이전됩니다</span><span class="en">Transfers</span></th>
+      <th><span class="ko">이전되지 않습니다</span><span class="en">Does not transfer</span></th>
+    </tr></thead>
+    <tbody><tr>
+      <td><span class="ko">모델 구조, 학습 파이프라인, 피처 설계 노하우, 코드, 연구 인력, 컴퓨트 구매 협상력</span><span class="en">Model architecture, training pipeline, feature-design know-how, code, research staff, compute purchasing power</span></td>
+      <td><span class="ko">학습된 가중치, 지역 특성에 맞춰진 파라미터, 실제 달성 성능</span><span class="en">Learned weights, locally fitted parameters, realised performance</span></td>
+    </tr></tbody>
+  </table></div>
+  <p class="ko">본문이 "이전되는 것은 방법론이지 학습된 지식이 아닙니다"라고 한 것이 이 뜻입니다. 그리고 <strong>이전되는 쪽은 전부 고정비 절감</strong>이라는 점이 논지의 핵심입니다.</p>
+  <p class="en">This is what "what moves is method, not learned knowledge" means. And critically, <strong>everything on the transferable side is fixed-cost saving</strong>.</p>
+
+  <h3><span class="ko">데이터 네트워크 효과 (Hagiu &amp; Wright)</span><span class="en">Data network effects (Hagiu &amp; Wright)</span></h3>
+  <p class="ko">"데이터가 많으면 무조건 이긴다"는 통념을 반박하는 틀입니다. 데이터가 진짜 해자가 되려면 네 조건이 <strong>동시에</strong> 필요합니다.</p>
+  <p class="en">A framework rebutting the "more data always wins" assumption. Data becomes a real moat only if four conditions hold <strong>at once</strong>.</p>
+  <ol class="ko">
+    <li>데이터가 늘수록 성능이 계속 좋아질 것 (수익체감이 빠르면 소용없습니다)</li>
+    <li>데이터가 빨리 낡지 않을 것</li>
+    <li>사용자별 데이터가 그 사용자에게 곧바로 더 나은 경험으로 이어질 것</li>
+    <li>경쟁자가 비슷한 데이터를 얻기 어려울 것</li>
+  </ol>
+  <ol class="en">
+    <li>Performance keeps improving with more data (fast diminishing returns kill it)</li>
+    <li>The data does not go stale quickly</li>
+    <li>A user's own data translates directly into a better experience for them</li>
+    <li>Rivals cannot easily obtain comparable data</li>
+  </ol>
+  <p class="ko">배달 데이터 단독으로는 1·2·4가 약합니다. 그런데 <strong>이동 데이터와 결합하면 4번이 강해집니다.</strong> 이동 이력은 배달만 하는 경쟁자가 원리적으로 얻을 수 없기 때문입니다. 본문 07장의 논지가 이것입니다.</p>
+  <p class="en">Delivery data alone is weak on 1, 2 and 4. But <strong>combined with mobility data, condition 4 becomes strong</strong>, because trip history is something a delivery-only rival cannot obtain in principle. That is the argument of §07.</p>
+
+  <h3><span class="ko">CPC 광고 경매의 원리</span><span class="en">How the CPC ad auction works</span></h3>
+  <p class="ko">검색 광고는 보통 <strong>GSP(Generalized Second Price)</strong> 경매로 돌아갑니다. 광고주들이 클릭당 지불의사 금액을 입찰하고, 플랫폼은 (입찰가 × 품질점수) 순으로 노출 순위를 매기며, 클릭이 발생하면 바로 아래 순위가 낸 금액 수준을 과금합니다.</p>
+  <p class="en">Search advertising typically runs a <strong>generalised second-price (GSP)</strong> auction. Advertisers bid what a click is worth to them, the platform ranks by (bid × quality score), and on a click charges roughly what the next-ranked bidder offered.</p>
+  <p class="ko">여기서 나오는 두 가지 성질이 본문 08장의 근거입니다.</p>
+  <p class="en">Two properties follow, and they are the basis of §08.</p>
+  <ol class="ko">
+    <li><strong>자동 가격차별</strong> — 노출의 가치가 높은 점주는 자발적으로 더 냅니다. 플랫폼이 일일이 조사하지 않아도 각자가 지불의사를 드러냅니다.</li>
+    <li><strong>고정 자원 위의 경쟁</strong> — 화면 상단 자리는 개수가 정해져 있습니다. 모든 점주가 입찰가를 올려도 <strong>순위만 바뀌고 총 주문량은 그대로입니다.</strong> 늘어난 광고비는 전부 플랫폼으로 갑니다. 점주 집단 전체로 보면 순수한 손실입니다.</li>
+  </ol>
+  <ol class="en">
+    <li><strong>Automatic price discrimination</strong> — merchants for whom an impression is worth more voluntarily pay more. The platform learns willingness to pay without investigating anyone.</li>
+    <li><strong>Competition over a fixed resource</strong> — there are only so many top slots. If every merchant raises their bid, <strong>the ranking shuffles and total orders stay the same.</strong> The extra spend goes entirely to the platform: a pure loss for merchants as a group.</li>
+  </ol>
+  <p class="ko">이것이 "수수료율보다 광고가 무섭다"는 주장의 근거입니다.</p>
+  <p class="en">This is why the analysis argues advertising is more dangerous than the commission rate.</p>
+
+  <h3><span class="ko">알고리즘 담합</span><span class="en">Algorithmic collusion</span></h3>
+  <p class="ko">Calvano 외(2020)가 보인 것은, 서로 대화하지 않는 강화학습(Q-learning) 가격 알고리즘들이 <strong>명시적 합의 없이도</strong> 경쟁 수준보다 높은 가격에 수렴할 수 있다는 것입니다. 담합의 고의를 입증해야 하는 기존 경쟁법으로는 다루기 어렵습니다.</p>
+  <p class="en">Calvano et al. (2020) showed that Q-learning pricing agents which never communicate can still converge on supra-competitive prices <strong>with no explicit agreement</strong>. Competition law, which needs to prove intent to collude, struggles with this.</p>
+  <p class="ko"><strong>허브앤스포크(hub-and-spoke)</strong>는 원래 "경쟁자들이 직접 담합하지 않고 공통의 거래상대(허브)를 통해 조율하는" 구조를 말합니다. 한 소유주가 여러 브랜드를 같은 팀과 같은 데이터로 운영하면 그 자체가 허브 역할을 할 수 있습니다.</p>
+  <p class="en"><strong>Hub-and-spoke</strong> originally describes competitors coordinating not directly but through a shared counterparty. One owner running several brands off the same team and the same data can itself become that hub.</p>
+  <p class="xref"><span class="ko">→ 본문 연결 · 06~08장, FIG 6·7</span><span class="en">→ In the analysis · §06–08, FIG 6 &amp; 7</span></p>
+</section>
+
+<!-- ===== P6 ===== -->
+<section id="p6">
+  <div class="sec-head"><span class="sec-num">06</span><h2><span class="ko">노동경제학 — 수요독점</span><span class="en">Labour economics — monopsony</span></h2></div>
+
+  <h3><span class="ko">독점 vs 수요독점</span><span class="en">Monopoly vs monopsony</span></h3>
+  <ul class="ko">
+    <li><strong>독점(monopoly)</strong> — 파는 사람이 하나라 가격을 <strong>올립니다.</strong></li>
+    <li><strong>수요독점(monopsony)</strong> — <strong>사는 사람</strong>이 하나 또는 소수라 가격을 <strong>내립니다.</strong></li>
+  </ul>
+  <ul class="en">
+    <li><strong>Monopoly</strong> — one seller, so the price goes <strong>up</strong>.</li>
+    <li><strong>Monopsony</strong> — one or few <strong>buyers</strong>, so the price goes <strong>down</strong>.</li>
+  </ul>
+  <p class="ko">라이더 노동시장은 후자에 가깝습니다. 노동력을 파는 사람(라이더)은 많고, 사는 사람(플랫폼)은 몇 개 되지 않습니다.</p>
+  <p class="en">Courier labour is the second case: many sellers of labour, very few buyers.</p>
+
+  <h3><span class="ko">FIG 8 읽는 법</span><span class="en">How to read FIG 8</span></h3>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="ko">기호</span><span class="en">Symbol</span></th>
+      <th><span class="ko">이름</span><span class="en">Name</span></th>
+      <th><span class="ko">뜻</span><span class="en">Meaning</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="n"><strong>S</strong></td><td><span class="ko">노동공급곡선</span><span class="en">Labour supply</span></td><td><span class="ko">임금이 높을수록 일하려는 사람이 많아집니다 (우상향)</span><span class="en">Higher wages attract more workers (upward sloping)</span></td></tr>
+      <tr><td class="n"><strong>MRP</strong></td><td><span class="ko">한계생산가치</span><span class="en">Marginal revenue product</span></td><td><span class="ko">라이더 한 명을 더 쓸 때 플랫폼이 얻는 추가 수입 (우하향)</span><span class="en">Extra revenue the platform gets from one more courier (downward sloping)</span></td></tr>
+      <tr><td class="n"><strong>MFC</strong></td><td><span class="ko">한계요소비용</span><span class="en">Marginal factor cost</span></td><td><span class="ko">라이더 한 명을 더 쓸 때 <strong>실제로 늘어나는 총 인건비</strong></span><span class="en">The <strong>actual increase in total wage bill</strong> from one more courier</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <p class="ko"><strong>왜 MFC가 S보다 위에 있을까요.</strong> 이게 수요독점의 핵심이자 가장 헷갈리는 부분입니다.</p>
+  <p class="en"><strong>Why does MFC sit above S?</strong> This is the heart of monopsony and the part that trips people up.</p>
+  <p class="ko">경쟁시장이면 한 명 더 쓰는 비용은 그 사람의 임금과 같습니다. 그런데 수요독점자는 <strong>혼자서 시장 임금을 움직입니다.</strong> 한 명을 더 데려오려면 임금을 올려야 하는데, 그러면 <strong>이미 일하고 있는 사람들 임금도 다 같이 올려줘야 합니다.</strong></p>
+  <p class="en">In a competitive market, hiring one more person costs exactly that person's wage. But a monopsonist <strong>moves the market wage single-handedly</strong>. To attract one more worker it must raise the wage — and then it must <strong>raise everyone else's wage too</strong>.</p>
+  <pre class="ko">지금 100명을 시급 10,000원에 고용 중
+101번째를 데려오려면 시급 10,100원이 필요
+
+추가 비용 = 10,100원        (새로 온 사람)
+         + 100원 × 100명   (기존 인원 인상분)
+         = 20,100원
+
+→ 새 사람의 임금(10,100)보다 훨씬 큽니다. 이것이 MFC입니다.</pre>
+  <pre class="en">currently employing 100 people at 10,000 won/hour
+attracting the 101st requires 10,100 won/hour
+
+added cost = 10,100          (the new hire)
+           + 100 × 100       (the raise for existing staff)
+           = 20,100
+
+→ far more than the new hire's own wage of 10,100. That is MFC.</pre>
+  <p class="ko">플랫폼은 MFC = MRP인 지점에서 고용량 L*를 정하고, 그 인원을 데려오는 데 필요한 최소 임금(공급곡선 S 위의 값)만 지급합니다. 그래서 <strong>임금 w &lt; MRP</strong>가 되고, 그 차이가 수요독점 격차입니다. 통합으로 사는 사람 수가 줄면 이 격차가 벌어집니다.</p>
+  <p class="en">The platform sets employment L* where MFC = MRP, then pays only the minimum wage needed to attract that many people — the value on the supply curve S. So <strong>w &lt; MRP</strong>, and that gap is the monopsony wedge. Consolidation reduces the number of buyers and widens it.</p>
+
+  <h3><span class="ko">가격차별 1·2·3차</span><span class="en">First-, second- and third-degree price discrimination</span></h3>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="ko">차수</span><span class="en">Degree</span></th>
+      <th><span class="ko">방식</span><span class="en">Method</span></th>
+      <th><span class="ko">예</span><span class="en">Example</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="n"><strong><span class="ko">1차</span><span class="en">First</span></strong></td><td><span class="ko">각자의 지불의사를 정확히 알고 개인별로 다른 가격</span><span class="en">Know each person's willingness to pay and charge exactly that</span></td><td><span class="ko">이론상의 완전차별</span><span class="en">The textbook ideal case</span></td></tr>
+      <tr><td class="n"><strong><span class="ko">2차</span><span class="en">Second</span></strong></td><td><span class="ko">수량·등급별로 다른 가격, 고객이 스스로 선택</span><span class="en">Prices vary by quantity or tier; customers self-select</span></td><td><span class="ko">대용량 할인, 요금제</span><span class="en">Bulk discounts, tiered plans</span></td></tr>
+      <tr><td class="n"><strong><span class="ko">3차</span><span class="en">Third</span></strong></td><td><span class="ko">식별 가능한 집단별로 다른 가격</span><span class="en">Different prices for identifiable groups</span></td><td><span class="ko">학생 할인, 지역별 요금</span><span class="en">Student discounts, regional pricing</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="ko">전통적으로 1차 가격차별은 이론상의 개념이었습니다. 개인의 지불의사를 알 방법이 없었기 때문입니다. <strong>AI가 바꾼 지점이 정확히 여기입니다.</strong> 개별 라이더의 과거 수락 이력으로 유보임금, 즉 그 사람이 수락하는 최소 금액을 추정할 수 있으면, 건별로 다른 단가를 제시해 공급곡선 아래 잉여를 거의 다 회수할 수 있습니다. 이것을 <strong>알고리즘 임금차별</strong>이라고 부릅니다.</p>
+  <p class="en">First-degree discrimination was long a theoretical construct, because no one could observe individual willingness to pay. <strong>This is precisely what AI changed.</strong> Estimate a courier's reservation wage from their history of accepted and declined jobs, then offer a different rate per job, and almost all the surplus under the supply curve can be captured. This is <strong>algorithmic wage discrimination</strong>.</p>
+  <p class="xref"><span class="ko">→ 본문 연결 · 09장, FIG 8</span><span class="en">→ In the analysis · §09, FIG 8</span></p>
+</section>
+
+<!-- ===== P7 ===== -->
+<section id="p7">
+  <div class="sec-head"><span class="sec-num">07</span><h2><span class="ko">한국 제도 배경</span><span class="en">Korean regulatory background</span></h2></div>
+
+  <h3><span class="ko">공정위 기업결합 심사</span><span class="en">KFTC merger review</span></h3>
+  <p class="ko">일정 규모 이상의 결합은 신고 의무가 있습니다. <strong>역외적용</strong>이 적용되어, 외국 기업 간 결합이라도 국내 시장에 영향을 주면 심사합니다. 이 딜이 여기 해당합니다. 결과는 승인 / 조건부 승인 / 불허 셋 중 하나이고, 대형 플랫폼 사건은 대부분 조건부 승인으로 끝납니다.</p>
+  <p class="en">Deals above certain thresholds must be notified. Under <strong>extraterritorial application</strong>, foreign-to-foreign mergers are reviewed if they affect the Korean market — which is the case here. Outcomes are clearance, conditional clearance, or prohibition; large platform cases almost always end in conditional clearance.</p>
+
+  <h3><span class="ko">개인정보보호법(PIPA)과 계열사 데이터 결합</span><span class="en">PIPA and combining affiliate data</span></h3>
+  <p class="ko">핵심만 말씀드리면, <strong>회사가 같은 그룹이 되었다는 사실만으로 개인정보를 합칠 수는 없습니다.</strong> 수집 목적 범위를 벗어나는 이용은 원칙적으로 별도 동의가 필요합니다.</p>
+  <p class="en">The essential point: <strong>becoming part of the same group does not by itself permit merging personal data.</strong> Use beyond the purpose for which data was collected generally requires separate consent.</p>
+  <p class="ko">따라서 "우버 이동 데이터 + 배민 주문 데이터"의 결합은 기술적으로는 쉬워도 <strong>법적으로는 별개 문제</strong>입니다. 그래서 이 사건은 공정위와 개인정보보호위원회가 같은 행위를 서로 다른 법으로 보게 되는 구조가 됩니다.</p>
+  <p class="en">So combining Uber trip data with Baemin order data is easy technically but <strong>a separate question legally</strong>. The result is that the KFTC and the Personal Information Protection Commission end up examining the same conduct under different statutes.</p>
+
+  <h3><span class="ko">상생협의체와 차등수수료</span><span class="en">The negotiated tiered commission</span></h3>
+  <p class="ko">2024년 배달플랫폼-입점업체 상생협의체에서 매출 구간별 차등 수수료가 합의됐습니다. 고매출 구간일수록 높고 영세 구간은 낮은 구조입니다. 본문에서 "이미 앵커가 있다"고 한 것이 이것입니다. <strong>한 번 사회적으로 합의된 숫자는 올리기가 정치적으로 매우 비쌉니다.</strong></p>
+  <p class="en">In 2024 a platform-merchant council agreed a commission schedule that varies by merchant revenue: higher for large sellers, lower for small ones. This is the "anchor" the analysis refers to. <strong>Once a number has been socially negotiated, raising it becomes politically very expensive.</strong></p>
+  <p class="ko">다만 이 합의는 <strong>중개수수료만</strong> 다룹니다. 광고비와 배달비 분담은 포함되지 않습니다. 본문 FIG 7의 문제의식이 여기서 나옵니다.</p>
+  <p class="en">But the agreement covers <strong>the commission only</strong>. Advertising spend and the merchant's share of delivery fees are outside it — which is exactly the concern FIG 7 raises.</p>
+
+  <h3><span class="ko">온플법</span><span class="en">The online platform bills</span></h3>
+  <p class="ko">여러 형태의 법안이 논의되어 왔으나 2026년 중반 기준 입법이 확정되지 않은 상태입니다. 통과 여부와 내용에 따라 이 딜의 규제 환경이 크게 달라질 수 있어, 본문에서 관찰 변수로 다뤘습니다.</p>
+  <p class="en">Several versions have been debated but, as of mid-2026, none has been enacted. Whether and how one passes could change the regulatory environment for this deal substantially, which is why the analysis treats it as a variable to watch.</p>
+</section>
+
+<!-- ===== P8 ===== -->
+<section id="p8">
+  <div class="sec-head"><span class="sec-num">08</span><h2><span class="ko">헷갈리기 쉬운 구분 정리</span><span class="en">Pairs that are easily confused</span></h2></div>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="ko">헷갈리는 쌍</span><span class="en">Pair</span></th>
+      <th><span class="ko">차이</span><span class="en">Difference</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="ko">지분가치 vs 기업가치(EV)</span><span class="en">Equity value vs enterprise value</span></td><td><span class="ko">지분가치는 주주 몫이고, EV는 부채까지 포함한 전체입니다</span><span class="en">Equity value is the shareholders' share; EV includes debt</span></td></tr>
+      <tr><td><span class="ko">34% 프리미엄 vs 127% 프리미엄</span><span class="en">The 34% vs the 127% premium</span></td><td><span class="ko">기준 시점이 다릅니다 (소문 반영 후 / 소문 이전)</span><span class="en">Different reference dates (after rumours / before them)</span></td></tr>
+      <tr><td><span class="ko">규모의 경제 vs 네트워크 효과</span><span class="en">Economies of scale vs network effects</span></td><td><span class="ko">전자는 <strong>생산비</strong>가 내려가는 것, 후자는 <strong>가치</strong>가 올라가는 것입니다</span><span class="en">The first lowers <strong>cost</strong>; the second raises <strong>value</strong></span></td></tr>
+      <tr><td><span class="ko">네트워크 효과 vs 학습효과(데이터)</span><span class="en">Network effects vs learning from data</span></td><td><span class="ko">전자는 사용자 수, 후자는 데이터 축적입니다. 데이터 쪽이 훨씬 약합니다</span><span class="en">One runs on user count, the other on accumulated data — and data is much weaker</span></td></tr>
+      <tr><td><span class="ko">직접 vs 간접 네트워크 효과</span><span class="en">Direct vs indirect network effects</span></td><td><span class="ko">같은 집단이 늘어서 좋아지는가, 다른 집단이 늘어서 좋아지는가</span><span class="en">More of the same group, or more of the other group</span></td></tr>
+      <tr><td><span class="ko">수평결합 vs 혼합결합</span><span class="en">Horizontal vs conglomerate merger</span></td><td><span class="ko">겹치는 시장이 있는가 없는가</span><span class="en">Whether the markets overlap</span></td></tr>
+      <tr><td><span class="ko">독점 vs 수요독점</span><span class="en">Monopoly vs monopsony</span></td><td><span class="ko">파는 쪽이 하나인가, 사는 쪽이 하나인가</span><span class="en">One seller, or one buyer</span></td></tr>
+      <tr><td><span class="ko">구조적 vs 행태적 시정조치</span><span class="en">Structural vs behavioural remedy</span></td><td><span class="ko">사업을 떼어내는가, 행동을 규율하는가</span><span class="en">Sell something off, or regulate conduct</span></td></tr>
+      <tr><td><span class="ko">NPV vs 실물옵션</span><span class="en">NPV vs real options</span></td><td><span class="ko">전자는 확정된 현금흐름의 현재가치, 후자는 <strong>기다릴 권리</strong>나 <strong>선점의 가치</strong>까지 포함합니다</span><span class="en">NPV values committed cash flows; real options also value the <strong>right to wait</strong> and the <strong>value of pre-empting</strong></span></td></tr>
+      <tr><td><span class="ko">취득 옵션 vs 배제 옵션</span><span class="en">Acquisition option vs preemption option</span></td><td><span class="ko">내가 얻는 것의 가치인가, 남이 못 얻게 해서 지키는 가치인가</span><span class="en">The value of what you gain, or of what you stop a rival gaining</span></td></tr>
+      <tr><td><span class="ko">런레이트 시너지 vs 누적 시너지</span><span class="en">Run-rate vs cumulative synergy</span></td><td><span class="ko">연간 반복액인가, 총 합계액인가</span><span class="en">A recurring annual figure, or a running total</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===== P9 ===== -->
+<section id="p9">
+  <div class="sec-head"><span class="sec-num">09</span><h2><span class="ko">이 글의 논증 구조 한눈에 보기</span><span class="en">The argument in one map</span></h2></div>
+  <p class="ko">논지가 어떻게 이어지는지 흐름만 다시 정리해 드립니다.</p>
+  <p class="en">How the argument connects, start to finish.</p>
+  <pre class="ko">[전제] 배달의 수익체증은 세 가지 — 밀도 / 고정비 분산 / 멀티호밍 절단
+   │
+   ├─ 밀도는 반경 2~3km에서만 작동한다 (nC2 논리)
+   │      → 국경을 넘는 인수로는 개선 불가
+   │      → 산 밀도는 이미 장부에 반영됨 → 프리미엄 정당화 못 함
+   │
+   ├─ 그렇다면 남는 건 고정비 분산
+   │      → 2026년 배달업의 최대 고정비 = AI 스택
+   │      → "이 딜은 AI 인프라 통합이다"   ★핵심 주장
+   │
+   ├─ 그런데 AI 스택도 층마다 다르다
+   │      → 전역 이전 가능 = 고정비 절감 (시너지의 대부분)
+   │      → 지역 종속 = 실제 배차 성능 (개선 안 됨)
+   │      → "이전되는 건 방법론이지 학습된 지식이 아니다"
+   │
+   ├─ 숫자로 검증: 프리미엄 $8.4B ≈ 시너지 가치 $9.6~12B
+   │      → 비용 시너지는 이미 다 지불됨
+   │      → 남는 근거는 매출 시너지 + 배제 옵션
+   │
+   ├─ 규제: 한국엔 수평 중첩 없음 → 혼합결합 이론밖에 없음
+   │      → 구조적 조치 어려움 → 행태적 조건
+   │
+   ├─ 회수: 수수료는 안 오름 (정치적 비용) → 광고 경매로 이동
+   │      → 감시 지표는 수수료율이 아니라 광고매출 비중
+   │
+   └─ 노동: 구매자 수 감소 → 수요독점 격차 확대
+          → 알고리즘 개인화 임금 = 1차 가격차별</pre>
+  <pre class="en">[PREMISE] Increasing returns in delivery come from three things —
+          density / fixed-cost amortisation / severing multihoming
+   │
+   ├─ Density only works within a 2–3 km radius (the nC2 logic)
+   │      → cross-border acquisition cannot improve it
+   │      → purchased density is already in the accounts → no premium justified
+   │
+   ├─ So what remains is fixed-cost amortisation
+   │      → the largest fixed cost in 2026 delivery = the AI stack
+   │      → "this deal is an AI-infrastructure consolidation"   ★ core claim
+   │
+   ├─ But the AI stack differs layer by layer
+   │      → globally transferable = cost savings (most of the synergy)
+   │      → locally bound = realised dispatch performance (not improved)
+   │      → "what moves is method, not learned knowledge"
+   │
+   ├─ Check it numerically: premium $8.4B ≈ synergy value $9.6–12B
+   │      → cost synergies are already paid away
+   │      → what is left rests on revenue synergies + the preemption option
+   │
+   ├─ Regulation: no horizontal overlap in Korea → only conglomerate theories
+   │      → structural remedies hard → behavioural conditions
+   │
+   ├─ Extraction: commissions will not rise (political cost) → moves to the ad auction
+   │      → the metric to watch is ad revenue share, not the take rate
+   │
+   └─ Labour: fewer buyers → wider monopsony gap
+          → algorithmic personalised pay = first-degree discrimination</pre>
+</section>
+
+<!-- ===== P10 ===== -->
+<section id="p10">
+  <div class="sec-head"><span class="sec-num">10</span><h2><span class="ko">더 깊이 보실 때 읽을 것</span><span class="en">Further reading, in order</span></h2></div>
+  <p class="ko">이론 배경을 직접 확인하고 싶으실 때 순서대로 권해 드립니다.</p>
+  <p class="en">If you want to check the theory at source, this is the order I would suggest.</p>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="ko">순위</span><span class="en">#</span></th>
+      <th><span class="ko">문헌</span><span class="en">Work</span></th>
+      <th><span class="ko">왜 읽는가</span><span class="en">Why</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td><strong>Armstrong (2006), <em>Competition in Two-Sided Markets</em>, RAND</strong></td><td><span class="ko">경쟁병목 개념의 원전입니다. 본문 03장의 뼈대이고, 분량 대비 얻는 것이 가장 큽니다</span><span class="en">The origin of the competitive bottleneck. It is the backbone of §03 and gives the most per page read</span></td></tr>
+      <tr><td class="n">2</td><td><strong>Hagiu &amp; Wright (2020), HBR</strong></td><td><span class="ko">짧고 실무적입니다. "데이터=해자" 통념을 정리하는 데 가장 효율적입니다</span><span class="en">Short and practical — the fastest way to dismantle the "data equals moat" assumption</span></td></tr>
+      <tr><td class="n">3</td><td><strong>Rochet &amp; Tirole (2003), JEEA</strong></td><td><span class="ko">다면시장의 정본입니다. 수식이 있지만 서론만 보셔도 가격 구조 개념은 잡히십니다</span><span class="en">The canonical multi-sided markets paper. Formal, but the introduction alone conveys the price-structure idea</span></td></tr>
+      <tr><td class="n">4</td><td><strong>Calvano et al. (2020), AER</strong></td><td><span class="ko">AI 담합 논의의 출발점입니다. 08장 허브앤스포크 부분의 근거입니다</span><span class="en">Where the AI-collusion debate starts; the basis for the hub-and-spoke passage in §08</span></td></tr>
+      <tr><td class="n">5</td><td><strong>Dixit &amp; Pindyck (1994), <em>Investment under Uncertainty</em></strong></td><td><span class="ko">실물옵션 교과서입니다. 전체를 읽기보다 "기다릴 가치" 챕터만 보셔도 됩니다</span><span class="en">The real-options textbook. Read the chapter on the option to wait rather than the whole book</span></td></tr>
+      <tr><td class="n">6</td><td><strong>Manning (2003), <em>Monopsony in Motion</em></strong></td><td><span class="ko">수요독점 노동시장의 표준 참고서입니다. 09장 배경입니다</span><span class="en">The standard reference on monopsonistic labour markets; background for §09</span></td></tr>
+      <tr><td class="n">7</td><td><strong><span class="ko">공정위 2020년 DH–우아한형제들 의결서</span><span class="en">KFTC's 2020 DH–Woowa decision</span></strong></td><td><span class="ko">실제 심사가 어떤 논리로 쓰이는지 보는 데 가장 좋습니다. 시장획정 부분만 보셔도 충분합니다</span><span class="en">The best way to see how a real review is reasoned. The market-definition section alone is enough</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===== P11 ===== -->
+<section id="p11">
+  <div class="sec-head"><span class="sec-num">—</span><h2><span class="ko">용어 빠른 찾기</span><span class="en">Glossary</span></h2></div>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="ko">용어</span><span class="en">Term</span></th>
+      <th><span class="ko">한 줄 정의</span><span class="en">One-line definition</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="n">VWAP</td><td><span class="ko">거래량 가중 평균 주가</span><span class="en">Volume-weighted average price</span></td></tr>
+      <tr><td class="n"><span class="ko">미영향 주가</span><span class="en">Unaffected price</span></td><td><span class="ko">인수설 유포 이전의 주가</span><span class="en">The share price before bid rumours circulated</span></td></tr>
+      <tr><td class="n"><span class="ko">완전희석</span><span class="en">Fully diluted</span></td><td><span class="ko">옵션·전환사채가 모두 주식이 됐다고 가정한 주식수</span><span class="en">Share count assuming all options and convertibles convert</span></td></tr>
+      <tr><td class="n">TRS</td><td><span class="ko">주식을 직접 보유하지 않고 손익만 가져가는 파생계약</span><span class="en">A derivative giving the economics of shares without holding them</span></td></tr>
+      <tr><td class="n">Irrevocable undertaking</td><td><span class="ko">대주주의 사전 응모 서면 확약</span><span class="en">A large holder's written pre-commitment to tender</span></td></tr>
+      <tr><td class="n"><span class="ko">런레이트 시너지</span><span class="en">Run-rate synergy</span></td><td><span class="ko">목표 시점에서의 연간 환산 절감액</span><span class="en">Annualised savings measured at a target date</span></td></tr>
+      <tr><td class="n">EPS accretion</td><td><span class="ko">인수 후 주당순이익 증가</span><span class="en">An increase in earnings per share after the deal</span></td></tr>
+      <tr><td class="n">Carve-out</td><td><span class="ko">인수 대상 중 일부 사업의 분리매각</span><span class="en">Selling part of the target to a third party</span></td></tr>
+      <tr><td class="n"><span class="ko">싱글호밍 / 멀티호밍</span><span class="en">Single-homing / multihoming</span></td><td><span class="ko">한 플랫폼만 씀 / 여러 개를 동시에 씀</span><span class="en">Using one platform / using several at once</span></td></tr>
+      <tr><td class="n"><span class="ko">경쟁병목</span><span class="en">Competitive bottleneck</span></td><td><span class="ko">싱글호밍 쪽에 대한 독점 접근권으로 멀티호밍 쪽에서 지대를 뽑는 구조</span><span class="en">Exclusive access to the single-homing side, monetised on the multihoming side</span></td></tr>
+      <tr><td class="n"><span class="ko">지대</span><span class="en">Rent</span></td><td><span class="ko">경쟁이 충분했다면 없었을 초과 이익</span><span class="en">Surplus profit that competition would have eliminated</span></td></tr>
+      <tr><td class="n">SSNIP</td><td><span class="ko">작지만 유의미한 지속적 가격인상 테스트</span><span class="en">Small but significant non-transitory increase in price test</span></td></tr>
+      <tr><td class="n">HHI</td><td><span class="ko">점유율 제곱합으로 계산하는 시장집중도</span><span class="en">Market concentration, the sum of squared shares</span></td></tr>
+      <tr><td class="n"><span class="ko">혼합결합</span><span class="en">Conglomerate merger</span></td><td><span class="ko">겹치지 않는 인접 시장 간의 결합</span><span class="en">A merger across adjacent, non-overlapping markets</span></td></tr>
+      <tr><td class="n"><span class="ko">자기우대</span><span class="en">Self-preferencing</span></td><td><span class="ko">플랫폼이 자사 서비스를 우대 노출하는 행위</span><span class="en">A platform ranking its own services above rivals'</span></td></tr>
+      <tr><td class="n"><span class="ko">행태적 시정조치</span><span class="en">Behavioural remedy</span></td><td><span class="ko">매각 대신 행위를 규율하는 조건</span><span class="en">Conditions on conduct rather than a divestiture</span></td></tr>
+      <tr><td class="n">Batching</td><td><span class="ko">한 라이더가 여러 주문을 묶어 처리</span><span class="en">One courier carrying several orders together</span></td></tr>
+      <tr><td class="n">ETA</td><td><span class="ko">도착예정시간 예측</span><span class="en">Estimated time of arrival prediction</span></td></tr>
+      <tr><td class="n"><span class="ko">분포 이동</span><span class="en">Distribution shift</span></td><td><span class="ko">학습 환경과 적용 환경의 데이터 분포가 다른 문제</span><span class="en">When training and deployment data differ in distribution</span></td></tr>
+      <tr><td class="n"><span class="ko">GSP 경매</span><span class="en">GSP auction</span></td><td><span class="ko">검색광고의 표준 경매 방식 (차순위 가격 과금)</span><span class="en">The standard search-ad auction, charging the next bid down</span></td></tr>
+      <tr><td class="n"><span class="ko">허브앤스포크</span><span class="en">Hub-and-spoke</span></td><td><span class="ko">공통 거래상대를 매개로 한 간접 담합 구조</span><span class="en">Indirect coordination through a shared counterparty</span></td></tr>
+      <tr><td class="n"><span class="ko">수요독점</span><span class="en">Monopsony</span></td><td><span class="ko">사는 쪽이 소수여서 임금이 낮게 형성되는 시장</span><span class="en">A market with few buyers, so wages settle low</span></td></tr>
+      <tr><td class="n">MRP / MFC</td><td><span class="ko">한계생산가치 / 한계요소비용</span><span class="en">Marginal revenue product / marginal factor cost</span></td></tr>
+      <tr><td class="n"><span class="ko">1차 가격차별</span><span class="en">First-degree discrimination</span></td><td><span class="ko">개인별 지불의사에 맞춘 완전한 차별</span><span class="en">Pricing exactly at each individual's willingness to pay</span></td></tr>
+      <tr><td class="n"><span class="ko">실물옵션</span><span class="en">Real option</span></td><td><span class="ko">기다리거나 선점할 권리의 가치</span><span class="en">The value of the right to wait or to pre-empt</span></td></tr>
+      <tr><td class="n"><span class="ko">배제 옵션</span><span class="en">Preemption option</span></td><td><span class="ko">경쟁자가 자산을 갖지 못하게 해서 지키는 가치</span><span class="en">Value protected by keeping an asset away from a rival</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    AIECONLAB · DEAL TEARDOWN · 2026-07-26<br>
+    <span class="ko">투자 자문이 아니며, 특정 증권의 매매를 권유하지 않습니다.</span>
+    <span class="en">Not investment advice; no security is recommended.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var body=document.body,
+      langBtns=document.querySelectorAll('.toggle button'),
+      tabs=document.querySelectorAll('.tab'),
+      views={article:document.getElementById('view-article'),
+             primer:document.getElementById('view-primer')},
+      hero=document.getElementById('hero-article');
+
+  langBtns.forEach(function(b){
+    b.addEventListener('click',function(){
+      var l=b.dataset.set;
+      body.dataset.lang=l;
+      document.documentElement.lang=l;
+      langBtns.forEach(function(x){x.setAttribute('aria-pressed', String(x.dataset.set===l));});
+    });
+  });
+
+  // Updating the address bar is a nice-to-have. It is unavailable when the page is
+  // rendered inside a sandboxed/srcdoc iframe (artifact previews, email clients),
+  // where the History API throws a SecurityError. Tab switching must still work there.
+  function setHash(name){
+    try{
+      if(!window.history || !history.replaceState) return;
+      if(location.protocol === 'about:' || location.href.indexOf('about:') === 0) return;
+      history.replaceState(null,'', name==='primer' ? '#primer' : location.pathname+location.search);
+    }catch(e){ /* sandboxed context: skip silently */ }
+  }
+
+  function show(name,push){
+    if(!views[name]) name='article';
+    Object.keys(views).forEach(function(k){ views[k].hidden = (k!==name); });
+    hero.hidden = (name!=='article');
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.dataset.view===name)); });
+    if(push) setHash(name);
+    window.scrollTo({top:0,behavior:'auto'});
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){ show(t.dataset.view,true); });
+  });
+
+  // deep link: #primer opens the note directly; #p3 etc. jump inside it
+  try{
+    var h = location.hash || '';
+    if(h==='#primer'){ show('primer',false); }
+    else if(/^#p\d/.test(h)){
+      show('primer',false);
+      var el=document.querySelector(h);
+      if(el) setTimeout(function(){ el.scrollIntoView(); },0);
+    }
+  }catch(e){ /* no hash available in this context */ }
+})();
+</script>
+</body>
+</html>

@@ -10,7 +10,8 @@ social:
 ---
 
 - 서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사
-- (현) VWS, AI Lead
+- (현) Coupang, Principal Program Manager
+- (전) VWS, AI Lead
 - (전) Decode Data Inc., Founder/Data Scientist
 - (전) Datacrunch Global, Data Scientist
 - (전) 육군3사관학교 경제학과 조교수

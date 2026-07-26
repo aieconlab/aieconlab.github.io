@@ -102,25 +102,57 @@ def main():
                  loc="left", fontsize=18, fontweight="bold", color=NAVY, pad=14)
 
     fig.subplots_adjust(left=0.185, right=0.865, top=0.9, bottom=0.26)
-    # 주석은 이미지 왼쪽 끝(x=0.01)에서 시작해, 본문에 삽입됐을 때 글의 왼쪽 선과 맞도록 한다
-    note1 = fig.text(0.01, 0.135, "주: 물량 기여도 = ln(물량 배수)/ln(금액 배수). 중국은 수출 개수, 한국은 가격 변동분을 제거한",
-                     fontsize=11.8, color=NOTE)
-    note2 = fig.text(0.01, 0.093, "수출물량지수(2020=100)로 잣대가 다르다. 한국은 2025·2026년 상반기 월별 지수 평균 기준.",
-                     fontsize=11.8, color=NOTE)
-    note3 = fig.text(0.01, 0.051, "자료: 중국 해관총서 「주요 수출상품 수량·금액표」, 한국은행 ECOS 403Y001·403Y002  |  계산: AIEconLab",
-                     fontsize=11.8, color=NOTE)
+    # 주석은 이미지 왼쪽 끝(x=0.01)에서 시작하고, '주' 문단은 그림 폭에 맞춰
+    # 그리디 줄바꿈으로 채운다(마지막 줄을 제외한 각 줄이 폭의 88% 이상이어야 통과)
+    NOTE_PARAS = [
+        "주: 물량 기여도 = ln(물량 배수)/ln(금액 배수). 중국은 수출 개수, 한국은 가격 변동분을 제거한 "
+        "수출물량지수(2020=100)로 잣대가 다르다. 한국은 2025·2026년 상반기 월별 지수 평균 기준.",
+        "자료: 중국 해관총서 「주요 수출상품 수량·금액표」, 한국은행 ECOS 403Y001·403Y002  |  계산: AIEconLab",
+    ]
+    NOTE_X, NOTE_FS = 0.01, 11.8
+    rend0 = fig.canvas.get_renderer()
+    fig_w0 = fig.canvas.get_width_height()[0]
+    limit = fig_w0 * (0.99 - NOTE_X)
+
+    def measure(s):
+        t = fig.text(0, -1, s, fontsize=NOTE_FS)
+        w = t.get_window_extent(renderer=rend0).width
+        t.remove()
+        return w
+
+    wrapped = []  # (para_index, line)
+    for pi, para in enumerate(NOTE_PARAS):
+        cur = ""
+        for word in para.split(" "):
+            trial = (cur + " " + word).strip()
+            if measure(trial) <= limit or not cur:
+                cur = trial
+            else:
+                wrapped.append((pi, cur))
+                cur = word
+        wrapped.append((pi, cur))
+    assert len(wrapped) == 3, ("주석 줄 수 변경 — y 좌표 재설계 필요", len(wrapped))
+    ys = [0.135, 0.093, 0.051]
+    notes = [fig.text(NOTE_X, y, ln, fontsize=NOTE_FS, color=NOTE)
+             for (pi, ln), y in zip(wrapped, ys)]
+    # 문단 중간 줄(다음 줄이 같은 문단)은 폭을 충분히 채워야 한다
+    for i, (pi, ln) in enumerate(wrapped[:-1]):
+        if wrapped[i + 1][0] == pi:
+            assert measure(ln) >= 0.88 * limit, ("주석 줄 채움 부족", ln[:20])
+    # 필수 문구('잣대가 다르다')가 줄바꿈 과정에서 사라지지 않았는지
+    assert any("잣대가 다르다" in ln for _pi, ln in wrapped)
 
     # 렌더링 후 텍스트 충돌·잘림 검사
     fig.canvas.draw()
     rend = fig.canvas.get_renderer()
     bb = lambda t: t.get_window_extent(renderer=rend)
     fig_w = fig.canvas.get_width_height()[0]
-    for t in (note1, note2, note3):
+    for t in notes:
         assert bb(t).x1 <= fig_w - 5, ("주석 우측 잘림", t.get_text()[:16])
     for t in right_notes:
         assert bb(t).x1 <= fig_w - 3, ("우측 병기 잘림", t.get_text()[:12])
-    gap12 = bb(note1).y0 - bb(note2).y1
-    gap23 = bb(note2).y0 - bb(note3).y1
+    gap12 = bb(notes[0]).y0 - bb(notes[1]).y1
+    gap23 = bb(notes[1]).y0 - bb(notes[2]).y1
     assert gap12 >= 2 and gap23 >= 2, ("주석 줄간 겹침", round(gap12, 1), round(gap23, 1))
     # 막대 안 라벨끼리 겹침 검사
     inbar = [t for t in ax.texts if t not in right_notes and t is not sep_note]

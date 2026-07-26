@@ -24,9 +24,9 @@
   ```bash
   /opt/anaconda3/bin/python3 -c "from PIL import Image; import sys; a,b=(Image.open(p).convert('RGBA') for p in sys.argv[1:3]); print('pixel-identical:', a.size==b.size and list(a.getdata())==list(b.getdata()))" scripts/out/fig01_value_vs_volume.png ../../../static/images/post/trend15/fig01_value_vs_volume.png
   ```
-- 게시본 SHA-256 (out/과 게시 경로 동일 확인, 2026-07-26 — fig01·fig02는 주석 위치를 이미지 왼쪽 끝으로 옮긴 재생성본으로 갱신):
-  - `fig01_value_vs_volume.png` `0563ff42866a1a6eb0be2aa4bcc0c347c4eff365693e1c979f8fb4a46f1795d0`
-  - `fig02_price_volume_contribution.png` `aeb51c93ee80dc727cc143fdd17c4c825a17d0b959878028d612c8bedb150f69`
+- 게시본 SHA-256 (out/과 게시 경로 동일 확인, 2026-07-26 — fig01·fig02는 주석을 이미지 왼쪽 끝 정렬 + 그림 폭 채움 줄바꿈으로 재생성해 갱신):
+  - `fig01_value_vs_volume.png` `ef90061b3d4c423bb2812a4fcdead78c07df59ef40d14196198d333a9dc6a2d8`
+  - `fig02_price_volume_contribution.png` `91e40d0171882f6ef90a9103aec6ac693d3b79480e6982ea507b717fdfe0b012`
   - `trend15_cover.png` `efa89623203f7a243c3f5942266bc83a55292b5b6574978ebda34c1e976115f6`
 - 출력 → 게시 경로 복사:
   - `scripts/out/fig01_value_vs_volume.png` → `static/images/post/trend15/`

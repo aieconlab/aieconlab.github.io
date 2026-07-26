@@ -20,10 +20,22 @@
       "Bash(xargs -I{} sh -c 'echo \"--- {}\"; head -18 \"{}\"')",
       "PowerShell($sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; $url=\"https://github.com/gohugoio/hugo/releases/download/v0.124.0/hugo_extended_0.124.0_windows-amd64.zip\"; try { Invoke-WebRequest -Uri $url -OutFile \"$sp\\\\hugo.zip\" -UseBasicParsing -TimeoutSec 180; Expand-Archive -Path \"$sp\\\\hugo.zip\" -DestinationPath \"$sp\\\\hugo\" -Force; & \"$sp\\\\hugo\\\\hugo.exe\" version } catch { \"DOWNLOAD FAILED: $\\($_.Exception.Message\\)\" })",
       "PowerShell($sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; & \"$sp\\\\hugo\\\\hugo.exe\" --minify --gc --destination \"$sp\\\\public\" --logLevel info 2>&1 | Select-Object -Last 40)",
-      "PowerShell($sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; & \"$sp\\\\hugo\\\\hugo.exe\" -s \"c:\\\\github\\\\aieconlab.github.io\" --minify --gc --destination \"$sp\\\\public\" 2>&1 | Select-Object -Last 40)"
+      "PowerShell($sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; & \"$sp\\\\hugo\\\\hugo.exe\" -s \"c:\\\\github\\\\aieconlab.github.io\" --minify --gc --destination \"$sp\\\\public\" 2>&1 | Select-Object -Last 40)",
+      "Bash(git config *)",
+      "Bash(echo \"\\(exit $?\\)\")",
+      "Bash(cd \"c:/github/aieconlab.github.io\" && sed -i 's|^date: 2026-07-26T09:00:00+09:00$|date: 2026-07-26T16:58:00+09:00|' content/english/post/html/uber-delivery-hero-aieconlab.html && sed -n '1,5p' content/english/post/html/uber-delivery-hero-aieconlab.html)",
+      "Bash(curl -s http://localhost:1313/post/uber-delivery-hero-aieconlab/)",
+      "PowerShell($p=\"c:\\\\github\\\\aieconlab.github.io\"; foreach\\($d in @\\(\"$p\\\\assets\\\\images\\\\post\\\\uber_dh.jpeg\",\"$p\\\\static\\\\images\\\\post\\\\uber_dh.jpeg\"\\)\\){ \"$d : $\\(if\\(Test-Path $d\\){'있음 ' + \\(Get-Item $d\\).Length + ' bytes'}else{'없음'}\\)\" }; Add-Type -AssemblyName System.Drawing; $f=\"$p\\\\assets\\\\images\\\\post\\\\uber_dh.jpeg\"; if\\(Test-Path $f\\){ $img=[System.Drawing.Image]::FromFile\\($f\\); \"크기: $\\($img.Width\\)x$\\($img.Height\\)\"; $img.Dispose\\(\\) })",
+      "Bash(curl -s http://localhost:1313/?v=__TRACKED_VAR__)",
+      "PowerShell($p=\"c:\\\\github\\\\aieconlab.github.io\"; Select-String -Path \"$p\\\\layouts\\\\index.html\" -Pattern \"first \\\\d+ \\\\\\(where\" | ForEach-Object { $_.Line.Trim\\(\\) }; $sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; Remove-Item \"$sp\\\\public3\" -Recurse -Force -ErrorAction SilentlyContinue; & \"$sp\\\\hugo\\\\hugo.exe\" -s $p --destination \"$sp\\\\public3\" 2>&1 | Select-Object -Last 2; $t = Get-Content \"$sp\\\\public3\\\\index.html\" -Raw -Encoding UTF8; \"CLI 빌드 featured 슬라이드 수: $\\(\\([regex]::Matches\\($t,'<article class=\"\"featured-post\"\">'\\)\\).Count\\)\")",
+      "PowerShell(Get-Process hugo -ErrorAction SilentlyContinue | Stop-Process -Force; Start-Sleep -Milliseconds 800; $sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; Start-Process -FilePath \"$sp\\\\hugo\\\\hugo.exe\" -ArgumentList @\\(\"server\",\"-s\",\"c:\\\\github\\\\aieconlab.github.io\",\"-D\",\"--port\",\"1313\",\"--disableFastRender\",\"--noHTTPCache\"\\) -WindowStyle Hidden; Start-Sleep -Seconds 4; \"restarted\")",
+      "Bash(gh auth *)",
+      "Bash(gh api *)",
+      "Bash(git credential *)"
     ],
     "additionalDirectories": [
-      "C:\\github\\aieconlab.github.io\\content\\english\\post\\html"
+      "C:\\github\\aieconlab.github.io\\content\\english\\post\\html",
+      "c:\\github\\aieconlab.github.io\\content\\english\\post\\html"
     ]
   }
 }

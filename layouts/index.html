@@ -2,7 +2,7 @@
 
 {{ $featuredPosts := slice }}
 {{ if site.Params.featured_post }}
-  {{ $featuredPosts = first 3 (where site.RegularPages "Type" "featured") }}
+  {{ $featuredPosts = first 5 (where site.RegularPages "Type" "featured") }}
 {{ end }}
 
 {{ $postPages := where site.RegularPages "Section" "in" site.Params.mainSections }}

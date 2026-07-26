@@ -33,7 +33,7 @@
   - `scripts/out/fig02_price_volume_contribution.png` → `static/images/post/trend15/`
   - `scripts/out/trend15_cover.png` → `assets/images/post/trend15_cover.png`
 
-## 원자료 대장 (`data/`, 취득 2026-07-26 — GACC·UIBE·TrendForce 12:00 KST, ECOS 무역지수 12:16, ECOS GDI 12:18, 언론 보도 12:30~12:36)
+## 원자료 대장 (`data/`, 취득 2026-07-26 — GACC·UIBE·TrendForce 12:00 KST, ECOS 무역지수 12:16, ECOS GDI 12:18, 언론 보도 12:30~12:36, NBS 원표 13:02)
 
 | 파일 | 출처 URL | SHA-256 |
 |---|---|---|

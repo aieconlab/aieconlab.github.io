@@ -15,4 +15,7 @@
 {{- $raw = replaceRE `(?i)<!doctype[^>]*>` " " $raw -}}
 {{- $text := $raw | plainify | htmlUnescape -}}
 {{- $text = replaceRE `\s+` " " $text -}}
-{{- trim $text " " -}}
+{{- /* `return`, not plain output: this partial is an .html template, so printing
+       the value would run it through Go's contextual escaping and put entities
+       (&#34; …) back into the index. */ -}}
+{{- return (trim $text " ") -}}

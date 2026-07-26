@@ -31,7 +31,16 @@
       "PowerShell(Get-Process hugo -ErrorAction SilentlyContinue | Stop-Process -Force; Start-Sleep -Milliseconds 800; $sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; Start-Process -FilePath \"$sp\\\\hugo\\\\hugo.exe\" -ArgumentList @\\(\"server\",\"-s\",\"c:\\\\github\\\\aieconlab.github.io\",\"-D\",\"--port\",\"1313\",\"--disableFastRender\",\"--noHTTPCache\"\\) -WindowStyle Hidden; Start-Sleep -Seconds 4; \"restarted\")",
       "Bash(gh auth *)",
       "Bash(gh api *)",
-      "Bash(git credential *)"
+      "Bash(git credential *)",
+      "Bash(grep -oE \"<title>[^<]*</title>|<h1[^>]*>.*|class=\\\\\"eyebrow\\\\\".{0,300}|<p class=\\\\\"dek[^\\\\\"]*\\\\\">[^<]*\" ai_diagnosis.html)",
+      "Bash(grep -v '^\\\\s*$')",
+      "Bash(grep -oiE \"\\(byline|author|AIEconLab|2026\\)[^<]{0,120}\" ai_diagnosis.html)",
+      "Bash(grep -oE \"position:\\\\s*sticky[^}]{0,60}\" ai_diagnosis.html)",
+      "Bash(grep -oE \"\\\\-\\\\-\\(paper|ink|line|magenta|f-mono\\)[^;]{0,40}\" ai_diagnosis.html)",
+      "Bash(grep -oE \"body\\\\s*\\\\{[^}]{0,200}\" ai_diagnosis.html)",
+      "PowerShell($edge=\"C:\\\\Program Files \\(x86\\)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\"; $sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; & $edge --headless=new --disable-gpu --no-sandbox --virtual-time-budget=8000 --user-data-dir=\"$sp\\\\p5\" --window-size=1280,820 --screenshot=\"$sp\\\\shot-diag.png\" \"http://localhost:1313/post/ai-diagnosis/\" 2>$null | Out-Null; \"size: $\\(\\(Get-Item \"$sp\\\\shot-diag.png\"\\).Length\\)\")",
+      "Bash(curl -s http://localhost:1313/)",
+      "PowerShell(Get-Process hugo -ErrorAction SilentlyContinue | Stop-Process -Force; Start-Sleep -Milliseconds 800; $sp=\"C:\\\\Users\\\\ymju8\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--github-aieconlab-github-io\\\\e2d12a01-e9e0-4783-84ca-4a0a4b5085d7\\\\scratchpad\"; Start-Process -FilePath \"$sp\\\\hugo\\\\hugo.exe\" -ArgumentList @\\(\"server\",\"-s\",\"c:\\\\github\\\\aieconlab.github.io\",\"-D\",\"--port\",\"1313\",\"--disableFastRender\",\"--noHTTPCache\"\\) -WindowStyle Hidden; Start-Sleep -Seconds 5; \"restarted\")"
     ],
     "additionalDirectories": [
       "C:\\github\\aieconlab.github.io\\content\\english\\post\\html",

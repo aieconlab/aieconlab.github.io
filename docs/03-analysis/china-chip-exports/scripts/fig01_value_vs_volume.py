@@ -89,11 +89,12 @@ def main():
                  loc="left", fontsize=18.5, fontweight="bold", color=NAVY, pad=16)
 
     fig.subplots_adjust(left=0.095, right=0.97, top=0.905, bottom=0.225)
-    note1 = fig.text(0.095, 0.112, "주: 각 시점의 연초 누계 전년 동기 대비 증가율(해관총서 공표치). 수량 단위는 개수(억 개)이며",
+    # 주석은 이미지 왼쪽 끝(x=0.01)에서 시작해, 본문에 삽입됐을 때 글의 왼쪽 선과 맞도록 한다
+    note1 = fig.text(0.01, 0.112, "주: 각 시점의 연초 누계 전년 동기 대비 증가율(해관총서 공표치). 수량 단위는 개수(억 개)이며",
                      fontsize=11.8, color=NOTE)
-    note2 = fig.text(0.095, 0.070, "제품 구성 변화를 통제하지 못한다. 6월 단월의 수량 증가율은 -0.4%(누계 차분).",
+    note2 = fig.text(0.01, 0.070, "제품 구성 변화를 통제하지 못한다. 6월 단월의 수량 증가율은 -0.4%(누계 차분).",
                      fontsize=11.8, color=NOTE)
-    note3 = fig.text(0.095, 0.028, "자료: 중국 해관총서 「주요 수출상품 수량·금액표」 2~6월판(달러 기준)  |  계산: AIEconLab",
+    note3 = fig.text(0.01, 0.028, "자료: 중국 해관총서 「주요 수출상품 수량·금액표」 2~6월판(달러 기준)  |  계산: AIEconLab",
                      fontsize=11.8, color=NOTE)
 
     # 렌더링 후 텍스트 충돌·잘림 검사

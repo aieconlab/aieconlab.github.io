@@ -102,11 +102,12 @@ def main():
                  loc="left", fontsize=18, fontweight="bold", color=NAVY, pad=14)
 
     fig.subplots_adjust(left=0.185, right=0.865, top=0.9, bottom=0.26)
-    note1 = fig.text(0.02, 0.135, "주: 물량 기여도 = ln(물량 배수)/ln(금액 배수). 중국은 수출 개수, 한국은 가격 변동분을 제거한",
+    # 주석은 이미지 왼쪽 끝(x=0.01)에서 시작해, 본문에 삽입됐을 때 글의 왼쪽 선과 맞도록 한다
+    note1 = fig.text(0.01, 0.135, "주: 물량 기여도 = ln(물량 배수)/ln(금액 배수). 중국은 수출 개수, 한국은 가격 변동분을 제거한",
                      fontsize=11.8, color=NOTE)
-    note2 = fig.text(0.02, 0.093, "수출물량지수(2020=100)로 잣대가 다르다. 한국은 2025·2026년 상반기 월별 지수 평균 기준.",
+    note2 = fig.text(0.01, 0.093, "수출물량지수(2020=100)로 잣대가 다르다. 한국은 2025·2026년 상반기 월별 지수 평균 기준.",
                      fontsize=11.8, color=NOTE)
-    note3 = fig.text(0.02, 0.051, "자료: 중국 해관총서 「주요 수출상품 수량·금액표」, 한국은행 ECOS 403Y001·403Y002  |  계산: AIEconLab",
+    note3 = fig.text(0.01, 0.051, "자료: 중국 해관총서 「주요 수출상품 수량·금액표」, 한국은행 ECOS 403Y001·403Y002  |  계산: AIEconLab",
                      fontsize=11.8, color=NOTE)
 
     # 렌더링 후 텍스트 충돌·잘림 검사

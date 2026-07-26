@@ -23,15 +23,16 @@
   font-size: 0.875rem;
   color: #64748b;
   line-height: 1.6;
-  text-align: justify;
+  text-align: left;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
 
-/* Long-form Korean body text: justified alignment, no mid-word breaks */
+/* Long-form Korean body text: left-aligned (justify creates uneven gaps with
+   number-heavy Korean text), no mid-word breaks */
 .article-content p,
 .article-content li {
-  text-align: justify;
+  text-align: left;
   word-break: keep-all;
   overflow-wrap: break-word;
 }

@@ -1,0 +1,11 @@
+[렌더링 텍스트 보존 — JS 렌더 페이지라 curl 원본(kimi_k3_pricing.html)에는 가격이 없음]
+URL: https://platform.kimi.ai/docs/pricing/chat-k3
+취득: 2026-07-27 14:2x KST, Claude Code 내장 브라우저
+페이지 제목: Flagship Model Kimi K3 Pricing - Kimi API Platform
+
+Model | Unit | Input Price (Cache Hit) | Input Price (Cache Miss) | Output Price | Context Window
+kimi-k3 | 1M tokens | $0.30 | $3.00 | $15.00 | 1,048,576 tokens
+
+"Kimi K3 is Kimi's flagship model for long-horizon coding and end-to-end knowledge work,
+with a 1M-token context window and industry-leading intelligence."
+"Always reasons and supports configuring its reasoning effort ... (low / high / max, default max)"

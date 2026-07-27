@@ -1,0 +1,11 @@
+[렌더링 텍스트 발췌 보존 — JS 렌더 페이지. 취득 2026-07-27 14:4x KST, Claude Code 내장 브라우저]
+URL: https://www.kimi.com/blog/kimi-k3  (제목: Kimi K3 Tech Blog: Open Frontier Intelligence, 게시일 2026/07/16 — kimi.com 리서치 인덱스 표기)
+
+"Today, we are introducing Kimi K3 — our most capable model. Kimi K3 is a 2.8T-parameter model
+built on our Kimi Delta Attention and Attention Residuals, with native vision capabilities and
+a 1-million-token context window. It is the world's first open 3T-class model..."
+"We have also scaled up Mixture of Experts (MoE) sparsity, effectively activating 16 out of 896
+experts when paired with a Stable LatentMoE framework."
+"The full model weights will be released by July 27, 2026. Further details on the architecture,
+training, and evaluations will be released alongside the Kimi K3 technical report."
+(라이선스 언급 없음 — 2026-07-27 확인 시점 기준)

@@ -1,0 +1,9 @@
+[렌더링 텍스트 발췌 보존 — curl 400 차단 페이지. 취득 2026-07-27 14:4x KST, Claude Code 내장 브라우저]
+URL: https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/  (제목: Introducing Muse Spark 1.1)
+
+"Introducing Muse Spark 1.1 — July 9, 2026"
+"the latest model from Meta Superintelligence Labs ... a multimodal reasoning model built for
+agentic tasks"
+"Along with this release, we are launching a public preview of the new Meta Model API where
+developers can access Muse Spark 1.1."
+(본문에 API 단가 없음 — 확인 범위 내)

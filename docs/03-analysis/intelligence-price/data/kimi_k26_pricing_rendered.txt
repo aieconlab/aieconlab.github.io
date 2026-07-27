@@ -1,0 +1,7 @@
+[렌더링 텍스트 보존 — JS 렌더 페이지라 curl 원본(kimi_k26_pricing.html)에는 가격이 없음]
+URL: https://platform.kimi.ai/docs/pricing/chat-k26
+취득: 2026-07-27 14:2x KST, Claude Code 내장 브라우저
+페이지 제목: Kimi K2.6 Model Pricing - Kimi API Platform
+
+Model | Unit | Input Price (Cache Hit) | Input Price (Cache Miss) | Output Price | Context Window
+kimi-k2.6 | 1M tokens | $0.16 | $0.95 | $4.00 | 262,144 tokens

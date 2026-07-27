@@ -36,7 +36,11 @@ def pdf_text(name):
 CHECKS = [
     # (파일, [필수 문자열 또는 (라벨, 정규식)]) — 그림·본문 상수의 근거
     ("openai_pricing.html", ["gpt-5.6-sol", "gpt-5.5", "$30.00", "$15.00", "$6.00",
-                             "gpt-5.5-pro", "$180.00"]),
+                             "gpt-5.5-pro", "$180.00",
+                             # 표본 밖에는 더 높은 값도 있다(본문 '숫자의 기준'에 명기)
+                             # HTML 엔티티(&quot;)로 인코딩돼 있어 따옴표를 느슨하게 매칭
+                             ("o1-pro 입력150/출력600",
+                              r'o1-pro(?:&quot;|")\],\[0,150\],\[0,null\],\[0,600\]')]),
     ("anthropic_pricing.html", ["$75", "$25", "$50", "$10", "approximately 30% more tokens",
                                 "August 31", "September 1"]),
     ("google_gemini_pricing.html", ["gemini-3.5-flash", "gemini-3.6-flash", "$9.00",
@@ -51,9 +55,14 @@ CHECKS = [
     ("mistral_pricing.html", ["Medium 3.5", "Ministral 3", "$0.1"]),
     ("together_pricing.html", ["DeepSeek V4 Pro", "3.48"]),
     ("aa_cost_per_task_rendered.txt", ["$0.04", "$0.35", "$0.50", "$0.72", "$1.53",
-                                       "$1.54", "$1.80", "$2.03", "$2.75", "300M", "120M",
+                                       "$1.54", "$1.80", "$2.03", "$2.75",
                                        "Cost per Task", "with fallback",
-                                       "Intelligence #16/190 = 53", "Intelligence #10/190 = 56"]),
+                                       "Intelligence #16/190 = 53", "Intelligence #10/190 = 56",
+                                       # 과제당 비용의 사이트 정의(출력 단가만의 함수가 아님)
+                                       "input, cache hit, cache write, reasoning, and answer token prices",
+                                       "divided by task count",
+                                       # 과제당 출력 토큰은 별도 지표
+                                       "Output Tokens per Intelligence Index Task"]),
     ("google_io2026_keynote.html", ["19 billion tokens per minute", "375"]),
     ("kimi_k3_blog_rendered.txt", ["2.8T-parameter", "16 out of 896",
                                    "July 27, 2026"]),
@@ -96,13 +105,45 @@ for fname, needles in PDF_CHECKS:
             fails.append((fname, n))
 
 # 파생 산수 검증(그림·본문에서 쓰는 계산)
+import math
+
+
+def _rank(vals):
+    order = sorted(range(len(vals)), key=lambda i: vals[i])
+    r = [0] * len(vals)
+    for pos, i in enumerate(order):
+        r[i] = pos + 1
+    return r
+
+
+def _pearson(x, y):
+    mx, my = sum(x) / len(x), sum(y) / len(y)
+    num = sum((a - mx) * (b - my) for a, b in zip(x, y))
+    den = math.sqrt(sum((a - mx) ** 2 for a in x) * sum((b - my) ** 2 for b in y))
+    return num / den
+
+
+# 그림 2와 동일한 7종 (출력 단가, 과제당 비용)
+_PAIRS = [(0.87, 0.04), (6.00, 0.35), (7.50, 0.50), (10.0, 1.53),
+          (15.0, 0.72), (25.0, 1.80), (30.0, 1.54)]
+_p = [a for a, _ in _PAIRS]
+_c = [b for _, b in _PAIRS]
+_rp, _rc = _rank(_p), _rank(_c)
+_n = len(_PAIRS)
+_spearman = 1 - 6 * sum((a - b) ** 2 for a, b in zip(_rp, _rc)) / (_n * (_n * _n - 1))
+_logr = _pearson([math.log(v) for v in _p], [math.log(v) for v in _c])
+_inv = sum(1 for i in range(_n) for j in range(_n) if _p[i] < _p[j] and _c[i] > _c[j])
+
 calc = [
-    ("180배", abs(50 / 0.28 - 178.57) < 0.1),
-    ("1,800배", abs(180 / 0.10 - 1800) < 1e-9),
+    ("180배(비교 15종)", abs(50 / 0.28 - 178.57) < 0.1),
+    ("1,800배(표본 밖 두 사례)", abs(180 / 0.10 - 1800) < 1e-9),
     ("과제당 15%", abs(1 - 1.53 / 1.80 - 0.15) < 0.005),
     ("단가 60%", abs(1 - 10 / 25 - 0.60) < 1e-9),
     ("단가 3배·1센트", 30 / 10 == 3.0 and abs(abs(1.54 - 1.53) - 0.01) < 1e-9),
-    ("출력 토큰 2.5배", 300 / 120 == 2.5),
+    ("K3는 Sonnet 단가 1.5배·과제당 절반 이하", 15.0 / 10.0 == 1.5 and 0.72 / 1.53 < 0.5),
+    ("순위상관 0.93", abs(_spearman - 0.929) < 0.005),
+    ("로그 상관 0.95", abs(_logr - 0.953) < 0.005),
+    ("역전 두 쌍", _inv == 2),
 ]
 for label, ok in calc:
     if not ok:

@@ -55,8 +55,8 @@ left_texts = [
             fontweight="bold", va="center", ha="left", linespacing=1.35),
     ax.text(LX, 425, "AI 비용을 세는 두 가지 방법", fontsize=22,
             color=BLUE, va="center", ha="left", fontweight="medium"),
-    ax.text(LX, 295, "출력 단가 3배인 모델, 과제당 비용은 1센트 차이\n"
-                     "7월의 신모델들은 토큰 값을 내리지 않았다",
+    ax.text(LX, 295, "출력 단가 3배인 두 모델, 과제당 비용은 1센트 차이\n"
+                     "전작과 견줄 수 있는 7월 신모델은 동결 아니면 인상",
             fontsize=17, color=GRAY, va="center", ha="left", linespacing=1.9),
     ax.text(LX, 180, "2026년 7월, 모델 가격표와 과제당 비용 읽기", fontsize=14,
             color=LGRAY, va="center", ha="left"),

@@ -9,9 +9,11 @@
 - Google:    Gemini 2.5 Flash $2.50 → 3.5 Flash $9.00 (3.6배, 3.5 Flash는 2026-05-19
              I/O에서 전면 제공 — 7월 신모델 아님) → 3.6 Flash $7.50
 - xAI:       Grok 4.3 $2.50 → Grok 4.5 $6.00 (2.4배, 2026-07-16)
-- DeepSeek:  V4-Pro $3.48 → $0.87 (2026-05-25 발표, 05-31 발효 인하), V4-Flash $0.28
+- DeepSeek:  V4-Pro $0.87, V4-Flash $0.28 (현행가만 표기 — 인하 시점·이전 가격은 공식
+             자료로 확인되지 않아 화살표를 그리지 않는다. 공식 변경 기록의 2026년 항목은
+             04-24 V4 공개뿐)
 - 본문 비교 15종 기준 최저 $0.28(V4-Flash) ~ 최고 $50(Fable 5) = 약 180배
-  (정가표 전체로는 격차가 더 큼: gpt-5.5-pro 출력 $180, Ministral 3 3B $0.10)
+  (표본 밖에서는 더 벌어짐: gpt-5.5-pro 출력 $180, Ministral 3 3B $0.10, 구세대 o1-pro $600)
 
 사용법: python3 fig01_output_price_moves.py [--out PNG] [--font FONT]
 의존성: matplotlib
@@ -34,7 +36,9 @@ ROWS = [
     ("문샷AI", "Kimi K2.6", 4.0, "Kimi K3", 15.0, "2026-07 신모델", "×3.75"),
     ("구글", "2.5 Flash", 2.5, "3.6 Flash", 7.5, "2026-05~ 세대", "×3.0"),
     ("xAI", "Grok 4.3", 2.5, "Grok 4.5", 6.0, "2026-07 신모델", "×2.4"),
-    ("딥시크", "V4-Pro", 3.48, "V4-Pro", 0.87, "2026-05 인하", "×1/4"),
+    # 딥시크는 현행가만 점으로 표시(이전 가격·인하 시점 미확인) — old_p == new_p 로 두되
+    # 'frozen' 분기를 타지 않도록 별도 처리한다
+    ("딥시크", "V4-Pro", 0.87, "V4-Pro", 0.87, "현행가", "비교 기준 없음"),
 ]
 FABLE5 = 50.0        # Anthropic 신설 최상위
 GEMINI_35F = 9.0     # 구글 중간 경유(3.5 Flash)
@@ -48,8 +52,8 @@ assert abs(GEMINI_35F / 2.5 - 3.6) < 1e-9              # 3.5 Flash 대비
 assert abs(7.5 / 2.5 - 3.0) < 1e-9                     # 3.6 Flash 대비
 assert ROWS[1][2] == ROWS[1][4] == 30.0                # GPT 동결
 assert abs(25.0 / 75.0 - 1 / 3) < 1e-9                 # Opus 인하
-assert abs(0.87 / 3.48 - 0.25) < 1e-9                  # DeepSeek 인하
-assert all(r[4] <= FABLE5 for r in ROWS)               # 현행 최고는 Fable 5
+assert ROWS[-1][2] == ROWS[-1][4] == 0.87              # 딥시크는 현행가만(이전 가격 미확인)
+assert all(r[4] <= FABLE5 for r in ROWS)               # 비교 15종의 최고는 Fable 5
 
 
 def dollar(v):
@@ -86,11 +90,17 @@ def main():
             ax.plot([GEMINI_35F], [y], "o", ms=6.5, mfc="white", mec=NAVY, mew=1.4, zorder=4)
             labels.append(ax.text(GEMINI_35F * 1.06, y + 0.30, f"3.5 Flash {dollar(GEMINI_35F)}",
                                   fontsize=9.5, color=NOTE, ha="left", va="center"))
+        elif comp == "딥시크":
+            pass  # 비교 기준(이전 가격) 미확인 — 화살표 없이 현행가 점만 찍는다
         elif not frozen:
             ax.annotate("", xy=(new_p, y), xytext=(old_p, y),
                         arrowprops=dict(arrowstyle="-|>", color=NAVY, lw=2.0,
                                         shrinkA=5, shrinkB=5, mutation_scale=16), zorder=3)
-        if frozen:
+        if comp == "딥시크":
+            ax.plot([new_p], [y], "o", ms=8, color=NAVY, zorder=5)
+            labels.append(ax.text(new_p, y - 0.36, f"{new_m} {dollar(new_p)}", fontsize=10.5,
+                                  color=NAVY, ha="center", va="center", fontweight="bold"))
+        elif frozen:
             ax.plot([old_p], [y], "o", ms=13, mfc="none", mec=GRAY, mew=1.6, zorder=3)
             ax.plot([new_p], [y], "o", ms=8, color=NAVY, zorder=4)
             labels.append(ax.text(old_p, y + 0.34, f"{old_m} → {new_m}  {dollar(new_p)}",
@@ -99,7 +109,7 @@ def main():
         else:
             ax.plot([old_p], [y], "o", ms=8, mfc="white", mec=GRAY, mew=1.8, zorder=4)
             ax.plot([new_p], [y], "o", ms=8, color=NAVY, zorder=5)
-            old_lab = f"{old_m} {dollar(old_p)}" if comp != "딥시크" else f"인하 전 {dollar(old_p)}"
+            old_lab = f"{old_m} {dollar(old_p)}"
             old_dy = -0.36 if comp == "앤스로픽" else 0.34  # 앤스로픽 행 상단은 Fable 라벨 몫
             labels.append(ax.text(old_p, y + old_dy, old_lab, fontsize=10, color=GRAY,
                                   ha="center", va="center"))
@@ -109,9 +119,10 @@ def main():
         # 회사명(왼쪽 밖) · 배수/시점(오른쪽 밖)
         labels.append(ax.text(0.185, y, comp, fontsize=12, color=NAVY, ha="left",
                               va="center", fontweight="bold"))
-        labels.append(ax.text(120, y + 0.14, mult, fontsize=11.5, ha="left", va="center",
-                              color=(GRAY if mult in ("×1/3", "×1/4") else NAVY),
-                              fontweight=("normal" if mult in ("×1/3", "×1/4") else "bold")))
+        soft = mult in ("×1/3", "비교 기준 없음")
+        labels.append(ax.text(120, y + 0.14, mult, fontsize=10 if soft else 11.5,
+                              ha="left", va="center", color=GRAY if soft else NAVY,
+                              fontweight="normal" if soft else "bold"))
         labels.append(ax.text(120, y - 0.24, when, fontsize=9, color=NOTE, ha="left",
                               va="center"))
 
@@ -122,7 +133,7 @@ def main():
                           fontsize=10.5, color=BLUE, ha="center", va="center",
                           fontweight="bold"))
     ax.plot([V4_FLASH], [y_ds], "o", ms=7, color=BLUE, zorder=5)
-    labels.append(ax.text(0.19, y_ds - 0.36, f"V4-Flash {dollar(V4_FLASH)} (비교 최저)",
+    labels.append(ax.text(0.19, y_ds + 0.34, f"V4-Flash {dollar(V4_FLASH)} (비교 최저)",
                           fontsize=9.5, color=BLUE, ha="left", va="center"))
 
     # 상단 스펙트럼 브래킷: $0.28 ~ $50 ≈ 180배
@@ -153,9 +164,10 @@ def main():
 
     NOTE_PARAS = [
         "주: 각 사 공식 문서의 표준 출력 단가(2026-07-27 확인, 캐시·배치 할인 제외). 회색은 비교 기준으로 원칙은 "
-        "직전 모델이되, 구글은 기존 2.5 Flash(현행 3.6 Flash는 2026년 5월 이후 세대), 딥시크는 같은 모델의 "
-        "인하 전 가격이다. 남색은 현행. 확인된 대폭 인하는 모두 2026년 7월 이전이다(앤스로픽 2025-11-24 "
-        "Opus 4.5부터, 딥시크 2026-05-31 발효).",
+        "직전 모델이되, 구글은 기존 2.5 Flash다(현행 3.6 Flash는 2026년 5월 이후 세대). 딥시크는 이전 가격과 "
+        "인하 시점이 공식 자료로 확인되지 않아 현행가만 표시했다. 남색은 현행. 1차 출처로 확인된 대폭 인하는 "
+        "앤스로픽 한 건으로 2025-11-24 Opus 4.5부터다. 최저·최고는 본문 비교 15종 기준이며 표본 밖에는 더 "
+        "높은 값도 있다(구세대 o1-pro 출력 $600).",
         "자료: OpenAI·Anthropic·Google·xAI·Moonshot AI·DeepSeek 공식 가격 문서  |  정리: AIEconLab",
     ]
     NOTE_X, NOTE_FS = 0.01, 11.3

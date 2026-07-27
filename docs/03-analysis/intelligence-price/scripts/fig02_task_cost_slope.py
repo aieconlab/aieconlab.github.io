@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""그림 2: 단가의 순서는 청구서의 순서가 아니다 — 출력 단가 vs 과제당 비용(Cost per Task).
+"""그림 2: 단가와 청구서는 대체로 함께 가되 일대일이 아니다 — 출력 단가 vs 과제당 비용.
 
 수치(집계사이트 Artificial Analysis 자체 측정, 2026-07-27 확인 — 원자료 스냅숏
-data/aa_cost_per_task_rendered.txt. 'Cost per Task'는 동 사이트 지능지수(v4.1, 9개 평가)
-과제들의 과제당 가중평균 비용. 출력 단가는 각 사 공식 가격 문서):
+data/aa_cost_per_task_rendered.txt. 'Cost per Task'의 사이트 정의는 "각 평가의 비용을
+입력·캐시 적중·캐시 기록·추론·답변 토큰 가격에서 산출해 과제 수로 나누고 지수 가중치를
+적용한 과제당 가중평균 비용"이다 — 출력 단가만의 함수가 아니다. 출력 단가는 각 사 공식 문서):
 - DeepSeek V4-Pro (max)    출력 $0.87 | 과제당 $0.04
 - Grok 4.5 (high)          출력 $6.00 | 과제당 $0.35
 - Gemini 3.6 Flash         출력 $7.50 | 과제당 $0.50
-- Claude Sonnet 5 (max)    출력 $10   | 과제당 $1.53  (지수 출력 토큰 3억)
+- Claude Sonnet 5 (max)    출력 $10   | 과제당 $1.53
 - Kimi K3                  출력 $15   | 과제당 $0.72
-- Claude Opus 4.8 (max)    출력 $25   | 과제당 $1.80  (지수 출력 토큰 1.2억)
+- Claude Opus 4.8 (max)    출력 $25   | 과제당 $1.80
 - GPT-5.6 Sol (max)        출력 $30   | 과제당 $1.54
-핵심: 단가 3배(Sol vs Sonnet)가 과제당에선 $0.01 차이. Sonnet의 단가 60% 우위(vs Opus 4.8)는
-과제당 15%로 줄어든다(출력 토큰 3억 vs 1.2억). 모델마다 지능지수가 달라 동일 품질 비교가 아님.
+핵심: 두 축은 대체로 함께 움직인다(순위상관 0.929, 로그값 상관 0.953). 다만 일대일이 아니어서
+단가 3배(Sol vs Sonnet)가 과제당엔 $0.01 차이로 압축되고, Sonnet의 단가 60% 우위(vs Opus 4.8)는
+과제당 15%로 줄며, 인접 두 쌍(Sonnet-K3, Opus 4.8-Sol)에서 순위가 뒤집힌다.
+모델마다 지능지수가 달라 동일 품질 비교가 아님.
 
 사용법: python3 fig02_task_cost_slope.py [--out PNG] [--font FONT]
 의존성: matplotlib
@@ -49,11 +52,29 @@ assert abs(abs(C["GPT-5.6 Sol (max)"] - C["Claude Sonnet 5 (max)"]) - 0.01) < 1e
 assert abs(1 - C["Claude Sonnet 5 (max)"] / C["Claude Opus 4.8 (max)"] - 0.15) < 0.005  # 15%
 assert abs(1 - P["Claude Sonnet 5 (max)"] / P["Claude Opus 4.8 (max)"] - 0.60) < 1e-9   # 단가 60%
 assert C["Grok 4.5 (high)"] / C["Claude Sonnet 5 (max)"] < 0.26              # 약 4분의 1 이하
-assert 300 / 120 == 2.5                                                      # 출력 토큰 배수
-# 순서 불일치: 단가 순위와 과제당 순위가 다르다
-by_price = [m[0] for m in sorted(MODELS, key=lambda m: m[1])]
-by_cost = [m[0] for m in sorted(MODELS, key=lambda m: m[2])]
-assert by_price != by_cost, "단가 순서와 과제당 순서가 같으면 이 그림의 논지가 무너진다"
+
+# ---- 논지 검증: '대체로 함께 가되 일대일은 아니다' ----
+# (구판의 '단가 순서는 청구서 순서를 예측하지 못한다'는 과장이어서 아래 두 조건으로 대체)
+def _rank(vals):
+    order = sorted(range(len(vals)), key=lambda i: vals[i])
+    r = [0] * len(vals)
+    for pos, i in enumerate(order):
+        r[i] = pos + 1
+    return r
+
+
+_p = [m[1] for m in MODELS]
+_c = [m[2] for m in MODELS]
+_rp, _rc = _rank(_p), _rank(_c)
+_n = len(MODELS)
+_spearman = 1 - 6 * sum((a - b) ** 2 for a, b in zip(_rp, _rc)) / (_n * (_n * _n - 1))
+_inversions = [(MODELS[i][0], MODELS[j][0]) for i in range(_n) for j in range(_n)
+               if _p[i] < _p[j] and _c[i] > _c[j]]
+# (1) 두 축은 강하게 함께 움직인다 — '무관하다'로 읽히면 안 된다
+assert _spearman > 0.85, ("순위상관이 낮아졌다 — 본문 서술 재검토 필요", round(_spearman, 3))
+assert abs(_spearman - 0.929) < 0.005, ("본문 표기 0.93과 불일치", round(_spearman, 4))
+# (2) 그러나 일대일은 아니다 — 역전이 존재하고, 그 수는 본문이 밝힌 두 쌍이다
+assert len(_inversions) == 2, ("역전 쌍 수 변경 — 본문·캡션 수정 필요", _inversions)
 
 
 def logpos(v, lo, hi):
@@ -120,24 +141,24 @@ def main():
                               fontweight=fw))
 
     labels.append(ax.text((XL + XR) / 2, 0.30,
-                          "단가 3배 차이(Sonnet $10 vs Sol $30)가\n과제당에선 1센트 차이($1.53 vs $1.54)",
+                          "두 축의 순위상관 0.93 — 대체로 함께 가지만\n단가 3배(Sonnet $10 vs Sol $30)가 과제당엔 1센트 차이",
                           fontsize=12, color=NAVY, ha="center", va="center",
                           fontweight="bold", linespacing=1.5))
     labels.append(ax.text((XL + XR) / 2, 0.135,
-                          "Sonnet 5의 단가 60% 우위(vs Opus 4.8)는 과제당 15%로 줄어든다\n같은 지수에서 출력 토큰 3억 대 1억 2,000만(2.5배)",
+                          "Sonnet 5의 단가 60% 우위(vs Opus 4.8)는 과제당 15%로 줄고,\n인접 두 쌍(Sonnet 5–Kimi K3, Opus 4.8–Sol)에서는 순위가 뒤집힌다",
                           fontsize=10.5, color=NOTE, ha="center", va="center",
                           linespacing=1.5))
 
-    ax.set_title("단가의 순서는 청구서의 순서가 아니다: 토큰의 값 vs 과제의 값",
+    ax.set_title("대체로 함께 가지만 일대일은 아니다: 토큰의 값 vs 과제의 값",
                  loc="left", fontsize=18, fontweight="bold", color=NAVY, pad=14)
 
     fig.subplots_adjust(left=0.015, right=0.985, top=0.905, bottom=0.185)
 
     NOTE_PARAS = [
         "주: 집계사이트 아티피셜 애널리시스(Artificial Analysis)의 자체 측정(2026-07-27 확인). 과제당 비용(Cost per "
-        "Task)은 동 사이트 지능지수(v4.1, 9개 평가) 과제들의 가중평균이고, 괄호는 추론 설정(설정은 토큰 사용량을 바꾸지 "
-        "단가를 바꾸지 않는다). 모델마다 지능지수가 달라 같은 품질의 답에 대한 비교가 아니다. 세로 위치는 각 기둥 안의 "
-        "로그 눈금 상대 위치다.",
+        "Task)은 각 평가의 비용을 입력·캐시 적중·캐시 기록·추론·답변 토큰 가격에서 산출해 과제 수로 나누고 지수 "
+        "가중치를 적용한 값이라 출력 단가만의 함수가 아니다. 괄호는 추론 설정이며, 모델마다 지능지수가 달라 같은 "
+        "품질의 답에 대한 비교가 아니다. 세로 위치는 각 기둥 안의 로그 눈금 상대 위치다.",
         "자료: Artificial Analysis (artificialanalysis.ai), 각 사 공식 가격 문서  |  정리: AIEconLab",
     ]
     NOTE_X, NOTE_FS = 0.01, 11.3

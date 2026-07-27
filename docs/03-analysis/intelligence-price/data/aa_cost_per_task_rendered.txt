@@ -26,3 +26,17 @@ URL: https://artificialanalysis.ai/models/claude-opus-4-8 (같은 시각 확인)
 per 1M tokens / Verbosity #64/190 = 120M "Output tokens from Intelligence Index"
 이 페이지의 Cost per Task 차트: ... Kimi K3 $0.72 | GPT-5.6 Sol (max) $1.54 |
 Claude Opus 4.8 (max) $1.80 | Claude Opus 5 (max) $2.03 | Claude Fable 5 (with fallback) $2.75
+
+■ 지표 정의 (2026-07-27 15:5x KST 브라우저 재확인, 세 지표는 서로 다름)
+- "Cost per Intelligence Index Task": "Weighted average cost per Intelligence Index task.
+  Each evaluation's cost is calculated from input, cache hit, cache write, reasoning, and
+  answer token prices, divided by task count, and weighted by its Intelligence Index weight."
+  → 출력 단가만의 함수가 아니며, 과제 수로 정규화된 값이다.
+- "Output Tokens per Intelligence Index Task": "The number of tokens required per Intelligence
+  Index task. This is calculated by multiplying the output tokens per eval by the relative
+  weights of each benchmark in the Intelligence Index, then dividing by task count
+  (excluding repeats)." → 과제당 비용과 별도로 공표되는 지표.
+- "Cost to Run Artificial Analysis Intelligence Index": "Cost (USD) to run all evaluations..."
+  → 정규화 이전의 원시 총비용(1차 원고가 '완주 비용'으로 잘못 쓴 지표).
+- Verbosity(예: Sonnet 5 max 300M, Opus 4.8 max 120M)는 "Output tokens from Intelligence
+  Index"로 지수 전체의 원시 합계 → 과제당으로 정규화된 비용과 직접 견줄 수 없다.

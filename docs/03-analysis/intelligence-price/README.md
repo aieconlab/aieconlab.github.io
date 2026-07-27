@@ -10,6 +10,13 @@
   3. **[확정] 제번스 기각 과잉** — 논문 원문에 "we do not attempt to formally analyze the paradox or causality"와 "There is some evidence of Jevons Paradox"(저비용 모델군)가 실재(PDF 확인). 탄력성은 모델 간 횡단면. 판정을 '기각'에서 '확인·기각 불가 + 단정 미지지'로 교체.
   4. **[확정] 요청당·표본 이전** — 논문 지표는 요청당 토큰. '작업당'을 '요청당'으로 고치고, 메커니즘 주장을 '관측된 유력한 후보'로 하향, 요청 수 분해 부재와 OpenRouter(2023~25)→알파벳(2026) 이전 불가를 본문에 명기.
   - 부수 수정: 제목·리드·결론 재작성(「토큰 단가와 과제 비용은 다르다」), '분모' 은유를 청구서 산식(입력단가×입력토큰+출력단가×출력·추론토큰+캐시)으로 교체, 공급 제약 해석을 '식별 불가'로 완화, 원문 미확보 OpenAI 매출 문단 삭제, 단가표를 모바일에서 숫자가 갈라지지 않는 3열로 축소.
+- **3차 개고(2026-07-27 저녁, 2차 외부 검토 NO-GO 반영).** 지적 5건 + 개선 6건을 원자료로 재검증해 전부 타당 판정하고 반영:
+  1. **[확정] 핵심 명제가 자료보다 강함** — 그림 2의 7종으로 직접 계산하면 단가·과제당 비용의 스피어만 순위상관 0.929, 로그값 피어슨 0.953이고 역전은 Sonnet 5–Kimi K3, Opus 4.8–GPT-5.6 Sol 두 쌍뿐. '단가는 청구서를 예측하지 못한다'를 **'대체로 함께 움직이되 일대일이 아니다(일부 쌍에서 압축·역전)'**로 전면 교체(제목 제외 description·리드·본문·굵은 결론·그림 2 제목·주석). fig02의 assert도 `by_price != by_cost` → 순위상관 0.85 초과 **및** 역전 2쌍 확인으로 교체.
+  2. **[확정] 정규화 지표를 원시 총량으로 설명** — AA 사이트에서 세 지표의 정의를 원문 확인: Cost per Task는 "입력·캐시 적중·캐시 기록·추론·답변 토큰 가격에서 산출해 **과제 수로 나누고** 지수 가중치 적용", Output Tokens per Task는 별도 지표, Verbosity(300M/120M)는 지수 전체 **원시 합계**. 정규화 비용을 원시 총량 비율(2.5배)로 설명한 문장과 "차이는 전부 토큰 양에서 나온다"를 삭제하고, 원인 분해를 하지 않았음을 명시. 그림 2 주석·README·verify_sources.py도 동시 수정.
+  3. **[확정] $180/$0.10은 '정가표 전체 극단'이 아님** — 같은 가격표에 구세대 o1-pro 출력 $600 실재(보존 사본에서 `o1-pro],[0,150],[0,null],[0,600]` 확인). '전체 극단' 표현을 삭제하고 '표본 밖 두 사례만으로도 1,800배', 'o1-pro는 더 높음', '천장·바닥을 말하려면 모집단 정의가 먼저'로 교체.
+  4. **[확정] 딥시크 인하 날짜 1차 출처 없음** — 보존한 공식 가격 문서·변경 기록에 `$3.48`·`2026-05-25/31`이 없고 2026년 항목은 04-24 V4 공개뿐. (계획 프롬프트가 제시한 '인하 전 $3.48'은 Together AI의 서드파티 서빙가 $3.48과 정확히 일치해 혼동 가능성이 있음.) 본문에서 날짜·이전 가격을 빼고, 그림 1의 딥시크 화살표를 제거해 현행가만 표시.
+  5. **[확정] 실무 결론에 품질 조건 필요** — "예산 단위는 과제" → "**품질 기준을 통과한** 과제이며 재시도·폴백까지 포함"으로 보강.
+  - 개선 반영: '7월 신모델들은 값을 내리지 않았다' → '전작 가격과 견줄 수 있는 세 계열은 동결 또는 인상', Fable 5 $50을 '시장 천장' → '자사 라인업 상단', Inkling '3분의 1 토큰'에 범위 명시(Terminal Bench 2.1에서 Nemotron 3 Ultra 대비), 출처 없는 '애널리스트 평가' 삭제, description 축약, 상대 날짜('지난 22일'·'어제 글'·'이틀 뒤')를 고정 날짜로, **그림 1·2 아래 HTML 요약표 추가**(모바일 축소 시 원본 링크만으로는 값 확인이 어렵다는 지적 반영).
 - **게시 직전 재확인(2026-07-28 06:30 KST 전후, 필수)**
   1. **Kimi K3 가중치** — 2026-07-27 14:1x KST 확인 시점 `huggingface.co/moonshotai/Kimi-K3`는 공개 예고(카운트다운 잔여 9시간 47분, 예고 시점 약 07-28 00:00 KST) 상태. 공식 발표문에 "The full model weights will be released by July 27, 2026" 명시. 본문·'숫자의 기준'은 이 상태가 게시 후에도 참으로 남게 과거형으로 서술했으나, 게시 30분 전 저장소를 다시 열어 safetensors 존재·라이선스를 확인하고 필요하면 문장을 강화(공개 확인)하거나 조정(지연)할 것. 저장소가 `moonshotai` 조직인지도 재확인(가짜 미러 주의).
   2. **Artificial Analysis 과제당 비용(Cost per Task) 9건** — 동적 렌더 사이트라 이 세션의 브라우저 스냅숏(`data/aa_cost_per_task_rendered.txt`, 2026-07-27 15:1x KST)이 근거. 게시 직전 모델 페이지에서 값 유지 여부 확인($1.53/$1.54/$1.80이 핵심).
@@ -28,14 +35,14 @@
 /opt/anaconda3/bin/python3 scripts/verify_sources.py             # 그림·본문 하드코딩 수치 ↔ data/ 원자료 기계 대조(82건)
 ```
 
-- 그림 스크립트는 수치를 상수로 내장하되(집계 관례), `verify_sources.py`가 그 상수들이 `data/` 원자료 사본에 실재하는지와 파생 산수(180배·15%·3배 등)를 기계 대조한다. 2026-07-27 실행 결과 전부 통과.
+- 그림 스크립트는 수치를 상수로 내장하되(집계 관례), `verify_sources.py`가 그 상수들이 `data/` 원자료 사본에 실재하는지(문자열·정규식 78건)와 파생 산수(180배·15%·3배·순위상관 0.929·로그상관 0.953·역전 2쌍 등 9건)를 기계 대조한다. 2026-07-27 3차 개고 후 실행 결과 전부 통과. 이 스크립트는 문자열 존재 검사가 주여서 '원자료 → 그림'의 자동 파이프라인은 아니며, 상수와 원자료가 어긋나면 실패하는 회귀 장치로 쓴다.
 
 - 공통: matplotlib(Agg), dpi 200(커버 100), `--out`/`--font`(기본 Apple SD Gothic Neo) 인자. 각 스크립트는 수치 assert와 렌더링 후 레이아웃(겹침·잘림, 그림 1은 x축 라벨-주석 충돌 포함) assert를 통과해야 저장된다. `plt.rcParams["text.parse_math"]=False`로 `$` 두 개짜리 라벨의 mathtext 오파싱을 차단했다.
 - **재현성 계약(2026-07-27 게시본 생성 기준):** 생성 인터프리터는 `/opt/anaconda3/bin/python3`(Python 3.13.9 + matplotlib 3.10.6). `savefig`의 `metadata={"Date": None}` 적용. 같은 머신·같은 스택에서는 연속 실행 시 같은 바이트가 나오지만, 하위 스택(zlib 등)이 다르면 픽셀이 같아도 바이트는 달라진다 — 무결성 검증은 아래 SHA-256 대조로, 교차 환경 재생성 검증은 픽셀 비교로 한다(trend15 README의 픽셀 비교 명령 참조).
-- 게시본 SHA-256 (scripts/out/과 게시 경로 동일, 2026-07-27 2차 개고 재생성):
-  - `fig01_output_price_moves.png` `951e591d1427176bf1c117debd8bd96aed618ee03cdd2ce381e6a6d5ab69e667` (브래킷을 '본문 비교 15종' 기준으로 한정)
-  - `fig02_task_cost_slope.png` `4da932a32885d7429aba6dfbf40cf8c225efd7e1c6d25d5b45c12dddd53d9ee6` (Cost per Task 기준 7개 모델로 전면 재설계)
-  - `trend16_cover.png` `3c9a76db5f41ada6c77ed37d496c720b15278d58676ac8002e8dc1c5d01685a1` (새 제목·수렴 그래픽)
+- 게시본 SHA-256 (scripts/out/과 게시 경로 동일, 2026-07-27 3차 개고 재생성):
+  - `fig01_output_price_moves.png` `789e559a623af74ea02d21ed821f091b0c1ae81f16aabd3e1e63d07904ea00d1` (딥시크 인하 화살표 제거·현행가만, 주석에 o1-pro $600 단서)
+  - `fig02_task_cost_slope.png` `a2d019c830f9e8ca192fdb7c82cbe58f408248448951aa1e1df393fa43c18485` (제목·주석을 '대체로 함께 가되 일대일 아님'으로, 원시 토큰 비율 삭제)
+  - `trend16_cover.png` `aa5935e3abc21e55f9996b5faa72a8c43402b9c1ab6b51f2448f75edbeba4ebb` (부제를 '전작과 견줄 수 있는 7월 신모델'로 한정)
 - 출력 → 게시 경로 복사:
   - `scripts/out/fig01_output_price_moves.png` → `static/images/post/trend16/`
   - `scripts/out/fig02_task_cost_slope.png` → `static/images/post/trend16/`
@@ -72,7 +79,7 @@ curl 수집이 차단되거나 JS 렌더인 페이지는 Claude Code 내장 브�
 | (교차 참조) 2026q2-alphabet-earnings-release.pdf | `docs/03-analysis/alphabet-receipts/data/`에 기보존 (분당 220억 문구 재확인) | trend14 README 참조 |
 | arxiv_2601.10088.html / .pdf | https://arxiv.org/abs/2601.10088 (State of AI: An Empirical 100 Trillion Token Study) | `8b75672ac4ecb67657c3dea27b79256a0f3abe79c42332be94ac2944b36bf59e` / `0a3cc52bad6961424c9e6fe83351d2208c5311f99e7e7d6afa65e494de3c4535` |
 | artificialanalysis_models.html | https://artificialanalysis.ai/models (동적 렌더 — 지표 정의 텍스트만 정적) | `edb540850be8d929666e0a1b5544239d4425f8f75821a3c7035570cdb8e6874c` |
-| aa_cost_per_task_rendered.txt | https://artificialanalysis.ai/models/claude-sonnet-5 · /claude-opus-4-8 (브라우저 렌더 발췌 — Cost per Task 13종·Verbosity·지능지수) | `0bf749de5fe514c6dec6b0c16212075390ae2e6090a624bcd1fc8fc1d117999d` |
+| aa_cost_per_task_rendered.txt | https://artificialanalysis.ai/models/claude-sonnet-5 · /claude-opus-4-8 (브라우저 렌더 발췌 — Cost per Task 13종·Verbosity·지능지수) | `fea3378f920fed7965067a39a879fbf276671d4a4196849304549bc66e01baae` |
 | artificialanalysis_methodology.html | https://artificialanalysis.ai/methodology | `05b9f3615182b6b7deee3dd1472d17d6deba2cff2334e0c5e3cf1fdedcbb3106` |
 
 ## 원자료 1:1 대조 결과 (2026-07-27, 이 세션)
@@ -103,7 +110,8 @@ curl 수집이 차단되거나 JS 렌더인 페이지는 Claude Code 내장 브�
 | 전작 대비 | GPT-5.6 Sol 동결($30), Grok 4.5 ×2.4, Kimi K3 ×3.75, Gemini 3.5F ×3.6(3.6F ×3.0, 2026-05~ 세대), Fable 5 신설 | 동 |
 | 7월 이전 인하 | Opus 4.1→4.5 $75→$25(2025-11-24), V4-Pro $3.48→$0.87(2026-05-31 발효) | Anthropic 문서·계획 프롬프트 |
 | 과제당 비용(Cost per Task) | Sonnet 5(max) $1.53 ≈ Sol(max) $1.54 (단가 $10 vs $30, 3배) / Opus 4.8(max) $1.80 → Sonnet 단가 60% 우위가 과제당 15%로 압축 / Grok 4.5(high) $0.35, K3 $0.72, 3.6F $0.50, V4-Pro(max) $0.04, Opus 5(max) $2.03, Fable 5(폴백 포함) $2.75 | Artificial Analysis(2026-07-27 확인, 렌더 스냅숏) |
-| 지수 출력 토큰(Verbosity) | Sonnet 5(max) 300M vs Opus 4.8(max) 120M (2.5배) | 동 |
+| 단가-과제당 상관 | 7종 기준 스피어만 0.929, 로그값 피어슨 0.953, 역전 2쌍(Sonnet 5–K3, Opus 4.8–Sol) | 위 값으로 필자 계산(verify_sources.py가 재계산·검증) |
+| 정규화 주의 | Verbosity(Sonnet 5 max 300M·Opus 4.8 max 120M)는 지수 전체 **원시 합계**여서 과제당 비용과 직접 견줄 수 없음 → 본문에서 제외. AA는 'Output Tokens per Task'를 별도 공표 | 동 |
 | 사용량 | 분당 100억→160억 초과→약 190억→약 220억, 1조+ 고객 330→375 초과→거의 500 | 알파벳 콜·I/O·발표문 |
 | 가격-사용량 횡단면 | 가격 -10% ↔ 사용량 +0.5~0.7%(모델 간 산점도, 인과 아님·논문이 역설/인과 미분석 명시) | arXiv 2601.10088 |
 | 요청당 워크로드 | 프롬프트 1.5K→6K+(×4), 완성 150→400(×3), 시퀀스 2,000-→5,400+(2023말→2025말) | 동 |

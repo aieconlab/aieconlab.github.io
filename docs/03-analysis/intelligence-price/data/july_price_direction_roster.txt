@@ -1,0 +1,50 @@
+[7월 신모델 가격 방향 집계 — 모집단 정의와 근거. 확정 2026-07-28]
+
+규칙: 2026년 7월에 나온 모델 가운데 (a) 같은 회사의 (b) 같은 등급(티어)에 (c) 공식 단가가
+공표된 직전 모델이 있는 것만 센다. 오픈웨이트로만 공개돼 개발사 API 단가가 없는 모델
+(Hunyuan Hy3 7/6, Inkling 7/15)과 단가 미공표 모델(Muse Spark 1.1 7/9)은 제외.
+등급 대응은 각 사 공식 문서의 표현을 따른다.
+
+| # | 회사 | 7월 모델(출시일) | 직전 동급 모델 | 출력 단가 | 방향 |
+|---|---|---|---|---|---|
+| 1 | OpenAI | GPT-5.6 Sol (7/9) | gpt-5.5 | $30 → $30 | 동결 |
+| 2 | OpenAI | GPT-5.6 Terra (7/9) | gpt-5.4-mini | $4.50 → $15 | 인상 ×3.33 |
+| 3 | OpenAI | GPT-5.6 Luna (7/9) | gpt-5.4-nano | $1.25 → $6 | 인상 ×4.8 |
+| 4 | xAI | Grok 4.5 (7/16) | grok-4.3 | $2.50 → $6 | 인상 ×2.4 |
+| 5 | Moonshot | Kimi K3 (7/16) | Kimi K2.6 | $4 → $15 | 인상 ×3.75 |
+| 6 | Google | Gemini 3.6 Flash (7/21 GA) | 3.5 Flash | $9 → $7.50 | 인하 -16.7% |
+| 7 | Google | Gemini 3.5 Flash-Lite (7/21 GA) | 3.1 Flash-Lite | $1.50 → $2.50 | 인상 ×1.67 |
+| 8 | Anthropic | Claude Opus 5 (7/24) | Claude Opus 4.8 | $25 → $25 | 동결 |
+
+합계: 동결 2 · 인상 5 · 인하 1
+
+■ 등급 대응 근거 (OpenAI 공식 모델 문서, 사본 openai_model_gpt-5.6-*.html)
+- Sol:   "GPT-5.6 Sol is the frontier model in the GPT-5.6 family."
+- Terra: "It roughly corresponds to the **mini** model tier used in earlier GPT-5 families."
+- Luna:  "It roughly corresponds to the **nano** model tier used in earlier GPT-5 families."
+  → Terra를 gpt-5.4($2.50/$15)와 비교하면 티어가 어긋난다(gpt-5.4는 mini가 아님).
+    5.5 계열에는 mini/nano가 없으므로 직전 동급은 gpt-5.4-mini / gpt-5.4-nano다.
+
+■ OpenAI 공식 가격표(사본 openai_pricing.html) 원문 행
+  gpt-5.6-sol $5.00 / $30.00 · gpt-5.6-terra $2.50 / $15.00 · gpt-5.6-luna $1.00 / $6.00
+  gpt-5.5 $5.00 / $30.00 · gpt-5.5-pro $30.00 / $180.00
+  gpt-5.4 $2.50 / $15.00 · gpt-5.4-mini $0.75 / $4.50 · gpt-5.4-nano $0.20 / $1.25
+  gpt-5.4-pro $30.00 / $180.00
+
+■ Anthropic 릴리스 노트(사본 anthropic_release_notes.html)
+  "July 24, 2026 — We've launched Claude Opus 5 (claude-opus-5), a step-change improvement over
+   Claude Opus 4.8 ... at $5 / $25 per MTok, **the same pricing as Claude Opus 4.8**."
+  "June 9, 2026 — We've launched Claude Fable 5 (claude-fable-5) ... alongside Claude Mythos 5"
+  → **Fable 5는 6월 9일 출시로 7월 집계 대상이 아니다.** 상단 신설은 6월 사건.
+
+■ Google 릴리스 노트(사본 google_gemini_changelog.html)
+  "July 21, 2026 — Gemini 3.6 Flash and Gemini 3.5 Flash-Lite generally available (GA)"
+  3.6 Flash: "at a lower price point than 3.5 Flash"
+  가격표(사본 google_gemini_pricing.html): 3.6 Flash $1.50/$7.50 · 3.5 Flash $1.50/$9.00
+  3.5 Flash-Lite 입력 $0.30 / 출력 $2.50 · 3.1 Flash-Lite 입력 $0.25 / 출력 $1.50
+  → Flash-Lite는 $1.50 → $2.50 = +66.7% 인상
+
+■ 이전 판의 오류(4차 개고까지)
+  '네 계열: 동결1·인상2·인하1'은 (a) OpenAI를 계열 하나로 묶어 Terra/Luna를 누락하고
+  (b) Terra를 gpt-5.4와 비교해 티어를 어긋나게 잡았으며 (c) 7/24 Opus 5와 (d) 7/21
+  Flash-Lite를 빠뜨린 결과였다. 5차 개고에서 위 표로 교체.

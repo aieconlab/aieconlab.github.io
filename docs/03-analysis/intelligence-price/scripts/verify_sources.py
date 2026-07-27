@@ -52,7 +52,23 @@ CHECKS = [
                                     "$7.50", "$2.50", "$0.30"]),
     # 3.6 Flash는 2026-07-21 GA이고 공식 릴리스 노트가 3.5 Flash보다 싸다고 명시
     ("google_gemini_changelog.html", ["July 21, 2026", "gemini-3.6-flash",
-                                      "lower price point than 3.5 Flash"]),
+                                      "lower price point than 3.5 Flash",
+                                      "gemini-3.5-flash-lite"]),
+    # 등급 대응 근거 — 이번 P0(구글·OpenAI 티어 오비교)을 막는 핵심 검사
+    ("openai_model_gpt-5.6-terra.html",
+     [("Terra=mini 등급", r"corresponds to the\s*(?:<[^>]+>\s*)?mini\s*(?:</[^>]+>\s*)?model tier")]),
+    ("openai_model_gpt-5.6-luna.html",
+     [("Luna=nano 등급", r"corresponds to the\s*(?:<[^>]+>\s*)?nano\s*(?:</[^>]+>\s*)?model tier")]),
+    ("openai_model_gpt-5.6-sol.html", ["frontier model in the GPT-5.6 family"]),
+    ("anthropic_release_notes.html",
+     ["July 24, 2026", "the same pricing as Claude Opus 4.8",
+      # 'launched'와 모델명 사이에 <strong> 태그가 끼므로 태그를 허용해 매칭
+      # (Fable 5 출시는 6월 9일 = 7월 집계 밖이라는 근거)
+      ("Fable 5는 6월 9일", r"June 9, 2026.{0,900}launched.{0,80}Claude Fable 5")]),
+    # 7월 가격 방향 대응표(사람이 유지하는 문서) — 본문 집계와 같은 값인지 확인
+    ("july_price_direction_roster.txt",
+     ["합계: 동결 2 · 인상 5 · 인하 1", "gpt-5.4-mini", "gpt-5.4-nano",
+      "3.1 Flash-Lite", "Claude Opus 4.8"]),
     ("google_blog_gemini36_ko.html", ["출력 토큰 사용량을 17% 줄였", "7.50 달러",
                                       "에이전틱 작업의 전체 비용"]),
     ("xai_models.html", ["$2.00", "$6.00", ("grok-4.3 입력 12500(=$1.25/1M)",
@@ -160,7 +176,11 @@ calc = [
     ("단가 3배·1센트", 30 / 10 == 3.0 and abs(abs(1.54 - 1.53) - 0.01) < 1e-9),
     ("K3는 Sonnet 단가 1.5배·과제당 절반 이하", 15.0 / 10.0 == 1.5 and 0.72 / 1.53 < 0.5),
     ("동일 단가 $25의 과제당 13% 차", abs(2.03 / 1.80 - 1 - 0.128) < 0.002),
-    ("구글 인하 16.7%", abs((1 - 7.5 / 9.0) - 0.1667) < 0.0005),
+    ("구글 3.6 Flash 인하 16.7%", abs((1 - 7.5 / 9.0) - 0.1667) < 0.0005),
+    ("구글 Flash-Lite 인상 66.7%", abs((2.5 / 1.5 - 1) - 0.667) < 0.001),
+    ("Terra vs gpt-5.4-mini ×3.33", abs(15.0 / 4.50 - 3.333) < 0.001),
+    ("Luna vs gpt-5.4-nano ×4.8", abs(6.0 / 1.25 - 4.8) < 1e-9),
+    ("7월 집계 합 8(인상5·동결2·인하1)", 5 + 2 + 1 == 8),
     ("순위상관 0.90(8종)", abs(_spearman - 0.898) < 0.005),
     ("로그 상관 0.96(8종)", abs(_logr - 0.958) < 0.005),
     ("역전 세 쌍(8종)", _inv == 3),

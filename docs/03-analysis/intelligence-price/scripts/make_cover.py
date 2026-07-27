@@ -6,8 +6,9 @@
 data/aa_cost_per_task_rendered.txt):
 - Claude Sonnet 5 (max): 출력 단가 $10 → 과제당 비용(Cost per Task) $1.53
 - GPT-5.6 Sol (max):     출력 단가 $30 → 과제당 비용 $1.54
-좌측 텍스트 수치: 단가 3배 차이가 과제당 1센트 차이. 전작과 견줄 수 있는 7월 신모델 네 계열은
-동결(오픈AI)·인상(문샷AI·xAI)·인하(구글 3.5 Flash $9 → 3.6 Flash $7.50, 2026-07-21 GA).
+좌측 텍스트 수치: 출력 단가가 $25로 동일한 Opus 4.8·Opus 5의 과제당 비용이 $1.80 대 $2.03(13% 차).
+7월 신모델 여덟(같은 등급 직전 모델과 비교 가능한 것)은 인상 5·동결 2·인하 1
+— 상세 대응표는 data/july_price_direction_roster.txt.
 """
 import argparse
 from pathlib import Path
@@ -36,6 +37,10 @@ SPINE = "#cbd5e1"
 P_SON, P_SOL = 10.0, 30.0          # 출력 단가($/1M)
 C_SON, C_SOL = 1.53, 1.54          # 과제당 비용($, Cost per Task)
 assert P_SOL / P_SON == 3.0 and abs(abs(C_SOL - C_SON) - 0.01) < 1e-9
+# 좌측 문구가 쓰는 '동일 단가 $25, 과제당 13% 차'와 7월 집계(인상5·동결2·인하1)
+assert abs(2.03 / 1.80 - 1 - 0.128) < 0.002
+JULY_UP, JULY_FLAT, JULY_DOWN = 5, 2, 1
+assert JULY_UP + JULY_FLAT + JULY_DOWN == 8
 
 fig = plt.figure(figsize=(16, 8), dpi=100)
 ax = fig.add_axes([0, 0, 1, 1])
@@ -55,8 +60,8 @@ left_texts = [
             fontweight="bold", va="center", ha="left", linespacing=1.35),
     ax.text(LX, 425, "AI 비용을 세는 두 가지 방법", fontsize=22,
             color=BLUE, va="center", ha="left", fontweight="medium"),
-    ax.text(LX, 295, "출력 단가 3배인 두 모델, 과제당 비용은 1센트 차이\n"
-                     "7월 신모델의 값은 동결 하나, 인상 둘, 인하 하나",
+    ax.text(LX, 295, "출력 단가가 똑같은 두 모델, 과제당 비용은 13% 차이\n"
+                     "7월 신모델 여덟: 인상 다섯, 동결 둘, 인하 하나",
             fontsize=17, color=GRAY, va="center", ha="left", linespacing=1.9),
     ax.text(LX, 180, "2026년 7월, 모델 가격표와 과제당 비용 읽기", fontsize=14,
             color=LGRAY, va="center", ha="left"),

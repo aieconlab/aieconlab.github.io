@@ -24,6 +24,16 @@
   4. **[확정] README 잔존 모순** — '정가표 전체 1,800배', DeepSeek `$3.48→$0.87`·05-31, Gemini 출시일 '미확인', 검증 건수 82건 표기를 모두 현행으로 교정(이 항목).
   5. **[확정] 검증 스크립트 설명 과장** — `verify_sources.py`는 본문·그림을 파싱하지 않으므로 '원자료→본문 연동 검증'이 아니다. 스크립트 docstring과 아래 설명을 '보존 자료 문자열 존재 + 내부 계산 확인'으로 고치고, **이번 구글 오류를 이 스크립트가 통과시킨 사실을 docstring에 실명으로 기록**했다.
   - 부수: 제번스 절에 `|ε|>1`의 전제(다른 조건 동일·효율 개선의 비례 전가·단순 부분균형)를 명시하고, 오픈라우터 자료의 한계와 알파벳 시계열의 한계를 문단 분리. 그림 라벨의 U+2212(−) 두부 글자를 잡는 assert 추가.
+- **5차 개고(2026-07-28, 4차 외부 검토 NO-GO 반영).** P0 1건 + P1 6건을 원자료로 재검증해 전부 타당 판정하고 반영:
+  1. **[P0 확정] 7월 가격 방향 모집단 누락** — 4차까지의 '네 계열: 동결1·인상2·인하1'은 (a) OpenAI를 계열 하나로 묶어 **Terra·Luna를 누락**하고, (b) **Terra를 gpt-5.4와 비교해 등급을 어긋나게** 잡았으며(공식 모델 문서는 Terra="mini 등급", Luna="nano 등급"에 대응한다고 명시 — 사본 `data/openai_model_gpt-5.6-*.html`), (c) **7/24 출시 Claude Opus 5**(릴리스 노트: "the same pricing as Claude Opus 4.8")와 (d) **7/21 GA Gemini 3.5 Flash-Lite**($1.50→$2.50, +66.7%)를 빠뜨린 결과였다. 모집단 규칙을 '같은 회사·같은 등급·공식 단가가 있는 직전 모델이 존재하는 7월 모델'로 명문화해 **여덟 개**를 세니 **동결 2·인상 5·인하 1**. description·리드·개요·1절·요약표·그림 1(모델 단위 8행으로 전면 재설계)·커버·결론을 일괄 교체. 대응표는 `data/july_price_direction_roster.txt`.
+     - 함께 확정된 사실: **Claude Fable 5는 2026-06-09 출시**로 7월 집계 대상이 아니다(4차까지 '7월 상단 신설'처럼 읽히던 서술을 교정).
+  2. **[P1] '대폭 인하' 기준 부재** — '절반 이상의 인하'로 문턱을 명시.
+  3. **[P1] 옛 가격 서사 잔존** — 절 제목 '값을 안 내리는 대신'과 '단가가 내려가지 않는 시장'이 구글 인하와 충돌해, '단가 대신'·'여덟 중 일곱은 올리거나 묶어 둔'으로 교체.
+  4. **[P1] 동가 쌍을 역전에 포함** — Opus 4.8·Opus 5는 단가가 $25로 같아 순서를 매길 수 없으므로 역전 3쌍과 분리해 '순위로는 잡히지 않는 별도 사례'로 서술.
+  5. **[P1] 총액 하락의 필요조건 오류** — '두 축을 함께 움직여야 총액이 내려간다'는 거짓(한 축만 내려도 총액은 감소). '둘 다 필요한 것은 아니지만 구글이 두 축을 나란히 내세웠다'는 관찰로 교정.
+  6. **[P1] Together AI 단가 상충** — 모델 페이지 $3.48 / 서버리스 문서 $4.40으로 두 페이지가 달라, '정확히 4배' 대신 '자사 단가가 제3자 서빙가보다 크게 낮다'는 방향만 서술하고 확인 시점·두 페이지를 명시.
+  7. **[P1] 제번스 측정 한계** — 토큰은 청구 단위이지 물리적 자원 소비가 아니라는 문단을 추가하고, '현재 공개 자료에 없다'를 '이 글이 확인한 두 자료에서는 찾지 못했다'로 한정.
+  - 검증 확대: `verify_sources.py`에 **등급 대응 검사**(Terra=mini/Luna=nano/Sol=frontier 정규식), Opus 5 동가 문구, Fable 5 6월 9일, Flash-Lite GA, 7월 대응표 일치, 배수 산수를 추가 — 이번 P0 유형(가격은 맞지만 비교 기준이 틀린 오류)을 잡도록 설계. 96+15건 통과.
 - **게시 직전 재확인 — 2026-07-28 01:0x KST 완료(둘 다 통과)**
   - ✅ **Kimi K3 가중치 공개 확인** — 공식 저장소(moonshotai, private/gated 아님)에 safetensors 96분할 공개. 라이선스는 표준 오픈소스가 아닌 자체 `kimi-k3`(cardData: license=other, license_name=kimi-k3). 본문 서술을 '공개를 공언한' → '공개한'으로 확정하고 '숫자의 기준'에 라이선스 성격을 명기. 근거: `data/hf_api_kimi_k3.json`, `data/kimi_k3_release_confirmed.txt`. (HF `lastModified`는 공개일 근거로 쓰지 않음 — 계획 프롬프트 금지 항목)
   - ✅ **AA 과제당 비용 9개 값 유지 확인** — Sonnet 5·Opus 4.8 두 페이지 차트에서 $0.04/$0.35/$0.50/$0.72/$1.53/$1.54/$1.80/$2.03/$2.75 전부 27일 확인값과 동일. 근거: `data/aa_cost_per_task_rendered.txt` 말미.
@@ -32,7 +42,7 @@
   2. **Artificial Analysis 과제당 비용(Cost per Task) 9건** — 동적 렌더 사이트라 이 세션의 브라우저 스냅숏(`data/aa_cost_per_task_rendered.txt`, 2026-07-27 15:1x KST)이 근거. 게시 직전 모델 페이지에서 값 유지 여부 확인($1.53/$1.54/$1.80이 핵심).
   3. **한시 가격** — 본문에 "2026년 7월 28일 기준" 명시 완료(Sonnet 5 도입가 8/31까지, 9/1부터 $3/$15 예고를 표 각주·본문에 반영).
   4. **출시일** — Grok 4.5·GPT-5.6 발표일을 이 세션에서 공식 발표문 원문으로 직접 확인(각각 2026-07-16, 2026-07-09). **주의: 계획 프롬프트 2-6 표의 Grok 4.5 '7/8'은 2차 보도 기반 오류로 판명, 본문은 7/16로 게재.**
-- **미확인으로 남긴 것**: WSJ 2026-04-28로 인용되는 'OpenAI 연환산 매출 2~4월 횡보' 원문(2차 개고에서 해당 문단 자체를 삭제 — 본문 미사용), Muse Spark 1.1 단가(공식 발표문에 없음 — 본문 미사용), Kimi K3 라이선스(미공개 — 본문 미기재). **Gemini 3.6 Flash 출시일은 4차 개고에서 공식 릴리스 노트로 확정(2026-07-21 GA)돼 이 목록에서 빠졌다.**
+- **미확인으로 남긴 것**: WSJ 2026-04-28로 인용되는 'OpenAI 연환산 매출 2~4월 횡보' 원문(2차 개고에서 해당 문단 자체를 삭제 — 본문 미사용), Muse Spark 1.1 단가(공식 발표문에 없음)는 7월 가격 방향 집계에서도 제외 사유로 명시했다. **Kimi K3 라이선스는 게시 직전 재확인에서 자체 라이선스 `kimi-k3`(license=other, license_name=kimi-k3)로 확인돼 이 목록에서 빠졌고, Gemini 3.6 Flash 출시일도 공식 릴리스 노트로 확정(2026-07-21 GA)돼 빠졌다.**
 - **적대적 검수 반영(2026-07-27)**: ① [P0] 구글을 '7월 신모델'로 묶은 그림 1 주석·캡션·본문을 교정 — I/O 키노트 보존본에 "Gemini 3.5 Flash is available for everyone today"(2026-05-19)가 명시돼 3.5 Flash는 5월 출시이고, 리드의 7월 발표 여섯 건에도 구글이 없어 내적 모순이었음. ② [P1] 'Fable 5가 현행 최고 지능'이라는 AA 전체 1위 주장을 '이 비교(4개 모델) 안에서 최고'로 한정. ③ [P2] 리드의 220억 귀속(발표문)과 공급 제약 인용처(콜) 분리, GPT-5.6 '표제'→'부제', '하나같이'→'잇따라', 단가표를 출력 내림차순으로 재정렬, 결론의 무기간 '플래그십 동결·인상'에 '이번 달에도' 한정.
 
 ## 스크립트
@@ -42,25 +52,25 @@
 /opt/anaconda3/bin/python3 scripts/fig01_output_price_moves.py   # 그림 1: 플래그십 출력 단가의 이동(전작 대비, 로그 눈금)
 /opt/anaconda3/bin/python3 scripts/fig02_task_cost_slope.py      # 그림 2: 출력 단가 vs 과제당 비용(Cost per Task) 기울기 그래프
 /opt/anaconda3/bin/python3 scripts/make_cover.py                 # 커버 1600x800
-/opt/anaconda3/bin/python3 scripts/verify_sources.py             # 보존 자료 문자열·내부 계산 확인(84+11건)
+/opt/anaconda3/bin/python3 scripts/verify_sources.py             # 보존 자료 문자열·내부 계산 확인(96+15건)
 ```
 
-- 그림 스크립트는 수치를 상수로 내장하되(집계 관례), `verify_sources.py`가 그 값들이 `data/` 원자료 사본에 문자열·정규식으로 실재하는지(84건)와 파생 산수(180배·15%·구글 16.7% 인하·순위상관 0.898·로그상관 0.958·역전 3쌍 등 11건)를 재계산해 대조한다. 2026-07-27 4차 개고 후 전부 통과.
+- 그림 스크립트는 수치를 상수로 내장하되(집계 관례), `verify_sources.py`가 그 값들이 `data/` 원자료 사본에 문자열·정규식으로 실재하는지(96건)와 파생 산수(180배·15%·구글 16.7% 인하·순위상관 0.898·로그상관 0.958·역전 3쌍 등 15건)를 재계산해 대조한다. 2026-07-28 5차 개고 후 전부 통과.
 - **이 스크립트의 한계를 명확히 해 둔다.** 본문(.md)이나 그림 스크립트를 파싱하지 않으므로 '원자료 → 본문·그림 연동 검증'이 아니다. 어떤 값이 원자료에 존재하기만 하면 **그것을 잘못된 비교 기준으로 쓰는 오류는 통과시킨다.** 실제로 3차 개고까지 `$9`와 `$7.50`이 모두 원자료에 있었지만 구글의 비교 기준을 2.5 Flash로 잘못 잡은 P0 오류를 이 스크립트는 잡지 못했다. 비교 기준의 타당성은 사람이 검토해야 한다.
 
 - 공통: matplotlib(Agg), dpi 200(커버 100), `--out`/`--font`(기본 Apple SD Gothic Neo) 인자. 각 스크립트는 수치 assert와 렌더링 후 레이아웃(겹침·잘림, 그림 1은 x축 라벨-주석 충돌 포함) assert를 통과해야 저장된다. `plt.rcParams["text.parse_math"]=False`로 `$` 두 개짜리 라벨의 mathtext 오파싱을 차단했다.
 - **재현성 계약(2026-07-27 게시본 생성 기준):** 생성 인터프리터는 `/opt/anaconda3/bin/python3`(Python 3.13.9 + matplotlib 3.10.6). `savefig`의 `metadata={"Date": None}` 적용. 같은 머신·같은 스택에서는 연속 실행 시 같은 바이트가 나오지만, 하위 스택(zlib 등)이 다르면 픽셀이 같아도 바이트는 달라진다 — 무결성 검증은 아래 SHA-256 대조로, 교차 환경 재생성 검증은 픽셀 비교로 한다(trend15 README의 픽셀 비교 명령 참조).
 - 게시본 SHA-256 (scripts/out/과 게시 경로 동일, 2026-07-27 3차 개고 재생성):
-- 게시본 SHA-256 (scripts/out/과 게시 경로 동일, 2026-07-27 4차 개고 재생성):
-  - `fig01_output_price_moves.png` `c2b35ac3c1b221382814307f28380149618c2dfc74410ee5b2597a1e06fb30ad` (구글 행을 3.5 Flash $9 → 3.6 Flash $7.50 인하로 교체, 2.5 Flash는 점선 궤적)
+- 게시본 SHA-256 (scripts/out/과 게시 경로 동일, 2026-07-27 5차 개고 재생성):
+  - `fig01_output_price_moves.png` `463ecc66b4cbd401381088978d04f3dde40d07401fd527d8e6c99e623d08da48` (모델 단위 8행으로 전면 재설계 — 인상 5·동결 2·인하 1)
   - `fig02_task_cost_slope.png` `b33845273423630c0346a5f99b259ea959abc45776d03d9b62f7e7b18f2c5ff5` (Opus 5 추가로 8종, 순위상관 0.90·역전 3쌍)
-  - `trend16_cover.png` `f635263d1eb612f02ef5ac95f0bdf7b9a346d4862aa16289847f6c7e30cccf78` (부제를 '동결 하나, 인상 둘, 인하 하나'로)
+  - `trend16_cover.png` `43fb9d70b5d9585fde880696e661c73309ec11a169dccffe097c30f3d0f9ddaa` (부제를 '인상 다섯, 동결 둘, 인하 하나'로)
 - 출력 → 게시 경로 복사:
   - `scripts/out/fig01_output_price_moves.png` → `static/images/post/trend16/`
   - `scripts/out/fig02_task_cost_slope.png` → `static/images/post/trend16/`
   - `scripts/out/trend16_cover.png` → `assets/images/post/trend16_cover.png`
 
-## 원자료 대장 (`data/`, 취득 2026-07-27 14:15~14:50 KST)
+## 원자료 대장 (`data/`, 취득 2026-07-27 14:15~15:5x KST + 2026-07-28 00:5x~01:2x KST 추가분)
 
 curl 수집이 차단되거나 JS 렌더인 페이지는 Claude Code 내장 브라우저로 확인하고 렌더 텍스트 발췌를 `*_rendered.txt`로 보존했다(해당 파일에 취득 방법 명기).
 
@@ -94,6 +104,11 @@ curl 수집이 차단되거나 JS 렌더인 페이지는 Claude Code 내장 브�
 | arxiv_2601.10088.html / .pdf | https://arxiv.org/abs/2601.10088 (State of AI: An Empirical 100 Trillion Token Study) | `8b75672ac4ecb67657c3dea27b79256a0f3abe79c42332be94ac2944b36bf59e` / `0a3cc52bad6961424c9e6fe83351d2208c5311f99e7e7d6afa65e494de3c4535` |
 | artificialanalysis_models.html | https://artificialanalysis.ai/models (동적 렌더 — 지표 정의 텍스트만 정적) | `edb540850be8d929666e0a1b5544239d4425f8f75821a3c7035570cdb8e6874c` |
 | aa_cost_per_task_rendered.txt | https://artificialanalysis.ai/models/claude-sonnet-5 · /claude-opus-4-8 (브라우저 렌더 발췌 — Cost per Task 13종·Verbosity·지능지수) | `9bb903c9df8adad09ede59a6616b2d106a7992ea8b4e85ff1a57a2b3bef4e803` |
+| openai_model_gpt-5.6-sol.html | https://developers.openai.com/api/docs/models/gpt-5.6-sol ("frontier model in the GPT-5.6 family") | `91c3c74f6a35b5532ba4ea0522269df00caacd1d987bc8f8ce64b786bfb4b5e4` |
+| openai_model_gpt-5.6-terra.html | 동 /gpt-5.6-terra ("corresponds to the **mini** model tier") | `cdaa226ca799f5f8927cfa1af9acf0b50039be4d382a8b140212231169681474` |
+| openai_model_gpt-5.6-luna.html | 동 /gpt-5.6-luna ("corresponds to the **nano** model tier") | `a8cf10205974ddfbe88d271c2471966629d81ac3ce84d92f9bee191e442161c4` |
+| anthropic_release_notes.html | https://platform.claude.com/docs/en/release-notes/overview (2026-07-24 Opus 5 "same pricing as Opus 4.8", 2026-06-09 Fable 5) | `eda57f4d94379a6ff789a805d05165529f7e06776291e8393dc76cc823a7e99e` |
+| july_price_direction_roster.txt | 7월 가격 방향 대응표(모집단 규칙·등급 근거·원문 인용, 필자 정리) | `2f2c332af3b3ba058e55fb6258c91fc7fd75a97a85a9e8398b10ec7b42ef5c9a` |
 | hf_api_kimi_k3.json | https://huggingface.co/api/models/moonshotai/Kimi-K3 (게시 직전 공개 확인 — safetensors 96분할·license_name kimi-k3) | `7812d489b800893dc0ae0b1094df3fe6b4d2df65a519d6bb56cd38377eaf30ee` |
 | kimi_k3_release_confirmed.txt | 위 API·페이지 확인 기록(2026-07-28 01:0x KST) | `133147c7ab49e730b1bb0f0920ebd46d96fe43093cad3bfb1822c6185328d1d0` |
 | artificialanalysis_methodology.html | https://artificialanalysis.ai/methodology | `05b9f3615182b6b7deee3dd1472d17d6deba2cff2334e0c5e3cf1fdedcbb3106` |
@@ -123,7 +138,7 @@ curl 수집이 차단되거나 JS 렌더인 페이지는 Claude Code 내장 브�
 | 수치 | 값 | 출처 |
 |---|---|---|
 | 출력 단가 스펙트럼 | **본문 비교 15종 기준** $0.28(V4-Flash) ~ $50(Fable 5) = 178.6배(약 180배). 표본 밖 두 사례(gpt-5.5-pro $180 / Ministral 3 3B $0.10)만으로도 1,800배 — **'전체 극단' 아님**(o1-pro $600) | 각 사 공식 가격 문서 |
-| 전작 대비 | GPT-5.6 Sol 동결($30), Grok 4.5 ×2.4, Kimi K3 ×3.75, Gemini 3.5F ×3.6(3.6F ×3.0, 2026-05~ 세대), Fable 5 신설 | 동 |
+| 7월 가격 방향 | **여덟 개 기준 동결 2·인상 5·인하 1**. 인상: Luna ×4.8(vs nano), K3 ×3.75, Terra ×3.3(vs mini), Grok 4.5 ×2.4, 3.5 Flash-Lite ×1.67 / 동결: Sol $30, Opus 5 $25 / 인하: 3.6 Flash −16.7% | 각 사 공식 가격·모델 문서·릴리스 노트 |
 | 인하 | **7월**: 구글 3.5 Flash $9 → 3.6 Flash $7.50(−16.7%, 2026-07-21 GA). **7월 이전**: Opus 4.1→4.5 $75→$25(2025-11-24). DeepSeek 인하 이력은 근거 없어 폐기 | 구글 릴리스 노트·Anthropic 문서 |
 | 과제당 비용(Cost per Task) | Sonnet 5(max) $1.53 ≈ Sol(max) $1.54 (단가 $10 vs $30, 3배) / Opus 4.8(max) $1.80 → Sonnet 단가 60% 우위가 과제당 15%로 압축 / Grok 4.5(high) $0.35, K3 $0.72, 3.6F $0.50, V4-Pro(max) $0.04, Opus 5(max) $2.03, Fable 5(폴백 포함) $2.75 | Artificial Analysis(2026-07-27 확인, 렌더 스냅숏) |
 | 단가-과제당 상관 | 7종 기준 스피어만 0.929, 로그값 피어슨 0.953, 역전 2쌍(Sonnet 5–K3, Opus 4.8–Sol) | 위 값으로 필자 계산(verify_sources.py가 재계산·검증) |

@@ -10,7 +10,8 @@
              I/O에서 전면 제공 — 7월 신모델 아님) → 3.6 Flash $7.50
 - xAI:       Grok 4.3 $2.50 → Grok 4.5 $6.00 (2.4배, 2026-07-16)
 - DeepSeek:  V4-Pro $3.48 → $0.87 (2026-05-25 발표, 05-31 발효 인하), V4-Flash $0.28
-- 현행 스펙트럼: 최저 $0.28(V4-Flash) ~ 최고 $50(Fable 5) = 약 180배
+- 본문 비교 15종 기준 최저 $0.28(V4-Flash) ~ 최고 $50(Fable 5) = 약 180배
+  (정가표 전체로는 격차가 더 큼: gpt-5.5-pro 출력 $180, Ministral 3 3B $0.10)
 
 사용법: python3 fig01_output_price_moves.py [--out PNG] [--font FONT]
 의존성: matplotlib
@@ -121,7 +122,7 @@ def main():
                           fontsize=10.5, color=BLUE, ha="center", va="center",
                           fontweight="bold"))
     ax.plot([V4_FLASH], [y_ds], "o", ms=7, color=BLUE, zorder=5)
-    labels.append(ax.text(0.19, y_ds - 0.36, f"V4-Flash {dollar(V4_FLASH)} (현행 최저)",
+    labels.append(ax.text(0.19, y_ds - 0.36, f"V4-Flash {dollar(V4_FLASH)} (비교 최저)",
                           fontsize=9.5, color=BLUE, ha="left", va="center"))
 
     # 상단 스펙트럼 브래킷: $0.28 ~ $50 ≈ 180배
@@ -130,8 +131,8 @@ def main():
     for x in (V4_FLASH, FABLE5):
         ax.plot([x, x], [y_br - 0.10, y_br + 0.10], color=BLUE, lw=1.3, zorder=2)
     labels.append(ax.text(math.sqrt(V4_FLASH * FABLE5), y_br + 0.13,
-                          "현행 최저 $0.28 ~ 최고 $50 : 약 180배", fontsize=11, color=BLUE,
-                          ha="center", va="bottom", fontweight="bold"))
+                          "본문 비교 15종의 최저 $0.28 ~ 최고 $50 : 약 180배", fontsize=11,
+                          color=BLUE, ha="center", va="bottom", fontweight="bold"))
 
     ax.set_yticks([])
     ax.set_xticks([0.3, 1, 3, 10, 30, 100])

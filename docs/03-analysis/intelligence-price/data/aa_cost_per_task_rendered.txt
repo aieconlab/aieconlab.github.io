@@ -1,0 +1,28 @@
+[렌더링 텍스트 발췌 보존 — 동적 사이트. 취득 2026-07-27 15:1x KST, Claude Code 내장 브라우저]
+URL: https://artificialanalysis.ai/models/claude-sonnet-5
+페이지 제목: Claude Sonnet 5 (max) - Intelligence, Performance & Price Analysis
+
+■ Cost per Task 차트 (정의: "Weighted average cost (USD) per Intelligence Index task · Lower is better")
+DeepSeek V4 Pro (max) $0.04 | gpt-oss-120b (high) $0.06 | MiniMax-M3 $0.12 | Nemotron 3 Ultra $0.25
+| Muse Spark 1.1 (xhigh) $0.26 | GLM-5.2 (max) $0.32 | Grok 4.5 (high) $0.35 | Gemini 3.6 Flash $0.50
+| Kimi K3 $0.72 | Claude Sonnet 5 (max) $1.53 | GPT-5.6 Sol (max) $1.54 | Claude Opus 5 (max) $2.03
+| Claude Fable 5 (with fallback) $2.75
+
+■ Sonnet 5 모델 헤더
+"Claude Sonnet 5 (Adaptive Reasoning, Max Effort)" — Intelligence #16/190 = 53 (Artificial
+Analysis Intelligence Index) / Price: Input $2.00, Output $10.00 per 1M tokens /
+Verbosity #75/190 = 300M "Output tokens from Intelligence Index"
+
+■ 지수 구성: Intelligence Index v4.1 = 9개 평가 (GDPval-AA v2, τ³-Banking, Terminal-Bench v2.1,
+SciCode, Humanity's Last Exam, GPQA Diamond, CritPt, AA-Omniscience, AA-LCR)
+
+■ 별도 지표 구분: "Cost to Run Artificial Analysis Intelligence Index — Cost (USD) to run all
+evaluations in the Artificial Analysis Intelligence Index" (원시 총비용)와 위의 정규화된
+Cost per Task는 서로 다른 지표다.
+
+URL: https://artificialanalysis.ai/models/claude-opus-4-8 (같은 시각 확인)
+페이지 제목: Claude Opus 4.8 (max) - Intelligence, Performance & Price Analysis
+"Claude Opus 4.8 (Adaptive Reasoning, Max Effort)" — Intelligence #10/190 = 56 / Output $25.00
+per 1M tokens / Verbosity #64/190 = 120M "Output tokens from Intelligence Index"
+이 페이지의 Cost per Task 차트: ... Kimi K3 $0.72 | GPT-5.6 Sol (max) $1.54 |
+Claude Opus 4.8 (max) $1.80 | Claude Opus 5 (max) $2.03 | Claude Fable 5 (with fallback) $2.75

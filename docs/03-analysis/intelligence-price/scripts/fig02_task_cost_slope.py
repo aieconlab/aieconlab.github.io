@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""그림 2: 토큰 단가의 순서와 과제당 비용의 순서는 다르다 — 기울기 그래프.
+"""그림 2: 단가의 순서는 청구서의 순서가 아니다 — 출력 단가 vs 과제당 비용(Cost per Task).
 
-수치(집계사이트 Artificial Analysis 자체 측정, 2026-07-27 확인. '지수 완주 비용'은
-동 사이트 지능지수(Intelligence Index) 전체 평가를 실행하는 비용으로, 입력·캐시·추론·
-출력 요금을 모두 합산한 값):
-- Claude Sonnet 5           지능 53 | 완주 토큰 300M  | 완주 비용 $4,010.12 | 출력 단가 $10
-- Claude Opus 4.8 (max)     지능 56 | 완주 토큰 120M  | 완주 비용 $3,752.55 | 출력 단가 $25
-- Claude Fable 5            지능 60 | 완주 토큰 87M   | 완주 비용 $5,630.52 | 출력 단가 $50
-- GPT-5.6 Sol (low)         지능 49 | 완주 토큰 6.6M  | 완주 비용 $400.79   | 출력 단가 $30
-핵심: Sonnet 5는 출력 단가가 Opus 4.8보다 60% 싼데 완주 비용은 약 7% 더 비싸다.
+수치(집계사이트 Artificial Analysis 자체 측정, 2026-07-27 확인 — 원자료 스냅숏
+data/aa_cost_per_task_rendered.txt. 'Cost per Task'는 동 사이트 지능지수(v4.1, 9개 평가)
+과제들의 과제당 가중평균 비용. 출력 단가는 각 사 공식 가격 문서):
+- DeepSeek V4-Pro (max)    출력 $0.87 | 과제당 $0.04
+- Grok 4.5 (high)          출력 $6.00 | 과제당 $0.35
+- Gemini 3.6 Flash         출력 $7.50 | 과제당 $0.50
+- Claude Sonnet 5 (max)    출력 $10   | 과제당 $1.53  (지수 출력 토큰 3억)
+- Kimi K3                  출력 $15   | 과제당 $0.72
+- Claude Opus 4.8 (max)    출력 $25   | 과제당 $1.80  (지수 출력 토큰 1.2억)
+- GPT-5.6 Sol (max)        출력 $30   | 과제당 $1.54
+핵심: 단가 3배(Sol vs Sonnet)가 과제당에선 $0.01 차이. Sonnet의 단가 60% 우위(vs Opus 4.8)는
+과제당 15%로 줄어든다(출력 토큰 3억 vs 1.2억). 모델마다 지능지수가 달라 동일 품질 비교가 아님.
 
 사용법: python3 fig02_task_cost_slope.py [--out PNG] [--font FONT]
 의존성: matplotlib
 """
 import argparse
+import math
 from pathlib import Path
 
 import matplotlib
@@ -23,27 +28,36 @@ import matplotlib.pyplot as plt
 
 HERE = Path(__file__).resolve().parent
 BLUE, NAVY, GRAY, NOTE, SPINE = "#2563eb", "#1b2a4a", "#8290a6", "#5a6472", "#c8cdd6"
+DGRAY = "#4a5a7a"
 
-# (모델, 지능지수, 완주 토큰 표기, 완주 비용 $, 출력 단가 $/1M, 색, 굵기, 강조)
+# (표기, 출력 단가 $/1M, 과제당 비용 $, 색, 굵기, 강조)
 MODELS = [
-    ("Claude Fable 5", 60, "8,700만", 5630.52, 50.0, "#4a5a7a", 2.0, False),
-    ("GPT-5.6 Sol (low)", 49, "660만", 400.79, 30.0, GRAY, 2.0, False),
-    ("Claude Opus 4.8 (max)", 56, "1억 2,000만", 3752.55, 25.0, NAVY, 3.0, True),
-    ("Claude Sonnet 5", 53, "3억", 4010.12, 10.0, BLUE, 3.0, True),
+    ("DeepSeek V4-Pro (max)", 0.87, 0.04, GRAY, 1.8, False),
+    ("Grok 4.5 (high)", 6.00, 0.35, GRAY, 1.8, False),
+    ("Gemini 3.6 Flash", 7.50, 0.50, GRAY, 1.8, False),
+    ("Claude Sonnet 5 (max)", 10.0, 1.53, BLUE, 3.0, True),
+    ("Kimi K3", 15.0, 0.72, GRAY, 1.8, False),
+    ("Claude Opus 4.8 (max)", 25.0, 1.80, DGRAY, 2.4, False),
+    ("GPT-5.6 Sol (max)", 30.0, 1.54, NAVY, 3.0, True),
 ]
+P = {m[0]: m[1] for m in MODELS}
+C = {m[0]: m[2] for m in MODELS}
 
 # ---- 수치 검증 ----
-_price = {m[0]: m[4] for m in MODELS}
-_cost = {m[0]: m[3] for m in MODELS}
-assert abs(_price["Claude Sonnet 5"] / _price["Claude Opus 4.8 (max)"] - 0.40) < 1e-9  # 단가 60% 저렴
-assert abs(_cost["Claude Sonnet 5"] / _cost["Claude Opus 4.8 (max)"] - 1.0686) < 0.001  # 완주는 약 7% 비쌈
-assert abs(_cost["Claude Opus 4.8 (max)"] / _cost["GPT-5.6 Sol (low)"] - 9.36) < 0.01   # 약 9분의 1
-assert _cost["Claude Fable 5"] == max(_cost.values())
-assert 300 / 120 == 2.5  # 완주 토큰 배수(3억 vs 1.2억)
+assert P["GPT-5.6 Sol (max)"] / P["Claude Sonnet 5 (max)"] == 3.0            # 단가 3배
+assert abs(abs(C["GPT-5.6 Sol (max)"] - C["Claude Sonnet 5 (max)"]) - 0.01) < 1e-9  # 과제당 1센트 차
+assert abs(1 - C["Claude Sonnet 5 (max)"] / C["Claude Opus 4.8 (max)"] - 0.15) < 0.005  # 15%
+assert abs(1 - P["Claude Sonnet 5 (max)"] / P["Claude Opus 4.8 (max)"] - 0.60) < 1e-9   # 단가 60%
+assert C["Grok 4.5 (high)"] / C["Claude Sonnet 5 (max)"] < 0.26              # 약 4분의 1 이하
+assert 300 / 120 == 2.5                                                      # 출력 토큰 배수
+# 순서 불일치: 단가 순위와 과제당 순위가 다르다
+by_price = [m[0] for m in sorted(MODELS, key=lambda m: m[1])]
+by_cost = [m[0] for m in sorted(MODELS, key=lambda m: m[2])]
+assert by_price != by_cost, "단가 순서와 과제당 순서가 같으면 이 그림의 논지가 무너진다"
 
 
-def norm(v, lo, hi):
-    return (v - lo) / (hi - lo)
+def logpos(v, lo, hi):
+    return (math.log10(v) - math.log10(lo)) / (math.log10(hi) - math.log10(lo))
 
 
 def main():
@@ -54,67 +68,77 @@ def main():
 
     plt.rcParams["font.family"] = a.font
     plt.rcParams["axes.unicode_minus"] = False
-    plt.rcParams["text.parse_math"] = False  # '$' 라벨의 mathtext 오파싱 방지
-    fig, ax = plt.subplots(figsize=(10, 6.9), dpi=200)
+    plt.rcParams["text.parse_math"] = False
+    fig, ax = plt.subplots(figsize=(10, 7.0), dpi=200)
     fig.patch.set_facecolor("white")
     ax.set_facecolor("white")
     ax.set_xlim(0, 1)
-    ax.set_ylim(-0.10, 1.24)
+    ax.set_ylim(-0.06, 1.26)
     ax.axis("off")
 
-    XL, XR = 0.315, 0.685  # 두 기둥의 x 위치
-    prices = [m[4] for m in MODELS]
-    costs = [m[3] for m in MODELS]
-    plo, phi = min(prices), max(prices)
-    clo, chi = min(costs), max(costs)
+    XL, XR = 0.335, 0.665
+    plo, phi = min(P.values()), max(P.values())
+    clo, chi = min(C.values()), max(C.values())
 
-    # 기둥
     for x in (XL, XR):
         ax.plot([x, x], [0, 1], color=SPINE, lw=1.2, zorder=1)
-    col_heads = [
-        ax.text(XL, 1.10, "토큰으로 센 값", fontsize=14, color=NAVY, ha="center",
+    heads = [
+        ax.text(XL, 1.115, "토큰으로 센 값", fontsize=14.5, color=NAVY, ha="center",
                 fontweight="bold"),
-        ax.text(XL, 1.045, "출력 100만 토큰당 단가", fontsize=10.5, color=NOTE, ha="center"),
-        ax.text(XR, 1.10, "답으로 센 값", fontsize=14, color=NAVY, ha="center",
+        ax.text(XL, 1.052, "출력 100만 토큰당 공식 단가", fontsize=10.5, color=NOTE,
+                ha="center"),
+        ax.text(XR, 1.115, "과제로 센 값", fontsize=14.5, color=NAVY, ha="center",
                 fontweight="bold"),
-        ax.text(XR, 1.045, "같은 지능지수 평가 전체를 완주한 비용", fontsize=10.5,
-                color=NOTE, ha="center"),
+        ax.text(XR, 1.052, "지능지수 과제당 가중평균 비용", fontsize=10.5, color=NOTE,
+                ha="center"),
     ]
 
-    labels = list(col_heads)
-    for name, iq, tok, cost, price, color, lw, strong in MODELS:
-        yl = norm(price, plo, phi) * 0.92 + 0.04
-        yr = norm(cost, clo, chi) * 0.92 + 0.04
+    # 오른쪽 라벨 y 슬롯(값이 거의 같은 Sonnet·Sol은 겹치지 않게 수동 배치)
+    right_slot = {
+        "Claude Opus 4.8 (max)": 1.000,
+        "GPT-5.6 Sol (max)": 0.944,
+        "Claude Sonnet 5 (max)": 0.896,
+        "Kimi K3": 0.738,
+        "Gemini 3.6 Flash": 0.651,
+        "Grok 4.5 (high)": 0.564,
+        "DeepSeek V4-Pro (max)": 0.040,
+    }
+
+    labels = list(heads)
+    for name, price, cost, color, lw, strong in MODELS:
+        yl = logpos(price, plo, phi) * 0.92 + 0.04
+        yr = logpos(cost, clo, chi) * 0.92 + 0.04
         ax.plot([XL, XR], [yl, yr], color=color, lw=lw, zorder=3,
                 alpha=1.0 if strong else 0.85, solid_capstyle="round")
-        ax.plot([XL], [yl], "o", ms=8 if strong else 6.5, color=color, zorder=4)
-        ax.plot([XR], [yr], "o", ms=8 if strong else 6.5, color=color, zorder=4)
+        ax.plot([XL], [yl], "o", ms=8 if strong else 6, color=color, zorder=4)
+        ax.plot([XR], [yr], "o", ms=8 if strong else 6, color=color, zorder=4)
         fw = "bold" if strong else "normal"
         labels.append(ax.text(XL - 0.022, yl, f"{name}  ${price:g}", fontsize=11.5,
                               color=color, ha="right", va="center", fontweight=fw))
-        labels.append(ax.text(XR + 0.022, yr, f"${cost:,.0f}  (지능 {iq} · {tok} 토큰)",
+        labels.append(ax.text(XR + 0.022, right_slot[name], f"${cost:.2f}  {name}",
                               fontsize=11, color=color, ha="left", va="center",
                               fontweight=fw))
 
-    # 교차 강조 주석: 단가는 싼데 완주는 비싸다
-    labels.append(ax.text((XL + XR) / 2, 0.145,
-                          "단가 60% 싼 Sonnet 5가\n완주 비용은 7% 더 비싸다",
-                          fontsize=12, color=BLUE, ha="center", va="center",
-                          fontweight="bold", linespacing=1.45))
-    labels.append(ax.text((XL + XR) / 2, -0.055,
-                          "지능 49로 낮춘 GPT-5.6 Sol (low)의 완주 비용은 Opus 4.8의 약 9분의 1",
-                          fontsize=10.5, color=GRAY, ha="center", va="center"))
+    labels.append(ax.text((XL + XR) / 2, 0.30,
+                          "단가 3배 차이(Sonnet $10 vs Sol $30)가\n과제당에선 1센트 차이($1.53 vs $1.54)",
+                          fontsize=12, color=NAVY, ha="center", va="center",
+                          fontweight="bold", linespacing=1.5))
+    labels.append(ax.text((XL + XR) / 2, 0.135,
+                          "Sonnet 5의 단가 60% 우위(vs Opus 4.8)는 과제당 15%로 줄어든다\n같은 지수에서 출력 토큰 3억 대 1억 2,000만(2.5배)",
+                          fontsize=10.5, color=NOTE, ha="center", va="center",
+                          linespacing=1.5))
 
-    ax.set_title("같은 자를 대도 순서가 뒤집힌다: 토큰의 값 vs 답의 값",
-                 loc="left", fontsize=18.5, fontweight="bold", color=NAVY, pad=14)
+    ax.set_title("단가의 순서는 청구서의 순서가 아니다: 토큰의 값 vs 과제의 값",
+                 loc="left", fontsize=18, fontweight="bold", color=NAVY, pad=14)
 
-    fig.subplots_adjust(left=0.015, right=0.985, top=0.90, bottom=0.185)
+    fig.subplots_adjust(left=0.015, right=0.985, top=0.905, bottom=0.185)
 
     NOTE_PARAS = [
-        "주: 집계사이트 아티피셜 애널리시스(Artificial Analysis)의 자체 측정(2026-07-27 확인). '완주 비용'은 동 사이트 "
-        "지능지수(Intelligence Index) 전체 평가를 실행할 때의 입력·캐시·추론·출력 요금 합산으로, 출력 단가만으로 계산되지 "
-        "않는다. 괄호는 추론 설정, 세로 위치는 각 기둥 안의 상대 위치다.",
-        "자료: Artificial Analysis (artificialanalysis.ai)  |  정리: AIEconLab",
+        "주: 집계사이트 아티피셜 애널리시스(Artificial Analysis)의 자체 측정(2026-07-27 확인). 과제당 비용(Cost per "
+        "Task)은 동 사이트 지능지수(v4.1, 9개 평가) 과제들의 가중평균이고, 괄호는 추론 설정(설정은 토큰 사용량을 바꾸지 "
+        "단가를 바꾸지 않는다). 모델마다 지능지수가 달라 같은 품질의 답에 대한 비교가 아니다. 세로 위치는 각 기둥 안의 "
+        "로그 눈금 상대 위치다.",
+        "자료: Artificial Analysis (artificialanalysis.ai), 각 사 공식 가격 문서  |  정리: AIEconLab",
     ]
     NOTE_X, NOTE_FS = 0.01, 11.3
     rend0 = fig.canvas.get_renderer()
@@ -138,8 +162,8 @@ def main():
                 wrapped.append((pi, cur))
                 cur = word
         wrapped.append((pi, cur))
-    assert 2 <= len(wrapped) <= 4, ("주석 줄 수 이상", len(wrapped))
-    ys_note = [0.126 - 0.038 * i for i in range(len(wrapped))]
+    assert 2 <= len(wrapped) <= 5, ("주석 줄 수 이상", len(wrapped))
+    ys_note = [0.132 - 0.033 * i for i in range(len(wrapped))]
     notes = [fig.text(NOTE_X, y, ln, fontsize=NOTE_FS, color=NOTE)
              for (pi, ln), y in zip(wrapped, ys_note)]
     for i, (pi, ln) in enumerate(wrapped[:-1]):

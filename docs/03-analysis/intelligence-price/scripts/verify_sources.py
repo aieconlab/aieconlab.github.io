@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""그림·본문의 하드코딩 수치를 data/ 원자료 사본과 기계 대조한다.
+"""보존 자료의 문자열 존재와 내부 계산을 확인하는 회귀 장치.
 
-그림 스크립트(fig01/fig02/make_cover)는 상수를 내장하므로, 이 스크립트가 그 상수들이
-원자료(각 사 공식 가격 문서 사본, AA 렌더 스냅숏, 알파벳 트랜스크립트, arXiv PDF)에
-실제로 존재하는지 확인한다. 하나라도 실패하면 비영(non-zero)으로 종료한다.
+**이 스크립트가 하는 일과 하지 않는 일을 분명히 해 둔다.**
+- 한다: 본문·그림이 쓰는 값들이 `data/` 원자료 사본에 문자열(또는 정규식)로 실재하는지
+  확인하고, 파생 산수(배수·인하율·상관계수·역전 쌍 수)를 자체 재계산해 표기와 대조한다.
+- 하지 않는다: 본문(.md)이나 그림 스크립트를 파싱해 값을 끌어오지 않는다. 따라서 어떤 값이
+  원자료에 존재하기만 하면, 그것을 **잘못된 비교 기준으로 쓰는 오류는 잡지 못한다**
+  (실제로 3차 개고 전까지 $9와 $7.50이 모두 원자료에 있었지만 구글의 비교 기준을 2.5 Flash로
+  잘못 잡은 오류를 이 스크립트는 통과시켰다). 비교 기준의 타당성은 사람이 검토해야 한다.
+하나라도 실패하면 비영(non-zero)으로 종료한다.
 
 사용법: python3 verify_sources.py   (scripts/ 어디서 실행해도 data/는 상대 경로로 찾음)
 의존성: pypdf
@@ -45,6 +50,11 @@ CHECKS = [
                                 "August 31", "September 1"]),
     ("google_gemini_pricing.html", ["gemini-3.5-flash", "gemini-3.6-flash", "$9.00",
                                     "$7.50", "$2.50", "$0.30"]),
+    # 3.6 Flash는 2026-07-21 GA이고 공식 릴리스 노트가 3.5 Flash보다 싸다고 명시
+    ("google_gemini_changelog.html", ["July 21, 2026", "gemini-3.6-flash",
+                                      "lower price point than 3.5 Flash"]),
+    ("google_blog_gemini36_ko.html", ["출력 토큰 사용량을 17% 줄였", "7.50 달러",
+                                      "에이전틱 작업의 전체 비용"]),
     ("xai_models.html", ["$2.00", "$6.00", ("grok-4.3 입력 12500(=$1.25/1M)",
                           r'"grok-4\.3".{0,200}promptTextTokenPrice"?[:=]\s*"?12500'),
                          ("grok-4.3 출력 25000(=$2.50/1M)",
@@ -109,10 +119,19 @@ import math
 
 
 def _rank(vals):
-    order = sorted(range(len(vals)), key=lambda i: vals[i])
-    r = [0] * len(vals)
-    for pos, i in enumerate(order):
-        r[i] = pos + 1
+    """동점은 평균 순위(Opus 4.8·Opus 5의 출력 단가가 $25로 동일)."""
+    n = len(vals)
+    idx = sorted(range(n), key=lambda i: vals[i])
+    r = [0.0] * n
+    i = 0
+    while i < n:
+        j = i
+        while j + 1 < n and vals[idx[j + 1]] == vals[idx[i]]:
+            j += 1
+        avg = (i + j) / 2 + 1
+        for k in range(i, j + 1):
+            r[idx[k]] = avg
+        i = j + 1
     return r
 
 
@@ -123,14 +142,13 @@ def _pearson(x, y):
     return num / den
 
 
-# 그림 2와 동일한 7종 (출력 단가, 과제당 비용)
+# 그림 2와 동일한 8종 (출력 단가, 과제당 비용) — AA 9종 중 Fable 5(폴백)만 제외
 _PAIRS = [(0.87, 0.04), (6.00, 0.35), (7.50, 0.50), (10.0, 1.53),
-          (15.0, 0.72), (25.0, 1.80), (30.0, 1.54)]
+          (15.0, 0.72), (25.0, 1.80), (25.0, 2.03), (30.0, 1.54)]
 _p = [a for a, _ in _PAIRS]
 _c = [b for _, b in _PAIRS]
-_rp, _rc = _rank(_p), _rank(_c)
 _n = len(_PAIRS)
-_spearman = 1 - 6 * sum((a - b) ** 2 for a, b in zip(_rp, _rc)) / (_n * (_n * _n - 1))
+_spearman = _pearson(_rank(_p), _rank(_c))   # _rank는 동점 평균 순위
 _logr = _pearson([math.log(v) for v in _p], [math.log(v) for v in _c])
 _inv = sum(1 for i in range(_n) for j in range(_n) if _p[i] < _p[j] and _c[i] > _c[j])
 
@@ -141,9 +159,11 @@ calc = [
     ("단가 60%", abs(1 - 10 / 25 - 0.60) < 1e-9),
     ("단가 3배·1센트", 30 / 10 == 3.0 and abs(abs(1.54 - 1.53) - 0.01) < 1e-9),
     ("K3는 Sonnet 단가 1.5배·과제당 절반 이하", 15.0 / 10.0 == 1.5 and 0.72 / 1.53 < 0.5),
-    ("순위상관 0.93", abs(_spearman - 0.929) < 0.005),
-    ("로그 상관 0.95", abs(_logr - 0.953) < 0.005),
-    ("역전 두 쌍", _inv == 2),
+    ("동일 단가 $25의 과제당 13% 차", abs(2.03 / 1.80 - 1 - 0.128) < 0.002),
+    ("구글 인하 16.7%", abs((1 - 7.5 / 9.0) - 0.1667) < 0.0005),
+    ("순위상관 0.90(8종)", abs(_spearman - 0.898) < 0.005),
+    ("로그 상관 0.96(8종)", abs(_logr - 0.958) < 0.005),
+    ("역전 세 쌍(8종)", _inv == 3),
 ]
 for label, ok in calc:
     if not ok:

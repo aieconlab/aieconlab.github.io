@@ -6,8 +6,8 @@
 data/aa_cost_per_task_rendered.txt):
 - Claude Sonnet 5 (max): 출력 단가 $10 → 과제당 비용(Cost per Task) $1.53
 - GPT-5.6 Sol (max):     출력 단가 $30 → 과제당 비용 $1.54
-좌측 텍스트 수치: 단가 3배 차이가 과제당 1센트 차이. 7월 신모델(전작 비교 가능 3사)은
-단가 동결 아니면 인상.
+좌측 텍스트 수치: 단가 3배 차이가 과제당 1센트 차이. 전작과 견줄 수 있는 7월 신모델 네 계열은
+동결(오픈AI)·인상(문샷AI·xAI)·인하(구글 3.5 Flash $9 → 3.6 Flash $7.50, 2026-07-21 GA).
 """
 import argparse
 from pathlib import Path
@@ -56,7 +56,7 @@ left_texts = [
     ax.text(LX, 425, "AI 비용을 세는 두 가지 방법", fontsize=22,
             color=BLUE, va="center", ha="left", fontweight="medium"),
     ax.text(LX, 295, "출력 단가 3배인 두 모델, 과제당 비용은 1센트 차이\n"
-                     "전작과 견줄 수 있는 7월 신모델은 동결 아니면 인상",
+                     "7월 신모델의 값은 동결 하나, 인상 둘, 인하 하나",
             fontsize=17, color=GRAY, va="center", ha="left", linespacing=1.9),
     ax.text(LX, 180, "2026년 7월, 모델 가격표와 과제당 비용 읽기", fontsize=14,
             color=LGRAY, va="center", ha="left"),

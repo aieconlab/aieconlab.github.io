@@ -12,10 +12,12 @@ data/aa_cost_per_task_rendered.txt. 'Cost per Task'의 사이트 정의는 "각 
 - Claude Sonnet 5 (max)    출력 $10   | 과제당 $1.53
 - Kimi K3                  출력 $15   | 과제당 $0.72
 - Claude Opus 4.8 (max)    출력 $25   | 과제당 $1.80
+- Claude Opus 5 (max)      출력 $25   | 과제당 $2.03   ← 단가가 같아도 과제당은 13% 차
 - GPT-5.6 Sol (max)        출력 $30   | 과제당 $1.54
-핵심: 두 축은 대체로 함께 움직인다(순위상관 0.929, 로그값 상관 0.953). 다만 일대일이 아니어서
+표본 규칙: AA에서 확인한 9종 중 Fable 5만 제외(폴백 구성이라 한 모델의 단가와 대응 불가).
+핵심: 두 축은 대체로 함께 움직인다(8종 순위상관 0.898, 로그값 상관 0.958). 다만 일대일이 아니어서
 단가 3배(Sol vs Sonnet)가 과제당엔 $0.01 차이로 압축되고, Sonnet의 단가 60% 우위(vs Opus 4.8)는
-과제당 15%로 줄며, 인접 두 쌍(Sonnet-K3, Opus 4.8-Sol)에서 순위가 뒤집힌다.
+과제당 15%로 줄며, 세 쌍(Sonnet-K3, Opus 4.8-Sol, Opus 5-Sol)에서 순위가 뒤집힌다.
 모델마다 지능지수가 달라 동일 품질 비교가 아님.
 
 사용법: python3 fig02_task_cost_slope.py [--out PNG] [--font FONT]
@@ -41,6 +43,7 @@ MODELS = [
     ("Claude Sonnet 5 (max)", 10.0, 1.53, BLUE, 3.0, True),
     ("Kimi K3", 15.0, 0.72, GRAY, 1.8, False),
     ("Claude Opus 4.8 (max)", 25.0, 1.80, DGRAY, 2.4, False),
+    ("Claude Opus 5 (max)", 25.0, 2.03, DGRAY, 2.4, False),
     ("GPT-5.6 Sol (max)", 30.0, 1.54, NAVY, 3.0, True),
 ]
 P = {m[0]: m[1] for m in MODELS}
@@ -55,26 +58,45 @@ assert C["Grok 4.5 (high)"] / C["Claude Sonnet 5 (max)"] < 0.26              # �
 
 # ---- 논지 검증: '대체로 함께 가되 일대일은 아니다' ----
 # (구판의 '단가 순서는 청구서 순서를 예측하지 못한다'는 과장이어서 아래 두 조건으로 대체)
-def _rank(vals):
-    order = sorted(range(len(vals)), key=lambda i: vals[i])
-    r = [0] * len(vals)
-    for pos, i in enumerate(order):
-        r[i] = pos + 1
+def _rank_avg(vals):
+    """동점은 평균 순위(Opus 4.8과 Opus 5의 출력 단가가 $25로 같다)."""
+    n = len(vals)
+    idx = sorted(range(n), key=lambda i: vals[i])
+    r = [0.0] * n
+    i = 0
+    while i < n:
+        j = i
+        while j + 1 < n and vals[idx[j + 1]] == vals[idx[i]]:
+            j += 1
+        avg = (i + j) / 2 + 1
+        for k in range(i, j + 1):
+            r[idx[k]] = avg
+        i = j + 1
     return r
+
+
+def _pearson(x, y):
+    mx, my = sum(x) / len(x), sum(y) / len(y)
+    num = sum((a - mx) * (b - my) for a, b in zip(x, y))
+    den = math.sqrt(sum((a - mx) ** 2 for a in x) * sum((b - my) ** 2 for b in y))
+    return num / den
 
 
 _p = [m[1] for m in MODELS]
 _c = [m[2] for m in MODELS]
-_rp, _rc = _rank(_p), _rank(_c)
 _n = len(MODELS)
-_spearman = 1 - 6 * sum((a - b) ** 2 for a, b in zip(_rp, _rc)) / (_n * (_n * _n - 1))
+_spearman = _pearson(_rank_avg(_p), _rank_avg(_c))
+_logr = _pearson([math.log(v) for v in _p], [math.log(v) for v in _c])
 _inversions = [(MODELS[i][0], MODELS[j][0]) for i in range(_n) for j in range(_n)
                if _p[i] < _p[j] and _c[i] > _c[j]]
 # (1) 두 축은 강하게 함께 움직인다 — '무관하다'로 읽히면 안 된다
 assert _spearman > 0.85, ("순위상관이 낮아졌다 — 본문 서술 재검토 필요", round(_spearman, 3))
-assert abs(_spearman - 0.929) < 0.005, ("본문 표기 0.93과 불일치", round(_spearman, 4))
-# (2) 그러나 일대일은 아니다 — 역전이 존재하고, 그 수는 본문이 밝힌 두 쌍이다
-assert len(_inversions) == 2, ("역전 쌍 수 변경 — 본문·캡션 수정 필요", _inversions)
+assert abs(_spearman - 0.898) < 0.005, ("본문 표기 0.90과 불일치", round(_spearman, 4))
+assert abs(_logr - 0.958) < 0.005, ("본문 표기 0.96과 불일치", round(_logr, 4))
+# (2) 그러나 일대일은 아니다 — 역전이 존재하고, 그 수는 본문이 밝힌 세 쌍이다
+assert len(_inversions) == 3, ("역전 쌍 수 변경 — 본문·캡션 수정 필요", _inversions)
+# (3) 단가가 같아도 과제당은 다르다(Opus 4.8 vs Opus 5) — 본문 핵심 예시
+assert _p[5] == _p[6] == 25.0 and abs(2.03 / 1.80 - 1 - 0.128) < 0.002
 
 
 def logpos(v, lo, hi):
@@ -116,13 +138,20 @@ def main():
 
     # 오른쪽 라벨 y 슬롯(값이 거의 같은 Sonnet·Sol은 겹치지 않게 수동 배치)
     right_slot = {
-        "Claude Opus 4.8 (max)": 1.000,
-        "GPT-5.6 Sol (max)": 0.944,
-        "Claude Sonnet 5 (max)": 0.896,
-        "Kimi K3": 0.738,
-        "Gemini 3.6 Flash": 0.651,
-        "Grok 4.5 (high)": 0.564,
+        "Claude Opus 5 (max)": 1.000,
+        "Claude Opus 4.8 (max)": 0.948,
+        "GPT-5.6 Sol (max)": 0.896,
+        "Claude Sonnet 5 (max)": 0.844,
+        "Kimi K3": 0.700,
+        "Gemini 3.6 Flash": 0.620,
+        "Grok 4.5 (high)": 0.540,
         "DeepSeek V4-Pro (max)": 0.040,
+    }
+    # 왼쪽 라벨 y 슬롯(Opus 4.8·Opus 5는 단가가 $25로 같아 점이 겹치므로 라벨만 분리)
+    left_slot = {
+        "Claude Opus 4.8 (max)": -0.032,   # 기본 위치에서의 오프셋
+        "Claude Opus 5 (max)": +0.032,
+        "GPT-5.6 Sol (max)": +0.034,       # Opus 5 라벨과 겹치지 않게 위로
     }
 
     labels = list(heads)
@@ -134,18 +163,19 @@ def main():
         ax.plot([XL], [yl], "o", ms=8 if strong else 6, color=color, zorder=4)
         ax.plot([XR], [yr], "o", ms=8 if strong else 6, color=color, zorder=4)
         fw = "bold" if strong else "normal"
-        labels.append(ax.text(XL - 0.022, yl, f"{name}  ${price:g}", fontsize=11.5,
+        labels.append(ax.text(XL - 0.022, yl + left_slot.get(name, 0.0),
+                              f"{name}  ${price:g}", fontsize=11.5,
                               color=color, ha="right", va="center", fontweight=fw))
         labels.append(ax.text(XR + 0.022, right_slot[name], f"${cost:.2f}  {name}",
                               fontsize=11, color=color, ha="left", va="center",
                               fontweight=fw))
 
     labels.append(ax.text((XL + XR) / 2, 0.30,
-                          "두 축의 순위상관 0.93 — 대체로 함께 가지만\n단가 3배(Sonnet $10 vs Sol $30)가 과제당엔 1센트 차이",
+                          "두 축의 순위상관 0.90 — 대체로 함께 가지만\n단가 3배(Sonnet $10 vs Sol $30)가 과제당엔 1센트 차이",
                           fontsize=12, color=NAVY, ha="center", va="center",
                           fontweight="bold", linespacing=1.5))
     labels.append(ax.text((XL + XR) / 2, 0.135,
-                          "Sonnet 5의 단가 60% 우위(vs Opus 4.8)는 과제당 15%로 줄고,\n인접 두 쌍(Sonnet 5–Kimi K3, Opus 4.8–Sol)에서는 순위가 뒤집힌다",
+                          "출력 단가가 $25로 같은 Opus 4.8과 Opus 5도 과제당은 $1.80 대 $2.03,\n세 쌍(Sonnet 5–Kimi K3, Opus 4.8–Sol, Opus 5–Sol)에서는 순위가 뒤집힌다",
                           fontsize=10.5, color=NOTE, ha="center", va="center",
                           linespacing=1.5))
 

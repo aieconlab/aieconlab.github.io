@@ -40,3 +40,13 @@ Claude Opus 4.8 (max) $1.80 | Claude Opus 5 (max) $2.03 | Claude Fable 5 (with f
   → 정규화 이전의 원시 총비용(1차 원고가 '완주 비용'으로 잘못 쓴 지표).
 - Verbosity(예: Sonnet 5 max 300M, Opus 4.8 max 120M)는 "Output tokens from Intelligence
   Index"로 지수 전체의 원시 합계 → 과제당으로 정규화된 비용과 직접 견줄 수 없다.
+
+■ 게시 직전 재확인 (2026-07-28 01:0x KST, 브라우저)
+Sonnet 5 페이지 차트: DeepSeek V4 Pro (max) $0.04 | gpt-oss-120b (high) $0.06 | MiniMax-M3 $0.12
+| Nemotron 3 Ultra $0.25 | Muse Spark 1.1 (xhigh) $0.26 | GLM-5.2 (max) $0.32 | Grok 4.5 (high)
+$0.35 | Gemini 3.6 Flash $0.50 | Kimi K3 $0.72 | Claude Sonnet 5 (max) $1.53 | GPT-5.6 Sol (max)
+$1.54 | Claude Opus 5 (max) $2.03 | Claude Fable 5 (with fallback) $2.75
+Opus 4.8 페이지 차트: ... GPT-5.6 Sol (max) $1.54 | Claude Opus 4.8 (max) $1.80 |
+Claude Opus 5 (max) $2.03 | Claude Fable 5 (with fallback) $2.75  (지능지수 #10/190 = 56 유지)
+→ 본문·그림 2가 쓰는 9개 값 전부 27일 확인값과 동일. 게시 게이트 통과.
+(각 모델 페이지의 차트는 기본 표시 모델 집합이 달라 한 페이지에 9개가 모두 뜨지는 않는다.)

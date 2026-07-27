@@ -1,0 +1,14 @@
+[게시 직전 재확인 — Kimi K3 가중치 공개 확인. 2026-07-28 01:0x KST]
+URL: https://huggingface.co/moonshotai/Kimi-K3  (API: /api/models/moonshotai/Kimi-K3)
+원본 JSON 사본: hf_api_kimi_k3.json
+
+- 페이지 제목이 "· Upcoming release ·"에서 "moonshotai/Kimi-K3 · Hugging Face"로 바뀜
+- author: moonshotai (공식 조직, 팔로워 13.8k) / private=False, gated=False, disabled=False
+- safetensors 96개 분할(model-00001-of-000096.safetensors …) + config.json +
+  model.safetensors.index.json, 총 114개 파일, LICENSE 파일 존재
+- cardData.license = "other", cardData.license_name = "kimi-k3" (자체 라이선스)
+  → Apache 2.0 등 표준 오픈소스 라이선스가 아님. 본문은 '오픈웨이트'로만 서술.
+- 태그: Image-Text-to-Text, Transformers, Safetensors, kimi_k3, compressed-tensors
+- 주의: API의 lastModified(2026-07-27T15:35:41Z = 2026-07-28 00:35 KST)는 마지막 파일 변경
+  시각일 뿐 공개 시각의 1차 근거가 아니므로(계획 프롬프트 금지 항목) 본문에 쓰지 않았다.
+  본문은 '2026-07-28 오전 1시 확인 시점에 공개된 것을 확인했다'로만 적었다.

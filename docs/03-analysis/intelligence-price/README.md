@@ -24,7 +24,10 @@
   4. **[확정] README 잔존 모순** — '정가표 전체 1,800배', DeepSeek `$3.48→$0.87`·05-31, Gemini 출시일 '미확인', 검증 건수 82건 표기를 모두 현행으로 교정(이 항목).
   5. **[확정] 검증 스크립트 설명 과장** — `verify_sources.py`는 본문·그림을 파싱하지 않으므로 '원자료→본문 연동 검증'이 아니다. 스크립트 docstring과 아래 설명을 '보존 자료 문자열 존재 + 내부 계산 확인'으로 고치고, **이번 구글 오류를 이 스크립트가 통과시킨 사실을 docstring에 실명으로 기록**했다.
   - 부수: 제번스 절에 `|ε|>1`의 전제(다른 조건 동일·효율 개선의 비례 전가·단순 부분균형)를 명시하고, 오픈라우터 자료의 한계와 알파벳 시계열의 한계를 문단 분리. 그림 라벨의 U+2212(−) 두부 글자를 잡는 assert 추가.
-- **게시 직전 재확인(2026-07-28 06:30 KST 전후, 필수)**
+- **게시 직전 재확인 — 2026-07-28 01:0x KST 완료(둘 다 통과)**
+  - ✅ **Kimi K3 가중치 공개 확인** — 공식 저장소(moonshotai, private/gated 아님)에 safetensors 96분할 공개. 라이선스는 표준 오픈소스가 아닌 자체 `kimi-k3`(cardData: license=other, license_name=kimi-k3). 본문 서술을 '공개를 공언한' → '공개한'으로 확정하고 '숫자의 기준'에 라이선스 성격을 명기. 근거: `data/hf_api_kimi_k3.json`, `data/kimi_k3_release_confirmed.txt`. (HF `lastModified`는 공개일 근거로 쓰지 않음 — 계획 프롬프트 금지 항목)
+  - ✅ **AA 과제당 비용 9개 값 유지 확인** — Sonnet 5·Opus 4.8 두 페이지 차트에서 $0.04/$0.35/$0.50/$0.72/$1.53/$1.54/$1.80/$2.03/$2.75 전부 27일 확인값과 동일. 근거: `data/aa_cost_per_task_rendered.txt` 말미.
+- **〔이력〕 게시 직전 재확인 절차(원안)**
   1. **Kimi K3 가중치** — 2026-07-27 14:1x KST 확인 시점 `huggingface.co/moonshotai/Kimi-K3`는 공개 예고(카운트다운 잔여 9시간 47분, 예고 시점 약 07-28 00:00 KST) 상태. 공식 발표문에 "The full model weights will be released by July 27, 2026" 명시. 본문·'숫자의 기준'은 이 상태가 게시 후에도 참으로 남게 과거형으로 서술했으나, 게시 30분 전 저장소를 다시 열어 safetensors 존재·라이선스를 확인하고 필요하면 문장을 강화(공개 확인)하거나 조정(지연)할 것. 저장소가 `moonshotai` 조직인지도 재확인(가짜 미러 주의).
   2. **Artificial Analysis 과제당 비용(Cost per Task) 9건** — 동적 렌더 사이트라 이 세션의 브라우저 스냅숏(`data/aa_cost_per_task_rendered.txt`, 2026-07-27 15:1x KST)이 근거. 게시 직전 모델 페이지에서 값 유지 여부 확인($1.53/$1.54/$1.80이 핵심).
   3. **한시 가격** — 본문에 "2026년 7월 28일 기준" 명시 완료(Sonnet 5 도입가 8/31까지, 9/1부터 $3/$15 예고를 표 각주·본문에 반영).
@@ -90,7 +93,9 @@ curl 수집이 차단되거나 JS 렌더인 페이지는 Claude Code 내장 브�
 | (교차 참조) 2026q2-alphabet-earnings-release.pdf | `docs/03-analysis/alphabet-receipts/data/`에 기보존 (분당 220억 문구 재확인) | trend14 README 참조 |
 | arxiv_2601.10088.html / .pdf | https://arxiv.org/abs/2601.10088 (State of AI: An Empirical 100 Trillion Token Study) | `8b75672ac4ecb67657c3dea27b79256a0f3abe79c42332be94ac2944b36bf59e` / `0a3cc52bad6961424c9e6fe83351d2208c5311f99e7e7d6afa65e494de3c4535` |
 | artificialanalysis_models.html | https://artificialanalysis.ai/models (동적 렌더 — 지표 정의 텍스트만 정적) | `edb540850be8d929666e0a1b5544239d4425f8f75821a3c7035570cdb8e6874c` |
-| aa_cost_per_task_rendered.txt | https://artificialanalysis.ai/models/claude-sonnet-5 · /claude-opus-4-8 (브라우저 렌더 발췌 — Cost per Task 13종·Verbosity·지능지수) | `fea3378f920fed7965067a39a879fbf276671d4a4196849304549bc66e01baae` |
+| aa_cost_per_task_rendered.txt | https://artificialanalysis.ai/models/claude-sonnet-5 · /claude-opus-4-8 (브라우저 렌더 발췌 — Cost per Task 13종·Verbosity·지능지수) | `9bb903c9df8adad09ede59a6616b2d106a7992ea8b4e85ff1a57a2b3bef4e803` |
+| hf_api_kimi_k3.json | https://huggingface.co/api/models/moonshotai/Kimi-K3 (게시 직전 공개 확인 — safetensors 96분할·license_name kimi-k3) | `7812d489b800893dc0ae0b1094df3fe6b4d2df65a519d6bb56cd38377eaf30ee` |
+| kimi_k3_release_confirmed.txt | 위 API·페이지 확인 기록(2026-07-28 01:0x KST) | `133147c7ab49e730b1bb0f0920ebd46d96fe43093cad3bfb1822c6185328d1d0` |
 | artificialanalysis_methodology.html | https://artificialanalysis.ai/methodology | `05b9f3615182b6b7deee3dd1472d17d6deba2cff2334e0c5e3cf1fdedcbb3106` |
 
 ## 원자료 1:1 대조 결과 (2026-07-27, 이 세션)

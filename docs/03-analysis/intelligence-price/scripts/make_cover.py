@@ -6,7 +6,9 @@
 data/aa_cost_per_task_rendered.txt):
 - Claude Sonnet 5 (max): 출력 단가 $10 → 과제당 비용(Cost per Task) $1.53
 - GPT-5.6 Sol (max):     출력 단가 $30 → 과제당 비용 $1.54
-좌측 텍스트 수치: 출력 단가가 $25로 동일한 Opus 4.8·Opus 5의 과제당 비용이 $1.80 대 $2.03(13% 차).
+좌측 텍스트는 우측 그래프에 그린 쌍(Sol $30/$1.54 vs Sonnet 5 $10/$1.53)에서 파생시킨다 —
+'출력 단가 3배인 두 모델, 과제당 비용은 1센트 차이'. 문구를 손으로 적으면 그래프와 다른
+사례를 말할 수 있어(4차본의 실제 오류) 코드에서 계산해 렌더한다.
 7월 신모델 여덟(같은 등급 직전 모델과 비교 가능한 것)은 인상 5·동결 2·인하 1
 — 상세 대응표는 data/july_price_direction_roster.txt.
 """
@@ -36,11 +38,17 @@ SPINE = "#cbd5e1"
 
 P_SON, P_SOL = 10.0, 30.0          # 출력 단가($/1M)
 C_SON, C_SOL = 1.53, 1.54          # 과제당 비용($, Cost per Task)
-assert P_SOL / P_SON == 3.0 and abs(abs(C_SOL - C_SON) - 0.01) < 1e-9
-# 좌측 문구가 쓰는 '동일 단가 $25, 과제당 13% 차'와 7월 집계(인상5·동결2·인하1)
-assert abs(2.03 / 1.80 - 1 - 0.128) < 0.002
 JULY_UP, JULY_FLAT, JULY_DOWN = 5, 2, 1
 assert JULY_UP + JULY_FLAT + JULY_DOWN == 8
+
+# 좌측 문구는 우측 그래프에 실제로 그린 쌍에서 **파생**시킨다.
+# (4차본에서 좌측은 Opus 4.8-Opus 5의 '동일 단가·13% 차', 우측 그래프는 Sol-Sonnet을
+#  그려 서로 다른 사례를 말하는 오류가 있었다. 파생시키면 구조적으로 어긋날 수 없다.)
+_ratio = P_SOL / P_SON
+_cents = round(abs(C_SOL - C_SON) * 100)
+assert _ratio == int(_ratio), "단가 배수가 정수가 아니면 문구 표현을 고쳐야 한다"
+CLAIM = f"출력 단가 {int(_ratio)}배인 두 모델, 과제당 비용은 {_cents}센트 차이"
+JULY_LINE = f"7월 신모델 여덟: 인상 {JULY_UP if JULY_UP != 5 else '다섯'}, 동결 둘, 인하 하나"
 
 fig = plt.figure(figsize=(16, 8), dpi=100)
 ax = fig.add_axes([0, 0, 1, 1])
@@ -60,8 +68,7 @@ left_texts = [
             fontweight="bold", va="center", ha="left", linespacing=1.35),
     ax.text(LX, 425, "AI 비용을 세는 두 가지 방법", fontsize=22,
             color=BLUE, va="center", ha="left", fontweight="medium"),
-    ax.text(LX, 295, "출력 단가가 똑같은 두 모델, 과제당 비용은 13% 차이\n"
-                     "7월 신모델 여덟: 인상 다섯, 동결 둘, 인하 하나",
+    ax.text(LX, 295, f"{CLAIM}\n{JULY_LINE}",
             fontsize=17, color=GRAY, va="center", ha="left", linespacing=1.9),
     ax.text(LX, 180, "2026년 7월, 모델 가격표와 과제당 비용 읽기", fontsize=14,
             color=LGRAY, va="center", ha="left"),
@@ -120,7 +127,23 @@ left_right_edge = max(bb(t).x1 for t in left_texts)
 graphic_left_edge = min(bb(t).x0 for t in right_texts)
 assert graphic_left_edge - left_right_edge >= 30, ("좌우 블록 간격 부족",
                                                    left_right_edge, graphic_left_edge)
-print("cover layout checks passed")
+
+# 좌측 문구와 우측 그래프가 같은 사례를 말하는지 최종 확인:
+# 문구에 등장하는 배수·센트가 실제로 그린 두 점에서 나온 값이어야 한다.
+_body = "\n".join(t.get_text() for t in left_texts)
+assert CLAIM in _body, "좌측 문구가 파생값과 다르다"
+_plotted_prices = {P_SON, P_SOL}
+_plotted_costs = {C_SON, C_SOL}
+assert f"{int(P_SOL / P_SON)}배" in CLAIM and max(_plotted_prices) / min(_plotted_prices) == P_SOL / P_SON
+assert f"{round(abs(C_SOL - C_SON) * 100)}센트" in CLAIM
+# 우측 라벨에도 같은 값이 찍혀 있어야 한다
+_right = "\n".join(t.get_text() for t in right_texts)
+for v in (P_SON, P_SOL):
+    assert f"${v:g}" in _right, ("그래프 라벨에 단가 누락", v)
+for v in (C_SON, C_SOL):
+    assert f"${v:.2f}" in _right, ("그래프 라벨에 과제당 비용 누락", v)
+print("cover layout + claim/graph consistency checks passed")
+print("  claim:", CLAIM)
 
 args.out.parent.mkdir(parents=True, exist_ok=True)
 fig.savefig(args.out, dpi=100, facecolor="white", metadata={"Date": None})

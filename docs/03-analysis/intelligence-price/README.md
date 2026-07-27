@@ -11,7 +11,7 @@
   4. **[확정] 요청당·표본 이전** — 논문 지표는 요청당 토큰. '작업당'을 '요청당'으로 고치고, 메커니즘 주장을 '관측된 유력한 후보'로 하향, 요청 수 분해 부재와 OpenRouter(2023~25)→알파벳(2026) 이전 불가를 본문에 명기.
   - 부수 수정: 제목·리드·결론 재작성(「토큰 단가와 과제 비용은 다르다」), '분모' 은유를 청구서 산식(입력단가×입력토큰+출력단가×출력·추론토큰+캐시)으로 교체, 공급 제약 해석을 '식별 불가'로 완화, 원문 미확보 OpenAI 매출 문단 삭제, 단가표를 모바일에서 숫자가 갈라지지 않는 3열로 축소.
 - **3차 개고(2026-07-27 저녁, 2차 외부 검토 NO-GO 반영).** 지적 5건 + 개선 6건을 원자료로 재검증해 전부 타당 판정하고 반영:
-  1. **[확정] 핵심 명제가 자료보다 강함** — 그림 2의 7종으로 직접 계산하면 단가·과제당 비용의 스피어만 순위상관 0.929, 로그값 피어슨 0.953이고 역전은 Sonnet 5–Kimi K3, Opus 4.8–GPT-5.6 Sol 두 쌍뿐. '단가는 청구서를 예측하지 못한다'를 **'대체로 함께 움직이되 일대일이 아니다(일부 쌍에서 압축·역전)'**로 전면 교체(제목 제외 description·리드·본문·굵은 결론·그림 2 제목·주석). fig02의 assert도 `by_price != by_cost` → 순위상관 0.85 초과 **및** 역전 2쌍 확인으로 교체.
+  1. **[확정] 핵심 명제가 자료보다 강함** — 그림 2의 7종으로 직접 계산하면 단가·과제당 비용의 스피어만 순위상관 0.929, 로그값 피어슨 0.953이고 역전은 Sonnet 5–Kimi K3, Opus 4.8–GPT-5.6 Sol 두 쌍뿐. '단가는 청구서를 예측하지 못한다'를 **'대체로 함께 움직이되 일대일이 아니다(일부 쌍에서 압축·역전)'**로 전면 교체(제목 제외 description·리드·본문·굵은 결론·그림 2 제목·주석). fig02의 assert도 `by_price != by_cost` → 순위상관 0.85 초과 **및** 역전 쌍 수 확인으로 교체. 〔4차 개고에서 표본을 8종으로 넓혀 **0.898 / 0.958 / 역전 3쌍**으로 갱신됨 — 아래 4차 항목 3 참조. 이 줄의 7종 수치는 당시 기록이다〕
   2. **[확정] 정규화 지표를 원시 총량으로 설명** — AA 사이트에서 세 지표의 정의를 원문 확인: Cost per Task는 "입력·캐시 적중·캐시 기록·추론·답변 토큰 가격에서 산출해 **과제 수로 나누고** 지수 가중치 적용", Output Tokens per Task는 별도 지표, Verbosity(300M/120M)는 지수 전체 **원시 합계**. 정규화 비용을 원시 총량 비율(2.5배)로 설명한 문장과 "차이는 전부 토큰 양에서 나온다"를 삭제하고, 원인 분해를 하지 않았음을 명시. 그림 2 주석·README·verify_sources.py도 동시 수정.
   3. **[확정] $180/$0.10은 '정가표 전체 극단'이 아님** — 같은 가격표에 구세대 o1-pro 출력 $600 실재(보존 사본에서 `o1-pro],[0,150],[0,null],[0,600]` 확인). '전체 극단' 표현을 삭제하고 '표본 밖 두 사례만으로도 1,800배', 'o1-pro는 더 높음', '천장·바닥을 말하려면 모집단 정의가 먼저'로 교체.
   4. **[확정] 딥시크 인하 날짜 1차 출처 없음** — 보존한 공식 가격 문서·변경 기록에 `$3.48`·`2026-05-25/31`이 없고 2026년 항목은 04-24 V4 공개뿐. (계획 프롬프트가 제시한 '인하 전 $3.48'은 Together AI의 서드파티 서빙가 $3.48과 정확히 일치해 혼동 가능성이 있음.) 본문에서 날짜·이전 가격을 빼고, 그림 1의 딥시크 화살표를 제거해 현행가만 표시.
@@ -34,6 +34,11 @@
   6. **[P1] Together AI 단가 상충** — 모델 페이지 $3.48 / 서버리스 문서 $4.40으로 두 페이지가 달라, '정확히 4배' 대신 '자사 단가가 제3자 서빙가보다 크게 낮다'는 방향만 서술하고 확인 시점·두 페이지를 명시.
   7. **[P1] 제번스 측정 한계** — 토큰은 청구 단위이지 물리적 자원 소비가 아니라는 문단을 추가하고, '현재 공개 자료에 없다'를 '이 글이 확인한 두 자료에서는 찾지 못했다'로 한정.
   - 검증 확대: `verify_sources.py`에 **등급 대응 검사**(Terra=mini/Luna=nano/Sol=frontier 정규식), Opus 5 동가 문구, Fable 5 6월 9일, Flash-Lite GA, 7월 대응표 일치, 배수 산수를 추가 — 이번 P0 유형(가격은 맞지만 비교 기준이 틀린 오류)을 잡도록 설계. 96+15건 통과.
+- **6차 개고(2026-07-28, 5차 외부 검토 NO-GO 반영).**
+  1. **[P0 확정] 커버의 문구와 그래프가 다른 사례** — 좌측은 Opus 4.8·Opus 5의 '동일 단가·13% 차', 우측 그래프는 Sol·Sonnet의 '단가 3배·1센트 차'를 그려 서로 다른 사례를 말하고 있었다(검증 스크립트는 두 사례를 각각만 확인해 통과시킴). **좌측 문구를 우측 그래프에 그린 값에서 코드로 파생시키고**, 문구·그래프 라벨 일치 assert를 추가해 구조적으로 어긋날 수 없게 했다.
+  2. **[P1] Together AI 현재값** — 2026-07-28 재확인 결과 서버리스 모델 표와 V4-Pro 퀵스타트가 **모두 $3.48**로 일치(서버리스 표 원문 행: `$1.74 $0.20 $3.48`). 5차의 '$4.40과 상충' 서술을 삭제하고 '자사 $0.87 대비 4.0배'로 복원, 두 페이지를 참고자료에 명시.
+  3. **[P1] README 잔여 모순** — 핵심 수치 요약의 `7종·0.929·0.953·역전 2쌍`을 현행 `8종·0.898·0.958·역전 3쌍`으로, 중복된 게시본 SHA 제목 제거, 취득 기간에 7-28 추가분 반영, Kimi 대장 설명을 '공개 전 상태 보존'으로 명확화(공개 확인은 hf_api_kimi_k3.json).
+  4. **[P1] 본문 국소 3건** — '1차 출처로 확인되는 절반 이상 인하'를 '이 글이 가격 이력을 대조한 범위에서'로 한정, 절 제목을 '단가 대신'→'**단가에 더해**'로 바꾸고 캐시 적중률·1회 성공률도 청구서를 바꾼다는 점을 본문에 추가, 제번스 판정 범위를 리드·개요·결론 모두 '이 글이 확인한 두 자료'로 통일.
 - **게시 직전 재확인 — 2026-07-28 01:0x KST 완료(둘 다 통과)**
   - ✅ **Kimi K3 가중치 공개 확인** — 공식 저장소(moonshotai, private/gated 아님)에 safetensors 96분할 공개. 라이선스는 표준 오픈소스가 아닌 자체 `kimi-k3`(cardData: license=other, license_name=kimi-k3). 본문 서술을 '공개를 공언한' → '공개한'으로 확정하고 '숫자의 기준'에 라이선스 성격을 명기. 근거: `data/hf_api_kimi_k3.json`, `data/kimi_k3_release_confirmed.txt`. (HF `lastModified`는 공개일 근거로 쓰지 않음 — 계획 프롬프트 금지 항목)
   - ✅ **AA 과제당 비용 9개 값 유지 확인** — Sonnet 5·Opus 4.8 두 페이지 차트에서 $0.04/$0.35/$0.50/$0.72/$1.53/$1.54/$1.80/$2.03/$2.75 전부 27일 확인값과 동일. 근거: `data/aa_cost_per_task_rendered.txt` 말미.
@@ -60,11 +65,10 @@
 
 - 공통: matplotlib(Agg), dpi 200(커버 100), `--out`/`--font`(기본 Apple SD Gothic Neo) 인자. 각 스크립트는 수치 assert와 렌더링 후 레이아웃(겹침·잘림, 그림 1은 x축 라벨-주석 충돌 포함) assert를 통과해야 저장된다. `plt.rcParams["text.parse_math"]=False`로 `$` 두 개짜리 라벨의 mathtext 오파싱을 차단했다.
 - **재현성 계약(2026-07-27 게시본 생성 기준):** 생성 인터프리터는 `/opt/anaconda3/bin/python3`(Python 3.13.9 + matplotlib 3.10.6). `savefig`의 `metadata={"Date": None}` 적용. 같은 머신·같은 스택에서는 연속 실행 시 같은 바이트가 나오지만, 하위 스택(zlib 등)이 다르면 픽셀이 같아도 바이트는 달라진다 — 무결성 검증은 아래 SHA-256 대조로, 교차 환경 재생성 검증은 픽셀 비교로 한다(trend15 README의 픽셀 비교 명령 참조).
-- 게시본 SHA-256 (scripts/out/과 게시 경로 동일, 2026-07-27 3차 개고 재생성):
-- 게시본 SHA-256 (scripts/out/과 게시 경로 동일, 2026-07-27 5차 개고 재생성):
+- 게시본 SHA-256 (scripts/out/과 게시 경로 동일, 2026-07-28 6차 개고 재생성):
   - `fig01_output_price_moves.png` `463ecc66b4cbd401381088978d04f3dde40d07401fd527d8e6c99e623d08da48` (모델 단위 8행으로 전면 재설계 — 인상 5·동결 2·인하 1)
   - `fig02_task_cost_slope.png` `b33845273423630c0346a5f99b259ea959abc45776d03d9b62f7e7b18f2c5ff5` (Opus 5 추가로 8종, 순위상관 0.90·역전 3쌍)
-  - `trend16_cover.png` `43fb9d70b5d9585fde880696e661c73309ec11a169dccffe097c30f3d0f9ddaa` (부제를 '인상 다섯, 동결 둘, 인하 하나'로)
+  - `trend16_cover.png` `b4784f01075028b6b5abace7e0ffbabe087735791809f677790fb86962238647` (좌측 문구를 우측 그래프 값에서 파생 — '단가 3배·1센트 차', 일치 assert 추가)
 - 출력 → 게시 경로 복사:
   - `scripts/out/fig01_output_price_moves.png` → `static/images/post/trend16/`
   - `scripts/out/fig02_task_cost_slope.png` → `static/images/post/trend16/`
@@ -89,11 +93,13 @@ curl 수집이 차단되거나 JS 렌더인 페이지는 Claude Code 내장 브�
 | kimi_k3_pricing.html / _rendered.txt | https://platform.kimi.ai/docs/pricing/chat-k3 (JS 렌더) | `e6cac7377e0389b4e4669ba50111fc5119fa2360df849a4bbc6756713accca23` / `d4206f4431d0fde0ac9238cb9bc93ff3400c61050ee171d77606d3cee8629fa7` |
 | kimi_k26_pricing.html / _rendered.txt | https://platform.kimi.ai/docs/pricing/chat-k26 (JS 렌더) | `f30ee6aad29229ce82ec4012d43a82fca2bda9fa07525be9fb6a2abb7bd795b4` / `9e369c21c2735b54090ca12d09d5112c10ea51471ebe37a81af32ff18fdb5f26` |
 | moonshot_kimi_k3_announcement.html / kimi_k3_blog_rendered.txt | https://www.kimi.com/blog/kimi-k3 (JS 렌더 — 정적본에는 게시일 목록만) | `7c62004dd26208987ed09d17cf440d5a33142b30cf9b215de4fde21d8af3a0cd` / `26003790826a48daaad8a82a7bd2b1f9879021e547d646c7dd345c146ebb6a52` |
-| hf_kimi_k3_upcoming.html | https://huggingface.co/moonshotai/Kimi-K3 (공개 예고 페이지 상태 보존) | `35e4b849ae4c5c814d09033fecef284418968ac40908c8e25a5b92cd23c706db` |
+| hf_kimi_k3_upcoming.html | https://huggingface.co/moonshotai/Kimi-K3 (2026-07-27 14:1x KST **공개 전** 예고 페이지 상태 보존 — 공개 확인은 hf_api_kimi_k3.json) | `35e4b849ae4c5c814d09033fecef284418968ac40908c8e25a5b92cd23c706db` |
 | deepseek_pricing.html | https://api-docs.deepseek.com/quick_start/pricing | `08773e4021852f3c5cd4defdf91ccdc57573a7b4e859d84f0a18ba35156d4e69` |
 | deepseek_updates.html | https://api-docs.deepseek.com/updates (Change Log — 2026년 항목은 04-24 하나) | `b1064782723805a228941d14815de341ef54d758af01a6aab35ad00350b3eb62` |
 | deepseek_news260424.html | https://api-docs.deepseek.com/news/news260424 (V4 Preview Release) | `e1917ed7c53be33ab835dbaf0244a694c30d0e47d55b1265a21b14f8fae55ad5` |
 | mistral_pricing.html | https://mistral.ai/pricing/api | `08dbfd8a9fcd1e91ff4ec564870a437234459d75caf3a21cf943d1135cda34ee` |
+| together_serverless_models.html | https://docs.together.ai/docs/serverless/models (2026-07-28 재확인: DeepSeek-V4-Pro $1.74 / $0.20 / **$3.48**) | `77f2b2810a56e226ed03cb46f1eab2d069a29c656971e061c1fd24d372359161` |
+| together_v4pro_quickstart.html | https://docs.together.ai/docs/deepseek-v4-quickstart (같은 값 확인) | `388c20a56db5bbfecb8c26e0db39a1fcd28e1dbe7a40288979dbba60f0f02a02` |
 | together_pricing.html | https://www.together.ai/pricing (DeepSeek V4 Pro 행) | `5e3c5a81b3f9ffed384de61bf1634a52853d4713b8d525665952702c6a36bddf` |
 | tml_introducing_inkling.html | https://thinkingmachines.ai/news/introducing-inkling/ | `b316dd46d2ae666dfd96626e979be396a729e4dfc07d3aecec52a74dde7fe0ef` |
 | meta_muse_spark11_rendered.txt | https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/ (curl 400 — 브라우저 확인) | `60a4da302f5f7972e516cd2c150230ed66b1a62f8b4212f4f5ba22d4aac7a3a4` |
@@ -141,7 +147,7 @@ curl 수집이 차단되거나 JS 렌더인 페이지는 Claude Code 내장 브�
 | 7월 가격 방향 | **여덟 개 기준 동결 2·인상 5·인하 1**. 인상: Luna ×4.8(vs nano), K3 ×3.75, Terra ×3.3(vs mini), Grok 4.5 ×2.4, 3.5 Flash-Lite ×1.67 / 동결: Sol $30, Opus 5 $25 / 인하: 3.6 Flash −16.7% | 각 사 공식 가격·모델 문서·릴리스 노트 |
 | 인하 | **7월**: 구글 3.5 Flash $9 → 3.6 Flash $7.50(−16.7%, 2026-07-21 GA). **7월 이전**: Opus 4.1→4.5 $75→$25(2025-11-24). DeepSeek 인하 이력은 근거 없어 폐기 | 구글 릴리스 노트·Anthropic 문서 |
 | 과제당 비용(Cost per Task) | Sonnet 5(max) $1.53 ≈ Sol(max) $1.54 (단가 $10 vs $30, 3배) / Opus 4.8(max) $1.80 → Sonnet 단가 60% 우위가 과제당 15%로 압축 / Grok 4.5(high) $0.35, K3 $0.72, 3.6F $0.50, V4-Pro(max) $0.04, Opus 5(max) $2.03, Fable 5(폴백 포함) $2.75 | Artificial Analysis(2026-07-27 확인, 렌더 스냅숏) |
-| 단가-과제당 상관 | 7종 기준 스피어만 0.929, 로그값 피어슨 0.953, 역전 2쌍(Sonnet 5–K3, Opus 4.8–Sol) | 위 값으로 필자 계산(verify_sources.py가 재계산·검증) |
+| 단가-과제당 상관 | **8종 기준(AA 확인 9종 중 Fable 5만 제외)** 스피어만 0.898, 로그값 피어슨 0.958, 역전 3쌍(Sonnet 5–K3, Opus 4.8–Sol, Opus 5–Sol). 별개로 Opus 4.8·Opus 5는 단가 동일($25)인데 과제당 13% 차 | 위 값으로 필자 계산(verify_sources.py가 재계산·검증) |
 | 정규화 주의 | Verbosity(Sonnet 5 max 300M·Opus 4.8 max 120M)는 지수 전체 **원시 합계**여서 과제당 비용과 직접 견줄 수 없음 → 본문에서 제외. AA는 'Output Tokens per Task'를 별도 공표 | 동 |
 | 사용량 | 분당 100억→160억 초과→약 190억→약 220억, 1조+ 고객 330→375 초과→거의 500 | 알파벳 콜·I/O·발표문 |
 | 가격-사용량 횡단면 | 가격 -10% ↔ 사용량 +0.5~0.7%(모델 간 산점도, 인과 아님·논문이 역설/인과 미분석 명시) | arXiv 2601.10088 |

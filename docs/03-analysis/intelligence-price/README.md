@@ -105,6 +105,7 @@ curl 수집이 차단되거나 JS 렌더인 페이지는 Claude Code 내장 브�
 | deepseek_updates.html | https://api-docs.deepseek.com/updates (Change Log — 2026년 항목은 04-24 하나) | `b1064782723805a228941d14815de341ef54d758af01a6aab35ad00350b3eb62` |
 | deepseek_news260424.html | https://api-docs.deepseek.com/news/news260424 (V4 Preview Release) | `e1917ed7c53be33ab835dbaf0244a694c30d0e47d55b1265a21b14f8fae55ad5` |
 | mistral_pricing.html | https://mistral.ai/pricing/api | `08dbfd8a9fcd1e91ff4ec564870a437234459d75caf3a21cf943d1135cda34ee` |
+| jevons_coal_question_yale.html | https://energyhistory.yale.edu/w-stanley-jevons-the-coal-question-1865/ (각주의 제번스 역설 서지) | `52b62eda2da8747b56cacb1597e4570f172997c529a4bb8b40ccd1b12d74b840` |
 | together_serverless_models.html | https://docs.together.ai/docs/serverless/models (2026-07-28 재확인: DeepSeek-V4-Pro $1.74 / $0.20 / **$3.48**) | `77f2b2810a56e226ed03cb46f1eab2d069a29c656971e061c1fd24d372359161` |
 | together_v4pro_quickstart.html | https://docs.together.ai/docs/deepseek-v4-quickstart (같은 값 확인) | `388c20a56db5bbfecb8c26e0db39a1fcd28e1dbe7a40288979dbba60f0f02a02` |
 | together_pricing.html | https://www.together.ai/pricing (DeepSeek V4 Pro 행) | `5e3c5a81b3f9ffed384de61bf1634a52853d4713b8d525665952702c6a36bddf` |

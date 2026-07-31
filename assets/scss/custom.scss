@@ -37,6 +37,14 @@
   overflow-wrap: break-word;
 }
 
+/* Table cells need the same rule. Narrow columns on phones otherwise break
+   Korean words character by character ("하이퍼스케 / 일러"). */
+.article-content th,
+.article-content td {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 /* Keyboard users should never lose the current focus position. */
 .skip-link {
   position: fixed;

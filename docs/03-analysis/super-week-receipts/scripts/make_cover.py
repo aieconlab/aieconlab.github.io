@@ -59,10 +59,10 @@ LX = 183
 left_texts = [
     ax.text(LX, 555, f"명목 {NOMINAL}%, 실질 {REAL}%", fontsize=42, color=NAVY,
             fontweight="bold", va="center", ha="left"),
-    ax.text(LX, 442, "‘AI 영수증’ 다섯 장이 장부마다 다르게 적혔다", fontsize=21,
+    ax.text(LX, 442, "‘AI 투자’를 세는 숫자는 왜 서로 다른가", fontsize=21,
             color=BLUE, va="center", ha="left", fontweight="medium"),
     ax.text(LX, 300, f"미국 실질 GDP 성장에 대한 정보처리장비 기여\n{CONTRIB_Q1:.2f}%p → {CONTRIB_Q2:.2f}%p (2026Q1→Q2)\n"
-                     "명목 둔화와 가격 가속이 함께 작용",
+                     "기업 공시·공급자 매출·국민계정은 다른 것을 잰다",
             fontsize=16.5, color=GRAY, va="center", ha="left", linespacing=1.9),
     ax.text(LX, 185, "SK하이닉스·FOMC·메타·MS·미국 2분기 GDP 결산", fontsize=14,
             color=LGRAY, va="center", ha="left"),

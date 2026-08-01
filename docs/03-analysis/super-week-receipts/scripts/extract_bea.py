@@ -38,7 +38,8 @@ CODES = [
     "Y006RY", "Y020RY",          # R&D, 오락·문학·예술 원작
     "A014RY", "A020RY", "A021RY",  # 재고, 수출, 수입
 ]
-QUARTERS = [f"{y}Q{q}" for y in range(2015, 2027) for q in range(1, 5)]
+# 명목-실질 격차의 전 기간 순위를 검산해야 하므로 계열 전체를 뽑는다
+QUARTERS = [f"{y}Q{q}" for y in range(1947, 2027) for q in range(1, 5)]
 
 
 def main() -> None:
@@ -58,6 +59,8 @@ def main() -> None:
                 continue
             label = str(r[1]).strip()
             for q, i in cols.items():
+                if not isinstance(r[i], (int, float)):
+                    continue          # BEA 결측 표기('.....') 제외
                 rows_out.append(
                     {"table": table, "code": r[2], "label": label,
                      "quarter": q, "value": r[i]}

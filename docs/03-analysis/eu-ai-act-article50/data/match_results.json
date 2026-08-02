@@ -1,0 +1,160 @@
+{
+ "counts": {
+  "section1": 83,
+  "section2": 152
+ },
+ "matches": [
+  {
+   "label": "카카오",
+   "pattern": "kakao",
+   "hits": []
+  },
+  {
+   "label": "네이버",
+   "pattern": "naver",
+   "hits": []
+  },
+  {
+   "label": "삼성",
+   "pattern": "samsung",
+   "hits": []
+  },
+  {
+   "label": "LG(전자·AI연구원·CNS·유플러스)",
+   "pattern": "\\blg\\b|lg electronics|lg ai|lg cns|lg uplus|exaone",
+   "hits": []
+  },
+  {
+   "label": "SK(텔레콤·하이닉스)",
+   "pattern": "\\bsk\\b|sk telecom|sk hynix|\\bskt\\b",
+   "hits": []
+  },
+  {
+   "label": "KT",
+   "pattern": "\\bkt\\b|kt corp",
+   "hits": []
+  },
+  {
+   "label": "LINE(LY 계열)",
+   "pattern": "\\bline\\b|line corp|line plus|ly corp",
+   "hits": []
+  },
+  {
+   "label": "업스테이지",
+   "pattern": "upstage",
+   "hits": []
+  },
+  {
+   "label": "현대",
+   "pattern": "hyundai",
+   "hits": []
+  },
+  {
+   "label": "쿠팡",
+   "pattern": "coupang",
+   "hits": []
+  },
+  {
+   "label": "크래프톤",
+   "pattern": "krafton",
+   "hits": []
+  },
+  {
+   "label": "한화",
+   "pattern": "hanwha",
+   "hits": []
+  },
+  {
+   "label": "포스코",
+   "pattern": "posco",
+   "hits": []
+  },
+  {
+   "label": "롯데",
+   "pattern": "lotte",
+   "hits": []
+  },
+  {
+   "label": "두산",
+   "pattern": "doosan",
+   "hits": []
+  },
+  {
+   "label": "뤼튼",
+   "pattern": "wrtn",
+   "hits": []
+  },
+  {
+   "label": "리이드(뤼이드)",
+   "pattern": "riiid",
+   "hits": []
+  },
+  {
+   "label": "트웰브랩스",
+   "pattern": "twelve ?labs",
+   "hits": []
+  },
+  {
+   "label": "몰로코",
+   "pattern": "moloco",
+   "hits": []
+  },
+  {
+   "label": "클로바(네이버 서비스)",
+   "pattern": "clova|hyperclova",
+   "hits": []
+  },
+  {
+   "label": "솔트룩스",
+   "pattern": "saltlux",
+   "hits": []
+  },
+  {
+   "label": "코난테크놀로지",
+   "pattern": "konan",
+   "hits": []
+  },
+  {
+   "label": "42dot",
+   "pattern": "42 ?dot",
+   "hits": []
+  },
+  {
+   "label": "모티프테크놀로지스",
+   "pattern": "motif tech|motiftech",
+   "hits": []
+  },
+  {
+   "label": "NC(소프트·AI)",
+   "pattern": "ncsoft|nc ai|\\bnc\\b",
+   "hits": []
+  },
+  {
+   "label": "카카오브레인",
+   "pattern": "kakaobrain",
+   "hits": []
+  },
+  {
+   "label": "셀렉트스타",
+   "pattern": "selectstar",
+   "hits": []
+  },
+  {
+   "label": "마음AI",
+   "pattern": "\\bmaum\\b",
+   "hits": []
+  },
+  {
+   "label": "솔라(업스테이지 모델)",
+   "pattern": "solar pro|solar open|upstage solar",
+   "hits": []
+  }
+ ],
+ "auxiliary": [
+  {
+   "label": "Korea/KR/Seoul 문자열",
+   "pattern": "korea|\\bkr\\b|seoul",
+   "hits": []
+  }
+ ]
+}

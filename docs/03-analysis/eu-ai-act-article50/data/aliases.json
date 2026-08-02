@@ -1,0 +1,37 @@
+{
+  "_설명": "trend18 '국내 주요 AI 기업·서비스 명칭 비확인' 판정에 쓴 후보 목록. 기준: 국내 AI 생태계의 주요 기업·서비스 — 한국 본사 기업, 한국계 창업 해외법인(Moloco, Twelve Labs), 국내 대기업 계열, 대표 서비스·모델명(CLOVA, Solar)을 포함한다. 한국 기업 '전체'의 전수 목록이 아니다. 짧은 토큰(LG, SK, KT, LINE, NC, KR)은 단어 경계(\\b)로 오탐을 방지한다.",
+  "aliases": [
+    {"label": "카카오", "pattern": "kakao"},
+    {"label": "네이버", "pattern": "naver"},
+    {"label": "삼성", "pattern": "samsung"},
+    {"label": "LG(전자·AI연구원·CNS·유플러스)", "pattern": "\\blg\\b|lg electronics|lg ai|lg cns|lg uplus|exaone"},
+    {"label": "SK(텔레콤·하이닉스)", "pattern": "\\bsk\\b|sk telecom|sk hynix|\\bskt\\b"},
+    {"label": "KT", "pattern": "\\bkt\\b|kt corp"},
+    {"label": "LINE(LY 계열)", "pattern": "\\bline\\b|line corp|line plus|ly corp"},
+    {"label": "업스테이지", "pattern": "upstage"},
+    {"label": "현대", "pattern": "hyundai"},
+    {"label": "쿠팡", "pattern": "coupang"},
+    {"label": "크래프톤", "pattern": "krafton"},
+    {"label": "한화", "pattern": "hanwha"},
+    {"label": "포스코", "pattern": "posco"},
+    {"label": "롯데", "pattern": "lotte"},
+    {"label": "두산", "pattern": "doosan"},
+    {"label": "뤼튼", "pattern": "wrtn"},
+    {"label": "리이드(뤼이드)", "pattern": "riiid"},
+    {"label": "트웰브랩스", "pattern": "twelve ?labs"},
+    {"label": "몰로코", "pattern": "moloco"},
+    {"label": "클로바(네이버 서비스)", "pattern": "clova|hyperclova"},
+    {"label": "솔트룩스", "pattern": "saltlux"},
+    {"label": "코난테크놀로지", "pattern": "konan"},
+    {"label": "42dot", "pattern": "42 ?dot"},
+    {"label": "모티프테크놀로지스", "pattern": "motif tech|motiftech"},
+    {"label": "NC(소프트·AI)", "pattern": "ncsoft|nc ai|\\bnc\\b"},
+    {"label": "카카오브레인", "pattern": "kakaobrain"},
+    {"label": "셀렉트스타", "pattern": "selectstar"},
+    {"label": "마음AI", "pattern": "\\bmaum\\b"},
+    {"label": "솔라(업스테이지 모델)", "pattern": "solar pro|solar open|upstage solar"}
+  ],
+  "보조검사": [
+    {"label": "Korea/KR/Seoul 문자열", "pattern": "korea|\\bkr\\b|seoul"}
+  ]
+}

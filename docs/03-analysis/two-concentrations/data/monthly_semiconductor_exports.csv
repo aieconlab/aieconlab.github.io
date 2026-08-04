@@ -1,0 +1,14 @@
+month,total_export_100m_usd,semis_export_100m_usd,approx_flag,source_url,cross_check_url
+2025-07,608.2,147.1,0,https://eiec.kdi.re.kr/policy/materialView.do?num=269418,https://imnews.imbc.com/replay/2025/nw1200/article/6741612_36769.html
+2025-08,584.0,151.0,0,https://eiec.kdi.re.kr/policy/materialView.do?num=270413,https://news.nate.com/view/20250901n07821
+2025-09,659.5,166.1,0,https://eiec.kdi.re.kr/policy/materialView.do?num=271930,https://www.seoul.co.kr/news/economy/2025/10/02/20251002015006
+2025-10,595.7,157.0,0,https://eiec.kdi.re.kr/policy/materialView.do?num=272893,https://www.motir.go.kr/kor/article/ATCL3f49a5a8c/171141/view
+2025-11,610.4,172.6,0,https://www.motir.go.kr/kor/article/ATCL3f49a5a8c/171276/view,
+2025-12,695.7,208.0,1,https://www.shippingnewsnet.com/news/articleView.html?idxno=68435,https://www.motir.go.kr/kor/article/ATCL3f49a5a8c/171403/view
+2026-01,658.5,205.4,0,https://eiec.kdi.re.kr/policy/materialView.do?num=276561,
+2026-02,674.5,251.6,0,https://www.mt.co.kr/economy/2026/03/01/2026030109180743731,
+2026-03,861.3,328.3,0,https://www.busan.com/view/busan/view.php?code=2026040109080927904,https://www.motir.go.kr/kor/article/ATCL3f49a5a8c/171670/view
+2026-04,858.9,319.0,0,https://v.daum.net/v/20260501092611282,https://www.etoday.co.kr/news/view/2581091
+2026-05,877.5,371.6,0,https://www.etnews.com/20260601000299,https://eiec.kdi.re.kr/policy/materialView.do?num=281941
+2026-06,1022.5,448.2,0,https://www.korea.kr/news/policyNewsView.do?newsId=148967445,
+2026-07,988.9,410.1,0,https://www.newspim.com/news/view/20260731001262,https://www.motir.go.kr/kor/article/ATCL3f49a5a8c/172077/view

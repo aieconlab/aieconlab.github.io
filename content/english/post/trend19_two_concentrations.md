@@ -122,6 +122,9 @@ draft: false
 
 ## 참고자료
 
+<details>
+<summary>출처 목록 (펼쳐 보기)</summary>
+
 * 🏛️ [산업통상부 - 2026년 7월 수출입 동향 (2026.8.1, 게시번호 172077)](https://www.motir.go.kr/kor/article/ATCL3f49a5a8c/172077/view)
 * 🏛️ [산업통상부 - 15대 주력 수출 품목을 20대로 확대: 품목 분류(MTI) 개편 (2026.5.6)](https://www.motir.go.kr/kor/article/ATCL3f49a5a8c/171803/view)
 * 🏛️ [대한민국 정책브리핑 - 2026년 6월 수출입 동향: 사상 첫 월 수출 1,000억 달러 (2026.7.1)](https://www.korea.kr/news/policyNewsView.do?newsId=148967445)
@@ -162,6 +165,8 @@ draft: false
 * 📄 [한국민족문화대백과 - 섬유공업: 1970년 수출의 41% (한국학중앙연구원)](https://encykorea.aks.ac.kr/Article/E0029136)
 
 *원자료 정리(월별 수출 시계열, 시총 이정표), 그림 재현 스크립트와 검산은 [저장소 docs/03-analysis/two-concentrations/](https://github.com/aieconlab/aieconlab.github.io/tree/main/docs/03-analysis/two-concentrations)에 보존되어 있습니다.*
+
+</details>
 
 ## 함께 읽기
 

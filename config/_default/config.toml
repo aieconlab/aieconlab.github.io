@@ -57,6 +57,12 @@ maxAge = "720h"
 [markup.goldmark.renderer]
 unsafe = true
 
+# 취소선 확장 비활성화: 최신 goldmark(GFM)는 단일 물결표 쌍(예: "16~19세 ... 20~24세")도
+# 취소선으로 해석해 범위 표기 사이에 줄이 그어진다. 이 사이트는 취소선(~~)을 쓰지 않으므로
+# 끄는 것이 안전하며, Hugo 0.124(현 CI)와 이후 버전의 렌더 동작을 통일한다.
+[markup.goldmark.extensions]
+strikethrough = false
+
 # math: protect LaTeX delimiters from markdown parsing (rendered by KaTeX on pages with `math: true`)
 [markup.goldmark.extensions.passthrough]
 enable = true

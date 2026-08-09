@@ -1,0 +1,31 @@
+# 원자료 대장 — 파일명 / SHA-256 / 행 수 / 원본 URL
+# 1차 취득: 2026-08-08 23:07:48 KST (FRED 21계열)
+# 2차 취득: 2026-08-09 00:07 KST (FRED 3계열 + 뉴욕 연은 CSV, 검수 반영 라운드)
+# 취득 실패: FRED CES0500000034(민간 전체 근로자 총주당노동시간지수)는 봇 차단 페이지 반환 — 해당 수치(116.7 보합)는 BLS 표 B-4를 브라우저로 수동 대조
+
+PAYEMS.csv  5d8f5b4f09b0179ba6901dedf2cc2a9aad084a1ce4220be27b07abbb0460d17f  1052 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=PAYEMS
+OPHNFB.csv  d42ef61a91b622bbe47aeba137a411221da8d75b178617ab6d819eb2ebe96f0f  319 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=OPHNFB
+OUTNFB.csv  a7b46ee12531f0bd6484c403ce7eeb2fdc7f2e18759cc58fcc422ff3e3f82c5a  319 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=OUTNFB
+HOANBS.csv  136dfcefa3e886f240ffac2e3277f15b910ae387080e5d5f38f9b90bcd1aa3e2  319 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=HOANBS
+ULCNFB.csv  f534f84c856370a965636948274ac473e69ccdecae0a3a1f6a2563811a3b7769  319 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=ULCNFB
+COMPNFB.csv  a1ed3662fbb5714388f951d3a1340dc9e0ecd629f3b8f2a69cb44d48e5d0e62e  319 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=COMPNFB
+COMPRNFB.csv  353246416836e5b0d796ebbfd72a8a571f3b16db67f663714b6eb57ce598f806  319 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=COMPRNFB
+PRS85006173.csv  9a4a751924d1dd8e6713beab01fd3b99e7b2c6b6bd89f607bc722dfc82d2ddb3  319 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=PRS85006173
+CIVPART.csv  aeaed2fc766f18a843c44c61b17a3130057a99a889c0f4186765536b3f55e1e2  944 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=CIVPART
+EMRATIO.csv  de930e1b067bde657b725fe4388aee1492fdf0b6f50d8fcafc2b705767b500e1  944 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=EMRATIO
+UNRATE.csv  b671b94c9381e263cafeb2c24f035b49829d805ee2650498c8eb08a33b156f60  944 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE
+UNEMPLOY.csv  1a3d9e45d10b01f4b52679c27af2cc4295831086250ed5a840c701fd23df97e9  944 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNEMPLOY
+CES0500000003.csv  03ff30b659eb715ff94898583c645f219104fe934cc37038d727d64e883b7e7f  246 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=CES0500000003
+LNS14000012.csv  419a5492b307d678d0c6b8fa2c2573f6d96d3024e3f74f6fca9904a383f8eb96  944 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=LNS14000012
+LNS14000036.csv  e78154e0d40351c834d1208fcd32c76365219d67247228e70d51f32e48014eda  944 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=LNS14000036
+LNS14000089.csv  0214dd91defae31eee52b6d18ee317aaac0da87ad6317b49944b83b90b70d25f  944 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=LNS14000089
+LNS13023557.csv  883b57917bc58024f2c55f40d86b13f93f7a5f2b611053132fc1a8a1a56c3b3b  716 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=LNS13023557
+LNS13023569.csv  0f1ec0268b8b2a2c7d8fe5bc283b3f5a2061da3e23e2a01a8f5127cac660f740  716 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=LNS13023569
+CES9093161101.csv  8f14a085fdf4c3c09a47148976c4ac4aac3fe58707abea5013e808712dc8528d  860 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=CES9093161101
+USTRADE.csv  47507ba555d6c5fd9aad91ecd8f5f8b2c1a2b2161cb44d84aa702a3d519ae304  1052 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=USTRADE
+USFIRE.csv  5824b833546361fea14994173f63e9e645f8a52327c28f88ab383ad753456d49  1052 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=USFIRE
+
+USPRIV.csv  41d05a4607309293055282ff99f2a2a98216672aec3166da1047313291863750  1052 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=USPRIV
+USGOVT.csv  cf4d1ab25604560969fe4561174c84e11892393338f2704b82df9a553649a164  1052 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=USGOVT
+AWHI.csv  01ce2802898719d0da6659af627fb00bf8768d902583ad52d27e643393bc62f8  752 lines  https://fred.stlouisfed.org/graph/fredgraph.csv?id=AWHI
+nyfed_college_unemployment.csv  202e637b06568d3632f35a42baa5db985d2f860b278b2296630e46e36eae5cbd  439 lines  https://www.newyorkfed.org/medialibrary/research/interactives/data/college-labor-market/college-labor-unemployment-data.csv

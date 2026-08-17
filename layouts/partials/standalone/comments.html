@@ -1,0 +1,68 @@
+{{- /*
+  Comments for a standalone HTML post, injected before </body> by
+  layouts/_default/standalone.html.
+
+  partials/comments/giscus.html can't be reused here: it leans on the theme's
+  bootstrap classes and custom.scss, and a standalone document loads neither.
+  So this partial carries its own styles, namespaced under .aieconlab-comments
+  and inheriting the document's custom properties (var(--paper, …)) the same way
+  the site bar does, so it blends into the article instead of fighting it.
+
+  Config and behaviour (giscus repo, discussion mapping, staff-only writing)
+  are identical to the markdown path — both read data/comments.toml.
+*/ -}}
+{{- $config := site.Data.comments -}}
+{{- if and $config $config.enable -}}
+<style>
+.aieconlab-comments{box-sizing:border-box;width:100%;margin:0;padding:48px 22px 64px;
+  background:var(--paper, #fff);border-top:1px solid var(--line, var(--border, rgba(0,0,0,.14)));
+  font-family:var(--font-sans, var(--f-sans, Pretendard, system-ui, -apple-system, sans-serif));
+  color:var(--ink, #14181B);text-align:left}
+.aieconlab-comments *{box-sizing:border-box}
+.aieconlab-comments__inner{max-width:880px;margin:0 auto}
+.aieconlab-comments__eyebrow{margin:0 0 6px;font-family:var(--font-mono, var(--f-mono, ui-monospace, SFMono-Regular, Menlo, monospace));
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--magenta, var(--accent, #2563eb))}
+.aieconlab-comments__title{margin:0 0 10px;font-size:1.35rem;line-height:1.3;font-weight:700;color:inherit}
+.aieconlab-comments__description,.aieconlab-comments__help{margin:0;font-size:.9rem;line-height:1.65;
+  color:var(--ink-3, var(--muted, #64748b))}
+.aieconlab-comments__help{margin-top:8px;font-size:.83rem}
+.aieconlab-comments__frame{margin-top:24px}
+.aieconlab-comments__frame .giscus,.aieconlab-comments__frame .giscus-frame{width:100%;min-height:180px;border:0;color-scheme:light}
+</style>
+<section class="aieconlab-comments" id="staff-comments" aria-labelledby="staff-comments-title">
+  <div class="aieconlab-comments__inner">
+    <p class="aieconlab-comments__eyebrow">AIEconLab</p>
+    <h2 class="aieconlab-comments__title" id="staff-comments-title">운영진 코멘트</h2>
+    <p class="aieconlab-comments__description">
+      코멘트는 이 페이지에서 누구나 읽을 수 있습니다. 작성은 등록된 운영진 GitHub 계정만 가능합니다.
+    </p>
+    <p class="aieconlab-comments__help">
+      아래 입력창에서 GitHub로 로그인한 뒤 바로 작성하세요. 저장소 협업자 계정의 코멘트만 등록됩니다.
+    </p>
+
+    <div class="aieconlab-comments__frame">
+      <script src="https://giscus.app/client.js"
+              data-repo="{{ $config.repo }}"
+              data-repo-id="{{ $config.repo_id }}"
+              data-category="{{ $config.category }}"
+              data-category-id="{{ $config.category_id }}"
+              data-mapping="{{ $config.mapping }}"
+              data-strict="{{ if $config.strict }}1{{ else }}0{{ end }}"
+              data-reactions-enabled="0"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="ko"
+              data-ui-giscus
+              data-loading="lazy"
+              crossorigin="anonymous"
+              async>
+      </script>
+      <noscript>
+        운영진 코멘트를 이 페이지에서 읽으려면 브라우저에서 JavaScript를 활성화해 주세요.
+      </noscript>
+    </div>
+  </div>
+</section>
+{{- end -}}

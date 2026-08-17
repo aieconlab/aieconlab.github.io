@@ -14,6 +14,7 @@
     - <title>          replaced from front matter (front matter is the source of truth)
     - </head>          canonical, description, author, favicon, OG/Twitter, analytics, JSON-LD
     - after <body>     a sticky bar linking back into the site
+    - before </body>   the giscus comment section (same data/comments.toml as markdown posts)
 */ -}}
 {{- $out := .RawContent -}}
 
@@ -36,6 +37,16 @@
   {{- $out = replace $out $open (printf "%s\n%s" $open $bar) 1 -}}
 {{- else -}}
   {{- $out = printf "%s\n%s" $bar $out -}}
+{{- end -}}
+
+{{- /* Comments close the page, so they go last inside <body>. */ -}}
+{{- if and site.Data.comments site.Data.comments.enable -}}
+  {{- $comments := partial "standalone/comments.html" . -}}
+  {{- if in $out "</body>" -}}
+    {{- $out = replace $out "</body>" (printf "%s\n</body>" $comments) 1 -}}
+  {{- else -}}
+    {{- $out = printf "%s\n%s" $out $comments -}}
+  {{- end -}}
 {{- end -}}
 
 {{ $out | safeHTML }}

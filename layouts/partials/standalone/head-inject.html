@@ -17,8 +17,10 @@
 {{ partialCached "images/favicon" . }}
 {{ partial "datasets/og-twitter.html" . }}
 
-{{- $logoURL := site.Params.logo | absURL -}}
-{{- with resources.Get site.Params.logo }}{{ $logoURL = .Permalink }}{{ end -}}
+{{- /* logo_raster, not logo: JSON-LD publisher logos must be raster. */ -}}
+{{- $logoParam := site.Params.logo_raster | default site.Params.logo -}}
+{{- $logoURL := $logoParam | absURL -}}
+{{- with resources.Get $logoParam }}{{ $logoURL = .Permalink }}{{ end -}}
 {{- $imageURL := site.Params.metadata.image | absURL -}}
 {{- with .Params.images -}}
   {{- $firstImage := index . 0 -}}

@@ -307,6 +307,14 @@ html.ui-language-pending [data-ui-language-option] {
   text-align: right;
 }
 
+/* The logo is an SVG, so Hugo emits no height attribute (it only measures
+   raster images). Declaring the ratio here reserves the box before the file
+   loads, which the previous PNG got for free from its height attribute. */
+img[src$="logo.svg"] {
+  aspect-ratio: 265 / 62;
+  height: auto;
+}
+
 .staff-comments {
   scroll-margin-top: 7rem;
   padding-top: 2rem;

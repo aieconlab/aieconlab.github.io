@@ -119,8 +119,10 @@
 <!-- opengraph and twitter card -->
 {{ partial "datasets/og-twitter.html" . }}
 
-<!-- Publish the unprocessed logo at /images/logo.png for Article JSON-LD. -->
-{{ $publisherLogo := resources.Get site.Params.logo }}
+<!-- Publish the unprocessed logo at /images/logo.png for Article JSON-LD.
+     Uses logo_raster, not logo: the header logo is SVG, which search engines
+     do not reliably accept for Organization.logo. -->
+{{ $publisherLogo := resources.Get (site.Params.logo_raster | default site.Params.logo) }}
 {{ if and .IsHome $publisherLogo }}
 <script type="application/ld+json">
 {{ dict "@context" "https://schema.org" "@type" "Organization" "name" site.Title "url" site.BaseURL "logo" $publisherLogo.Permalink | jsonify | safeJS }}

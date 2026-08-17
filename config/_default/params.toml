@@ -2,7 +2,14 @@
 # favicon
 favicon = "images/favicon.png"
 # logo
-logo = "images/logo.png"
+# SVG: the logo partial passes .svg through without resizing, so this stays
+# crisp at any size. logo-dark.svg also exists but is deliberately NOT set as
+# logo_dark — the theme has no .only-light/.only-dark CSS, so setting it would
+# render both images stacked in the header.
+logo = "images/logo.svg"
+# Raster twin of the logo, used only for structured data. Search engines do not
+# reliably accept SVG for Organization.logo, so JSON-LD points here instead.
+logo_raster = "images/logo.png"
 # use `x` with logo_width, example: "100x"
 logo_width = "328x"
 # logo text will only show when logo is missing.

@@ -1,6 +1,6 @@
 ---
 title: "인간을 위한 AI 기술 발전 — 노동친화적 AI(PWAI)와 조향(Steering)"
-date: 2026-08-20T10:30:00+09:00
+date: 2026-08-20T10:00:00+09:00
 # post thumb
 images:
   - "images/post/column5_cover.png"

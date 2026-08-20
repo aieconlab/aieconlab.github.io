@@ -1,0 +1,91 @@
+{
+  "source_file": "artificialanalysis_models_motif-3_2026-08-18T1138Z.html",
+  "korean_models": {
+    "motif-3": {
+      "name": "Motif 3",
+      "aa_release_date": "2026-08-12",
+      "intelligence_index": 47.4,
+      "open_weights": true
+    },
+    "solar-open2-250b": {
+      "name": "Solar Open2 250B",
+      "aa_release_date": "2026-08-12",
+      "intelligence_index": 37.4,
+      "open_weights": true
+    },
+    "a-x-k2": {
+      "name": "A.X-K2",
+      "aa_release_date": "2026-08-12",
+      "intelligence_index": 35.0,
+      "open_weights": true
+    },
+    "k-exaone-2-0-0803": {
+      "name": "K-EXAONE 2.0 0803",
+      "aa_release_date": "2026-08-12",
+      "intelligence_index": 31.0,
+      "open_weights": true
+    }
+  },
+  "reference_models": {
+    "claude-opus-5": {
+      "name": "Claude Opus 5 (Adaptive Reasoning, Max Effort)",
+      "aa_release_date": "2026-07-24",
+      "intelligence_index": 63.1,
+      "open_weights": false
+    },
+    "gpt-5-6-sol": {
+      "name": "GPT-5.6 Sol (max)",
+      "aa_release_date": "2026-07-09",
+      "intelligence_index": 60.9,
+      "open_weights": false
+    },
+    "grok-4-6": {
+      "name": "Grok 4.6 (high)",
+      "aa_release_date": "2026-08-12",
+      "intelligence_index": 60.9,
+      "open_weights": false
+    },
+    "kimi-k3": {
+      "name": "Kimi K3 (max)",
+      "aa_release_date": "2026-07-16",
+      "intelligence_index": 59.7,
+      "open_weights": true
+    },
+    "qwen3-8-max": {
+      "name": "Qwen3.8 Max",
+      "aa_release_date": "2026-08-03",
+      "intelligence_index": 58.1,
+      "open_weights": false
+    },
+    "qwen3-8-2-4t-a95b": {
+      "name": "Qwen3.8 2.4T A95B",
+      "aa_release_date": "2026-08-12",
+      "intelligence_index": 57.7,
+      "open_weights": true
+    },
+    "muse-spark-1-2": {
+      "name": "Muse Spark 1.2 (xhigh)",
+      "aa_release_date": "2026-08-05",
+      "intelligence_index": 56.8,
+      "open_weights": false
+    },
+    "gemini-3-7-flash": {
+      "name": "Gemini 3.7 Flash (high)",
+      "aa_release_date": "2026-08-13",
+      "intelligence_index": 56.0,
+      "open_weights": false
+    },
+    "deepseek-v4-pro": {
+      "name": "DeepSeek V4 Pro 0813 (Reasoning, Max Effort)",
+      "aa_release_date": "2026-08-13",
+      "intelligence_index": 53.2,
+      "open_weights": true
+    },
+    "glm-5-2": {
+      "name": "GLM-5.2 (max)",
+      "aa_release_date": "2026-06-16",
+      "intelligence_index": 52.6,
+      "open_weights": true
+    }
+  }
+}

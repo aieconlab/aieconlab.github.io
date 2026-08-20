@@ -12,5 +12,6 @@ social:
 ---
 
 -	서던캘리포니아대학교 (USC, University of Southern California) 경제학 박사
--	(현) 기획재정부 예산실
+- (현) 홍익대학교 경제학부 조교수
+-	(전) 기획재정부, 기획예산처, 청와대
 -	Specialty: 인공지능 사회경제적 영향, 인공지능 정책

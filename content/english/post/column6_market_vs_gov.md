@@ -111,7 +111,7 @@ draft: false
 11. Mazzucato, Mariana (2021), 「미션 이코노미(Mission Economy: A Moonshot Guide to Changing Capitalism)」, Allen Lane.
 12. Mazzucato, Mariana (2016), 「From market fixing to market-creating: a new framework for innovation policy」, *Industry and Innovation*, 23(2), 140–156.
 13. Karp, Alexander C. & Nicholas W. Zamiska (2025), 「기술 공화국(The Technological Republic: Hard Power, Soft Belief, and the Future of the West)」, Crown Currency.
-14. 김용범 (2026.7.21), 「AI 시대, 국가는 시장을 조직한다」, 페이스북 게시글.
+14. 김용범 청와대 정책실장 (2026.7.21), 「AI 시대, 국가는 시장을 조직한다」, 페이스북 게시글.
 
 ---
 

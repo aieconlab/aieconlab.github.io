@@ -12,6 +12,7 @@ description: "AI 시대의 조세·재정 정책 — 최신 연구동향"
 categories: ["AI_분석"]
 tags: ["AI","ECONOMICS","PUBLIC FINANCE","TAX","EXPENDITURE"]
 type: "featured" # available type (regular or featured)
+math: true
 draft: false
 ---
 

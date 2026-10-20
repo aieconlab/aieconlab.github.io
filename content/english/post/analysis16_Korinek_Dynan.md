@@ -1,17 +1,18 @@
-
 ---
 title: "AI 시대의 조세·재정 정책 — 최신 연구동향"
-date: 2026-10-20T22:00:00+09:00
+date: 2026-10-20T10:00:00+09:00
 # post thumb
 images:
   - "images/post/analysis16_Korinek_Dynan_cover.png"
 #author
 author: "이정혁 (Jung Hyuk Lee)"
+# description
+description: "AI 시대의 조세·재정 정책 — 최신 연구동향"
 # Taxonomies
 categories: ["AI_분석"]
-tags: ["AI","PUBLIC FINANCE","TAX","KOREA"]
+tags: ["AI","ECONOMICS","PUBLIC FINANCE","TAX","EXPENDITURE"]
 type: "featured" # available type (regular or featured)
-draft: true
+draft: false
 ---
 
 AI 기술혁신이 가져오는 경제·사회적 변화에 정책적으로 대응하기 위해, 지난 두 편의 칼럼에서 필자는 재분배(redistribution), 사전분배(predistribution), 그리고 조향(steering)에 대해 논의했다.  특히, 필자의 주된 관심사 중의 하나는 **조세와 재정정책의 역할**이다. AI가 경제의 구조를 바꾼다면, 그 경제에서 **정부는 무엇에 세금을 매기고 어디에 돈을 써야 하는가.**

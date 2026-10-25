@@ -7,9 +7,9 @@ images:
 #author
 author: "주영민 (Youngmin Ju)"
 # description
-description: "아마존 경제학자들이 쓰는 인과 추론 6대 방법론과 FBA·로켓그로스에 그대로 옮겨 쓸 수 있는 분석 프레임워크를 정리했습니다"
+description: "아마존 경제학자들이 쓰는 인과 추론 6대 방법론과, 이를 마켓플레이스 운영에 옮겨 쓰는 분석 프레임워크를 정리했습니다"
 # 목록/검색/RSS에 쓰이는 요약 (완성형 HTML은 자동 요약이 불가능하므로 직접 지정)
-summary: "추천을 받은 셀러의 매출이 올랐다면, 그건 추천 덕분일까 아니면 원래 잘하던 셀러가 추천을 받은 것뿐일까. 아마존은 이 질문에 답하려고 경제학 박사 수백 명을 고용했습니다. Double ML부터 Causal Forest, BSTS, 스필오버 설계까지 여섯 가지 방법론을 코드와 함께 짚고, 쿠팡 로켓그로스에 적용할 지점 열두 곳을 표시했습니다."
+summary: "추천을 받은 셀러의 매출이 올랐다면, 그건 추천 덕분일까 아니면 원래 잘하던 셀러가 추천을 받은 것뿐일까. 아마존은 이 질문에 답하려고 경제학 박사 수백 명을 고용했습니다. Double ML부터 Causal Forest, BSTS, 스필오버 설계까지 여섯 가지 방법론을 코드와 함께 짚고, 마켓플레이스 운영에 적용할 지점을 정리했습니다."
 # Taxonomies
 categories: ["AI_분석"]
 tags: ["ECONOMICS","DATA","PLATFORM","AI","KOREA"]
@@ -24,7 +24,7 @@ draft: false
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amazon Economist Group — 인과 추론 & FBA/로켓그로스 분석</title>
+<title>Amazon Economist Group — 인과 추론 & FBA 분석</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
@@ -472,7 +472,7 @@ ul.body-list li{margin-bottom:6px;font-size:.875rem;line-height:1.6}
 
 <!-- TOP BAR -->
 <header class="top-bar">
-  <div class="top-bar-logo">Amazon<span>·</span>Economist <span style="font-style:normal;color:rgba(255,255,255,.5);margin:0 6px">×</span> FBA / 로켓그로스</div>
+  <div class="top-bar-logo">Amazon<span>·</span>Economist <span style="font-style:normal;color:rgba(255,255,255,.5);margin:0 6px">×</span> 마켓플레이스</div>
   <div class="top-bar-controls">
     <button class="lang-toggle" onclick="toggleLang()">EN / KO</button>
   </div>
@@ -494,8 +494,8 @@ ul.body-list li{margin-bottom:6px;font-size:.875rem;line-height:1.6}
   <a class="nav-item sub" href="#panel">Panel Data</a>
   <a class="nav-item sub" href="#spillover">Spillover Design</a>
 
-  <div class="nav-section-label">FBA / 로켓그로스</div>
-  <a class="nav-item" href="#compare">비즈니스 모델 비교</a>
+  <div class="nav-section-label">FBA 비즈니스 모델</div>
+  <a class="nav-item" href="#compare">풀필먼트 서비스 구조</a>
   <a class="nav-item" href="#flywheel">플라이휠 메커니즘</a>
 
   <div class="nav-section-label">연구 스트림</div>
@@ -516,22 +516,22 @@ ul.body-list li{margin-bottom:6px;font-size:.875rem;line-height:1.6}
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-eyebrow ko-only">Amazon Economist Group 인과 추론 연구 · FBA/로켓그로스 분석</div>
-  <div class="hero-eyebrow en-only">Amazon Economist Group — Causal Inference Research · FBA / Rocket Growth Analysis</div>
+  <div class="hero-eyebrow ko-only">Amazon Economist Group 인과 추론 연구 · FBA 분석</div>
+  <div class="hero-eyebrow en-only">Amazon Economist Group — Causal Inference Research · FBA Analysis</div>
   <h1 class="hero-title ko-only">아마존이 마켓플레이스를<br><em>경제학으로</em> 설계하는 법</h1>
   <h1 class="hero-title en-only">How Amazon Designs Its<br><em>Marketplace</em> with Economics</h1>
-  <p class="hero-subtitle ko-only">FBA 셀러 추천·배송 속도·수수료 정책의 인과 효과를 측정하는 아마존 경제학자들의 방법론과, 쿠팡 로켓그로스에 적용할 실전 분석 프레임워크를 종합 정리합니다.</p>
-  <p class="hero-subtitle en-only">A comprehensive reference on Amazon economists' causal inference methods — measuring the causal effects of FBA recommendations, delivery speed, and fee policies — and how Coupang Rocket Growth can apply the same frameworks.</p>
+  <p class="hero-subtitle ko-only">FBA 셀러 추천·배송 속도·수수료 정책의 인과 효과를 측정하는 아마존 경제학자들의 방법론을 마켓플레이스 실무 관점에서 정리합니다.</p>
+  <p class="hero-subtitle en-only">A comprehensive reference on Amazon economists' causal inference methods — measuring the causal effects of FBA recommendations, delivery speed, and fee policies — read from the perspective of anyone running a marketplace.</p>
   <div class="hero-meta">
     <div class="hero-badge"><div class="hero-badge-dot" style="background:var(--amazon)"></div><span>Amazon Science 논문 11편</span></div>
     <div class="hero-badge"><div class="hero-badge-dot" style="background:var(--accent)"></div><span>코드 예제 8개</span></div>
-    <div class="hero-badge"><div class="hero-badge-dot" style="background:var(--coupang)"></div><span>로켓그로스 적용 포인트 12개</span></div>
+    <div class="hero-badge"><div class="hero-badge-dot" style="background:var(--coupang)"></div><span>마켓플레이스 적용 포인트</span></div>
   </div>
 
   <!-- Causal DAG Animation -->
   <div class="dag-container" style="margin-top:40px">
-    <div class="dag-title ko-only">FBA / 로켓그로스 인과 사슬 (Causal Chain)</div>
-    <div class="dag-title en-only">FBA / Rocket Growth Causal Chain</div>
+    <div class="dag-title ko-only">풀필먼트 서비스 인과 사슬 (Causal Chain)</div>
+    <div class="dag-title en-only">Fulfillment Service Causal Chain</div>
     <svg class="dag" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -646,7 +646,7 @@ D̃ = D - E[D|X]   <span class="cm"># 처치 잔차</span>
 θ = (D̃'D̃)⁻¹ D̃'Ỹ  <span class="cm"># OLS on residuals → 인과 효과 θ</span>
 </div>
       <p class="ko-only"><strong>아마존 적용:</strong> 수억 명 고객 × 수백 가지 행동 유형의 ATE·CATE를 Apache Spark 분산 환경에서 추정한다. 파이프라인 구성은 JSON 설정 파일 하나로 끝난다.</p>
-      <p class="ko-only"><strong>로켓그로스 적용:</strong> 로켓그로스 가입이 셀러 매출에 미치는 인과 효과를 측정할 때는 셀러 이력·카테고리·가입 전 GMV를 교란 변수로 처리한다. 그래야 선택 편향이 빠지고 순수 효과가 분리된다.</p>
+      <p class="ko-only"><strong>마켓플레이스 적용:</strong> 풀필먼트 서비스 가입이 셀러 매출에 미치는 인과 효과를 측정할 때는 셀러 이력·카테고리·가입 전 GMV를 교란 변수로 처리한다. 그래야 선택 편향이 빠지고 순수 효과가 분리된다.</p>
 
       <div class="code-block">
         <div class="code-header">
@@ -660,7 +660,7 @@ D̃ = D - E[D|X]   <span class="cm"># 처치 잔차</span>
 
 <span class="cm"># ── 데이터 준비 ────────────────────────────────</span>
 <span class="cm"># X: 교란 변수 (셀러 이력, 카테고리, 가입 전 GMV 등)</span>
-<span class="cm"># T: 처치 변수 (로켓그로스 / FBA 가입 여부, binary 0/1)</span>
+<span class="cm"># T: 처치 변수 (풀필먼트 서비스 가입 여부, binary 0/1)</span>
 <span class="cm"># Y: 결과 변수 (가입 후 90일 매출 증가율)</span>
 
 <span class="var">est</span> = <span class="cls">CausalForestDML</span>(
@@ -691,7 +691,7 @@ intrp.plot(feature_names=[<span class="str">"가입전GMV"</span>, <span class="
 
       <div class="callout green">
         <span class="callout-icon">✅</span>
-        <div class="ko-only"><strong>로켓그로스 적용 포인트:</strong> 로켓그로스 가입 시점 이전 데이터(과거 GMV, 카테고리, 상품 수, 고객 평점 이력)를 X(교란 변수)로 처리하면 원래 잘하는 셀러가 로켓그로스를 선택했다는 선택 편향을 교정하고 순수 서비스 효과를 측정합니다.</div>
+        <div class="ko-only"><strong>마켓플레이스 적용 포인트:</strong> 서비스 가입 시점 이전 데이터(과거 GMV, 카테고리, 상품 수, 고객 평점 이력)를 X(교란 변수)로 처리하면 원래 잘하는 셀러가 서비스를 먼저 선택했다는 선택 편향을 교정하고 순수 서비스 효과를 측정합니다.</div>
       </div>
     </div>
   </div>
@@ -720,7 +720,7 @@ intrp.plot(feature_names=[<span class="str">"가입전GMV"</span>, <span class="
 <span class="kw">import</span> pandas <span class="kw">as</span> pd
 <span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
 
-<span class="cm"># 로켓그로스 추천 효과 이질성 분석 예시</span>
+<span class="cm"># 재입고 추천 효과 이질성 분석 예시</span>
 <span class="cm"># 어떤 카테고리 셀러에게 재입고 추천이 더 효과적인가?</span>
 
 <span class="var">cf</span> = <span class="cls">CausalForest</span>(
@@ -748,7 +748,7 @@ intrp.plot(feature_names=[<span class="str">"가입전GMV"</span>, <span class="
 
       <div class="callout amber">
         <span class="callout-icon">🎯</span>
-        <div class="ko-only"><strong>핵심 통찰:</strong> 로켓그로스 추천의 효과는 카테고리·셀러 규모에 따라 크게 갈릴 수 있다. 평균 효과가 같아도 어떤 셀러 집단에서는 재입고 추천이 크게 듣고 다른 집단에서는 거의 듣지 않을 수 있는데, Causal Forest는 이 차이를 세분화해 보여 준다. 추천 자원을 효과가 큰 집단에 집중 배분하는 근거가 여기서 나온다.</div>
+        <div class="ko-only"><strong>핵심 통찰:</strong> 재입고 추천의 효과는 카테고리·셀러 규모에 따라 크게 갈릴 수 있다. 평균 효과가 같아도 어떤 셀러 집단에서는 재입고 추천이 크게 듣고 다른 집단에서는 거의 듣지 않을 수 있는데, Causal Forest는 이 차이를 세분화해 보여 준다. 추천 자원을 효과가 큰 집단에 집중 배분하는 근거가 여기서 나온다.</div>
       </div>
     </div>
   </div>
@@ -782,7 +782,7 @@ intrp.plot(feature_names=[<span class="str">"가입전GMV"</span>, <span class="
 <span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> <span class="cls">LogisticRegressionCV</span>, <span class="cls">LassoCV</span>
 <span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> <span class="cls">RandomForestRegressor</span>
 
-<span class="cm"># 로켓그로스/FBA 추천 효과 — DR 추정</span>
+<span class="cm"># 재입고 추천 효과 — DR 추정</span>
 <span class="cm"># T: 추천 수용 여부 (binary)</span>
 <span class="cm"># Y: 90일 매출 증가율</span>
 <span class="cm"># X: 셀러 사전 특성 (교란 변수)</span>
@@ -833,8 +833,8 @@ intrp.plot(feature_names=[<span class="str">"가입전GMV"</span>, <span class="
 <span class="kw">from</span> causalimpact <span class="kw">import</span> <span class="cls">CausalImpact</span>
 <span class="kw">import</span> pandas <span class="kw">as</span> pd
 
-<span class="cm"># 로켓그로스 신규 카테고리 추가 효과 분석 예시</span>
-<span class="cm"># 개입: 2024-06-01 (해당 카테고리 로켓그로스 오픈)</span>
+<span class="cm"># 신규 카테고리 개방 효과 분석 예시 (가상 데이터)</span>
+<span class="cm"># 개입: 151일째 (해당 카테고리에 풀필먼트 서비스 개방)</span>
 <span class="cm"># Y: 해당 카테고리 일별 GMV</span>
 <span class="cm"># X: 유사 카테고리(개입 없음)의 GMV (대조군)</span>
 
@@ -842,11 +842,11 @@ intrp.plot(feature_names=[<span class="str">"가입전GMV"</span>, <span class="
     <span class="str">"y"</span>: gmv_target,      <span class="cm"># 개입 대상 카테고리</span>
     <span class="str">"x1"</span>: gmv_control_1,  <span class="cm"># 유사 카테고리 1</span>
     <span class="str">"x2"</span>: gmv_control_2,  <span class="cm"># 유사 카테고리 2</span>
-}, index=dates)
+})  <span class="cm"># 0부터 시작하는 일 단위 인덱스</span>
 
-<span class="cm"># 사전기간 / 사후기간 지정</span>
-<span class="var">pre_period</span> = [<span class="str">"2024-01-01"</span>, <span class="str">"2024-05-31"</span>]
-<span class="var">post_period</span> = [<span class="str">"2024-06-01"</span>, <span class="str">"2024-09-30"</span>]
+<span class="cm"># 사전기간 / 사후기간 지정 (일 인덱스)</span>
+<span class="var">pre_period</span> = [<span class="num">0</span>, <span class="num">149</span>]
+<span class="var">post_period</span> = [<span class="num">150</span>, <span class="num">271</span>]
 
 <span class="var">ci</span> = <span class="cls">CausalImpact</span>(data, pre_period, post_period)
 <span class="kw">print</span>(ci.summary())     <span class="cm"># 누적 효과 + 베이지안 p-value</span>
@@ -874,7 +874,7 @@ ci.plot()               <span class="cm"># 반사실적 vs 실제 시각화</spa
     <div class="method-body">
       <p class="ko-only"><strong>이중 차분법(DiD):</strong> 처치군과 대조군의 처치 전후 변화를 비교해 처치 효과를 추정한다. 핵심 가정은 '평행 추세(parallel trends)'다. 처치가 없었더라면 두 집단의 변화 추세가 같았을 것이라는 전제 위에서만 효과가 식별된다.</p>
       <p class="ko-only"><strong>합성 통제법(Synthetic Control):</strong> 대조군이 없거나 하나뿐일 때 쓰는 방법이다. 여러 대조 단위를 가중 평균해 '합성 대조군'을 직접 구성하고, 실제 처치 단위와의 차이로 효과를 추정한다.</p>
-      <p class="ko-only"><strong>아마존/로켓그로스 적용:</strong> 특정 지역 물류센터 오픈이 해당 지역 셀러 성과에 미친 효과, 또는 특정 카테고리에 로켓그로스를 우선 허용했을 때의 GMV 변화 측정.</p>
+      <p class="ko-only"><strong>마켓플레이스 적용:</strong> 특정 지역 물류센터 오픈이 해당 지역 셀러 성과에 미친 효과, 또는 특정 카테고리에 풀필먼트 서비스를 먼저 열었을 때의 GMV 변화 측정.</p>
 
       <div class="code-block">
         <div class="code-header">
@@ -884,7 +884,7 @@ ci.plot()               <span class="cm"># 반사실적 vs 실제 시각화</spa
         <div class="code-body"><span class="kw">import</span> statsmodels.formula.api <span class="kw">as</span> smf
 <span class="kw">import</span> pandas <span class="kw">as</span> pd
 
-<span class="cm"># 기본 DiD: 로켓그로스 FC 오픈 효과</span>
+<span class="cm"># 기본 DiD: 신규 물류센터(FC) 오픈 효과</span>
 <span class="cm"># seller_id: 셀러 ID</span>
 <span class="cm"># time: 기간 (0=사전, 1=사후)</span>
 <span class="cm"># treated: 처치군 여부 (해당 지역 셀러=1)</span>
@@ -949,7 +949,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
     <span class="var">power</span> = <span class="num">1</span> - stats.norm.cdf(z_alpha - mde / se)
     <span class="kw">return</span> power, deff, n_eff
 
-<span class="cm"># 로켓그로스 프로모션 실험 설계 예시</span>
+<span class="cm"># 셀러 프로모션 실험 설계 예시 (가상 수치)</span>
 <span class="kw">for</span> n_cat <span class="kw">in</span> [<span class="num">20</span>, <span class="num">50</span>, <span class="num">100</span>]:
     pwr, deff, n_eff = cluster_rct_power(
         n_clusters=n_cat,    <span class="cm"># 카테고리 수</span>
@@ -969,8 +969,8 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 <section class="section" id="compare">
   <div class="section-header">
     <span class="section-num">§ 03</span>
-    <h2 class="section-title ko-only">FBA vs 로켓그로스 — 비즈니스 모델 비교</h2>
-    <h2 class="section-title en-only">FBA vs Rocket Growth — Business Model Comparison</h2>
+    <h2 class="section-title ko-only">FBA 비즈니스 모델 — 풀필먼트 서비스의 구조</h2>
+    <h2 class="section-title en-only">The FBA Business Model — How a Fulfillment Service Works</h2>
   </div>
 
   <div class="metric-row">
@@ -979,16 +979,8 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
       <div class="metric-label">Amazon 전체 유닛 중<br>3P 셀러 비중 (2024 Q4)</div>
     </div>
     <div class="metric-box">
-      <div class="metric-val red">130%</div>
-      <div class="metric-label">Coupang FLC YoY 증가<br>(2024 Q1)</div>
-    </div>
-    <div class="metric-box">
       <div class="metric-val">74%</div>
       <div class="metric-label">Prime 고객 전환율<br>(비Prime 13% 대비)</div>
-    </div>
-    <div class="metric-box">
-      <div class="metric-val red">161%</div>
-      <div class="metric-label">로켓그로스 입고 셀러<br>매출 증가 (2개월, 사례)</div>
     </div>
   </div>
 
@@ -996,60 +988,49 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
     <table class="compare-table">
       <thead>
         <tr>
-          <th class="dim-col" style="width:22%">비교 차원</th>
-          <th class="coupang-col" style="width:39%">🛒 쿠팡 로켓그로스</th>
-          <th style="width:39%">📦 Amazon FBA</th>
+          <th class="dim-col" style="width:30%">구분</th>
+          <th style="width:70%">📦 Amazon FBA</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="dim-cell">출시 / 성숙도</td>
-          <td class="coupang-cell">2023년 3월 (성장 초기)</td>
           <td>2006년 (글로벌 성숙 단계)</td>
         </tr>
         <tr>
           <td class="dim-cell">대상 시장</td>
-          <td class="coupang-cell">한국 (대만 점진 진출)</td>
           <td>미국 + 글로벌 11개 마켓</td>
         </tr>
         <tr>
           <td class="dim-cell">서비스 범위</td>
-          <td class="coupang-cell">보관·포장·배송·교환·반품·CS 일괄</td>
-          <td>보관·포장·배송·교환·반품·CS 일괄 (동일)</td>
+          <td>보관·포장·배송·교환·반품·CS 일괄</td>
         </tr>
         <tr>
           <td class="dim-cell">셀러 혜택</td>
-          <td class="coupang-cell">'판매자로켓' 배지 → 전환율 급상승</td>
           <td>'Prime 배지' → 전환율 74%</td>
         </tr>
         <tr>
           <td class="dim-cell">플랫폼 수익원</td>
-          <td class="coupang-cell">입고비·보관료·출고배송비 + 판매 수수료</td>
           <td>수수료(~15%) + 보관·풀필먼트·광고비</td>
         </tr>
         <tr>
           <td class="dim-cell">재고 위험</td>
-          <td class="coupang-cell highlight-green">플랫폼 부담 없음 (셀러 소유)</td>
           <td class="highlight-green">플랫폼 부담 없음 (셀러 소유)</td>
         </tr>
         <tr>
           <td class="dim-cell">셀러 타깃</td>
-          <td class="coupang-cell">중소 셀러 중심 (소량 입고 허용)</td>
           <td>중소~대형 셀러 다양</td>
         </tr>
         <tr>
           <td class="dim-cell">멤버십 연계</td>
-          <td class="coupang-cell">로켓WOW ↔ 배송 속도</td>
           <td>Prime ↔ 배송 속도 ↔ 광고</td>
         </tr>
         <tr>
           <td class="dim-cell">3P 비중(2024)</td>
-          <td class="coupang-cell">35~40% (빠르게 증가)</td>
           <td>62%+ (역대 최고)</td>
         </tr>
         <tr>
           <td class="dim-cell highlight-amber">경제학 연구 성숙도</td>
-          <td class="coupang-cell highlight-amber" style="color:var(--coupang)">공개 논문 없음 (데이터 비공개)</td>
           <td class="highlight-green">Amazon Science 논문 다수 공개</td>
         </tr>
       </tbody>
@@ -1079,7 +1060,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
       <g>
         <rect x="180" y="15" width="140" height="36" rx="8" fill="#1A4E7B"/>
         <text x="250" y="32" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="10.5" fill="white" font-weight="600">풀필먼트 서비스</text>
-        <text x="250" y="46" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="10.5" fill="rgba(255,255,255,.8)">(FBA / 로켓그로스)</text>
+        <text x="250" y="46" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="10.5" fill="rgba(255,255,255,.8)">(FBA 등)</text>
       </g>
       <g>
         <rect x="360" y="95" width="130" height="36" rx="8" fill="#1A4E7B"/>
@@ -1108,7 +1089,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
       <path d="M 70 225 Q 30 180 40 133" stroke="#1A7F4B" stroke-width="1.5" fill="none" marker-end="url(#fw-arrow)"/>
       <path d="M 140 110 Q 175 70 179 51" stroke="#1A7F4B" stroke-width="1.5" fill="none" marker-end="url(#fw-arrow)"/>
     </svg>
-    <p style="font-size:.8rem;color:var(--muted);margin-top:12px;text-align:center" class="ko-only">FBA와 로켓그로스가 공유하는 자기강화 선순환 구조. 배송 속도의 전환율 인과 효과(ASPIRE 연구)가 이 플라이휠의 엔진입니다.</p>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:12px;text-align:center" class="ko-only">FBA 같은 풀필먼트 서비스가 만드는 자기강화 선순환 구조. 배송 속도의 전환율 인과 효과(ASPIRE 연구)가 이 플라이휠의 엔진입니다.</p>
   </div>
 </section>
 
@@ -1127,8 +1108,8 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
     <div class="stream-card-header">
       <div class="stream-num">01</div>
       <div>
-        <div class="stream-title ko-only">FBA / 로켓그로스 추천 시스템의 인과 효과 측정</div>
-        <div class="stream-title en-only">Causal Effects of FBA / Rocket Growth Recommendation Systems</div>
+        <div class="stream-title ko-only">FBA 추천 시스템의 인과 효과 측정</div>
+        <div class="stream-title en-only">Causal Effects of FBA Recommendation Systems</div>
         <div class="stream-subtitle ko-only">선택 편향 제거 → 순수 추천 효과 식별</div>
       </div>
     </div>
@@ -1136,7 +1117,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 
       <div class="callout red" style="margin-bottom:20px">
         <span class="callout-icon">⚠️</span>
-        <div class="ko-only"><strong>핵심 문제:</strong> "로켓그로스 추천을 따른 셀러의 매출이 X% 증가했다"는 통계에는 선택 편향이 숨어 있다. 추천의 효과가 아니라 <strong>셀러 역량의 효과</strong>를 측정하고 있을 가능성이 있는 것이다.</div>
+        <div class="ko-only"><strong>핵심 문제:</strong> "추천을 따른 셀러의 매출이 X% 증가했다"는 통계에는 선택 편향이 숨어 있다. 추천의 효과가 아니라 <strong>셀러 역량의 효과</strong>를 측정하고 있을 가능성이 있는 것이다.</div>
       </div>
 
       <div class="bias-grid">
@@ -1156,7 +1137,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
         <div class="stream-paper-desc">FBA 재입고·과잉재고 처리 추천의 인과 효과를 DML로 측정. 모델 1은 셀러의 추천 수용 성향(처치 모델), 모델 2는 결과(매출)를 각각 예측. 두 잔차를 OLS로 연결해 순수 처치 효과를 추출. 산출한 효과를 Seller Central에 공개해 추천 채택률까지 제고.</div>
         <span class="tag tag-method">DML</span>
         <span class="tag tag-method">Doubly Robust Forest</span>
-        <span class="tag tag-rg">로켓그로스 직접 적용 가능</span>
+        <span class="tag tag-rg">다른 마켓플레이스에 바로 적용 가능</span>
       </div>
 
       <div class="stream-paper">
@@ -1169,7 +1150,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 
       <div class="code-block" style="margin-top:16px">
         <div class="code-header">
-          <span class="code-lang">Python — 로켓그로스 추천 효과 측정 전체 파이프라인</span>
+          <span class="code-lang">Python — 셀러 추천 효과 측정 전체 파이프라인</span>
           <button class="code-copy" onclick="copyCode(this)">Copy</button>
         </div>
         <div class="code-body"><span class="kw">import</span> pandas <span class="kw">as</span> pd
@@ -1179,7 +1160,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 <span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> <span class="cls">GradientBoostingRegressor</span>, <span class="cls">GradientBoostingClassifier</span>
 
 <span class="cm"># ── 1. 데이터 준비 ─────────────────────────────────────</span>
-<span class="cm"># 로켓그로스 재입고 추천 → 셀러 90일 매출 변화율 분석</span>
+<span class="cm"># 재입고 추천 → 셀러 90일 매출 변화율 분석</span>
 
 <span class="var">feature_cols</span> = [
     <span class="str">"pre_gmv_90d"</span>,     <span class="cm"># 가입 전 90일 GMV (핵심 교란변수)</span>
@@ -1228,9 +1209,9 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 
       <div class="callout green">
         <span class="callout-icon">🎯</span>
-        <div class="ko-only"><strong>로켓그로스 즉시 적용 방법:</strong>
+        <div class="ko-only"><strong>마켓플레이스 적용 절차:</strong>
           <div class="step-list" style="margin-top:12px">
-            <div class="step-item"><div class="step-dot">1</div><div class="step-text"><strong>데이터 준비</strong> — Wing에서 셀러별 가입 전/후 GMV, 추천 이력, 상품 특성 추출</div></div>
+            <div class="step-item"><div class="step-dot">1</div><div class="step-text"><strong>데이터 준비</strong> — 셀러별 가입 전/후 GMV, 추천 이력, 상품 특성 추출</div></div>
             <div class="step-item"><div class="step-dot">2</div><div class="step-text"><strong>교란 변수 정의</strong> — 가입 전 90일 GMV, 셀러 경력, 카테고리, SKU 수를 X로 설정</div></div>
             <div class="step-item"><div class="step-dot">3</div><div class="step-text"><strong>DML 실행</strong> — 위 코드로 ATE를 추정하고 서비스 자체의 순효과를 측정</div></div>
             <div class="step-item"><div class="step-dot">4</div><div class="step-text"><strong>카테고리별 HTE</strong> — DR Forest로 어느 카테고리에 추천 자원을 집중할지 결정</div></div>
@@ -1247,7 +1228,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
       <div>
         <div class="stream-title ko-only">배송 속도의 전환율 인과 효과 (ASPIRE)</div>
         <div class="stream-title en-only">Causal Effect of Delivery Speed on Conversion (ASPIRE)</div>
-        <div class="stream-subtitle ko-only">로켓그로스 존재 이유를 수치로 증명한 연구 · KDD 2022</div>
+        <div class="stream-subtitle ko-only">풀필먼트 서비스의 존재 이유를 수치로 보여 준 연구 · KDD 2022</div>
       </div>
     </div>
     <div class="stream-body">
@@ -1255,10 +1236,10 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
       <div class="stream-paper">
         <div class="stream-paper-title">ASPIRE: Air Shipping Recommendation via Causal Inference Framework (KDD 2022)</div>
         <div class="stream-paper-meta">Amazon Science · Abhirup Mondal, Anirban Majumder, Vineet Chaoji</div>
-        <div class="stream-paper-desc ko-only">빠른 배송이 전환율·매출에 미치는 인과 효과를 Doubly Robust Estimation으로 측정했다. 상관관계에서 멈추지 않고 엄밀한 인과 식별까지 밀어붙였고, 배송비 대비 매출 증가의 트레이드오프는 최적화 알고리즘으로 풀었다. 신흥 마켓플레이스 A/B 테스트에서 매출이 +79 bps 상승했다. 배송이 빠를수록 전환율이 오른다는 FBA·로켓그로스의 핵심 가치 제안을 수치로 검증한 연구다.</div>
+        <div class="stream-paper-desc ko-only">빠른 배송이 전환율·매출에 미치는 인과 효과를 Doubly Robust Estimation으로 측정했다. 상관관계에서 멈추지 않고 엄밀한 인과 식별까지 밀어붙였고, 배송비 대비 매출 증가의 트레이드오프는 최적화 알고리즘으로 풀었다. 신흥 마켓플레이스 A/B 테스트에서 매출이 +79 bps 상승했다. 배송이 빠를수록 전환율이 오른다는 FBA 같은 풀필먼트 서비스의 핵심 가치 제안을 수치로 검증한 연구다.</div>
         <span class="tag tag-method">Doubly Robust</span>
         <span class="tag tag-insight">배송 속도 → 전환율 인과 검증</span>
-        <span class="tag tag-rg">로켓그로스 입고 ROI 측정에 직접 적용</span>
+        <span class="tag tag-rg">풀필먼트 입고 ROI 측정에 적용</span>
       </div>
 
       <div class="callout amber" style="margin:16px 0">
@@ -1268,7 +1249,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 
       <div class="code-block">
         <div class="code-header">
-          <span class="code-lang">Python — 배송 속도 전환율 DR 추정 (ASPIRE 방식, 로켓그로스 적용)</span>
+          <span class="code-lang">Python — 배송 속도 전환율 DR 추정 (ASPIRE 방식 응용 예시)</span>
           <button class="code-copy" onclick="copyCode(this)">Copy</button>
         </div>
         <div class="code-body"><span class="kw">from</span> econml.dr <span class="kw">import</span> <span class="cls">DRLearner</span>
@@ -1276,7 +1257,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 <span class="kw">import</span> numpy <span class="kw">as</span> np
 
 <span class="cm"># 설정</span>
-<span class="cm"># T: 판매자로켓 배송 여부 (1=로켓그로스 입고, 0=판매자 직접 배송)</span>
+<span class="cm"># T: 빠른 배송 여부 (1=풀필먼트 서비스 입고, 0=판매자 직접 배송)</span>
 <span class="cm"># Y: 전환율 (conversion rate)</span>
 <span class="cm"># X: 상품 특성 (카테고리, 가격대, 과거 판매량, 리뷰 수 등)</span>
 
@@ -1286,28 +1267,28 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
     cv=<span class="num">5</span>,
     random_state=<span class="num">42</span>,
 )
-<span class="var">dr</span>.fit(Y_conv, T_rocket, X=X_product)
+<span class="var">dr</span>.fit(Y_conv, T_fast, X=X_product)
 
-<span class="cm"># ATE: 판매자로켓 배송 시 전환율 평균 상승폭</span>
+<span class="cm"># ATE: 빠른 배송 시 전환율 평균 상승폭</span>
 <span class="var">ate_conv</span> = dr.ate(X_product)
-<span class="kw">print</span>(<span class="str">f"판매자로켓 → 전환율 인과 효과(ATE): {ate_conv:+.4f} ({ate_conv*100:+.2f}%p)"</span>)
+<span class="kw">print</span>(<span class="str">f"빠른 배송 → 전환율 인과 효과(ATE): {ate_conv:+.4f} ({ate_conv*100:+.2f}%p)"</span>)
 
-<span class="cm"># 상품별 CATE — 어떤 상품이 판매자로켓 효과가 큰가?</span>
+<span class="cm"># 상품별 CATE — 어떤 상품이 빠른 배송 효과가 큰가?</span>
 <span class="var">cate_conv</span> = dr.effect(X_test)
 
-<span class="cm"># 비용-편익 분석: 로켓그로스 추가 풀필먼트 비용 vs 전환율 상승 수익</span>
+<span class="cm"># 비용-편익 분석: 추가 풀필먼트 비용 vs 전환율 상승 수익</span>
 <span class="var">avg_price</span> = df_test[<span class="str">"price"</span>].values
 <span class="cm"># 입고비·보관료·출고배송비에서 판매자 직접 배송 비용을 뺀 추가분</span>
-<span class="var">rg_cost</span> = df_test[<span class="str">"rg_fulfillment_extra_cost"</span>].values
+<span class="var">fulfillment_cost</span> = df_test[<span class="str">"fulfillment_extra_cost"</span>].values
 
 <span class="cm"># 수익 증가 추정 = CATE × 가격 × 기대 노출수</span>
 <span class="var">revenue_uplift</span> = cate_conv * avg_price * df_test[<span class="str">"daily_impressions"</span>].values
-<span class="var">roi</span> = (revenue_uplift - rg_cost) / rg_cost
+<span class="var">roi</span> = (revenue_uplift - fulfillment_cost) / fulfillment_cost
 
-<span class="cm"># 로켓그로스 입고 추천 대상: ROI > 0인 상품만</span>
-<span class="var">recommend_rocket</span> = roi > <span class="num">0</span>
-<span class="kw">print</span>(<span class="str">f"로켓그로스 입고 추천 대상 비율: {recommend_rocket.mean():.1%}"</span>)
-<span class="kw">print</span>(<span class="str">f"예상 순수익: {(revenue_uplift - rg_cost)[recommend_rocket].sum():,.0f}원"</span>)</div>
+<span class="cm"># 풀필먼트 입고 추천 대상: ROI > 0인 상품만</span>
+<span class="var">recommend_inbound</span> = roi > <span class="num">0</span>
+<span class="kw">print</span>(<span class="str">f"풀필먼트 입고 추천 대상 비율: {recommend_inbound.mean():.1%}"</span>)
+<span class="kw">print</span>(<span class="str">f"예상 순수익: {(revenue_uplift - fulfillment_cost)[recommend_inbound].sum():,.0f}원"</span>)</div>
       </div>
     </div>
   </div>
@@ -1339,7 +1320,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
         <div class="stream-paper-desc ko-only">아마존 리테일 상품 구색의 장기 경제 가치를 인과 계량경제 모델로 측정. 포트폴리오 수준 구색 의사결정에 활용 (수십억 달러 규모). 동적 인과 모델링 + 반사실적 추정치를 실험 처치 효과와 대조 검증. 어떤 카테고리를 더 깊이 구색해야 장기 GMV·고객 만족도가 극대화되는지를 데이터로 결정.</div>
         <span class="tag tag-method">Dynamic Causal Modeling</span>
         <span class="tag tag-insight">장기 LTV</span>
-        <span class="tag tag-rg">어떤 카테고리를 로켓그로스 우선 유치?</span>
+        <span class="tag tag-rg">어떤 카테고리부터 셀러를 유치할까?</span>
       </div>
 
       <div class="code-block">
@@ -1398,12 +1379,12 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
         <div class="stream-paper-desc ko-only">동일 시점 동일 가격 정책이라는 제약 하에서 가격·수수료 변화의 인과 효과 측정. 인과적 의사결정 트리 앙상블로 제품 하위 집단별 처치 효과 추정. A/B 실험이 불가능한 상황에서 관찰 데이터 기반 인과 추론으로 전환. FBA 수수료 정책 설계에 직접 활용.</div>
         <span class="tag tag-method">Causal Decision Tree</span>
         <span class="tag tag-insight">수수료 정책 설계</span>
-        <span class="tag tag-rg">로켓그로스 수수료 변경 효과 사전 분석</span>
+        <span class="tag tag-rg">수수료 변경 효과 사전 측정</span>
       </div>
 
       <div class="callout purple">
         <span class="callout-icon">💡</span>
-        <div class="ko-only"><strong>로켓그로스 수수료 정책 설계에 활용:</strong> 수수료를 올릴 때 어떤 셀러가 이탈하는가? 어떤 카테고리에서 수수료 탄력성이 낮은가? DML + DiD 조합으로 수수료 변경이 셀러 이탈률·GMV에 미치는 인과 효과를 미리 시뮬레이션합니다.</div>
+        <div class="ko-only"><strong>수수료 변경 효과를 사전에 측정하는 법:</strong> 수수료가 바뀌면 어떤 셀러가 떠나는가? 셀러 반응은 카테고리마다 얼마나 다른가? 과거의 수수료 변경을 자연 실험으로 삼아 DML과 DiD를 함께 쓰면, 변경이 셀러 이탈률·GMV에 미칠 인과 효과를 미리 가늠할 수 있습니다.</div>
       </div>
 
       <div class="code-block">
@@ -1414,9 +1395,9 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
         <div class="code-body"><span class="kw">import</span> statsmodels.formula.api <span class="kw">as</span> smf
 <span class="kw">import</span> pandas <span class="kw">as</span> pd
 
-<span class="cm"># 수수료 인상(처치)이 셀러 이탈률에 미치는 DiD 추정</span>
-<span class="cm"># treated: 수수료 인상 대상 카테고리 (1=처치군)</span>
-<span class="cm"># post: 인상 이후 기간 (1=사후)</span>
+<span class="cm"># 수수료 변경(처치)이 셀러 이탈률에 미치는 DiD 추정</span>
+<span class="cm"># treated: 수수료 변경 대상 카테고리 (1=처치군)</span>
+<span class="cm"># post: 변경 이후 기간 (1=사후)</span>
 <span class="cm"># churn: 셀러 이탈 여부 (1=이탈)</span>
 
 <span class="cm"># 기본 DiD</span>
@@ -1425,14 +1406,14 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
     data=df_panel,
 ).fit(cov_type=<span class="str">"cluster"</span>, cov_kwds={<span class="str">"groups"</span>: df_panel[<span class="str">"seller_id"</span>]})
 
-<span class="kw">print</span>(<span class="str">"수수료 인상의 셀러 이탈 효과 (DiD):"</span>)
+<span class="kw">print</span>(<span class="str">"수수료 변경의 셀러 이탈 효과 (DiD):"</span>)
 <span class="kw">print</span>(did_model.summary().tables[<span class="num">1</span>].loc[[<span class="str">"treated:post"</span>]])
 
 <span class="cm"># ── 수수료 탄력성 이질성 분석 ──────────────────────────</span>
 <span class="kw">from</span> econml.dml <span class="kw">import</span> <span class="cls">NonParamDML</span>
 <span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> <span class="cls">GradientBoostingRegressor</span>
 
-<span class="cm"># 연속형 처치 (수수료 인상 %)</span>
+<span class="cm"># 연속형 처치 (수수료 변경 폭, %p)</span>
 <span class="cm"># 셀러별 수수료 탄력성 추정</span>
 <span class="var">est</span> = <span class="cls">NonParamDML</span>(
     model_y=<span class="cls">GradientBoostingRegressor</span>(),
@@ -1442,10 +1423,10 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 )
 <span class="var">est</span>.fit(Y_gmv, T_fee_change, X=X_seller)
 
-<span class="cm"># 수수료 인상 시 GMV 변화 탄력성 (카테고리별)</span>
+<span class="cm"># 수수료 변경에 대한 GMV 탄력성 (셀러별)</span>
 <span class="var">elasticity</span> = est.effect(X_test)  <span class="cm"># dGMV/d(fee_change) by seller</span>
 
-<span class="cm"># 탄력성이 낮은 카테고리 = 수수료 인상 여력 있는 카테고리</span>
+<span class="cm"># 카테고리별 평균 탄력성 — 수수료 변경에 민감한 카테고리 확인</span>
 <span class="var">df_test</span>[<span class="str">"fee_elasticity"</span>] = elasticity
 <span class="kw">print</span>(df_test.groupby(<span class="str">"category"</span>)[<span class="str">"fee_elasticity"</span>].mean().sort_values())</div>
       </div>
@@ -1509,7 +1490,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 
   <div class="code-block" style="margin-top:24px">
     <div class="code-header">
-      <span class="code-lang">Python — 툴킷 설치 & 퀵스타트 (로켓그로스 분석 환경)</span>
+      <span class="code-lang">Python — 툴킷 설치 & 퀵스타트 (마켓플레이스 분석 환경)</span>
       <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
     <div class="code-body"><span class="cm"># 인과 추론 분석 환경 한 번에 설치</span>
@@ -1519,7 +1500,7 @@ pip install econml doubleml causalml causalimpact pyfixest dowhy
 <span class="cm">#</span>
 <span class="cm"># 질문 유형                         → 추천 방법</span>
 <span class="cm"># ─────────────────────────────────────────────────────────</span>
-<span class="cm"># "로켓그로스 가입의 평균 효과?"      → DML (econml.dml.LinearDML)</span>
+<span class="cm"># "풀필먼트 서비스 가입의 평균 효과?" → DML (econml.dml.LinearDML)</span>
 <span class="cm"># "어떤 셀러에게 효과가 클까?"        → Causal Forest (econml.grf)</span>
 <span class="cm"># "추천 수용의 선택 편향 제거"        → Doubly Robust (econml.dr)</span>
 <span class="cm"># "FC 오픈의 지역 효과"              → DiD (pyfixest.feols)</span>
@@ -1619,20 +1600,20 @@ pip install econml doubleml causalml causalimpact pyfixest dowhy
 <section class="section" id="insights">
   <div class="section-header">
     <span class="section-num">§ 07</span>
-    <h2 class="section-title ko-only">전략적 시사점 — 로켓그로스에 주는 메시지</h2>
-    <h2 class="section-title en-only">Strategic Insights for Rocket Growth</h2>
+    <h2 class="section-title ko-only">마켓플레이스 운영자에게 주는 시사점</h2>
+    <h2 class="section-title en-only">Implications for Marketplace Operators</h2>
   </div>
 
   <div class="insight-grid">
     <div class="insight-card">
       <div class="insight-num">01</div>
       <h4 class="ko-only">인과 학습 루프를 빨리 구축하라</h4>
-      <p class="ko-only">FBA의 진짜 경쟁 우위는 물류 대행이 아니라 10년치 셀러 데이터로 구축한 인과 학습 시스템이다. 셀러 행동 데이터가 쌓이고 DML·DR 분석이 정교해질수록 추천 정확도가 올라가고, 정확해진 추천이 다시 셀러 성과를 끌어올린다. 로켓그로스 역시 단순 물류 처리량을 넘어 이 학습 루프를 얼마나 빠르게 구축하느냐에서 장기 경쟁력이 갈린다.</p>
+      <p class="ko-only">FBA의 진짜 경쟁 우위는 물류 대행이 아니라 10년치 셀러 데이터로 구축한 인과 학습 시스템이다. 셀러 행동 데이터가 쌓이고 DML·DR 분석이 정교해질수록 추천 정확도가 올라가고, 정확해진 추천이 다시 셀러 성과를 끌어올린다. 후발 풀필먼트 서비스도 단순 물류 처리량을 넘어 이 학습 루프를 얼마나 빠르게 구축하느냐에서 장기 경쟁력이 갈린다.</p>
     </div>
     <div class="insight-card red-border">
       <div class="insight-num">02</div>
       <h4 class="ko-only">선택 편향 없이 ROI를 보고하라</h4>
-      <p class="ko-only">"로켓그로스 입고 셀러 매출 161% 증가"라는 수치에는 선택 편향이 섞여 있을 가능성이 높다. 원래 잘 팔리는 상품을 가진 역량 있는 셀러가 로켓그로스를 선택했을 가능성을 배제하지 않으면, 잘못된 투자 결정과 과장된 ROI 보고가 반복되기 쉽다. DML로 편향을 교정한 서비스 순효과를 별도로 측정해 보고해야 한다.</p>
+      <p class="ko-only">"서비스에 입고한 셀러의 매출이 N% 늘었다"는 식의 수치에는 선택 편향이 섞이기 쉽다. 원래 잘 팔리는 상품을 가진 역량 있는 셀러가 서비스를 먼저 선택하기 때문이다. 이 편향을 걸러 내지 않으면 서비스 효과를 실제보다 크게 읽게 된다. DML로 편향을 교정한 서비스 순효과를 별도로 측정해 보고해야 한다.</p>
     </div>
     <div class="insight-card gold-border">
       <div class="insight-num">03</div>
@@ -1646,20 +1627,22 @@ pip install econml doubleml causalml causalimpact pyfixest dowhy
     </div>
     <div class="insight-card red-border">
       <div class="insight-num">05</div>
-      <h4 class="ko-only">수수료 정책 변경의 셀러 이탈 효과를 사전 시뮬레이션하라</h4>
-      <p class="ko-only">수수료를 올리기 전에 DiD + DML로 카테고리별 수수료 탄력성을 추정하면, 인상 여력이 있는 카테고리와 셀러 이탈 위험이 큰 카테고리가 미리 갈립니다. 블라인드한 수수료 인상은 고부가가치 셀러를 경쟁 플랫폼으로 밀어내기 쉽습니다.</p>
+      <h4 class="ko-only">수수료 변경의 셀러 이탈 효과를 미리 측정하라</h4>
+      <p class="ko-only">수수료를 바꾸기 전에 DiD와 DML로 카테고리별 수수료 탄력성을 추정하면, 변경에 둔감한 카테고리와 셀러 이탈 위험이 큰 카테고리를 미리 가를 수 있습니다. 셀러 반응을 재 보지 않고 수수료를 바꾸면 고부가가치 셀러를 경쟁 플랫폼으로 밀어내기 쉽습니다.</p>
     </div>
     <div class="insight-card gold-border">
       <div class="insight-num">06</div>
       <h4 class="ko-only">투명성이 셀러 신뢰의 선순환을 만든다</h4>
-      <p class="ko-only">아마존은 DML로 측정한 추천 효과를 Seller Central에 공개해 "이 추천을 따르면 매출이 X% 오릅니다"를 데이터로 뒷받침한다. 이 투명성 덕분에 추천 채택률이 오르고, 데이터가 더 쌓이는 선순환이 돈다. 로켓그로스도 인과 분석 결과를 Wing 대시보드에 공개하면 신뢰를 바탕으로 채택률을 끌어올린다.</p>
+      <p class="ko-only">아마존은 DML로 측정한 추천 효과를 Seller Central에 공개해 "이 추천을 따르면 매출이 X% 오릅니다"를 데이터로 뒷받침한다. 이 투명성 덕분에 추천 채택률이 오르고, 데이터가 더 쌓이는 선순환이 돈다. 다른 마켓플레이스도 인과 분석 결과를 셀러 대시보드에 공개하면 신뢰를 바탕으로 채택률을 끌어올릴 수 있다.</p>
     </div>
   </div>
 
   <div class="page-footer">
     <div>
-      <strong>Amazon Economist Group — Causal Inference & FBA / 로켓그로스 분석</strong><br>
-      <span class="text-muted text-small">Amazon Science 논문 및 블로그 기반 종합 정리. 내부 데이터 미포함.</span>
+      <strong>Amazon Economist Group — Causal Inference & FBA 분석</strong><br>
+      <span class="text-muted text-small">Amazon Science 논문 및 블로그 기반 종합 정리.</span><br>
+      <span class="text-muted text-small ko-only">공개 자료만으로 쓴 개인 의견이며, 필자가 속한 회사의 입장이나 내부 정보와 무관합니다.</span>
+      <span class="text-muted text-small en-only">Personal views drawn only from public sources; they do not represent the author's employer or rely on any internal information.</span>
     </div>
     <div class="text-small text-muted">
       Sources: amazon.science · INFORMS · KDD · arxiv.org

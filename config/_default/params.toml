@@ -18,7 +18,7 @@ page_not_found_image = "images/404.png" # 404 error page image
 # image gallery shortcode
 image_gallery = true
 # email address
-email = "youngmin.econ.ai@gmail.com"
+email = "jay.econ.ai@gmail.com"
 # contact form action
 contact_form_action = "https://formspree.io/f/xvzqpdne"
 # search

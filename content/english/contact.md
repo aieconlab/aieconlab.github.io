@@ -1,11 +1,11 @@
 ---
-title: "Talk To Me Anytime :)"
+title: "문의"
 # description
-description: "This is meta description"
+description: "인공지능경제연구소(AIEconLab) 문의 - 연구 협업 제안, 강연·자문 요청, 게재된 글에 대한 의견과 오류 제보를 이메일이나 문의 양식으로 보내 주세요."
 layout: "contact"
 draft: false
 ---
 
-# Ask Us Anything <br> Or just Say Hi,
+# 연구 협업과 문의를 <br> 기다립니다
 
-Rather than just filling out a form, Sleeknote also offers help to the user <br> with links directing them to find  additional information or take popular actions.
+AIEconLab은 AI가 경제와 사회에 가져올 변화를 연구하고 그 결과를 이곳에 공유하고 있습니다. 연구 협업 제안, 강연·자문 요청, 게재된 글에 대한 의견이나 오류 제보 등 무엇이든 편하게 보내 주세요. 확인한 뒤 회신드리겠습니다.

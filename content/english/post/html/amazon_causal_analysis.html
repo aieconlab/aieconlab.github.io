@@ -748,7 +748,7 @@ intrp.plot(feature_names=[<span class="str">"가입전GMV"</span>, <span class="
 
       <div class="callout amber">
         <span class="callout-icon">🎯</span>
-        <div class="ko-only"><strong>핵심 통찰:</strong> 로켓그로스 추천의 효과는 카테고리·셀러 규모에 따라 크게 갈린다. Causal Forest로 보면 소규모 생활용품 셀러에서는 재입고 추천 효과가 크고 대형 가전 셀러에서는 미미하다는 세분화된 인사이트가 드러난다. 추천 자원을 효과가 큰 집단에 집중 배분하는 근거가 여기서 나온다.</div>
+        <div class="ko-only"><strong>핵심 통찰:</strong> 로켓그로스 추천의 효과는 카테고리·셀러 규모에 따라 크게 갈릴 수 있다. 평균 효과가 같아도 어떤 셀러 집단에서는 재입고 추천이 크게 듣고 다른 집단에서는 거의 듣지 않을 수 있는데, Causal Forest는 이 차이를 세분화해 보여 준다. 추천 자원을 효과가 큰 집단에 집중 배분하는 근거가 여기서 나온다.</div>
       </div>
     </div>
   </div>
@@ -1019,7 +1019,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
         </tr>
         <tr>
           <td class="dim-cell">셀러 혜택</td>
-          <td class="coupang-cell">'로켓배송' 배지 → 전환율 급상승</td>
+          <td class="coupang-cell">'판매자로켓' 배지 → 전환율 급상승</td>
           <td>'Prime 배지' → 전환율 74%</td>
         </tr>
         <tr>
@@ -1258,7 +1258,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
         <div class="stream-paper-desc ko-only">빠른 배송이 전환율·매출에 미치는 인과 효과를 Doubly Robust Estimation으로 측정했다. 상관관계에서 멈추지 않고 엄밀한 인과 식별까지 밀어붙였고, 배송비 대비 매출 증가의 트레이드오프는 최적화 알고리즘으로 풀었다. 신흥 마켓플레이스 A/B 테스트에서 매출이 +79 bps 상승했다. 배송이 빠를수록 전환율이 오른다는 FBA·로켓그로스의 핵심 가치 제안을 수치로 검증한 연구다.</div>
         <span class="tag tag-method">Doubly Robust</span>
         <span class="tag tag-insight">배송 속도 → 전환율 인과 검증</span>
-        <span class="tag tag-rg">로켓배송 ROI 측정에 직접 적용</span>
+        <span class="tag tag-rg">로켓그로스 입고 ROI 측정에 직접 적용</span>
       </div>
 
       <div class="callout amber" style="margin:16px 0">
@@ -1268,7 +1268,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 
       <div class="code-block">
         <div class="code-header">
-          <span class="code-lang">Python — 배송 속도 전환율 DR 추정 (ASPIRE 재현)</span>
+          <span class="code-lang">Python — 배송 속도 전환율 DR 추정 (ASPIRE 방식, 로켓그로스 적용)</span>
           <button class="code-copy" onclick="copyCode(this)">Copy</button>
         </div>
         <div class="code-body"><span class="kw">from</span> econml.dr <span class="kw">import</span> <span class="cls">DRLearner</span>
@@ -1276,7 +1276,7 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 <span class="kw">import</span> numpy <span class="kw">as</span> np
 
 <span class="cm"># 설정</span>
-<span class="cm"># T: 로켓배송 지원 여부 (1=지원, 0=일반배송)</span>
+<span class="cm"># T: 판매자로켓 배송 여부 (1=로켓그로스 입고, 0=판매자 직접 배송)</span>
 <span class="cm"># Y: 전환율 (conversion rate)</span>
 <span class="cm"># X: 상품 특성 (카테고리, 가격대, 과거 판매량, 리뷰 수 등)</span>
 
@@ -1288,25 +1288,26 @@ fit.iplot()  <span class="cm"># 코호트별 ATT 시각화</span></div>
 )
 <span class="var">dr</span>.fit(Y_conv, T_rocket, X=X_product)
 
-<span class="cm"># ATE: 로켓배송 지원 시 전환율 평균 상승폭</span>
+<span class="cm"># ATE: 판매자로켓 배송 시 전환율 평균 상승폭</span>
 <span class="var">ate_conv</span> = dr.ate(X_product)
-<span class="kw">print</span>(<span class="str">f"로켓배송 → 전환율 인과 효과(ATE): {ate_conv:+.4f} ({ate_conv*100:+.2f}%p)"</span>)
+<span class="kw">print</span>(<span class="str">f"판매자로켓 → 전환율 인과 효과(ATE): {ate_conv:+.4f} ({ate_conv*100:+.2f}%p)"</span>)
 
-<span class="cm"># 상품별 CATE — 어떤 상품이 로켓배송 효과가 큰가?</span>
+<span class="cm"># 상품별 CATE — 어떤 상품이 판매자로켓 효과가 큰가?</span>
 <span class="var">cate_conv</span> = dr.effect(X_test)
 
-<span class="cm"># 비용-편익 분석: 항공배송 추가비용 vs 전환율 상승 수익</span>
+<span class="cm"># 비용-편익 분석: 로켓그로스 추가 풀필먼트 비용 vs 전환율 상승 수익</span>
 <span class="var">avg_price</span> = df_test[<span class="str">"price"</span>].values
-<span class="var">air_cost</span> = df_test[<span class="str">"air_shipping_extra_cost"</span>].values
+<span class="cm"># 입고비·보관료·출고배송비에서 판매자 직접 배송 비용을 뺀 추가분</span>
+<span class="var">rg_cost</span> = df_test[<span class="str">"rg_fulfillment_extra_cost"</span>].values
 
 <span class="cm"># 수익 증가 추정 = CATE × 가격 × 기대 노출수</span>
 <span class="var">revenue_uplift</span> = cate_conv * avg_price * df_test[<span class="str">"daily_impressions"</span>].values
-<span class="var">roi</span> = (revenue_uplift - air_cost) / air_cost
+<span class="var">roi</span> = (revenue_uplift - rg_cost) / rg_cost
 
-<span class="cm"># 로켓배송 추천 대상: ROI > 0인 상품만</span>
+<span class="cm"># 로켓그로스 입고 추천 대상: ROI > 0인 상품만</span>
 <span class="var">recommend_rocket</span> = roi > <span class="num">0</span>
-<span class="kw">print</span>(<span class="str">f"로켓배송 추천 대상 비율: {recommend_rocket.mean():.1%}"</span>)
-<span class="kw">print</span>(<span class="str">f"예상 순수익: {(revenue_uplift - air_cost)[recommend_rocket].sum():,.0f}원"</span>)</div>
+<span class="kw">print</span>(<span class="str">f"로켓그로스 입고 추천 대상 비율: {recommend_rocket.mean():.1%}"</span>)
+<span class="kw">print</span>(<span class="str">f"예상 순수익: {(revenue_uplift - rg_cost)[recommend_rocket].sum():,.0f}원"</span>)</div>
       </div>
     </div>
   </div>
@@ -1641,7 +1642,7 @@ pip install econml doubleml causalml causalimpact pyfixest dowhy
     <div class="insight-card">
       <div class="insight-num">04</div>
       <h4 class="ko-only">카테고리별 효과 이질성을 활용하라</h4>
-      <p class="ko-only">Causal Forest를 적용하면 추천 효과가 소규모 생활용품 셀러 쪽에 몰리고 대형 가전 셀러 쪽에서는 거의 잡히지 않는다는 결과가 나온다. 카테고리·셀러 유형별 맞춤 추천을 설계하면 획일적 정책을 쓸 때와 같은 예산으로도 효율이 훨씬 높다.</p>
+      <p class="ko-only">Causal Forest를 적용하면 추천 효과가 어느 카테고리·셀러 유형에 몰리고 어디서는 거의 잡히지 않는지가 드러난다. 카테고리·셀러 유형별 맞춤 추천을 설계하면 획일적 정책을 쓸 때와 같은 예산으로도 효율을 높일 수 있다.</p>
     </div>
     <div class="insight-card red-border">
       <div class="insight-num">05</div>

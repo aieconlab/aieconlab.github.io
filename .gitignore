@@ -16,3 +16,5 @@ analysis/
 # Local browser QA state and screenshots
 .playwright-cli/
 output/playwright/
+
+docs/

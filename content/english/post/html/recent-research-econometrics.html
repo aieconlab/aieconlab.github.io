@@ -1,0 +1,1478 @@
+---
+title: "계량경제학 개관과 분야별 최신 연구 동향"
+date: 2026-11-14T09:00:00+09:00
+# post thumb
+images:
+  - "images/post/recent_research_econometrics_cover.png"
+#author
+author: "주영민 (Youngmin Ju)"
+# description
+description: "계량경제학을 식별·추정·추론이라는 공통 틀과 일곱 연구 분야로 정리하고, 2023~2026년 분야별 최신 연구 동향과 테크기업의 실험설계·인과추론 적용 사례를 짚었습니다. 한국어·영어 병기."
+# 목록/검색/RSS에 쓰이는 요약 (완성형 HTML은 자동 요약이 불가능하므로 직접 지정)
+summary: "계량경제학은 식별·추정·추론이라는 공통 틀 위에서 일곱 갈래로 나뉩니다. 2023~2026년의 프런티어는 세 갈래입니다. 추정량이 실제로 무엇을 추정하는지 다시 묻는 작업, 모형이 틀려도 유효한 추론, 그리고 AI가 만든 데이터로 하는 추론입니다. 미시계량·머신러닝·시계열·금융·구조추정·이론 여섯 분야의 최신 연구와 테크기업의 실험설계까지 최근 문헌을 근거로 정리했습니다. 한국어와 영어로 함께 읽을 수 있습니다."
+# Taxonomies
+categories: ["AI_분석"]
+tags: ["AI","ML","ECONOMICS","ECONOMETRICS","CAUSALITY","RESEARCH"]
+type: "featured" # available type (regular or featured)
+# 완성형 HTML 문서 게시 방식 (layouts/_default/standalone.html)
+layout: "standalone"
+url: "/post/recent-research-econometrics/"
+draft: false
+---
+<!DOCTYPE html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>계량경제학 개관과 분야별 최신 연구 동향</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=Inter:wght@400..800&amp;family=JetBrains+Mono:wght@400..700&amp;family=Noto+Sans+KR:wght@400..800&amp;display=swap">
+<style>
+:root{
+  /* 차가운 종이색 바탕, 남색 잉크, 코발트 강조. 그래프는 검증한 파랑·주황 두 색만 쓴다.
+     배치: 44rem 본문 단, 넓은 화면에서는 왼쪽에 붙박이 목차. */
+  color-scheme:light;
+  --paper:#F5F7FA; --surface:#FFFFFF; --ink:#101B2B; --ink-2:#3F4C5C; --muted:#667385;
+  --rule:#DCE2EA; --rule-2:#C3CCD7; --accent:#1C5CAB; --accent-soft:#E8F1FC;
+  --s0:#8C97A5; --s1:#2a78d6; --s2:#eb6834; --s1t:#3987e5; --s2t:#d95926;
+  --grid:#E4E9EF; --axis:#B7C1CD; --meter-track:#cde2fb;
+  --good:#0ca30c; --crit:#d03b3b; --crit-soft:#FCEDED;
+  /* 본문은 기기에 Pretendard가 있으면 그것을, 없으면 같은 계열인 Inter + Noto Sans KR을 쓴다 */
+  --font-body:"Pretendard Variable",Pretendard,Inter,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --font-display:Fraunces,Georgia,"Times New Roman",serif;
+  --font-mono:"JetBrains Mono","Pretendard Variable",Pretendard,"Noto Sans KR",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#0D1218; --surface:#141B23; --ink:#E7ECF2; --ink-2:#B9C3CF; --muted:#8A96A5;
+    --rule:#25303B; --rule-2:#364453; --accent:#86B6EF; --accent-soft:#14263A;
+    --s0:#7C8795; --s1:#3987e5; --s2:#d95926; --s1t:#2a78d6; --s2t:#eb6834;
+    --grid:#212B36; --axis:#3B4857; --meter-track:#1B3A5E;
+    --good:#0ca30c; --crit:#d03b3b; --crit-soft:#2A1719;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#0D1218; --surface:#141B23; --ink:#E7ECF2; --ink-2:#B9C3CF; --muted:#8A96A5;
+  --rule:#25303B; --rule-2:#364453; --accent:#86B6EF; --accent-soft:#14263A;
+  --s0:#7C8795; --s1:#3987e5; --s2:#d95926; --s1t:#2a78d6; --s2t:#eb6834;
+  --grid:#212B36; --axis:#3B4857; --meter-track:#1B3A5E;
+  --good:#0ca30c; --crit:#d03b3b; --crit-soft:#2A1719;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:1.0625rem;line-height:1.78;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+html[data-lang="ko"] [data-l="en"],html[data-lang="en"] [data-l="ko"]{display:none}
+[data-l="en"]{line-height:1.68;word-break:normal;overflow-wrap:break-word}
+a{color:var(--accent);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* 상단 막대 */
+.bar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.bar-in{max-width:72rem;margin:0 auto;padding:.5rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.bar-title{font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink);text-decoration:none}
+.lang{display:inline-flex;border:1px solid var(--rule-2);border-radius:999px;padding:2px;background:var(--surface);flex:0 0 auto}
+.lang button{font:600 .78rem var(--font-mono);letter-spacing:.04em;border:0;background:transparent;color:var(--ink-2);padding:.32rem .8rem;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* 머리말 */
+.mast{position:relative;overflow:hidden}
+.mast::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(to bottom,#000 0,transparent 78%);mask-image:linear-gradient(to bottom,#000 0,transparent 78%);pointer-events:none}
+.mast-in{position:relative;max-width:72rem;margin:0 auto;padding:3.2rem 1.25rem 1.6rem}
+.eyebrow{font:500 .8rem var(--font-mono);color:var(--muted);margin:0 0 1rem}
+h1{font-size:clamp(1.85rem,4.8vw,2.9rem);line-height:1.22;letter-spacing:-.02em;margin:0 0 1.2rem;font-weight:800;text-wrap:balance;max-width:22em;scroll-margin-top:4.5rem}
+.lead{font-size:1.18rem;line-height:1.72;margin:0 0 2rem;max-width:41rem}
+.trio-lab{font:600 .8rem var(--font-body);color:var(--muted);margin:0 0 .6rem}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:.95rem 1rem .9rem}
+.card-no{font:600 .78rem var(--font-mono);color:var(--accent)}
+.card-h{font-weight:700;font-size:1.02rem;margin:.3rem 0 .35rem;line-height:1.35}
+.card p{font-size:.9rem;line-height:1.55;margin:0 0 .5rem;color:var(--ink-2)}
+.card p.card-h{color:var(--ink);font-size:1.02rem}
+.card p.card-meta{font-size:.8rem;color:var(--muted);margin:0}
+.card p:last-child{margin-bottom:0}
+@media (max-width:720px){.trio{grid-template-columns:1fr}}
+
+/* 배치 */
+.layout{max-width:72rem;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+.toc{margin:0 0 2.5rem;padding:1rem 0;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+.toc-h{font:700 .8rem var(--font-body);color:var(--muted);margin:0 0 .5rem}
+.toc ol{list-style:none;margin:0;padding:0;columns:2;column-gap:1.5rem;font-size:.9rem;line-height:1.45}
+.toc li{break-inside:avoid;margin:0;padding:.2rem 0}
+.toc a{color:var(--ink-2);text-decoration:none;display:flex;gap:.6rem}
+.toc a:hover{color:var(--accent)}
+.toc .n{font:500 .78rem var(--font-mono);color:var(--muted);min-width:1.5em;padding-top:.08em}
+@media (max-width:520px){.toc ol{columns:1}}
+@media (min-width:1080px){
+  .layout{display:grid;grid-template-columns:15rem minmax(0,45rem);gap:4rem;justify-content:center;align-items:start}
+  /* AIEconLab 사이트 바가 위에 붙으면 그 높이만큼 내린다(사이트 밖에서는 0) */
+  .toc{position:sticky;top:calc(4.2rem + var(--aiel-bar-h,0px));border:0;padding:0;max-height:calc(100vh - 5.5rem - var(--aiel-bar-h,0px));overflow:auto}
+  .toc ol{columns:1}
+}
+.body{min-width:0}
+
+/* 본문 */
+section{border-top:1px solid var(--rule-2);padding-top:1.7rem;margin-bottom:3.4rem}
+.sec-no{display:block;font:600 .85rem var(--font-mono);color:var(--accent);margin-bottom:.3rem}
+h2{font-size:1.55rem;line-height:1.3;margin:0 0 .5rem;letter-spacing:-.01em;text-wrap:balance;scroll-margin-top:5.5rem;font-weight:800}
+.sec-q{font-size:.93rem;color:var(--muted);margin:0 0 1.3rem}
+.sec-q b{font-weight:600;color:var(--ink-2);margin-right:.5rem}
+h2 + p,.sec-q + p{font-size:1.1rem}
+h3{font-size:1.15rem;line-height:1.4;margin:2.3rem 0 .6rem;scroll-margin-top:4.5rem;font-weight:700;text-wrap:balance}
+p{margin:0 0 1.1rem}
+ul,ol{padding-left:1.25rem;margin:0 0 1.2rem}
+li{margin:.4rem 0}
+[data-l="en"] h1,[data-l="en"] h2,[data-l="en"] h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.012em}
+[data-l="en"] h1{font-weight:600}
+
+/* 표 */
+.tbl{overflow-x:auto;margin:1.2rem 0 1.7rem;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:.89rem;line-height:1.55;min-width:33rem}
+th,td{text-align:left;vertical-align:top;padding:.6rem .9rem .6rem 0;border-bottom:1px solid var(--rule)}
+th{font-weight:700;color:var(--ink-2);font-size:.8rem;border-bottom:1px solid var(--rule-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+.tbl:not(.fit) td:first-child{overflow-wrap:normal}
+.tbl.in-fig{margin:0}
+.tbl.in-fig:not(.fit) td:first-child{white-space:nowrap}
+.tbl.fit table{min-width:0}
+.tbl.fit th{white-space:normal}
+.tbl.fit th,.tbl.fit td{padding-right:.6rem}
+td.stc{white-space:nowrap;font-weight:500}
+@media (max-width:480px){
+  .tbl.stack-sm td.stc{white-space:normal}
+  .tbl.stack-sm .st{display:flex;margin:0 0 .3rem}
+}
+
+/* 그림 공통 */
+.fig{margin:2.1rem 0 2.3rem;padding:1rem 0 0;border-top:2px solid var(--ink)}
+.fig-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.9rem}
+.fig-title{font-weight:700;margin:0;font-size:1rem;line-height:1.4}
+.fig-sub{margin:.15rem 0 0;color:var(--muted);font-size:.85rem;line-height:1.5}
+.fig-body{margin:0 0 .8rem}
+figcaption{font-size:.85rem;line-height:1.62;color:var(--ink-2)}
+.fig-no{font:600 .76rem var(--font-mono);color:var(--ink);margin-right:.5rem}
+.badge{display:inline-block;font-size:.7rem;font-weight:700;border:1px solid var(--rule-2);border-radius:3px;padding:0 .35rem;margin-right:.45rem;color:var(--ink-2);line-height:1.55;vertical-align:.05em}
+.fig-stats{border-top:0;padding-top:0;margin:1.5rem 0 1.9rem}
+.tv{font:600 .74rem var(--font-body);border:1px solid var(--rule-2);background:var(--surface);color:var(--ink-2);border-radius:6px;padding:.3rem .6rem;cursor:pointer;white-space:nowrap;flex:0 0 auto}
+.tv[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.viz{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:.9rem .9rem .8rem}
+.viz.narrow{max-width:33rem}
+.viz-table{display:none}
+.fig.show-table .viz{display:none}
+.fig.show-table .viz-table{display:block}
+.viz-table table{min-width:0}
+table.num td,table.num th{font-variant-numeric:tabular-nums}
+table.num td:first-child,table.num th:first-child{white-space:nowrap}
+table.num td:not(:first-child){font-family:var(--font-mono);font-size:.84rem}
+.legend{list-style:none;display:flex;flex-wrap:wrap;gap:.3rem 1.1rem;padding:0;margin:0 0 .5rem;font-size:.8rem;line-height:1.4;color:var(--ink-2)}
+.viz .chart-wrap + .legend{margin:.6rem 0 0}
+.legend li{display:flex;align-items:center;gap:.45rem;margin:0}
+.key{display:inline-block;width:18px;height:0;border-top:2px solid var(--muted);border-radius:2px;flex:0 0 auto}
+.key.s0{border-color:var(--s0)}.key.s1{border-color:var(--s1)}.key.s2{border-color:var(--s2)}
+.key.band{height:10px;border:0;background:var(--s2);opacity:.28}
+
+/* SVG 그래프와 개념도 */
+.chart-wrap{max-width:30rem}
+svg.chart{display:block;width:100%;height:auto;overflow:visible}
+.chart .grid{stroke:var(--grid);stroke-width:1}
+.chart .axis{stroke:var(--axis);stroke-width:1}
+.chart .tick{font:500 10px var(--font-mono);fill:var(--muted)}
+.chart .tick.txt{font:500 10px var(--font-body)}
+.chart .lab{font:600 11px var(--font-body);fill:var(--ink)}
+.chart .lab.num{font:600 11px var(--font-mono)}
+.chart .lab.strong{font-weight:700}
+.chart .ln{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .s0{stroke:var(--s0)}.chart .s1{stroke:var(--s1)}.chart .s2{stroke:var(--s2)}
+.chart .ln.thin{stroke-width:1;opacity:.55}
+.chart .dot{stroke:var(--surface);stroke-width:2}
+.chart .dot.s1{fill:var(--s1)}.chart .dot.s2{fill:var(--s2)}
+.chart .band{fill:var(--s2);opacity:.16}
+.chart .xh{stroke:var(--axis);stroke-width:1;opacity:0}
+.chart .xg:hover .xh,.chart .xg:focus-within .xh{opacity:1}
+.chart .hit{fill:transparent;cursor:crosshair;outline:none}
+.chart .hit:focus-visible{stroke:var(--accent);stroke-width:1.5}
+.chart .bx{fill:var(--surface);stroke:var(--rule-2);stroke-width:1.25}
+.chart .bx.mid{fill:var(--accent-soft);stroke:var(--accent)}
+.chart .cn{fill:none;stroke:var(--ink-2);stroke-width:1.75}
+.chart .cn.s1{stroke:var(--s1)}.chart .cn.s2{stroke:var(--s2)}
+.chart .arw.a0{fill:var(--ink-2)}.chart .arw.a1{fill:var(--s1)}.chart .arw.a2{fill:var(--s2)}
+
+/* 막대 */
+.bars{display:grid;gap:.6rem;padding:.2rem 0 0}
+.bar-row,.bar-axis{display:grid;grid-template-columns:4.4rem minmax(0,1fr);align-items:center;gap:.75rem}
+[data-l="en"] .bar-row,[data-l="en"] .bar-axis{grid-template-columns:6.4rem minmax(0,1fr)}
+.bar-row{border-radius:4px}
+.bar-lab{font-size:.84rem;color:var(--ink-2);text-align:right;line-height:1.3}
+.bar-track{position:relative;display:block;height:20px;background:linear-gradient(to right,var(--grid) 1px,transparent 1px) 0 0/25% 100%;border-right:1px solid var(--grid)}
+.bar-fill{display:block;height:100%;background:var(--s1);border-radius:0 4px 4px 0}
+.bar-row:hover .bar-fill,.bar-row:focus-visible .bar-fill{filter:brightness(1.1)}
+.bar-val{position:absolute;top:50%;transform:translate(8px,-50%);font:600 .8rem var(--font-mono);color:var(--ink)}
+.bar-axis{margin-top:.1rem}
+.bar-ticks{position:relative;display:block;height:1.1rem;font:500 .68rem var(--font-mono);color:var(--muted)}
+.bar-ticks i{position:absolute;top:0;font-style:normal;white-space:nowrap;transform:translateX(-50%)}
+.bar-ticks i:first-child{transform:none}
+.bar-ticks i:last-child{transform:translateX(-100%)}
+
+/* 수치 타일 */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.stat{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:.9rem 1rem}
+.stat-v{font:700 1.85rem/1.1 var(--font-mono);letter-spacing:-.03em;margin:0 0 .5rem;color:var(--ink)}
+.stat-u{font:600 .9rem var(--font-body);margin-left:.15rem;color:var(--ink-2);letter-spacing:0}
+.stat-u.pre{margin:0 .35rem 0 0}
+.stat-l{font-size:.85rem;line-height:1.5;color:var(--ink-2);margin:0}
+.meter{display:block;height:8px;border-radius:99px;background:var(--meter-track);margin:0 0 .6rem;overflow:hidden}
+.meter span{display:block;height:100%;background:var(--s1);border-radius:99px}
+@media (max-width:520px){.stats{grid-template-columns:1fr}}
+
+/* 연표 */
+.tl-found{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.84rem;line-height:1.5;color:var(--ink-2);margin:0 0 1rem}
+.tl-found b{font:600 .8rem var(--font-mono);color:var(--accent);margin-right:.35rem}
+.tl-grid{display:grid;grid-template-columns:4.1rem minmax(0,1.2fr) minmax(0,1fr);column-gap:.7rem}
+.tl-h{grid-row:1;font-size:.74rem;font-weight:700;color:var(--muted);padding-bottom:.4rem}
+.tl-line{grid-column:1 / -1;border-top:1px solid var(--rule);min-height:2.9rem}
+.tl-dec{grid-column:1;font:500 .76rem var(--font-mono);color:var(--muted);padding-top:.4rem}
+.tl-era{grid-column:2;display:flex;flex-direction:column;gap:.3rem;padding:.3rem 0}
+.era{flex:1;background:var(--surface);border:1px solid var(--rule-2);border-left:3px solid var(--accent);border-radius:4px;padding:.4rem .55rem;font-size:.82rem;line-height:1.4;display:flex;flex-direction:column;justify-content:center;gap:.1rem}
+.era b{font-weight:700}
+.era span{color:var(--ink-2);font-size:.77rem}
+.era .era-tag{font:600 .68rem var(--font-mono);color:var(--accent)}
+.tl-nobel{grid-column:3;display:flex;flex-direction:column;gap:.35rem;padding:.4rem 0}
+.nb{font-size:.78rem;line-height:1.35;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:.4rem;align-items:baseline}
+.nb-y{font:600 .74rem var(--font-mono);color:var(--ink)}
+.nb-n{font-weight:600}
+.nb-d{grid-column:2;color:var(--muted);font-size:.73rem}
+
+/* 세 질문 */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.step{display:grid;grid-template-columns:1.6rem minmax(0,1fr);gap:.7rem;align-items:start;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:.8rem .9rem;margin:0}
+.step.focus{border-left:4px solid var(--accent)}
+.step-no{font:700 1rem/1.5 var(--font-mono);color:var(--accent)}
+.step-tag{font-weight:700;margin:0;font-size:.98rem}
+.step-q{margin:.1rem 0 .45rem;color:var(--ink-2);font-size:.92rem;line-height:1.55}
+.step-ex{margin:0;font-size:.82rem;color:var(--muted);line-height:1.5}
+.step-two{list-style:none;padding:0;margin:0 0 .45rem;display:grid;grid-template-columns:1fr 1fr;gap:.4rem;font-size:.83rem;line-height:1.45}
+.step-two li{margin:0;padding:.45rem .55rem;background:var(--paper);border-radius:4px;color:var(--ink-2)}
+.step-two b{display:block;color:var(--ink);font-size:.82rem}
+.steps-note{font-size:.84rem;color:var(--ink-2);margin:.7rem 0 0;display:flex;align-items:center;gap:.55rem;line-height:1.5}
+.focus-key{display:inline-block;width:4px;height:1.1rem;background:var(--accent);border-radius:1px;flex:0 0 auto}
+@media (max-width:520px){.step-two{grid-template-columns:1fr}}
+
+/* 두 전통 */
+.tri3{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1.15fr) auto minmax(0,1fr);gap:.5rem;align-items:stretch}
+.tri-cell{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:.75rem .8rem}
+.tri-cell p{margin:0;font-size:.85rem;line-height:1.5;color:var(--ink-2)}
+.tri-cell p.tri-h{font-weight:700;color:var(--ink);font-size:.95rem;margin-bottom:.3rem}
+.tri-mid{border-color:var(--accent);background:var(--accent-soft)}
+.tri-arrow{display:flex;align-items:center;color:var(--muted)}
+.tri-arrow-rev .ar{transform:rotate(180deg)}
+@media (max-width:640px){.tri3{grid-template-columns:1fr}.tri-arrow{justify-content:center}.tri-arrow .ar{transform:rotate(90deg)}.tri-arrow-rev .ar{transform:rotate(-90deg)}}
+
+/* 분야 지도 */
+.fmap{display:grid;gap:.35rem}
+.fm-band,.fm-box{display:flex;flex-direction:column;gap:.15rem;text-decoration:none;color:inherit;border:1px solid var(--rule-2);border-radius:8px;padding:.7rem .9rem;background:var(--surface)}
+.fm-band{text-align:center;align-items:center}
+.fm-base{border:2px solid var(--accent);background:var(--accent-soft)}
+.fm-name{font-weight:700;font-size:.97rem;line-height:1.35;color:var(--ink)}
+.fm-line{font-size:.81rem;color:var(--ink-2);line-height:1.45}
+.fm-go{font:600 .7rem var(--font-mono);color:var(--accent);margin-top:.15rem}
+.fm-band:hover,.fm-box:hover{border-color:var(--accent)}
+.fm-arrows{display:grid;grid-template-columns:1.25fr 1fr;gap:.6rem;justify-items:center;color:var(--muted);height:18px}
+.fm-cols{display:grid;grid-template-columns:1.25fr 1fr;gap:.6rem;align-items:stretch}
+.fm-frame{border:1px solid var(--rule);border-radius:8px;padding:.6rem;display:flex;flex-direction:column;gap:.5rem}
+.fm-frame .fm-box{flex:1;justify-content:center}
+.fm-head{margin:0;font-size:.79rem;color:var(--muted);text-align:center}
+@media (max-width:560px){.fm-cols{grid-template-columns:1fr}.fm-arrows{grid-template-columns:1fr}.fm-arrows .ar:last-child{display:none}}
+
+/* 흐름 상자 */
+.flow-lab{font:700 .78rem var(--font-body);color:var(--muted);margin:0 0 .5rem}
+.flow-row{list-style:none;padding:0;margin:0 0 1.1rem;display:flex;align-items:stretch;gap:.4rem}
+.flow > .flow-row:last-child{margin-bottom:0}
+.flow-box{flex:1 1 0;background:var(--surface);border:1px solid var(--rule-2);border-radius:6px;padding:.65rem .7rem;display:flex;flex-direction:column;gap:.2rem;font-size:.86rem;line-height:1.4;margin:0;min-width:0}
+.flow-box b{font-weight:700}
+.flow-box span{color:var(--ink-2);font-size:.8rem}
+.flow-box .yr{font:600 .8rem var(--font-mono);color:var(--accent)}
+.flow-box.bad{border-color:var(--crit);background:var(--crit-soft);flex-direction:row;align-items:center;gap:.1rem}
+.flow-ar{display:flex;align-items:center;color:var(--muted);margin:0;flex:0 0 auto}
+.fix-row{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+.fix-row li{display:flex;gap:.1rem;align-items:flex-start;margin:0;font-size:.85rem;line-height:1.45;border-top:2px solid var(--good);padding-top:.55rem}
+.fix-row li div{display:flex;flex-direction:column;gap:.15rem}
+.fix-row li div span{color:var(--muted);font-size:.77rem}
+@media (max-width:640px){.flow-row{flex-direction:column}.flow-ar{justify-content:center}.flow-ar .ar{transform:rotate(90deg)}.fix-row{grid-template-columns:1fr}}
+.st{display:inline-flex;align-items:center;justify-content:center;width:1.25rem;height:1.25rem;border-radius:50%;flex:0 0 auto;vertical-align:-.25em;margin-right:.45rem;color:#fff}
+.st.ok{background:var(--good)}.st.no{background:var(--crit)}
+
+/* 대리지표 */
+.sur-meter{height:14px;border-radius:99px;background:var(--meter-track);overflow:hidden}
+.sur-fill{display:block;height:100%;background:var(--s1);border-radius:99px}
+.sur-scale{position:relative;height:1.5rem;font:500 .74rem var(--font-mono);color:var(--muted);margin:.35rem 0 1rem}
+.sur-scale span{position:absolute;top:0}
+.sur-scale .sur-mark{transform:translateX(-50%);color:var(--ink);font-weight:700}
+.sur-scale .sur-end{right:0}
+
+/* 다섯 흐름 */
+.fl{list-style:none;padding:0;margin:0}
+.fl li{display:grid;grid-template-columns:1.5rem minmax(0,1fr);gap:.6rem;padding:.75rem 0;border-top:1px solid var(--rule);margin:0}
+.fl li:first-child{border-top:0;padding-top:.2rem}
+.fl-no{font:700 .95rem/1.5 var(--font-mono);color:var(--accent)}
+.fl-h{font-weight:700;margin:0 0 .45rem;font-size:.96rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:0}
+.chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;line-height:1.3;text-decoration:none;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule-2);border-radius:99px;padding:.22rem .65rem .22rem .28rem}
+.chip-s{font:600 .68rem var(--font-mono);color:var(--paper);background:var(--ink-2);border-radius:99px;padding:.1rem .42rem}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+
+/* 도움말 상자 */
+.tip{position:fixed;z-index:50;display:none;pointer-events:none;background:var(--ink);color:var(--paper);border-radius:6px;padding:.45rem .6rem;font-size:.78rem;line-height:1.45;max-width:17rem;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.tip-h{font:600 .74rem var(--font-mono);opacity:.75;margin-bottom:.15rem}
+.tip-r{display:flex;align-items:baseline;gap:.4rem}
+.tip-r b{font:700 .82rem var(--font-mono)}
+.tip-k{display:inline-block;width:12px;border-top:2px solid currentColor;transform:translateY(-3px);flex:0 0 auto}
+.tip-k.s1{border-color:var(--s1t)}.tip-k.s2{border-color:var(--s2t)}
+
+footer{border-top:1px solid var(--rule-2);margin-top:1rem}
+.foot{max-width:72rem;margin:0 auto;padding:1.4rem 1.25rem 3rem;font-size:.8rem;line-height:1.6;color:var(--muted)}
+.foot p{margin:0 0 .3rem}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bar-in"><a class="bar-title" href="#ko-top" data-l="ko">계량경제학 개관</a><a class="bar-title" href="#en-top" data-l="en">Econometrics overview</a><div class="lang" role="group" aria-label="Language / 언어"><button type="button" data-set="ko" aria-pressed="true" lang="ko">KO</button><button type="button" data-set="en" aria-pressed="false" lang="en">EN</button></div></div></div>
+<div class="doc" data-l="ko" lang="ko"><header class="mast"><div class="mast-in"><p class="eyebrow">2026년 11월 14일 · Youngmin Ju</p><h1 id="ko-top">계량경제학 개관과 분야별 최신 연구 동향</h1><p class="lead">계량경제학은 식별·추정·추론이라는 공통 틀 위에서 일곱 갈래로 나뉜다. 2023~2026년의 프런티어는 추정량이 무엇을 추정하는지 다시 묻는 작업, 모형이 틀려도 유효한 추론, AI가 만든 데이터를 쓰는 추론이다.</p><div class="trio-wrap"><p class="trio-lab">2023~2026년의 프런티어</p><div class="trio" role="list"><div class="card" role="listitem"><span class="card-no">01</span><p class="card-h">추정 대상의 재검토</p><p>추정량이 무엇을 추정하는지 다시 묻는다.</p><p class="card-meta"><a href="#ko-s4">4절 DiD · IV</a> · <a href="#ko-s6">6절 LP와 VAR</a></p></div><div class="card" role="listitem"><span class="card-no">02</span><p class="card-h">오설정에 강건한 추론</p><p>모형이 틀려도 유효한 추론을 찾는다.</p><p class="card-meta"><a href="#ko-s6">6절 LP의 강건성</a> · <a href="#ko-s9">9절 민감도 분석</a></p></div><div class="card" role="listitem"><span class="card-no">03</span><p class="card-h">AI가 만든 데이터와 추론</p><p>AI가 만든 데이터를 써도 추론이 유효한지 따진다.</p><p class="card-meta"><a href="#ko-s5">5절 AI 생성 변수 · LLM 피험자</a></p></div></div></div></div></header><div class="layout"><nav class="toc" aria-label="목차"><p class="toc-h">목차</p><ol><li><a href="#ko-s1"><span class="n">01</span><span>정의와 역사</span></a></li><li><a href="#ko-s2"><span class="n">02</span><span>핵심 틀: 식별·추정·추론</span></a></li><li><a href="#ko-s3"><span class="n">03</span><span>연구분야 구분</span></a></li><li><a href="#ko-s4"><span class="n">04</span><span>최신 동향 ① 미시계량·인과추론</span></a></li><li><a href="#ko-s5"><span class="n">05</span><span>최신 동향 ② 머신러닝·AI 접목</span></a></li><li><a href="#ko-s6"><span class="n">06</span><span>최신 동향 ③ 시계열·거시계량</span></a></li><li><a href="#ko-s7"><span class="n">07</span><span>최신 동향 ④ 금융계량</span></a></li><li><a href="#ko-s8"><span class="n">08</span><span>최신 동향 ⑤ 구조추정·산업조직 계량</span></a></li><li><a href="#ko-s9"><span class="n">09</span><span>최신 동향 ⑥ 식별·추론 이론</span></a></li><li><a href="#ko-s10"><span class="n">10</span><span>산업 적용: 테크기업의 실험설계와 인과추론</span></a></li><li><a href="#ko-s11"><span class="n">11</span><span>분야를 가로지르는 흐름과 남은 쟁점</span></a></li><li><a href="#ko-s12"><span class="n">12</span><span>참고문헌</span></a></li><li><a href="#ko-s13"><span class="n">13</span><span>작성 메모</span></a></li></ol></nav><main class="body"><section aria-labelledby="ko-s1">
+<span class="sec-no" aria-hidden="true">01</span><h2 id="ko-s1">정의와 역사</h2>
+<p>계량경제학은 경제 이론과 통계적 추론을 묶어 경제 데이터로 이론을 검증하고 수량적 결론을 내는 학문이다. 답하려는 질문은 셋으로 모인다. 정책이나 처치의 인과효과는 얼마인가, 경제 모형의 구조 모수(structural parameters)는 얼마인가, 앞으로 어떻게 될 것인가.</p>
+<p>이름은 Ragnar Frisch가 1926년 지금의 뜻으로 처음 썼다. 1930년 Econometric Society가 세워졌고 1933년 학술지 Econometrica가 나왔다. 그 뒤 약 100년은 "식별의 근거를 어디에서 찾는가"가 바뀌어 온 과정으로 읽을 수 있다.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>시기</th>
+<th>무게중심</th>
+<th>대표 연구</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1930~50년대</td>
+<td>확률론적 접근(probability approach)과 연립방정식(simultaneous equations). 식별 문제를 처음 정식화했다.</td>
+<td>Haavelmo(1944), Cowles Commission, Tinbergen의 거시모형</td>
+</tr>
+<tr>
+<td>1960~70년대</td>
+<td>대형 거시계량모형의 확산과 위기. 미시자료 분석이 시작됐다.</td>
+<td>Klein 모형, Lucas 비판(1976), McFadden(1974), Heckman(1979)</td>
+</tr>
+<tr>
+<td>1980년대</td>
+<td>시계열 방법의 혁신과 추정 이론의 일반화.</td>
+<td>Sims(1980) VAR, Hansen(1982) GMM, White(1980), Engle(1982) ARCH, Engle·Granger(1987)</td>
+</tr>
+<tr>
+<td>1990~2000년대, 설계</td>
+<td>신뢰성 혁명(credibility revolution). 모형 가정 대신 연구 설계가 식별의 근거가 됐다.</td>
+<td>Leamer(1983)의 문제 제기, LaLonde(1986), Imbens·Angrist(1994), Card·Krueger(1994)</td>
+</tr>
+<tr>
+<td>1990~2000년대, 이론</td>
+<td>약한 도구변수, 부분식별, 준모수 추론. 구조추정도 정교해졌다.</td>
+<td>Staiger·Stock(1997), Manski(1990), Berry·Levinsohn·Pakes(1995)</td>
+</tr>
+<tr>
+<td>2010년대 후반~현재</td>
+<td>이질적 처치효과, 머신러닝 결합, AI를 측정 도구로 쓰는 연구.</td>
+<td>Athey·Imbens(2016), Chernozhukov 외(2018), 2018년 이후의 DiD 재검토</td>
+</tr>
+</tbody>
+</table></div>
+<p>노벨경제학상 수상 이력도 같은 순서를 따른다. Frisch·Tinbergen(1969), Klein(1980), Haavelmo(1989), Heckman·McFadden(2000), Engle·Granger(2003), Sargent·Sims(2011), Hansen(2013, 공동 수상), Card·Angrist·Imbens(2021)다.</p>
+<figure class="fig " id="ko-fig-timeline"><div class="fig-body"><div class="tl"><p class="tl-found"><span><b>1926</b> Frisch가 '계량경제학'이라는 이름을 지금의 뜻으로 사용</span><span><b>1930</b> Econometric Society 창립</span><span><b>1933</b> Econometrica 창간</span></p><div class="tl-grid"><div class="tl-h" style="grid-column:1">연대</div><div class="tl-h" style="grid-column:2">연구의 무게중심</div><div class="tl-h" style="grid-column:3">노벨경제학상</div><div class="tl-line" style="grid-row:2"></div><div class="tl-dec" style="grid-row:2">1930년대</div><div class="tl-line" style="grid-row:3"></div><div class="tl-dec" style="grid-row:3">1940년대</div><div class="tl-line" style="grid-row:4"></div><div class="tl-dec" style="grid-row:4">1950년대</div><div class="tl-line" style="grid-row:5"></div><div class="tl-dec" style="grid-row:5">1960년대</div><div class="tl-line" style="grid-row:6"></div><div class="tl-dec" style="grid-row:6">1970년대</div><div class="tl-line" style="grid-row:7"></div><div class="tl-dec" style="grid-row:7">1980년대</div><div class="tl-line" style="grid-row:8"></div><div class="tl-dec" style="grid-row:8">1990년대</div><div class="tl-line" style="grid-row:9"></div><div class="tl-dec" style="grid-row:9">2000년대</div><div class="tl-line" style="grid-row:10"></div><div class="tl-dec" style="grid-row:10">2010년대</div><div class="tl-line" style="grid-row:11"></div><div class="tl-dec" style="grid-row:11">2020년대</div><div class="tl-era" style="grid-row:2 / span 3"><div class="era"><b>확률론적 접근 · 연립방정식</b><span>식별 문제의 첫 정식화</span></div></div><div class="tl-era" style="grid-row:5 / span 2"><div class="era"><b>대형 거시계량모형의 확산과 위기</b><span>미시자료 분석의 시작</span></div></div><div class="tl-era" style="grid-row:7 / span 1"><div class="era"><b>시계열 방법의 혁신</b><span>추정 이론의 일반화</span></div></div><div class="tl-era" style="grid-row:8 / span 2"><div class="era"><span class="era-tag">설계</span><b>신뢰성 혁명</b><span>연구 설계가 식별의 근거</span></div><div class="era"><span class="era-tag">이론</span><b>약한 도구변수 · 부분식별 · 준모수 추론</b><span>구조추정의 정교화</span></div></div><div class="tl-era" style="grid-row:10 / span 2"><div class="era"><span class="era-tag">2010년대 후반~</span><b>이질적 처치효과 · ML 결합 · AI 측정</b></div></div><div class="tl-nobel" style="grid-row:5"><div class="nb"><span class="nb-y">1969</span><span class="nb-n">Frisch · Tinbergen</span><span class="nb-d">동태 모형</span></div></div><div class="tl-nobel" style="grid-row:7"><div class="nb"><span class="nb-y">1980</span><span class="nb-n">Klein</span><span class="nb-d">거시계량모형</span></div><div class="nb"><span class="nb-y">1989</span><span class="nb-n">Haavelmo</span><span class="nb-d">확률론적 기초</span></div></div><div class="tl-nobel" style="grid-row:9"><div class="nb"><span class="nb-y">2000</span><span class="nb-n">Heckman · McFadden</span><span class="nb-d">표본선택 · 이산선택</span></div><div class="nb"><span class="nb-y">2003</span><span class="nb-n">Engle · Granger</span><span class="nb-d">ARCH · 공적분</span></div></div><div class="tl-nobel" style="grid-row:10"><div class="nb"><span class="nb-y">2011</span><span class="nb-n">Sargent · Sims</span><span class="nb-d">거시의 인과 실증</span></div><div class="nb"><span class="nb-y">2013</span><span class="nb-n">Hansen​(공동 수상)</span><span class="nb-d">자산가격 실증</span></div></div><div class="tl-nobel" style="grid-row:11"><div class="nb"><span class="nb-y">2021</span><span class="nb-n">Card · Angrist · Imbens</span><span class="nb-d">자연실험 · 인과추론</span></div></div></div></div></div><figcaption><span class="fig-no">그림 1</span>식별 근거의 이동과 노벨상. 수상 순서가 연구의 무게중심이 옮겨 간 순서와 같다. 수상 사유 요약은 이 그림에서 덧붙였다.</figcaption></figure>
+</section>
+<section aria-labelledby="ko-s2">
+<span class="sec-no" aria-hidden="true">02</span><h2 id="ko-s2">핵심 틀: 식별·추정·추론</h2>
+<p>계량 분석은 다음 질문에 차례로 답한다. 무엇을 알고 싶은가(추정 대상), 데이터가 무한히 많다면 그 값을 알아낼 수 있는가(식별), 유한한 표본에서 어떻게 계산하고 불확실성을 어떻게 말할 것인가(추정과 추론). 최근 20년의 방법론 논쟁은 대부분 첫째와 둘째 질문에서 나왔다.</p>
+<figure class="fig " id="ko-fig-framework"><div class="fig-body"><ol class="steps"><li class="step focus"><span class="step-no">1</span><div class="step-in"><p class="step-tag">추정 대상</p><p class="step-q">무엇을 알고 싶은가</p><p class="step-ex">ATE · ATT · LATE</p></div></li><li class="step focus"><span class="step-no">2</span><div class="step-in"><p class="step-tag">식별</p><p class="step-q">데이터가 무한히 많다면 그 값을 알아낼 수 있는가</p><ul class="step-two"><li><b>설계 기반</b>무작위 배정, 준실험(IV · RDD · DiD)</li><li><b>모형 기반</b>배제 제약, 함수형, 균형 조건</li></ul><p class="step-ex">점식별 · 부분식별</p></div></li><li class="step"><span class="step-no">3</span><div class="step-in"><p class="step-tag">추정과 추론</p><p class="step-q">유한한 표본에서 어떻게 계산하고 불확실성을 어떻게 말할 것인가</p><p class="step-ex">OLS · IV · GMM · MLE · ML 결합 / 강건 분산 · 약식별에 강건한 추론</p></div></li></ol><p class="steps-note"><span class="focus-key" aria-hidden="true"></span>굵은 선으로 표시한 두 단계에 최근 20년의 방법론 논쟁이 몰렸다.</p></div><figcaption><span class="fig-no">그림 2</span>계량 분석이 차례로 답하는 세 질문.</figcaption></figure>
+<h3 id="ko-s2-1">식별</h3>
+<p>식별의 근거는 크게 두 곳에서 온다.</p>
+<ul>
+<li>설계 기반(design-based): 무작위 배정이나 준실험(도구변수, 회귀불연속, 이중차분)처럼 처치가 정해진 방식에서 근거를 찾는다.</li>
+<li>모형 기반(model-based): 배제 제약(exclusion restriction), 함수형(functional form), 균형 조건처럼 경제 이론이 주는 제약에서 근거를 찾는다.</li>
+</ul>
+<p>값 하나로 좁혀지면 점식별(point identification), 범위만 정해지면 부분식별(partial identification)이다. 처치효과가 사람마다 다르면 같은 추정량도 ATE, ATT, LATE처럼 서로 다른 대상을 가리킨다. 그래서 추정 대상(estimand)을 먼저 정하고 추정량(estimator)을 고르는 순서가 표준이 됐다.</p>
+<h3 id="ko-s2-2">추정</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>추정 원리</th>
+<th>대표 방법</th>
+<th>주로 쓰는 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>최소제곱·적률</td>
+<td>OLS, IV/2SLS, GMM</td>
+<td>선형모형, 내생성 처리, 자산가격·동태패널</td>
+</tr>
+<tr>
+<td>우도</td>
+<td>MLE, 준최우추정(quasi-maximum likelihood, QMLE)</td>
+<td>이산선택, 변동성 모형, 구조모형</td>
+</tr>
+<tr>
+<td>시뮬레이션 기반</td>
+<td>모의적률법(simulated method of moments, SMM), 간접추론(indirect inference)</td>
+<td>우도를 쓸 수 없는 구조모형</td>
+</tr>
+<tr>
+<td>비모수·준모수</td>
+<td>커널, 시브(sieve), 국소다항 회귀(local polynomial regression)</td>
+<td>회귀불연속, 함수형 가정 완화</td>
+</tr>
+<tr>
+<td>정규화·머신러닝</td>
+<td>Lasso, 랜덤포레스트, 신경망에 직교화를 결합</td>
+<td>고차원 통제변수, 이질적 효과</td>
+</tr>
+<tr>
+<td>베이지안</td>
+<td>MCMC, 순차 몬테카를로(sequential Monte Carlo), 변분추론(variational inference)</td>
+<td>DSGE, 대형 VAR, 계층모형</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="ko-s2-3">추론</h3>
+<p>추론의 쟁점은 "표준오차를 어떻게 구하나"에서 "어떤 조건에서도 유효한가"로 옮겨 왔다.</p>
+<ul>
+<li>강건 분산 추정: 이분산, 군집, 시계열 상관(HAC)을 허용한다. 군집 수가 적으면 와일드 부트스트랩(wild bootstrap)을 쓴다.</li>
+<li>약식별(weak identification)에 강건한 추론: 도구변수가 약해도 크기가 유지되는 검정(Anderson–Rubin 등)을 쓴다.</li>
+<li>선택과 탐색의 보정: 다중검정(multiple testing), 사전검정(pre-testing), 출판편향(publication bias)이 추론을 얼마나 왜곡하는지 다룬다.</li>
+<li>불확실성의 원천: 표본추출이 아니라 처치 배정의 무작위성으로 불확실성을 정의하는 설계 기반 추론이 늘었다.</li>
+</ul>
+<h3 id="ko-s2-4">데이터 구조와 두 전통</h3>
+<p>데이터는 횡단면, 시계열, 패널이 기본이다. 여기에 네트워크·공간 자료, 고빈도 자료, 텍스트·이미지 같은 비정형 자료가 더해졌다.</p>
+<p>연구 전통은 설계 기반의 축약형(reduced-form) 접근과 경제 모형을 직접 추정하는 구조적(structural) 접근으로 나뉜다. 지금은 준실험 변동으로 구조 모수를 식별하거나 충분통계량(sufficient statistics)으로 후생을 계산하는 식으로 둘을 섞어 쓰는 연구가 많다.</p>
+<figure class="fig " id="ko-fig-traditions"><div class="fig-body"><div class="tri3"><div class="tri-cell"><p class="tri-h">축약형 접근</p><p>설계 기반. 처치가 정해진 방식에서 식별 근거를 찾는다.</p></div><div class="tri-arrow"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="tri-cell tri-mid"><p class="tri-h">둘을 섞어 쓰는 연구</p><p>준실험 변동으로 구조 모수 식별 · 충분통계량으로 후생 계산</p></div><div class="tri-arrow tri-arrow-rev"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="tri-cell"><p class="tri-h">구조적 접근</p><p>경제 모형을 직접 추정한다. 이론이 주는 제약이 식별 근거다.</p></div></div></div><figcaption><span class="fig-no">그림 3</span>두 연구 전통과 둘을 섞어 쓰는 연구.</figcaption></figure>
+</section>
+<section aria-labelledby="ko-s3">
+<span class="sec-no" aria-hidden="true">03</span><h2 id="ko-s3">연구분야 구분</h2>
+<p>분야를 나누는 기준은 하나가 아니다. 공식 분류로는 미국경제학회의 JEL 코드가 있고 학계는 데이터 구조와 응용 영역을 섞은 관행적 구분을 쓴다. 그 위에 이론 계량과 응용 계량을 가르는 축이 하나 더 있다. 이론 계량은 방법 자체를 연구하고 응용 계량은 방법을 실증 문제에 쓴다.</p>
+<figure class="fig " id="ko-fig-fieldmap"><div class="fig-body"><div class="fmap"><a class="fm-band" href="#ko-s5"><span class="fm-name">머신러닝·AI 접목</span><span class="fm-line">모든 분야가 쓰는 도구: DML · 인과 포레스트 · 텍스트 분석 · LLM 측정</span><span class="fm-go">5절</span></a><div class="fm-arrows" aria-hidden="true"><svg class="ar ar-d" viewBox="0 0 12 18" width="12" height="18" aria-hidden="true"><path d="M6 1v14M1.5 10.5 6 16l4.5-5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="ar ar-d" viewBox="0 0 12 18" width="12" height="18" aria-hidden="true"><path d="M6 1v14M1.5 10.5 6 16l4.5-5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="fm-cols"><div class="fm-frame"><p class="fm-head">미시 자료: 횡단면·패널</p><a class="fm-box" href="#ko-s4"><span class="fm-name">미시계량·인과추론</span><span class="fm-line">DiD · IV · RDD · 합성통제 · 군집 추론</span><span class="fm-go">4절</span></a><a class="fm-box" href="#ko-s8"><span class="fm-name">구조추정·산업조직 계량</span><span class="fm-line">수요추정 · 동태 선택모형 · 경매·게임</span><span class="fm-go">8절</span></a><a class="fm-box" href="#ko-s10"><span class="fm-name">실험 설계·분석</span><span class="fm-line">A/B 테스트 · 간섭 · 순차 검정</span><span class="fm-go">10절</span></a></div><div class="fm-frame"><p class="fm-head">시계열 자료</p><a class="fm-box" href="#ko-s6"><span class="fm-name">시계열·거시계량</span><span class="fm-line">VAR · 국소투영 · 상태공간</span><span class="fm-line">충격반응 추정과 예측</span><span class="fm-go">6절</span></a><a class="fm-box" href="#ko-s7"><span class="fm-name">금융계량</span><span class="fm-line">요인모형 · 변동성 · 고빈도 자료</span><span class="fm-line">자산가격과 위험 측정</span><span class="fm-go">7절</span></a></div></div><div class="fm-arrows" aria-hidden="true"><svg class="ar ar-u" viewBox="0 0 12 18" width="12" height="18" aria-hidden="true"><path d="M6 17V3M1.5 7.5 6 2l4.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="ar ar-u" viewBox="0 0 12 18" width="12" height="18" aria-hidden="true"><path d="M6 17V3M1.5 7.5 6 2l4.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><a class="fm-band fm-base" href="#ko-s9"><span class="fm-name">식별·추론 이론</span><span class="fm-line">공통 기반: 부분식별 · 비모수 · 고차원 · 베이지안 · 통계적 의사결정</span><span class="fm-go">9절</span></a></div></div><figcaption><span class="fig-no">그림 4</span>일곱 분야는 공통 이론 위에서 자료 구조에 따라 갈린다. 상자를 누르면 해당 절로 간다.</figcaption></figure>
+<p>위아래 띠는 모든 분야에 걸치고 가운데 다섯 분야는 주로 쓰는 자료 구조에 따라 둘로 나뉜다. 화살표는 도구와 이론이 각 분야로 들어가는 방향이다.</p>
+<h3 id="ko-s3-1">공식 분류: JEL C코드</h3>
+<p>JEL 체계에서 계량경제학은 대분류 C(수리·계량 방법)에 속한다. C코드는 방법 자체를 다룬 연구에 붙이며 이미 확립된 방법을 응용한 연구에는 원칙적으로 붙이지 않는다(<a href="https://www.aeaweb.org/jel/guide/jel.php?class=C">AEA JEL 가이드</a>).</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>코드</th>
+<th>분류</th>
+<th>주요 세부 코드</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>계량·통계 방법 일반</td>
+<td>C11 베이지안, C12 가설검정, C13 추정, C14 준모수·비모수</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>단일방정식 모형</td>
+<td>C21 횡단면·처치효과·분위회귀, C22 시계열, C23 패널, C26 도구변수</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>다중·연립방정식 모형</td>
+<td>C31 사회적 상호작용, C32 상태공간, C33 패널, C38 요인모형</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>특수 주제</td>
+<td>C41 지속기간 분석, C44 통계적 의사결정 이론, C45 신경망</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>계량 모형화</td>
+<td>C52 모형 평가·선택, C53 예측, C55 대용량 데이터, C57 게임·경매 계량, C58 금융계량</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>수리적 방법·시뮬레이션</td>
+<td>C61 최적화, C63 계산 기법</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>게임이론·협상이론</td>
+<td>계량보다 경제이론에 가깝다</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>데이터 수집·추정 방법론</td>
+<td>C81·C82 미시·거시 자료, C83 서베이·표본추출, C87 계량 소프트웨어</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>실험 설계</td>
+<td>C91·C92 실험실 실험, C93 현장 실험</td>
+</tr>
+</tbody>
+</table></div>
+<p>코드명에도 최근 연구 주제가 들어 있다. C22와 C32에는 'Dynamic Treatment Effect Models'가, C31에는 'Social Interaction Models'가 포함돼 있다(<a href="https://topcat.aeaweb.org/econlit/jelCodes.php?view=jel">JEL 분류 체계</a>).</p>
+<h3 id="ko-s3-2">학계에서 쓰는 구분</h3>
+<p>학회 세션, 대학원 과목, 학술지 지면은 대체로 아래 일곱 갈래로 나뉜다. 이 문서의 4~10절이 이 순서를 따른다.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>분야</th>
+<th>핵심 질문</th>
+<th>대표 방법</th>
+<th>주된 응용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>미시계량·인과추론</td>
+<td>정책과 처치의 인과효과는 얼마인가</td>
+<td>DiD, IV, RDD, 합성통제, 패널·군집 추론</td>
+<td>노동, 공공, 보건, 개발</td>
+</tr>
+<tr>
+<td>머신러닝·AI 접목</td>
+<td>고차원·비정형 자료에서 어떻게 유효하게 추론하나</td>
+<td>DML, 인과 포레스트, 텍스트 분석, LLM 측정</td>
+<td>전 분야</td>
+</tr>
+<tr>
+<td>시계열·거시계량</td>
+<td>충격의 동태적 효과는 무엇이고 어떻게 예측하나</td>
+<td>VAR, 국소투영, 상태공간(state space), DSGE 추정</td>
+<td>통화·재정정책, 경기 분석</td>
+</tr>
+<tr>
+<td>금융계량</td>
+<td>위험과 수익, 변동성을 어떻게 측정하나</td>
+<td>요인모형, GARCH·실현변동성, 고빈도 분석</td>
+<td>자산가격, 위험관리</td>
+</tr>
+<tr>
+<td>구조추정·산업조직 계량</td>
+<td>아직 시행되지 않은 정책의 효과는 어떨까</td>
+<td>수요추정(BLP), 동태 이산선택(dynamic discrete choice), 경매·게임 추정</td>
+<td>산업조직, 노동, 무역</td>
+</tr>
+<tr>
+<td>식별·추론 이론</td>
+<td>약한 가정에서 무엇을 말할 수 있나</td>
+<td>부분식별, 비모수·준모수, 고차원, 베이지안</td>
+<td>방법론 전반</td>
+</tr>
+<tr>
+<td>실험 설계·분석</td>
+<td>실험을 어떻게 설계하고 읽을 것인가</td>
+<td>무작위 실험, 적응적 실험(adaptive experiments), 간섭이 있을 때의 추론</td>
+<td>개발경제, 플랫폼 기업</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="ko-s3-3">학계가 꼽은 프런티어</h3>
+<p>2025년 8월 서울에서 열린 Econometric Society World Congress는 5년에 한 번 열리는 학회의 중심 행사다. 계량 분야 초청 세션의 주제는 넷이었다. 'Causal Inference and Statistical Decisions', 'Frontiers in Nonparametric Methods', 'Misspecification in Econometrics', 'Econometric Methods for Panel Data'다(<a href="https://www.econometricsociety.org/regional-activities/schedule/2025/08/18/2025-World-Congress-Seoul-Korea?page=2">초청 세션 목록</a>).</p>
+<p>기념 강연 가운데 Fisher–Schultz Lecture는 Magne Mogstad가, Frisch Memorial Lecture는 Hidehiko Ichimura가 맡았다.</p>
+</section>
+<section aria-labelledby="ko-s4">
+<span class="sec-no" aria-hidden="true">04</span><h2 id="ko-s4">최신 동향 ① 미시계량·인과추론</h2>
+<p class="sec-q"><b>핵심 질문</b>정책과 처치의 인과효과는 얼마인가</p>
+<p>이 분야의 최근 흐름은 "관행적인 회귀식이 실제로 무엇을 추정하는가"를 다시 묻고, 추정 대상에 맞는 추정량을 새로 만드는 작업이다. 준실험(quasi-experimental) 방법의 확산은 수치로도 확인된다. NBER·CEPR 워킹페이퍼 4만 4천여 편을 분석한 연구에서 인과적 주장의 비중은 1990년 약 4%에서 2020년 약 28%로 늘었다(<a href="https://arxiv.org/abs/2501.06873v1">Garg·Fetzer, 2025</a>).</p>
+<figure class="fig " id="ko-fig-causal"><div class="fig-head"><div><p class="fig-title">논문 속 인과적 주장의 비중</p><p class="fig-sub">논문 한 편에 담긴 주장 가운데 인과추론 방법으로 뒷받침한 주장의 평균 비중</p></div><button type="button" class="tv" aria-pressed="false">표로 보기</button></div><div class="fig-body"><div class="viz narrow"><ul class="legend"><li><span class="key s1"></span>2025년 1월판(본문 인용)</li><li><span class="key s2"></span>2026년 2월 개정판</li></ul><div class="chart-wrap"><svg class="chart" viewBox="0 0 340 248" role="img" aria-label="논문당 인과적 주장의 평균 비중. 2025년 1월판은 1990년 4.2%에서 2020년 27.8%로, 2026년 2월 개정판은 1990년 7.7%에서 2023년 32.6%로 늘었다."><line class="grid" x1="36" x2="318" y1="154.6" y2="154.6"/><line class="grid" x1="36" x2="318" y1="99.1" y2="99.1"/><line class="grid" x1="36" x2="318" y1="43.7" y2="43.7"/><line class="axis" x1="36" x2="318" y1="210.0" y2="210.0"/><text class="tick" x="30" y="213.5" text-anchor="end">0%</text><text class="tick" x="30" y="158.1" text-anchor="end">10%</text><text class="tick" x="30" y="102.6" text-anchor="end">20%</text><text class="tick" x="30" y="47.2" text-anchor="end">30%</text><line class="axis" x1="36.0" x2="36.0" y1="210.0" y2="214.0"/><text class="tick" x="36.0" y="227.0" text-anchor="middle">1990</text><line class="axis" x1="121.5" x2="121.5" y1="210.0" y2="214.0"/><text class="tick" x="121.5" y="227.0" text-anchor="middle">2000</text><line class="axis" x1="206.9" x2="206.9" y1="210.0" y2="214.0"/><text class="tick" x="206.9" y="227.0" text-anchor="middle">2010</text><line class="axis" x1="292.4" x2="292.4" y1="210.0" y2="214.0"/><text class="tick" x="292.4" y="227.0" text-anchor="middle">2020</text><line class="axis" x1="318.0" x2="318.0" y1="210.0" y2="214.0"/><polyline class="ln s1" points="36.0,186.7 121.5,163.4 206.9,115.2 292.4,55.9"/><circle class="dot s1" cx="36.0" cy="186.7" r="4"/><circle class="dot s1" cx="121.5" cy="163.4" r="4"/><circle class="dot s1" cx="206.9" cy="115.2" r="4"/><circle class="dot s1" cx="292.4" cy="55.9" r="4"/><polyline class="ln s2" points="36.0,167.3 121.5,162.3 206.9,90.8 292.4,34.3 318.0,29.3"/><circle class="dot s2" cx="36.0" cy="167.3" r="4"/><circle class="dot s2" cx="121.5" cy="162.3" r="4"/><circle class="dot s2" cx="206.9" cy="90.8" r="4"/><circle class="dot s2" cx="292.4" cy="34.3" r="4"/><circle class="dot s2" cx="318.0" cy="29.3" r="4"/><text class="lab num" x="43.0" y="199.7" text-anchor="start">4.2</text><text class="lab num" x="294.4" y="71.9" text-anchor="start">27.8</text><text class="lab num" x="43.0" y="159.3" text-anchor="start">7.7</text><text class="lab num" x="327.0" y="20.3" text-anchor="end">32.6</text><text class="tick" x="318.0" y="238.0" text-anchor="middle">2023</text><g class="xg"><line class="xh" x1="36.0" x2="36.0" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="10.0" y="16" width="52" height="194" data-tip="{&quot;h&quot;: &quot;1990&quot;, &quot;rows&quot;: [[&quot;4.2%&quot;, &quot;2025년 1월판(본문 인용)&quot;, &quot;s1&quot;], [&quot;7.7%&quot;, &quot;2026년 2월 개정판&quot;, &quot;s2&quot;]]}" aria-label="1990: 2025년 1월판(본문 인용) 4.2%, 2026년 2월 개정판 7.7%"/></g><g class="xg"><line class="xh" x1="121.5" x2="121.5" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="95.5" y="16" width="52" height="194" data-tip="{&quot;h&quot;: &quot;2000&quot;, &quot;rows&quot;: [[&quot;8.4%&quot;, &quot;2025년 1월판(본문 인용)&quot;, &quot;s1&quot;], [&quot;8.6%&quot;, &quot;2026년 2월 개정판&quot;, &quot;s2&quot;]]}" aria-label="2000: 2025년 1월판(본문 인용) 8.4%, 2026년 2월 개정판 8.6%"/></g><g class="xg"><line class="xh" x1="206.9" x2="206.9" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="180.9" y="16" width="52" height="194" data-tip="{&quot;h&quot;: &quot;2010&quot;, &quot;rows&quot;: [[&quot;17.1%&quot;, &quot;2025년 1월판(본문 인용)&quot;, &quot;s1&quot;], [&quot;21.5%&quot;, &quot;2026년 2월 개정판&quot;, &quot;s2&quot;]]}" aria-label="2010: 2025년 1월판(본문 인용) 17.1%, 2026년 2월 개정판 21.5%"/></g><g class="xg"><line class="xh" x1="292.4" x2="292.4" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="279.4" y="16" width="26" height="194" data-tip="{&quot;h&quot;: &quot;2020&quot;, &quot;rows&quot;: [[&quot;27.8%&quot;, &quot;2025년 1월판(본문 인용)&quot;, &quot;s1&quot;], [&quot;31.7%&quot;, &quot;2026년 2월 개정판&quot;, &quot;s2&quot;]]}" aria-label="2020: 2025년 1월판(본문 인용) 27.8%, 2026년 2월 개정판 31.7%"/></g><g class="xg"><line class="xh" x1="318.0" x2="318.0" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="305.0" y="16" width="26" height="194" data-tip="{&quot;h&quot;: &quot;2023&quot;, &quot;rows&quot;: [[&quot;32.6%&quot;, &quot;2026년 2월 개정판&quot;, &quot;s2&quot;]]}" aria-label="2023: 2026년 2월 개정판 32.6%"/></g></svg></div></div><div class="viz-table"><div class="tbl in-fig fit"><table class="num"><thead><tr><th>연도</th><th>2025년 1월판(본문 인용) (%)</th><th>2026년 2월 개정판 (%)</th></tr></thead><tbody><tr><td>1990</td><td>4.2</td><td>7.7</td></tr><tr><td>2000</td><td>8.4</td><td>8.6</td></tr><tr><td>2010</td><td>17.1</td><td>21.5</td></tr><tr><td>2020</td><td>27.8</td><td>31.7</td></tr><tr><td>2023</td><td>–</td><td>32.6</td></tr></tbody></table></div></div></div><figcaption><span class="fig-no">그림 5</span><span class="badge">자료</span>두 판 모두에서 인과적 주장의 비중은 1990~2020년 사이 네 배 넘게 늘었다. 본문 수치(약 4% → 약 28%)는 <a href="https://arxiv.org/abs/2501.06873v1">2025년 1월판</a> 기준이다. <a href="https://arxiv.org/pdf/2501.06873v2">2026년 2월 개정판</a>은 같은 기간을 7.7% → 31.7%로, 2023년 값을 32.6%로 보고한다. 자료: Garg·Fetzer, NBER·CEPR 워킹페이퍼 4만 4천여 편.</figcaption></figure>
+<figure class="fig " id="ko-fig-designs"><div class="fig-body"><div class="tbl in-fig"><table><thead><tr><th>설계</th><th>쟁점</th><th>지금의 표준·흐름</th><th>대표 문헌</th></tr></thead><tbody><tr><td>DiD</td><td>엇갈린 처치(staggered treatment)와 이질적 효과에서 TWFE가 부호까지 틀릴 수 있음</td><td>집단·시점별 ATT(group-time ATT) 합산, 대체(imputation) 방식</td><td>Callaway·Sant&#x27;Anna 2021, Borusyak·Jaravel·Spiess 2024, Baker 외 2026</td></tr><tr><td>IV</td><td>LATE 해석을 어디까지 믿을 수 있나</td><td>이질성을 허용하는 추정량 설계(MTE). 약한 도구변수(weak instruments)에는 Anderson–Rubin 검정이나 tF 보정</td><td>Mogstad·Torgovitsky 2024, Lee 외 2022</td></tr><tr><td>RDD</td><td>일변수 점수를 넘어 다변수 경계로 확장</td><td>경계불연속 설계(boundary discontinuity design). 거리 하나로 줄여 추정하면 꺾인 경계에서 큰 편의</td><td>Cattaneo·Titiunik·Yu 2025</td></tr><tr><td>합성통제</td><td>방법론은 확장, 응용 언급은 2020년 이후 감소</td><td>합성 DiD, 증강 합성통제(augmented synthetic control), 행렬 완성(matrix completion)</td><td>Arkhangelsky 외 2021, Ben-Michael 외 2021, Athey 외 2021</td></tr></tbody></table></div></div><figcaption><span class="fig-no">그림 6</span>이 절에서 다루는 네 설계의 쟁점과 지금의 표준을 한 표로 묶었다.</figcaption></figure>
+<h3 id="ko-s4-1">이중차분(difference-in-differences, DiD)</h3>
+<p>DiD에서는 2018~2021년의 재검토가 실무 표준으로 굳어 간다.</p>
+<ul>
+<li>문제 제기: 처치 시점이 엇갈리고 효과가 이질적이면 이원고정효과(two-way fixed effects, TWFE) 회귀가 크기뿐 아니라 부호까지 틀릴 수 있다.</li>
+<li>대안: 집단·시점별 ATT(group-time ATT)를 먼저 추정해 합치는 방식(Callaway·Sant'Anna 2021, Sun·Abraham 2021)과 대체(imputation) 방식(Borusyak·Jaravel·Spiess 2024)을 표준 도구로 쓴다.</li>
+<li>정착: <a href="https://econpapers.repec.org/RePEc:aea:jeclit:v:64:y:2026:i:2:p:498-557">Baker 외(2026, JEL)</a>의 실무 가이드가 공변량, 가중치, 다기간, 엇갈린 처치(staggered treatment)를 하나의 틀로 정리했다.</li>
+<li>프런티어: 연속형 처치(<a href="https://arxiv.org/pdf/2107.02637v8">Callaway·Goodman-Bacon·Sant'Anna, 2025년 12월 개정 워킹페이퍼</a>), 평행추세(parallel trends) 가정 아래의 복잡한 설계 전반(<a href="https://sites.google.com/site/clementdechaisemartin/">de Chaisemartin·D'Haultfoeuille, 2025 World Congress 논문집 게재 예정</a>), 평행추세 위배에 대한 민감도 분석(Rambachan·Roth 2023).</li>
+</ul>
+<figure class="fig " id="ko-fig-twfe"><div class="fig-body"><div class="viz narrow"><div class="chart-wrap"><svg class="chart schem" viewBox="0 0 340 228" role="img" aria-label="처치 시점이 엇갈린 세 집단의 결과 경로. 후기 처치 이후 구간에서 이미 처치된 조기 집단이 통제집단으로 쓰인다."><polygon class="band" points="205.0,68.7 310.0,37.2 310.0,111.2 205.0,117.5"/><line class="axis" x1="30" x2="30" y1="20" y2="190"/><line class="axis" x1="30" x2="312" y1="190" y2="190"/><line class="grid" x1="110" x2="110" y1="24" y2="190"/><line class="grid" x1="205" x2="205" y1="24" y2="190"/><polyline class="ln s0" points="30.0,172.0 310.0,155.2"/><polyline class="ln s2" points="30.0,146.0 205.0,135.5"/><polyline class="ln s2" points="205.0,117.5 310.0,111.2"/><line class="ln s2 thin" x1="205" x2="205" y1="135.5" y2="117.5"/><polyline class="ln s1" points="30.0,120.0 110.0,115.2"/><polyline class="ln s1" points="110.0,97.2 310.0,37.2"/><line class="ln s1 thin" x1="110" x2="110" y1="115.2" y2="97.2"/><text class="lab" x="36" y="112.6">조기 처치 집단</text><text class="lab" x="36" y="138.6">후기 처치 집단</text><text class="lab" x="36" y="164.6">미처치 집단</text><text class="lab strong" x="258" y="88" text-anchor="middle">금지된 비교</text><text class="tick txt" x="110" y="205" text-anchor="middle">조기 처치 시작</text><text class="tick txt" x="205" y="205" text-anchor="middle">후기 처치 시작</text><text class="tick txt" x="312" y="220" text-anchor="end">시간 →</text><text class="tick txt" x="30" y="13" text-anchor="start">결과</text></svg></div><ul class="legend"><li><span class="key s1"></span>조기 처치 집단(early-treated)</li><li><span class="key s2"></span>후기 처치 집단(late-treated)</li><li><span class="key s0"></span>미처치 집단(never-treated)</li><li><span class="key band"></span>금지된 비교(forbidden comparison): 이미 처치된 집단을 통제집단으로 쓰는 구간</li></ul></div></div><figcaption><span class="fig-no">그림 7</span><span class="badge">개념도</span>처치 시점이 엇갈릴 때 TWFE가 쓰는 비교. 늦게 처치된 집단의 효과를 잴 때 이미 처치된 집단이 통제집단으로 들어간다. 먼저 처치된 집단의 효과가 시간에 따라 커지면 그 증가분이 추세로 잘못 빠지고, 추정치는 크기뿐 아니라 부호까지 틀릴 수 있다. 실제 자료가 아니다.</figcaption></figure>
+<p>연속형 처치(continuous treatment) 논문의 핵심은 용량(dose)이 다른 집단끼리 비교하려면 더 강한 평행추세 가정이 필요하다는 점이다. 이 가정이 없으면 용량 집단 간 비교에 선택 편의(selection bias)가 섞인다.</p>
+<h3 id="ko-s4-2">도구변수(instrumental variables, IV)</h3>
+<p>IV 연구의 중심 질문은 "LATE 해석을 어디까지 믿을 수 있나"다. <a href="https://www.nber.org/papers/w32927">Mogstad·Torgovitsky(2024)</a>는 접근을 둘로 나눈다. 선형 IV 추정량을 그대로 쓰고 해석을 사후에 찾는 방식(reverse engineering)과, 이질성을 허용하는 추정량을 처음부터 설계하는 방식(forward engineering)이다. 후자의 중심이 한계처치효과(marginal treatment effects, MTE) 분석이다.</p>
+<p>응용 쪽에서는 shift-share 도구와 판사·심사관 배정 설계(judge/examiner designs)가 늘었다. NBER 워킹페이퍼를 추적한 연구에서 IV 전체의 언급 비중은 정체했지만 shift-share 도구는 전 분야에서 늘었다(<a href="https://arxiv.org/abs/2405.20604v2">Goldsmith-Pinkham, 2024</a>). 약한 도구변수(weak instruments) 추론에서는 F&gt;10 관행 대신 Anderson–Rubin 검정이나 tF 보정(Lee 외 2022)을 쓰는 추세다.</p>
+<h3 id="ko-s4-3">회귀불연속(regression discontinuity design, RDD)</h3>
+<p>RDD는 이제 일변수 점수(score)를 넘어 다변수 경계까지 다룬다. <a href="https://arxiv.org/abs/2511.06474v2">Cattaneo·Titiunik·Yu(2025)</a>는 지리적 경계처럼 이변량 점수로 처치가 갈리는 경계불연속 설계(boundary discontinuity design)를 정리하면서 실증 논문 80여 편을 검토했다. 같은 저자들의 <a href="https://arxiv.org/abs/2505.05670v1">추정·추론 논문</a>에 따르면 경계까지의 거리 하나로 줄여 추정하는 관행은 경계에 꺾인 곳이 있으면 큰 편의를 남긴다.</p>
+<h3 id="ko-s4-4">합성통제(synthetic control)와 패널</h3>
+<p>합성통제는 방법론이 계속 확장되지만 응용은 증가세가 꺾였다. NBER 워킹페이퍼에서 합성통제 언급은 2020년 이후 줄었다(<a href="https://arxiv.org/abs/2405.20604v2">Goldsmith-Pinkham, 2024</a>).</p>
+<p>방법론은 합성 DiD(synthetic difference-in-differences, Arkhangelsky 외 2021), 증강 합성통제(augmented synthetic control, Ben-Michael 외 2021), 행렬 완성(matrix completion, Athey 외 2021)처럼 DiD·요인모형과 합쳐지는 방향이다. 2025년에 나온 World Congress 논문집(Advances in Economics and Econometrics: Twelfth World Congress)도 'Modern Causal Inference' 편에 <a href="https://resolve.cambridge.org/core/books/abs/advances-in-economics-and-econometrics/synthetic-controls-in-action/C5DCBB92549C7BC346F8DEEE379276D0">합성통제 장</a>을 두었다.</p>
+<h3 id="ko-s4-5">관측자료의 신뢰성과 추론</h3>
+<ul>
+<li>LaLonde(1986) 40년 재검토: <a href="https://econpapers.repec.org/RePEc:aea:jecper:v:39:y:2025:i:4:p:173-202">Imbens·Xu(2025, JEP)</a>는 공변량 분포의 겹침(overlap)이 확보되면 현대적 추정량들이 서로 비슷한 값을 낸다고 보고한다. 다만 그 값이 인과효과라는 보장은 없어서 플라시보 같은 검증 절차가 필수라고 결론짓는다.</li>
+<li>군집 추론: 군집 수가 무한대로 간다는 점근 이론에 기댄 관행을 다시 점검하는 연구가 이어진다. <a href="https://arxiv.org/pdf/2604.02000">MacKinnon(2026)</a>은 군집강건 추론(cluster-robust inference)을 언제 믿을 수 있는지를 다룬다. <a href="https://arxiv.org/html/2308.10138v8">Chiang·Sasaki·Wang(2025)</a>은 무시할 수 없이 큰 군집이 있으면 통상적인 방법이 일치성을 잃는다는 점을 보였다.</li>
+<li>설계 기반 추론: 군집 조정이 필요한 이유를 표본추출과 처치 배정으로 나눠 보는 관점(Abadie·Athey·Imbens·Wooldridge 2023)을 기준으로 삼는다. 처치가 독립적으로 정해지는 수준에서 군집을 잡으라는 것이 실무 지침이다(<a href="https://arxiv.org/pdf/2201.01194">Roth 외, 2023</a>).</li>
+</ul>
+</section>
+<section aria-labelledby="ko-s5">
+<span class="sec-no" aria-hidden="true">05</span><h2 id="ko-s5">최신 동향 ② 머신러닝·AI 접목</h2>
+<p class="sec-q"><b>핵심 질문</b>고차원·비정형 자료에서 어떻게 유효하게 추론하나</p>
+<p>머신러닝은 예측 도구에서 추론 절차의 부품으로 자리를 옮겼고 AI는 측정 도구로 들어왔다. 지금의 쟁점은 ML과 AI가 만든 값을 데이터처럼 써도 추론이 유효한가이다.</p>
+<h3 id="ko-s5-1">인과 ML</h3>
+<p>이중·편의제거 머신러닝(double/debiased machine learning, DML)이 표준 틀이다. 네이만 직교 점수(Neyman orthogonal score)와 교차적합(cross-fitting)을 결합해 고차원 장애모수(nuisance parameter)를 ML로 추정해도 저차원 목표 모수의 추론이 유효하도록 만든다(Chernozhukov 외 2018). <a href="https://arxiv.org/abs/2504.08324v2">Ahrens 외(2025, 2026년 개정 워킹페이퍼)</a>가 횡단면·패널 예제를 담은 입문 리뷰를 냈다.</p>
+<p>이질적 처치효과(heterogeneous treatment effects) 쪽에서는 인과 포레스트(causal forest, Wager·Athey 2018, Athey·Tibshirani·Wager 2019)와 정책 학습(policy learning, Kitagawa·Tetenov 2018, Athey·Wager 2021)을 기본으로 쓴다. 심층신경망을 1단계 추정에 쓰는 추론 이론도 갖춰졌다(Farrell·Liang·Misra 2021).</p>
+<h3 id="ko-s5-2">AI가 만든 변수로 하는 추론</h3>
+<p>2024~2026년에 가장 빠르게 커진 주제다. 텍스트나 이미지에서 AI가 뽑아낸 변수를 회귀에 그대로 넣는 2단계 관행에서 문제가 시작된다.</p>
+<figure class="fig " id="ko-fig-twostep"><div class="fig-body"><div class="flow"><p class="flow-lab">관행: 2단계</p><ol class="flow-row"><li class="flow-box"><b>비정형 자료</b><span>텍스트 · 이미지</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box"><b>AI·ML 모형</b><span>변수를 뽑아낸다</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box"><b>회귀</b><span>생성 변수를 데이터처럼 넣는다</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box bad"><span class="st no"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><b>추정에 편의, 추론 무효</b></li></ol><p class="flow-lab">처방</p><ul class="fix-row"><li><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>편의 보정 · 결합 추정</b><span>Battaglia 외 2025</span></div></li><li><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>추정에는 소규모 검증 표본으로 보정</b><span>Ludwig 외 2025</span></div></li><li><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>예측에는 학습자료와 연구 표본 사이의 누출 차단</b><span>Ludwig 외 2025</span></div></li></ul></div></div><figcaption><span class="fig-no">그림 8</span><span class="badge">개념도</span>AI가 만든 변수를 회귀에 그대로 넣는 2단계 관행과 처방.</figcaption></figure>
+<ul>
+<li><a href="https://www.aeaweb.org/doi/10.1257/jel.20241733">Dell(2025, JEL)</a>은 분류, 문서 디지털화, 레코드 연결(record linkage)처럼 딥러닝으로 비정형 자료를 구조화하는 방법을 정리했다.</li>
+<li><a href="https://arxiv.org/abs/2402.15585v5">Battaglia·Christensen·Hansen·Sacher(2025년 개정 워킹페이퍼)</a>는 AI·ML 생성 변수를 데이터처럼 다루면 추정에 편의가 생기고 추론이 무효가 됨을 보였다. 해법으로 편의 보정과 결합 추정(joint estimation)을 제안한다.</li>
+<li><a href="https://www.nber.org/papers/w33344">Ludwig·Mullainathan·Rambachan(2025, NBER 워킹페이퍼)</a>은 LLM 활용을 예측과 추정으로 나눈다. 예측에는 LLM 학습자료와 연구 표본 사이에 누출(leakage)이 없어야 하고, 추정에는 소규모 검증 표본(validation sample)을 함께 써야 한다. 검증 표본이 없으면 모형과 프롬프트 선택만으로 추정치가 크게 달라진다.</li>
+</ul>
+<p>이 주제는 이미 제도권에 들어왔다. 2026년 NBER Summer Institute의 Methods Lectures 주제가 'Estimation and Inference with AI-Generated Data'였다(<a href="https://www.nber.org/news/summer-institute-2026">NBER</a>).</p>
+<h3 id="ko-s5-3">LLM을 피험자로 쓰는 연구</h3>
+<p>LLM으로 사람의 응답을 모사하는 연구는 Horton(2023)의 'homo silicus' 이후 급증했지만 최근 검증 결과는 신중론에 가깝다. 2026년 10월 Nature Human Behaviour 논문은 74개국 67,201명의 선호 조사 응답을 LLM 모사 응답과 대조했다. 정렬은 양의 방향이지만 약했고, 국가 간 대표 설문을 대신하기에는 아직 신뢰하기 어렵다는 결론이다(<a href="https://www.nature.com/articles/s41562-026-02611-4">논문</a>).</p>
+<figure class="fig fig-stats" id="ko-fig-llmstats"><div class="fig-body"><div class="stats"><div class="stat"><p class="stat-v">74<span class="stat-u">개국</span></p><p class="stat-l">LLM 모사 응답과 대조한 선호 조사의 국가 수</p></div><div class="stat"><p class="stat-v">67,201<span class="stat-u">명</span></p><p class="stat-l">대조한 사람 응답자 수</p></div></div></div><figcaption>자료: <a href="https://www.nature.com/articles/s41562-026-02611-4">Nature Human Behaviour(2026)</a>. 정렬은 양의 방향이지만 약했다.</figcaption></figure>
+<p>계량경제학의 처방은 대체가 아니라 보강이다. 실제 응답을 일부 모아 LLM 응답의 오차를 보정하라는 것이다(Ludwig 외 2025).</p>
+<h3 id="ko-s5-4">AI 에이전트가 수행하는 실증 연구</h3>
+<p>연구 생산 방식 자체가 연구 대상이 됐다. 취리히대 Social Catalyst Lab의 APE 프로젝트에서는 AI 에이전트가 공개 자료로 연구 질문, 식별 전략, 원고까지 만들어 1,000편이 넘는 정책평가 논문을 냈다(<a href="https://www.stata.com/meeting/italy26/slides/Italy26_Cunningham.pdf">Cunningham, 2026</a>). LLM이 심사한 맞대결의 약 83%에서 AER·AEJ 게재 논문이 이겼다(<a href="https://arxiv.org/pdf/2604.03338">arXiv 2604.03338</a>).</p>
+<figure class="fig fig-stats" id="ko-fig-apestats"><div class="fig-body"><div class="stats"><div class="stat"><p class="stat-v">1,000+<span class="stat-u">편</span></p><p class="stat-l">APE 프로젝트의 AI 에이전트가 낸 정책평가 논문</p></div><div class="stat"><p class="stat-v"><span class="stat-u pre">약</span>83<span class="stat-u">%</span></p><span class="meter" aria-hidden="true"><span style="width:83%"></span></span><p class="stat-l">LLM이 심사한 맞대결에서 AER·AEJ 게재 논문이 이긴 비율</p></div></div></div><figcaption>자료: <a href="https://www.stata.com/meeting/italy26/slides/Italy26_Cunningham.pdf">Cunningham(2026)</a>, <a href="https://arxiv.org/pdf/2604.03338">arXiv 2604.03338</a>. 승률은 LLM이 심사한 결과다.</figcaption></figure>
+<p>에이전트 수천 개에 같은 패널과 과제를 주고 추정 방식을 비교하는 실험도 나왔다. 에이전트의 추정 행태를 평가하는 일이 계량경제학의 새 질문으로 떠오른다.</p>
+</section>
+<section aria-labelledby="ko-s6">
+<span class="sec-no" aria-hidden="true">06</span><h2 id="ko-s6">최신 동향 ③ 시계열·거시계량</h2>
+<p class="sec-q"><b>핵심 질문</b>충격의 동태적 효과는 무엇이고 어떻게 예측하나</p>
+<p>거시계량의 중심 논쟁은 충격반응(impulse responses)을 국소투영(local projections, LP)과 VAR 가운데 무엇으로 추정할 것인가였다. 이 논쟁은 2025~2026년에 이론적으로 일단락됐다. 예측 쪽에서는 시계열 파운데이션 모형의 검증이 새 과제로 떠올랐다.</p>
+<h3 id="ko-s6-1">국소투영 대 VAR</h3>
+<ul>
+<li>두 방법은 같은 대상을 추정한다(Plagborg-Møller·Wolf 2021). 차이는 유한표본에서 드러난다. LP는 편의가 작고 분산이 크며, 시차가 짧은 VAR은 그 반대다.</li>
+<li><a href="https://www.econometricsociety.org/publications/econometrica/2026/07/01/Double-Robustness-of-Local-Projections-and-Some-Unpleasant-VARithmetic/file/ecta70056.pdf">Montiel Olea·Plagborg-Møller·Qian·Wolf(2026, Econometrica)</a>는 VAR의 신뢰구간이 모형 오설정에도 포함확률(coverage)을 지키려면 시차를 길게 잡아야 하고, 그러면 구간이 LP만큼 넓어진다는 점을 증명했다. VAR에 "공짜 점심은 없다"는 결과다.</li>
+<li>같은 저자들의 <a href="https://www.arxiv.org/pdf/2503.17144">실무 입문서(2025)</a>는 불확실성 평가가 목적이면 LP나 시차가 긴 VAR을 쓰라고 권한다. 시차와 통제변수 선택, 편의 보정, 신뢰구간 구성 지침도 함께 준다.</li>
+<li><a href="https://www.aeaweb.org/doi/10.1257/jel.20241521">Jordà·Taylor(2025, JEL)</a>는 LP 서베이에서 이 방법을 거시 실증과 미시 정책평가를 잇는 접점으로 본다. LP를 이중차분에 쓰는 LP-DiD(Dube 외 2023)가 그 예다.</li>
+</ul>
+<figure class="fig " id="ko-fig-lpvar"><div class="fig-body"><div class="tbl in-fig fit"><table><thead><tr><th>방법</th><th>편의</th><th>분산</th><th>모형이 틀렸을 때의 신뢰구간</th></tr></thead><tbody><tr><td>국소투영(LP)</td><td>작다</td><td>크다</td><td>포함확률 유지</td></tr><tr><td>시차가 짧은 VAR</td><td>크다</td><td>작다</td><td>포함확률이 깨질 수 있음</td></tr><tr><td>시차가 긴 VAR</td><td>LP에 가까워짐</td><td>LP에 가까워짐</td><td>포함확률 유지. 구간은 LP만큼 넓어짐</td></tr></tbody></table></div></div><figcaption><span class="fig-no">그림 9</span>두 방법은 같은 대상을 추정하고 차이는 유한표본에서 드러난다. 불확실성 평가가 목적이면 LP나 시차가 긴 VAR을 쓰라는 것이 입문서의 권고다.</figcaption></figure>
+<h3 id="ko-s6-2">식별</h3>
+<p>거시 충격을 식별할 때는 이제 모형 제약보다 외부 정보에 더 기댄다. 외부 도구(external instruments)를 쓰는 프록시 SVAR(Stock·Watson 2018), 정책 발표 전후의 고빈도 자료를 쓰는 식별(high-frequency identification, Nakamura·Steinsson 2018, Bauer·Swanson 2023), 부호 제약(sign restrictions) 모형의 강건 베이지안(robust Bayesian) 추론(Giacomini·Kitagawa 2021)이 대표적이다.</p>
+<p>이질적 경제주체 모형(heterogeneous-agent models)은 sequence-space Jacobian 기법(Auclert 외 2021)으로 추정 부담이 크게 줄었다. 코로나19 시기의 극단값을 VAR에서 어떻게 다룰지도 별도 주제가 됐다(Lenza·Primiceri 2022).</p>
+<h3 id="ko-s6-3">예측과 파운데이션 모형</h3>
+<p>사전학습된 시계열 파운데이션 모형(time series foundation model, TSFM)을 거시 예측에 쓰는 연구가 빠르게 늘었다. 핵심 쟁점은 데이터 누출이다. 모형이 예측 대상의 실현값을 학습 중에 이미 봤을 수 있고, 개정된 자료로 학습하면 실시간 속보치와 어긋난다.</p>
+<p><a href="https://arxiv.org/abs/2606.28670">Carriero·Pettenuzzo·Shekhar(2026, 워킹페이퍼)</a>의 MACROCAST는 두 누출을 모두 막도록 설계한 모형이다. FRED-MD 실시간 평가에서 계열·예측시계(forecast horizon) 조합의 약 80%에서 AR(1)보다 나았고, 베이지안 VAR과 동태요인모형(dynamic factor model) 벤치마크도 앞섰다. 반면 실현변동성 예측에서는 TSFM이 계량 벤치마크를 일관되게 이기지 못했다는 <a href="https://arxiv.org/html/2607.05291v1">비교 연구(2026)</a>도 있다.</p>
+<figure class="fig fig-stats" id="ko-fig-tsfmstats"><div class="fig-body"><div class="stats"><div class="stat"><p class="stat-v"><span class="stat-u pre">약</span>80<span class="stat-u">%</span></p><span class="meter" aria-hidden="true"><span style="width:80%"></span></span><p class="stat-l">FRED-MD 실시간 평가에서 MACROCAST가 AR(1)보다 나았던 계열·예측시계 조합</p></div><div class="stat"><p class="stat-v">9 : 8</p><p class="stat-l">50개 자산의 실현변동성 예측에서 견준 TSFM과 계량 모형의 수. TSFM의 일관된 우위는 없었다.</p></div></div></div><figcaption>자료: <a href="https://arxiv.org/abs/2606.28670">Carriero·Pettenuzzo·Shekhar(2026)</a>, <a href="https://arxiv.org/html/2607.05291v1">비교 연구(2026)</a>.</figcaption></figure>
+</section>
+<section aria-labelledby="ko-s7">
+<span class="sec-no" aria-hidden="true">07</span><h2 id="ko-s7">최신 동향 ④ 금융계량</h2>
+<p class="sec-q"><b>핵심 질문</b>위험과 수익, 변동성을 어떻게 측정하나</p>
+<p>금융계량의 최근 논의는 수백 개로 불어난 수익률 예측 요인을 어떻게 걸러낼지, 그리고 머신러닝 자산가격 모형의 성과를 믿어도 되는지를 다룬다.</p>
+<h3 id="ko-s7-1">요인 모형(factor models)과 재현성</h3>
+<ul>
+<li>다중검정: 요인 후보가 많아지면 통상의 유의수준으로는 거짓 발견(false discoveries)이 늘어난다(Harvey·Liu·Zhu 2016).</li>
+<li>요인 선별: 고차원 통제 아래에서 새 요인의 기여를 검정하는 방법(Feng·Giglio·Xiu 2020), 기업 특성을 요인 적재(factor loadings)의 도구로 쓰는 IPCA(Kelly·Pruitt·Su 2019)가 나왔다.</li>
+<li>재현성: 대규모 재현 연구가 요인 문헌의 신뢰도를 다시 점검했다(Chen·Zimmermann 2022, Jensen·Kelly·Pedersen 2023).</li>
+</ul>
+<h3 id="ko-s7-2">머신러닝과 복잡성 논쟁</h3>
+<p>Gu·Kelly·Xiu(2020) 이후 ML 수익률 예측이 주류가 됐고 지금은 'virtue of complexity'(복잡성의 미덕)가 논쟁 중이다. <a href="https://www.sfi.ch/en/publications/the-virtue-of-complexity-in-return-prediction">Kelly·Malamud·Zhou(2024, Journal of Finance)</a>는 모수가 관측치보다 많은 모형이 단순한 모형보다 수익률 예측력이 높다는 점을 이론과 미국 주식시장 자료로 보였다.</p>
+<p>2025년에 이 결과를 반박하는 논문이 여럿 나왔고 저자들이 재반박하면서 논쟁이 이어지고 있다. 반대 측은 복잡성이 언제나 미덕은 아니라는 입장이다(<a href="https://www.advisorperspectives.com/articles/2025/08/22/wall-street-complex-left-humans">Bloomberg 칼럼, 2025</a>).</p>
+<figure class="fig " id="ko-fig-complexity"><div class="fig-body"><div class="flow"><ol class="flow-row"><li class="flow-box"><span class="yr">2020</span><b>Gu·Kelly·Xiu</b><span>ML 수익률 예측이 주류로</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box"><span class="yr">2024</span><b>Kelly·Malamud·Zhou</b><span>모수가 관측치보다 많은 모형의 예측력이 더 높다는 결과</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box"><span class="yr">2025</span><b>반박과 재반박</b><span>복잡성이 언제나 미덕은 아니라는 반론</span></li></ol></div></div><figcaption><span class="fig-no">그림 10</span>'virtue of complexity'(복잡성의 미덕) 논쟁의 흐름.</figcaption></figure>
+<h3 id="ko-s7-3">변동성과 텍스트</h3>
+<ul>
+<li>변동성 예측은 실현변동성(realized volatility) 자료와 HAR 계열 모형이 기준점이다. 2026년 비교 연구는 9개 TSFM과 8개 계량 모형을 50개 자산에서 견주었고, TSFM의 일관된 우위는 없었다(<a href="https://arxiv.org/html/2607.05291v1">arXiv 2607.05291</a>).</li>
+<li>LLM으로 실적 발표나 뉴스 텍스트에서 수익률을 예측하는 연구는 학습 누출 문제와 정면으로 부딪힌다. LLM 계량 프레임워크가 금융 응용을 예시로 든 이유다(Ludwig 외 2025).</li>
+</ul>
+<h3 id="ko-s7-4">준실험 방법의 확산</h3>
+<p>금융은 신뢰성 혁명을 뒤늦게 받아들이는 중이다. 2024년 기준 실험·준실험 방법을 언급한 논문 비중은 응용미시 63%, 금융 47%였고, 응용미시 밖의 증가분은 대부분 이중차분에서 나왔다(<a href="https://www.nber.org/papers/w35051">Goldsmith-Pinkham, 2026</a>).</p>
+<figure class="fig " id="ko-fig-adoption"><div class="fig-head"><div><p class="fig-title">실험·준실험 방법을 언급한 논문 비중, 2024년</p></div><button type="button" class="tv" aria-pressed="false">표로 보기</button></div><div class="fig-body"><div class="viz"><div class="bars" role="img" aria-label="응용미시 63%, 금융 47%, 거시·기타 39%"><div class="bar-row" tabindex="0" data-tip="{&quot;h&quot;: &quot;응용미시&quot;, &quot;rows&quot;: [[&quot;63%&quot;, &quot;2024년 논문 비중&quot;, &quot;s1&quot;]]}"><span class="bar-lab">응용미시</span><span class="bar-track"><span class="bar-fill" style="width:63%"></span><span class="bar-val" style="left:63%">63%</span></span></div><div class="bar-row" tabindex="0" data-tip="{&quot;h&quot;: &quot;금융&quot;, &quot;rows&quot;: [[&quot;47%&quot;, &quot;2024년 논문 비중&quot;, &quot;s1&quot;]]}"><span class="bar-lab">금융</span><span class="bar-track"><span class="bar-fill" style="width:47%"></span><span class="bar-val" style="left:47%">47%</span></span></div><div class="bar-row" tabindex="0" data-tip="{&quot;h&quot;: &quot;거시·기타&quot;, &quot;rows&quot;: [[&quot;39%&quot;, &quot;2024년 논문 비중&quot;, &quot;s1&quot;]]}"><span class="bar-lab">거시·기타</span><span class="bar-track"><span class="bar-fill" style="width:39%"></span><span class="bar-val" style="left:39%">39%</span></span></div><div class="bar-axis" aria-hidden="true"><span></span><span class="bar-ticks"><i style="left:0">0</i><i style="left:25%">25</i><i style="left:50%">50</i><i style="left:75%">75</i><i style="left:100%">100%</i></span></div></div></div><div class="viz-table"><div class="tbl in-fig fit"><table class="num"><thead><tr><th>분야</th><th>비중 (%)</th></tr></thead><tbody><tr><td>응용미시</td><td>63</td></tr><tr><td>금융</td><td>47</td></tr><tr><td>거시·기타</td><td>39</td></tr></tbody></table></div></div></div><figcaption><span class="fig-no">그림 11</span><span class="badge">자료</span>금융과 거시의 현재 수준은 응용미시의 2008~2010년과 비슷하다. 이중차분을 계산에 넣으면 준실험 방법을 언급한 논문 비중이 금융은 약 55%, 응용미시는 약 30% 커진다. 응용미시 밖의 확산을 이중차분이 이끌었다는 뜻이다. 자료: <a href="https://www.nber.org/papers/w35051">Goldsmith-Pinkham(2026)</a>, NBER 워킹페이퍼와 학술지 논문 약 4만 4천 편.</figcaption></figure>
+</section>
+<section aria-labelledby="ko-s8">
+<span class="sec-no" aria-hidden="true">08</span><h2 id="ko-s8">최신 동향 ⑤ 구조추정·산업조직 계량</h2>
+<p class="sec-q"><b>핵심 질문</b>아직 시행되지 않은 정책의 효과는 어떨까</p>
+<p>구조추정 연구는 최근 식별 근거를 투명하게 밝히고 신경망으로 계산 부담을 줄이며 실험과 균형 모형을 결합하는 방향으로 나아간다.</p>
+<figure class="fig " id="ko-fig-structural"><div class="fig-body"><div class="trio" role="list"><div class="card" role="listitem"><span class="card-no">01</span><p class="card-h">식별 근거의 투명화</p><p>수요의 비모수 식별 조건(Berry·Haile 2021, 2024), 마크업 식별 논쟁(Bond 외 2021)</p></div><div class="card" role="listitem"><span class="card-no">02</span><p class="card-h">신경망으로 계산 부담 축소</p><p>적대적 추정(Kaji·Manresa·Pouliot 2023), 신경망 모수 추정(Wei·Jiang 2025)</p></div><div class="card" role="listitem"><span class="card-no">03</span><p class="card-h">실험과 균형 모형의 결합</p><p>시장 균형 속 처치효과(Munro·Kuang·Wager 2025)</p></div></div></div><figcaption><span class="fig-no">그림 12</span>구조추정 연구의 세 방향과 이 절에서 다루는 대표 연구.</figcaption></figure>
+<h3 id="ko-s8-1">수요와 생산함수</h3>
+<ul>
+<li>수요추정(demand estimation): 차별화 제품(differentiated products) 수요의 식별 조건을 비모수적으로 정리하는 작업이 이어졌다(Berry·Haile 2021, 2024). 실무에서는 PyBLP(Conlon·Gortmaker 2020)가 추정 관행을 표준화했다.</li>
+<li>생산함수와 마크업: 대리변수 방법(proxy variable methods, Ackerberg·Caves·Frazer 2015, Gandhi·Navarro·Rivers 2020)이 기본이다. 생산함수로 마크업을 재는 접근(De Loecker·Eeckhout·Unger 2020)은 매출 자료만으로는 식별이 어렵다는 비판(Bond 외 2021)을 받으며 논쟁 중이다.</li>
+<li>동태 모형: 조건부 선택확률(conditional choice probability, CCP) 추정(Hotz·Miller 1993, Arcidiacono·Miller 2011)이 계산 부담을 낮춘 뒤 응용이 넓어졌다.</li>
+</ul>
+<h3 id="ko-s8-2">신경망을 이용한 추정</h3>
+<p>우도를 쓸 수 없어 시뮬레이션에 의존하던 모형에서 신경망이 추정 도구로 쓰이기 시작했다.</p>
+<ul>
+<li><a href="https://collaborate.princeton.edu/en/publications/an-adversarial-approach-to-structural-estimation/">Kaji·Manresa·Pouliot(2023, Econometrica)</a>의 적대적 추정(adversarial estimation)은 구조모형이 만든 모의 자료와 실제 자료를 판별기(discriminator)가 구분하지 못하게 만드는 모수를 찾는다. 판별기가 충분히 풍부하면 올바른 설정에서 모수적 효율성을 얻는다.</li>
+<li><a href="https://econpapers.repec.org/RePEc:inm:ormksc:v:44:y:2025:i:1:p:102-128">Wei·Jiang(2025, Marketing Science)</a>는 모형이 생성한 자료로 신경망을 학습시켜, 자료의 적률을 넣으면 모수 추정값이 나오게 한다. 소비자 탐색 모형(consumer search model)에서 기존 방법보다 정확하고 계산이 가벼웠다.</li>
+</ul>
+<h3 id="ko-s8-3">실험과 균형의 결합</h3>
+<p>시장 안에서 한 실험은 가격을 통해 통제집단에도 영향을 준다. <a href="https://econpapers.repec.org/RePEc:aea:aecrev:v:115:y:2025:i:10:p:3273-3321">Munro·Kuang·Wager(2025, AER)</a>는 하나의 큰 시장에서 개체 단위로 무작위 배정한 실험만으로 직접효과(direct effects)와 균형 변화에 따른 파급효과(spillovers)를 식별하는 방법을 보였다. 파급효과를 추정하려면 가격탄력성이 필요해서 이를 얻도록 실험 설계를 보강한다.</p>
+<figure class="fig " id="ko-fig-spillover"><div class="fig-body"><div class="viz narrow"><div class="chart-wrap"><svg class="chart schem" viewBox="0 0 340 200" role="img" aria-label="처치가 처치집단의 결과에 직접 영향을 주고, 시장 가격을 바꿔 통제집단의 결과에도 영향을 준다."><defs><marker id="ko-arw0" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arw a0"/></marker><marker id="ko-arw1" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arw a1"/></marker><marker id="ko-arw2" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arw a2"/></marker></defs><rect class="bx " x="4" y="80" width="66" height="40" rx="5"/><text class="lab strong" x="37.0" y="104.0" text-anchor="middle">처치</text><rect class="bx mid" x="100" y="78" width="112" height="44" rx="5"/><text class="lab strong" x="156.0" y="98.0" text-anchor="middle">시장 가격</text><text class="tick txt" x="156.0" y="112.0" text-anchor="middle">균형이 바뀐다</text><rect class="bx " x="238" y="22" width="98" height="40" rx="5"/><text class="lab strong" x="287.0" y="46.0" text-anchor="middle">처치집단 결과</text><rect class="bx " x="238" y="140" width="98" height="40" rx="5"/><text class="lab strong" x="287.0" y="164.0" text-anchor="middle">통제집단 결과</text><path class="cn s1" d="M40 80 C 60 28, 150 34, 234 42" marker-end="url(#ko-arw1)"/><text class="lab" x="128" y="27" text-anchor="middle">직접효과</text><path class="cn" d="M70 100 H96" marker-end="url(#ko-arw0)"/><path class="cn s2" d="M212 90 L236 62" marker-end="url(#ko-arw2)"/><path class="cn s2" d="M212 112 L236 142" marker-end="url(#ko-arw2)"/><text class="lab" x="287" y="105" text-anchor="middle">파급효과</text></svg></div><ul class="legend"><li><span class="key s1"></span>직접효과</li><li><span class="key s2"></span>균형 변화에 따른 파급효과</li></ul></div></div><figcaption><span class="fig-no">그림 13</span><span class="badge">개념도</span>시장 안에서 한 실험은 가격을 통해 통제집단에도 닿는다. 개체 단위로 무작위 배정하고 가격탄력성을 얻도록 설계를 보강하면 직접효과와 파급효과를 따로 식별할 수 있다(Munro·Kuang·Wager 2025). 실제 자료가 아니다.</figcaption></figure>
+<p>구조모형이 틀렸을 가능성을 추정 단계에서 다루는 연구는 9절의 오설정 논의와 이어진다.</p>
+</section>
+<section aria-labelledby="ko-s9">
+<span class="sec-no" aria-hidden="true">09</span><h2 id="ko-s9">최신 동향 ⑥ 식별·추론 이론</h2>
+<p class="sec-q"><b>핵심 질문</b>약한 가정에서 무엇을 말할 수 있나</p>
+<p>이론 쪽의 공통 주제는 '모형이 틀렸을 때도 믿을 수 있는 결론'이다. 2025년 World Congress의 계량 분야 초청 세션 네 개를 보면 이 분야의 윤곽이 잡힌다.</p>
+<h3 id="ko-s9-1">모형 오설정(model misspecification)</h3>
+<p><a href="https://tbarmstr.github.io/files/2025/07/misspecification_review_eswc_2025.pdf">Armstrong(2025)</a>의 World Congress 리뷰는 오설정 연구가 결국 모형을 더 큰 모형으로 넓히는 문제라고 정리한다. 어떻게 넓힐지가 그 자체로 연구 주제라는 것이다. <a href="https://tbarmstr.github.io/">Armstrong·Kline·Sun(2025, Econometrica)</a>의 'Adapting to Misspecification'이 이 흐름의 대표 논문이다.</p>
+<h3 id="ko-s9-2">부분식별과 민감도 분석</h3>
+<p>부분식별은 Manski의 경계 분석(bounds analysis)에서 출발해 Molinari(2020)의 Handbook of Econometrics 장으로 정리됐다. 응용에서 가장 널리 쓰이는 형태는 민감도 분석(sensitivity analysis)이다.</p>
+<ul>
+<li>평행추세가 어느 정도 깨져도 결론이 유지되는지 보는 방법(Rambachan·Roth 2023)</li>
+<li>누락변수가 얼마나 강해야 결과가 뒤집히는지 재는 방법(Cinelli·Hazlett 2020)</li>
+<li>가정을 얼마나 풀면 결론이 무너지는지 보는 breakdown frontier(Masten·Poirier 2020)</li>
+</ul>
+<h3 id="ko-s9-3">통계적 의사결정과 경험적 베이즈</h3>
+<p>추정과 검정 대신 '어떤 처치를 고를 것인가'를 직접 푸는 접근이 힘을 얻었다. 경험적 후생 극대화(empirical welfare maximization, Kitagawa·Tetenov 2018)와 정책 학습(Athey·Wager 2021)이 출발점이고 World Congress도 'Causal Inference and Statistical Decisions'를 초청 세션으로 뒀다.</p>
+<p>경험적 베이즈(empirical Bayes)는 교사, 학교, 기업, 판사처럼 단위별 모수가 많은 문제에서 표준 도구로 쓰인다. <a href="https://www.nber.org/papers/w33091">Walters(2024)</a>의 Handbook of Labor Economics 장이 방법을 정리했다. 기업별 고용 차별을 등급으로 매긴 Kline·Rose·Walters(2024, AER)가 대표 응용이다.</p>
+<h3 id="ko-s9-4">패널, 비모수, 고차원</h3>
+<ul>
+<li>패널: World Congress 초청 세션의 주제였다. 비선형 패널의 고정효과 문제, 상호작용 고정효과(interactive fixed effects, Bai 2009), 집단 이질성(grouped heterogeneity, Bonhomme·Manresa 2015)이 중심이다.</li>
+<li>비모수·고차원: 심층신경망 추정량의 추론(Farrell·Liang·Misra 2021), 자동 편의제거(automatic debiased machine learning, Chernozhukov·Newey·Singh 2022)처럼 ML 추정량에 추론 보장을 붙이는 작업이 이어진다.</li>
+</ul>
+<h3 id="ko-s9-5">베이지안, 네트워크, 공간</h3>
+<ul>
+<li>베이지안: 대형 VAR의 축소 사전분포(shrinkage priors, Giannone·Lenza·Primiceri 2015), 집합식별(set-identified) 모형의 강건 베이지안(Giacomini·Kitagawa 2021), 트리 기반 인과추론(Hahn·Murray·Carvalho 2020).</li>
+<li>네트워크: 간섭(interference)이 있을 때의 인과추론(Aronow·Samii 2017, Leung 2022)과 네트워크 형성 모형(network formation models, Graham 2017, de Paula 2020).</li>
+<li>공간: 공간 상관에 강건한 추론과 공간 단위근(spatial unit roots, Müller·Watson 2022, 2024).</li>
+</ul>
+</section>
+<section aria-labelledby="ko-s10">
+<span class="sec-no" aria-hidden="true">10</span><h2 id="ko-s10">산업 적용: 테크기업의 실험설계와 인과추론</h2>
+<p class="sec-q"><b>핵심 질문</b>실험을 어떻게 설계하고 읽을 것인가</p>
+<p>테크기업에서 계량경제학은 주로 두 곳에 쓰인다. 온라인 실험(A/B 테스트)의 설계와 분석, 그리고 실험이 불가능할 때의 관측자료 인과추론이다. 간섭, 순차 검정(sequential testing), 장기효과 추정처럼 학계 프런티어가 된 주제 상당수가 현업 문제에서 출발했다.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>현업 문제</th>
+<th>방법</th>
+<th>대표 연구</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>한 사용자의 처치가 다른 사용자의 결과를 바꾼다</td>
+<td>양면 무작위화(two-sided randomization), 군집 무작위화(cluster randomization), 균형 모형</td>
+<td>Johari·Li·Liskovich·Weintraub(2022), Munro·Kuang·Wager(2025)</td>
+</tr>
+<tr>
+<td>가격·배차처럼 시장 전체에 걸리는 처치</td>
+<td>스위치백 실험(switchback experiment)</td>
+<td>Bojinov·Simchi-Levi·Zhao(2023)</td>
+</tr>
+<tr>
+<td>실험 도중 결과를 계속 들여다본다</td>
+<td>always-valid inference, confidence sequence</td>
+<td>Johari·Koomen·Pekelis·Walsh(2022), Howard 외(2021)</td>
+</tr>
+<tr>
+<td>장기 효과를 빨리 알아야 한다</td>
+<td>대리지표(surrogate index)</td>
+<td>Athey·Chetty·Imbens·Kang(2025)</td>
+</tr>
+<tr>
+<td>분산이 커서 검정력이 부족하다</td>
+<td>실험 전 공변량 조정(CUPED)</td>
+<td>Deng 외(2013)</td>
+</tr>
+<tr>
+<td>실험을 할 수 없다</td>
+<td>합성통제, DiD, 지역 단위 실험(geo experiments)</td>
+<td>Abadie(2021)</td>
+</tr>
+<tr>
+<td>누구에게 줄지 정해야 한다</td>
+<td>이질적 처치효과, 정책 학습</td>
+<td>Athey·Wager(2021)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="ko-s10-1">양면 시장(two-sided market)의 간섭</h3>
+<p><a href="https://gsb.stanford.edu/faculty-research/publications/experimental-design-two-sided-platforms-analysis-bias">Johari·Li·Liskovich·Weintraub(2022, Management Science)</a>에 따르면 어느 쪽을 무작위화할지는 시장의 수급 균형에 달렸다. 수요가 부족한 시장에서는 고객 단위 무작위화(customer-side randomization)가 편의 없이 작동하고 리스팅 단위(listing-side)는 편의를 낳는다. 공급이 부족한 시장에서는 반대다. 양쪽을 함께 무작위화하는 설계는 두 극단 모두에서 편의가 없다.</p>
+<figure class="fig " id="ko-fig-twosided"><div class="fig-head"><div><p class="fig-title">무작위화 단위에 따른 편의</p></div></div><div class="fig-body"><div class="tbl in-fig fit"><table><thead><tr><th>시장 상태</th><th>고객 단위 무작위화</th><th>리스팅 단위 무작위화</th><th>양면 무작위화</th></tr></thead><tbody><tr><td>수요가 부족한 시장</td><td class="stc"><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>편의 없음</td><td class="stc"><span class="st no"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>편의 있음</td><td class="stc"><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>편의 없음</td></tr><tr><td>공급이 부족한 시장</td><td class="stc"><span class="st no"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>편의 있음</td><td class="stc"><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>편의 없음</td><td class="stc"><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>편의 없음</td></tr></tbody></table></div></div><figcaption><span class="fig-no">그림 14</span>어느 쪽을 무작위화할지는 시장의 수급 균형에 달렸다. 양쪽을 함께 무작위화하면 두 극단 모두에서 편의가 없다. 자료: <a href="https://gsb.stanford.edu/faculty-research/publications/experimental-design-two-sided-platforms-analysis-bias">Johari·Li·Liskovich·Weintraub(2022)</a>.</figcaption></figure>
+<h3 id="ko-s10-2">장기 효과</h3>
+<p><a href="https://opportunityinsights.org/paper/the-surrogate-index/">Athey·Chetty·Imbens·Kang(2025, Review of Economic Studies)</a>의 대리지표 방법은 여러 단기 결과를 하나의 예측 지수로 묶어 장기 효과를 추정한다. 캘리포니아 직업훈련 실험에 적용하면 9년 평균 고용률 효과를 1.5년 시점에 추정할 수 있었고 표준오차는 35% 줄었다.</p>
+<figure class="fig " id="ko-fig-surrogate"><div class="fig-head"><div><p class="fig-title">대리지표: 9년 효과를 1.5년 시점에</p></div></div><div class="fig-body"><div class="sur"><div class="sur-meter" role="img" aria-label="9년 가운데 1.5년 시점"><span class="sur-fill" style="width:16.67%"></span></div><div class="sur-scale" aria-hidden="true"><span style="left:0">0</span><span class="sur-mark" style="left:16.67%">1.5년</span><span class="sur-end">9년</span></div><div class="stats sur-stats"><div class="stat"><p class="stat-v">1.5<span class="stat-u">년</span></p><p class="stat-l">9년 평균 고용률 효과를 추정할 수 있었던 시점</p></div><div class="stat"><p class="stat-v">−35<span class="stat-u">%</span></p><p class="stat-l">표준오차의 감소 폭</p></div></div></div></div><figcaption><span class="fig-no">그림 15</span><span class="badge">자료</span>대리지표 방법을 캘리포니아 직업훈련 실험에 적용한 결과. 자료: <a href="https://opportunityinsights.org/paper/the-surrogate-index/">Athey·Chetty·Imbens·Kang(2025)</a>.</figcaption></figure>
+<h3 id="ko-s10-3">학계와 산업의 경계</h3>
+<p>방법론 논문의 저자 소속에 기업이 함께 적히는 일이 흔해졌다. 경험적 베이즈 핸드북 장의 저자는 UC 버클리와 Amazon 소속이고(<a href="https://rfberlin.com/wp-content/uploads/2024/10/24022.pdf">Walters, 2024</a>), AI 생성 변수 논문의 공저자 한 명은 Meta 소속이다(<a href="https://econpapers.repec.org/RePEc:cwl:cwldpp:2421">Cowles Foundation Discussion Paper</a>).</p>
+<p>실무 참고서로는 Kohavi·Tang·Xu(2020)의 온라인 실험 교과서와 Athey·Luca(2019)의 테크기업 경제학자 개관이 출발점이다.</p>
+</section>
+<section aria-labelledby="ko-s11">
+<span class="sec-no" aria-hidden="true">11</span><h2 id="ko-s11">분야를 가로지르는 흐름과 남은 쟁점</h2>
+<p>일곱 분야에서 같은 흐름이 반복된다.</p>
+<ol>
+<li>추정 대상을 먼저 정한다. TWFE 재검토, LATE 해석 논쟁, LP와 VAR의 관계 정리가 모두 '이 추정량은 무엇을 추정하는가'에서 출발했다.</li>
+<li>오설정을 전제로 추론한다. 민감도 분석, 편의를 감안한 신뢰구간(bias-aware confidence intervals), LP의 강건성 결과가 같은 문제의식을 공유한다.</li>
+<li>ML과 AI를 추론 절차 안에 넣는다. 직교화, 교차적합, 검증 표본을 이용한 보정이 그 장치다.</li>
+<li>설계와 구조를 결합한다. 시장 균형 속 실험, 한계처치효과, 대리지표가 그 예다.</li>
+<li>연구 생산 방식이 바뀐다. 에이전트가 쓰는 실증 논문과 자동화된 자료 구축이 이제 방법론의 검증 대상이다.</li>
+</ol>
+<figure class="fig " id="ko-fig-flows"><div class="fig-body"><ol class="fl"><li><span class="fl-no">1</span><div><p class="fl-h">추정 대상을 먼저 정한다</p><p class="chips"><a class="chip" href="#ko-s4"><span class="chip-s">4절</span>TWFE 재검토</a><a class="chip" href="#ko-s4"><span class="chip-s">4절</span>LATE 해석 논쟁</a><a class="chip" href="#ko-s6"><span class="chip-s">6절</span>LP와 VAR의 관계</a></p></div></li><li><span class="fl-no">2</span><div><p class="fl-h">오설정을 전제로 추론한다</p><p class="chips"><a class="chip" href="#ko-s9"><span class="chip-s">9절</span>민감도 분석</a><a class="chip" href="#ko-s9"><span class="chip-s">9절</span>편의를 감안한 신뢰구간</a><a class="chip" href="#ko-s6"><span class="chip-s">6절</span>LP의 강건성</a></p></div></li><li><span class="fl-no">3</span><div><p class="fl-h">ML과 AI를 추론 절차 안에 넣는다</p><p class="chips"><a class="chip" href="#ko-s5"><span class="chip-s">5절</span>직교화 · 교차적합</a><a class="chip" href="#ko-s5"><span class="chip-s">5절</span>검증 표본을 이용한 보정</a></p></div></li><li><span class="fl-no">4</span><div><p class="fl-h">설계와 구조를 결합한다</p><p class="chips"><a class="chip" href="#ko-s8"><span class="chip-s">8절</span>시장 균형 속 실험</a><a class="chip" href="#ko-s4"><span class="chip-s">4절</span>한계처치효과</a><a class="chip" href="#ko-s10"><span class="chip-s">10절</span>대리지표</a></p></div></li><li><span class="fl-no">5</span><div><p class="fl-h">연구 생산 방식이 바뀐다</p><p class="chips"><a class="chip" href="#ko-s5"><span class="chip-s">5절</span>에이전트가 쓰는 실증 논문</a><a class="chip" href="#ko-s5"><span class="chip-s">5절</span>자동화된 자료 구축</a></p></div></li></ol></div><figcaption><span class="fig-no">그림 16</span>다섯 흐름과 본문에서 예로 든 주제. 주제를 누르면 해당 절로 간다.</figcaption></figure>
+<p>남은 쟁점은 다음과 같다.</p>
+<ul>
+<li>확산의 불균등: 실험·준실험 방법을 언급한 논문 비중은 2024년 기준 응용미시 63%, 금융 47%, 거시·기타 39%다. 금융과 거시의 현재 수준은 응용미시의 2008~2010년과 비슷하다(<a href="https://www.nber.org/papers/w35051">Goldsmith-Pinkham, 2026</a>).</li>
+<li>이론과 응용의 간극: 같은 연구에 따르면 Journal of Econometrics가 주로 다루는 주제는 비모수 추정과 점근 이론이고, 응용 연구자가 쓰는 것은 DiD와 식별 전략이다.</li>
+<li>AI 측정의 신뢰성: 검증 표본 없이 LLM 출력을 변수로 쓰는 관행과 LLM 피험자의 타당성이 아직 정리되지 않았다.</li>
+<li>복잡성의 미덕: 과모수(overparameterized) 모형의 수익률 예측력, 파운데이션 모형의 누출 없는 평가가 진행 중인 논쟁이다.</li>
+<li>투명성: 귀무 결과(null results) 보고는 줄고 비공개 자료 사용은 늘었다는 지적이 있다(<a href="https://econpapers.repec.org/RePEc:osf:osfxxx:u4vgs">Garg·Fetzer, 2024</a>).</li>
+</ul>
+</section>
+<section aria-labelledby="ko-s12">
+<span class="sec-no" aria-hidden="true">12</span><h2 id="ko-s12">참고문헌</h2>
+<p>2023~2026년 문헌 가운데 본문의 근거로 쓴 것을 실었다. 2022년 이전 문헌은 본문에 저자와 연도로 표기했다.</p>
+<h3 id="ko-s12-1">서베이와 실무 가이드</h3>
+<ul>
+<li>Baker·Callaway·Cunningham·Goodman-Bacon·Sant'Anna (2026), <a href="https://econpapers.repec.org/RePEc:aea:jeclit:v:64:y:2026:i:2:p:498-557">Difference-in-Differences Designs: A Practitioner's Guide</a>, Journal of Economic Literature 64(2)</li>
+<li>Jordà·Taylor (2025), <a href="https://www.aeaweb.org/doi/10.1257/jel.20241521">Local Projections</a>, Journal of Economic Literature 63(1)</li>
+<li>Dell (2025), <a href="https://www.aeaweb.org/doi/10.1257/jel.20241733">Deep Learning for Economists</a>, Journal of Economic Literature 63(1)</li>
+<li>Imbens·Xu (2025), <a href="https://econpapers.repec.org/RePEc:aea:jecper:v:39:y:2025:i:4:p:173-202">Comparing Experimental and Nonexperimental Methods</a>, Journal of Economic Perspectives 39(4)</li>
+<li>Mogstad·Torgovitsky (2024), <a href="https://www.nber.org/papers/w32927">Instrumental Variables with Unobserved Heterogeneity in Treatment Effects</a>, NBER WP 32927, Handbook of Labor Economics 수록용</li>
+<li>Walters (2024), <a href="https://www.nber.org/papers/w33091">Empirical Bayes Methods in Labor Economics</a>, Handbook of Labor Economics 5</li>
+<li>Roth·Sant'Anna·Bilinski·Poe (2023), <a href="https://arxiv.org/pdf/2201.01194">What's Trending in Difference-in-Differences?</a>, Journal of Econometrics</li>
+</ul>
+<h3 id="ko-s12-2">게재 논문</h3>
+<ul>
+<li>Montiel Olea·Plagborg-Møller·Qian·Wolf (2026), <a href="https://www.econometricsociety.org/publications/econometrica/2026/07/01/Double-Robustness-of-Local-Projections-and-Some-Unpleasant-VARithmetic/file/ecta70056.pdf">Double Robustness of Local Projections and Some Unpleasant VARithmetic</a>, Econometrica 94(4)</li>
+<li>Simulated responses from large language models are weak proxies for human economic preferences across 74 countries (2026), <a href="https://www.nature.com/articles/s41562-026-02611-4">Nature Human Behaviour</a></li>
+<li>Munro·Kuang·Wager (2025), <a href="https://econpapers.repec.org/RePEc:aea:aecrev:v:115:y:2025:i:10:p:3273-3321">Treatment Effects in Market Equilibrium</a>, American Economic Review 115(10)</li>
+<li>Athey·Chetty·Imbens·Kang (2025), <a href="https://opportunityinsights.org/paper/the-surrogate-index/">The Surrogate Index</a>, Review of Economic Studies</li>
+<li>Armstrong·Kline·Sun (2025), <a href="https://tbarmstr.github.io/">Adapting to Misspecification</a>, Econometrica 93(6)</li>
+<li>Wei·Jiang (2025), <a href="https://econpapers.repec.org/RePEc:inm:ormksc:v:44:y:2025:i:1:p:102-128">Estimating Parameters of Structural Models Using Neural Networks</a>, Marketing Science 44(1)</li>
+<li>Kelly·Malamud·Zhou (2024), <a href="https://www.sfi.ch/en/publications/the-virtue-of-complexity-in-return-prediction">The Virtue of Complexity in Return Prediction</a>, Journal of Finance 79(1)</li>
+<li>Kaji·Manresa·Pouliot (2023), <a href="https://collaborate.princeton.edu/en/publications/an-adversarial-approach-to-structural-estimation/">An Adversarial Approach to Structural Estimation</a>, Econometrica 91(6)</li>
+<li>Johari·Li·Liskovich·Weintraub (2022), <a href="https://gsb.stanford.edu/faculty-research/publications/experimental-design-two-sided-platforms-analysis-bias">Experimental Design in Two-Sided Platforms: An Analysis of Bias</a>, Management Science 68(10)</li>
+</ul>
+<h3 id="ko-s12-3">워킹페이퍼와 게재 예정 논문</h3>
+<ul>
+<li>Goldsmith-Pinkham (2026), <a href="https://www.nber.org/papers/w35051">Tracking the Credibility Revolution across Fields</a>, NBER WP 35051. 2024년판은 <a href="https://arxiv.org/abs/2405.20604v2">arXiv</a></li>
+<li>Garg·Fetzer (2025), <a href="https://arxiv.org/abs/2501.06873v1">Causal Claims in Economics</a></li>
+<li>Callaway·Goodman-Bacon·Sant'Anna (2025), <a href="https://arxiv.org/pdf/2107.02637v8">Difference-in-Differences with a Continuous Treatment</a></li>
+<li>de Chaisemartin·D'Haultfoeuille, <a href="https://sites.google.com/site/clementdechaisemartin/">Treatment-Effect Estimation in Complex Designs under a Parallel-trends Assumption</a>, 2025 World Congress 논문집 게재 예정</li>
+<li>Cattaneo·Titiunik·Yu (2025), <a href="https://arxiv.org/abs/2511.06474v2">Boundary Discontinuity Designs: Theory and Practice</a>, <a href="https://arxiv.org/abs/2505.05670v1">Estimation and Inference in Boundary Discontinuity Designs</a></li>
+<li>Armstrong (2025), <a href="https://tbarmstr.github.io/files/2025/07/misspecification_review_eswc_2025.pdf">Misspecification in Econometrics: A Selective Review</a>, 2025 World Congress 논문집 게재 예정</li>
+<li>Ahrens·Chernozhukov·Hansen·Kozbur·Schaffer·Wiemann (2025), <a href="https://arxiv.org/abs/2504.08324v2">An Introduction to Double/Debiased Machine Learning</a></li>
+<li>Battaglia·Christensen·Hansen·Sacher (2025), <a href="https://arxiv.org/abs/2402.15585v5">Inference for Regression with Variables Generated by AI or Machine Learning</a></li>
+<li>Ludwig·Mullainathan·Rambachan (2025), <a href="https://www.nber.org/papers/w33344">Large Language Models: An Applied Econometric Framework</a>, NBER WP 33344</li>
+<li>Montiel Olea·Plagborg-Møller·Qian·Wolf (2025), <a href="https://www.arxiv.org/pdf/2503.17144">Local Projections or VARs? A Primer for Macroeconomists</a></li>
+<li>Carriero·Pettenuzzo·Shekhar (2026), <a href="https://arxiv.org/abs/2606.28670">MACROCAST: A Vintage-Consistent Time Series Foundation Model</a></li>
+<li>MacKinnon (2026), <a href="https://arxiv.org/pdf/2604.02000">When Can We Trust Cluster-Robust Inference?</a></li>
+<li>Chiang·Sasaki·Wang (2025), <a href="https://arxiv.org/html/2308.10138v8">Genuinely Robust Inference for Clustered Data</a></li>
+</ul>
+<h3 id="ko-s12-4">학회, 강의, 기타 자료</h3>
+<ul>
+<li><a href="https://www.econometricsociety.org/regional-activities/schedule/2025/08/18/2025-World-Congress-Seoul-Korea?page=2">2025 Econometric Society World Congress(서울) 초청 세션</a></li>
+<li><a href="https://www.nber.org/news/summer-institute-2026">NBER Summer Institute 2026 Methods Lectures 안내</a></li>
+<li><a href="https://topcat.aeaweb.org/econlit/jelCodes.php?view=jel">JEL 분류 체계</a></li>
+<li>APE 프로젝트 관련: <a href="https://cepr.org/voxeu/columns/literature-support-and-capabilities-autonomous-research-agents">VoxEU 칼럼</a>, <a href="https://arxiv.org/pdf/2604.03338">arXiv 2604.03338</a>, <a href="https://www.stata.com/meeting/italy26/slides/Italy26_Cunningham.pdf">Cunningham 발표 자료</a></li>
+</ul>
+</section>
+<section aria-labelledby="ko-s13">
+<span class="sec-no" aria-hidden="true">13</span><h2 id="ko-s13">작성 메모</h2>
+<ul>
+<li>기준: 2026년 11월 14일 시점, 연구자 수준, 전 분야 균형, 산업 적용 포함으로 썼다. '최신'은 2023~2026년으로 잡았다.</li>
+<li>근거: 수치와 서지 정보는 논문 초록, 학술지, 학회·기관 페이지에서 확인했다. 2022년 이전 문헌은 표준 서지에 따라 저자와 연도만 적었다.</li>
+<li>워킹페이퍼: 12절에 따로 묶었다. 심사 과정에서 결과가 바뀔 수 있다.</li>
+<li>분야 경계: 일곱 갈래 구분은 관행을 따른 것이라 서로 겹친다. LP-DiD는 시계열과 인과추론 양쪽에, 시장 균형 속 실험은 구조추정과 실험설계 양쪽에 걸친다.</li>
+<li>얕게 다룬 곳: 금융계량의 고빈도 분석, 베이지안, 네트워크·공간 계량은 2025~2026년 문헌을 개별 확인하지 못해 2022년 이전 대표 문헌 중심으로 적었다. 한국 학계의 동향은 다루지 않았다.</li>
+<li>해석 주의: APE의 승률은 LLM이 심사한 결과다. 논문 텍스트의 언급 빈도로 방법의 확산을 잰 연구는 실제 사용 빈도와 다를 수 있다.</li>
+</ul>
+</section></main></div></div>
+<div class="doc" data-l="en" lang="en"><header class="mast"><div class="mast-in"><p class="eyebrow">November 14, 2026 · Youngmin Ju</p><h1 id="en-top">An Overview of Econometrics and Recent Research by Field</h1><p class="lead">Econometrics splits into seven branches that share one framework: identification, estimation, and inference. The frontier in 2023–2026 consists of work that re-asks what an estimator actually estimates, inference that stays valid when the model is wrong, and inference that uses data made by AI.</p><div class="trio-wrap"><p class="trio-lab">The frontier, 2023–2026</p><div class="trio" role="list"><div class="card" role="listitem"><span class="card-no">01</span><p class="card-h">Rethinking the estimand</p><p>Re-asking what an estimator actually estimates.</p><p class="card-meta"><a href="#en-s4">§4 DiD · IV</a> · <a href="#en-s6">§6 LP and VARs</a></p></div><div class="card" role="listitem"><span class="card-no">02</span><p class="card-h">Inference robust to misspecification</p><p>Inference that stays valid when the model is wrong.</p><p class="card-meta"><a href="#en-s6">§6 robustness of LP</a> · <a href="#en-s9">§9 sensitivity analysis</a></p></div><div class="card" role="listitem"><span class="card-no">03</span><p class="card-h">Inference with data made by AI</p><p>Asking whether inference stays valid with data made by AI.</p><p class="card-meta"><a href="#en-s5">§5 AI-generated variables · LLM subjects</a></p></div></div></div></div></header><div class="layout"><nav class="toc" aria-label="Contents"><p class="toc-h">Contents</p><ol><li><a href="#en-s1"><span class="n">01</span><span>Definition and history</span></a></li><li><a href="#en-s2"><span class="n">02</span><span>The core framework: identification, estimation, inference</span></a></li><li><a href="#en-s3"><span class="n">03</span><span>How the field is divided</span></a></li><li><a href="#en-s4"><span class="n">04</span><span>Recent developments ① Microeconometrics and causal inference</span></a></li><li><a href="#en-s5"><span class="n">05</span><span>Recent developments ② Machine learning and AI</span></a></li><li><a href="#en-s6"><span class="n">06</span><span>Recent developments ③ Time series and macroeconometrics</span></a></li><li><a href="#en-s7"><span class="n">07</span><span>Recent developments ④ Financial econometrics</span></a></li><li><a href="#en-s8"><span class="n">08</span><span>Recent developments ⑤ Structural estimation and empirical IO</span></a></li><li><a href="#en-s9"><span class="n">09</span><span>Recent developments ⑥ Identification and inference theory</span></a></li><li><a href="#en-s10"><span class="n">10</span><span>Applications in industry: experimental design and causal inference at tech companies</span></a></li><li><a href="#en-s11"><span class="n">11</span><span>Cross-cutting trends and open issues</span></a></li><li><a href="#en-s12"><span class="n">12</span><span>References</span></a></li><li><a href="#en-s13"><span class="n">13</span><span>Notes on this document</span></a></li></ol></nav><main class="body"><section aria-labelledby="en-s1">
+<span class="sec-no" aria-hidden="true">01</span><h2 id="en-s1">Definition and history</h2>
+<p>Econometrics combines economic theory with statistical inference to test theory against economic data and to reach quantitative conclusions. The questions it tries to answer come down to three. What is the causal effect of a policy or treatment? What are the structural parameters of an economic model? What will happen next?</p>
+<p>Ragnar Frisch first used the name in its present sense in 1926. The Econometric Society was founded in 1930, and the journal Econometrica followed in 1933. The roughly 100 years since can be read as a history of changing answers to one question: "where does identification come from?"</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Period</th>
+<th>Center of gravity</th>
+<th>Representative work</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1930s–50s</td>
+<td>The probability approach and simultaneous equations. The identification problem was first formalized.</td>
+<td>Haavelmo (1944), the Cowles Commission, Tinbergen's macro models</td>
+</tr>
+<tr>
+<td>1960s–70s</td>
+<td>The spread and crisis of large macroeconometric models. Analysis of micro data began.</td>
+<td>The Klein models, the Lucas critique (1976), McFadden (1974), Heckman (1979)</td>
+</tr>
+<tr>
+<td>1980s</td>
+<td>Innovation in time-series methods and generalization of estimation theory.</td>
+<td>Sims (1980) VAR, Hansen (1982) GMM, White (1980), Engle (1982) ARCH, Engle and Granger (1987)</td>
+</tr>
+<tr>
+<td>1990s–2000s, design</td>
+<td>The credibility revolution. Research design replaced model assumptions as the basis for identification.</td>
+<td>Leamer's (1983) critique, LaLonde (1986), Imbens and Angrist (1994), Card and Krueger (1994)</td>
+</tr>
+<tr>
+<td>1990s–2000s, theory</td>
+<td>Weak instruments, partial identification, semiparametric inference. Structural estimation also became more refined.</td>
+<td>Staiger and Stock (1997), Manski (1990), Berry, Levinsohn, and Pakes (1995)</td>
+</tr>
+<tr>
+<td>Late 2010s–present</td>
+<td>Heterogeneous treatment effects, the combination with machine learning, and AI used as a measurement tool.</td>
+<td>Athey and Imbens (2016), Chernozhukov et al. (2018), the reassessment of DiD since 2018</td>
+</tr>
+</tbody>
+</table></div>
+<p>The Nobel Prizes in economics follow the same order: Frisch and Tinbergen (1969), Klein (1980), Haavelmo (1989), Heckman and McFadden (2000), Engle and Granger (2003), Sargent and Sims (2011), Hansen (2013, shared), and Card, Angrist, and Imbens (2021).</p>
+<figure class="fig " id="en-fig-timeline"><div class="fig-body"><div class="tl"><p class="tl-found"><span><b>1926</b> Frisch uses the name 'econometrics' in its present sense</span><span><b>1930</b> Econometric Society founded</span><span><b>1933</b> Econometrica launched</span></p><div class="tl-grid"><div class="tl-h" style="grid-column:1">Decade</div><div class="tl-h" style="grid-column:2">Center of gravity</div><div class="tl-h" style="grid-column:3">Nobel Prize</div><div class="tl-line" style="grid-row:2"></div><div class="tl-dec" style="grid-row:2">1930s</div><div class="tl-line" style="grid-row:3"></div><div class="tl-dec" style="grid-row:3">1940s</div><div class="tl-line" style="grid-row:4"></div><div class="tl-dec" style="grid-row:4">1950s</div><div class="tl-line" style="grid-row:5"></div><div class="tl-dec" style="grid-row:5">1960s</div><div class="tl-line" style="grid-row:6"></div><div class="tl-dec" style="grid-row:6">1970s</div><div class="tl-line" style="grid-row:7"></div><div class="tl-dec" style="grid-row:7">1980s</div><div class="tl-line" style="grid-row:8"></div><div class="tl-dec" style="grid-row:8">1990s</div><div class="tl-line" style="grid-row:9"></div><div class="tl-dec" style="grid-row:9">2000s</div><div class="tl-line" style="grid-row:10"></div><div class="tl-dec" style="grid-row:10">2010s</div><div class="tl-line" style="grid-row:11"></div><div class="tl-dec" style="grid-row:11">2020s</div><div class="tl-era" style="grid-row:2 / span 3"><div class="era"><b>Probability approach · simultaneous equations</b><span>identification first formalized</span></div></div><div class="tl-era" style="grid-row:5 / span 2"><div class="era"><b>Rise and crisis of large macro models</b><span>micro data analysis begins</span></div></div><div class="tl-era" style="grid-row:7 / span 1"><div class="era"><b>Innovation in time-series methods</b><span>estimation theory generalized</span></div></div><div class="tl-era" style="grid-row:8 / span 2"><div class="era"><span class="era-tag">Design</span><b>Credibility revolution</b><span>research design as the basis for identification</span></div><div class="era"><span class="era-tag">Theory</span><b>Weak IV · partial identification · semiparametrics</b><span>structural estimation refined</span></div></div><div class="tl-era" style="grid-row:10 / span 2"><div class="era"><span class="era-tag">Late 2010s–</span><b>Heterogeneous effects · ML · AI as measurement</b></div></div><div class="tl-nobel" style="grid-row:5"><div class="nb"><span class="nb-y">1969</span><span class="nb-n">Frisch, Tinbergen</span><span class="nb-d">dynamic models</span></div></div><div class="tl-nobel" style="grid-row:7"><div class="nb"><span class="nb-y">1980</span><span class="nb-n">Klein</span><span class="nb-d">macro models</span></div><div class="nb"><span class="nb-y">1989</span><span class="nb-n">Haavelmo</span><span class="nb-d">probability foundations</span></div></div><div class="tl-nobel" style="grid-row:9"><div class="nb"><span class="nb-y">2000</span><span class="nb-n">Heckman, McFadden</span><span class="nb-d">selection · discrete choice</span></div><div class="nb"><span class="nb-y">2003</span><span class="nb-n">Engle, Granger</span><span class="nb-d">ARCH · cointegration</span></div></div><div class="tl-nobel" style="grid-row:10"><div class="nb"><span class="nb-y">2011</span><span class="nb-n">Sargent, Sims</span><span class="nb-d">cause and effect in macro</span></div><div class="nb"><span class="nb-y">2013</span><span class="nb-n">Hansen (shared)</span><span class="nb-d">empirical asset pricing</span></div></div><div class="tl-nobel" style="grid-row:11"><div class="nb"><span class="nb-y">2021</span><span class="nb-n">Card, Angrist, Imbens</span><span class="nb-d">natural experiments · causal inference</span></div></div></div></div></div><figcaption><span class="fig-no">Figure 1</span>Shifts in the basis for identification, and the Nobel Prizes. The prizes come in the same order in which the center of gravity moved. The short prize descriptions are added in this figure.</figcaption></figure>
+</section>
+<section aria-labelledby="en-s2">
+<span class="sec-no" aria-hidden="true">02</span><h2 id="en-s2">The core framework: identification, estimation, inference</h2>
+<p>An econometric analysis answers the following questions in order. What do we want to know (the estimand)? Could we learn that value with infinitely much data (identification)? In a finite sample, how do we compute it and how do we describe the uncertainty (estimation and inference)? Most methodological debates of the past 20 years came from the first and second questions.</p>
+<figure class="fig " id="en-fig-framework"><div class="fig-body"><ol class="steps"><li class="step focus"><span class="step-no">1</span><div class="step-in"><p class="step-tag">Estimand</p><p class="step-q">What do we want to know?</p><p class="step-ex">ATE · ATT · LATE</p></div></li><li class="step focus"><span class="step-no">2</span><div class="step-in"><p class="step-tag">Identification</p><p class="step-q">Could we learn that value with infinitely much data?</p><ul class="step-two"><li><b>Design-based</b>random assignment, quasi-experiments (IV · RDD · DiD)</li><li><b>Model-based</b>exclusion restrictions, functional form, equilibrium conditions</li></ul><p class="step-ex">point identification · partial identification</p></div></li><li class="step"><span class="step-no">3</span><div class="step-in"><p class="step-tag">Estimation and inference</p><p class="step-q">In a finite sample, how do we compute it and describe the uncertainty?</p><p class="step-ex">OLS · IV · GMM · MLE · ML / robust variance · weak-identification-robust inference</p></div></li></ol><p class="steps-note"><span class="focus-key" aria-hidden="true"></span>The two steps marked with a heavy rule are where the debates of the past 20 years concentrated.</p></div><figcaption><span class="fig-no">Figure 2</span>The three questions an econometric analysis answers in order.</figcaption></figure>
+<h3 id="en-s2-1">Identification</h3>
+<p>Identification rests on two main sources.</p>
+<ul>
+<li>Design-based: the source is the way treatment was assigned, as in random assignment or quasi-experiments (instrumental variables, regression discontinuity, difference-in-differences).</li>
+<li>Model-based: the source is the restrictions that economic theory supplies, such as exclusion restrictions, functional form, and equilibrium conditions.</li>
+</ul>
+<p>A parameter is point identified when the data pin it down to a single value and partially identified when they only bound it. When treatment effects differ across people, the same estimator can point to different objects such as the ATE, the ATT, or the LATE. So fixing the estimand first and then choosing the estimator has become the standard order.</p>
+<h3 id="en-s2-2">Estimation</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Estimation principle</th>
+<th>Representative methods</th>
+<th>Main uses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Least squares and moments</td>
+<td>OLS, IV/2SLS, GMM</td>
+<td>Linear models, endogeneity, asset pricing and dynamic panels</td>
+</tr>
+<tr>
+<td>Likelihood</td>
+<td>MLE, quasi-maximum likelihood (QMLE)</td>
+<td>Discrete choice, volatility models, structural models</td>
+</tr>
+<tr>
+<td>Simulation-based</td>
+<td>Simulated method of moments (SMM), indirect inference</td>
+<td>Structural models with no usable likelihood</td>
+</tr>
+<tr>
+<td>Nonparametric and semiparametric</td>
+<td>Kernels, sieves, local polynomial regression</td>
+<td>Regression discontinuity, relaxing functional-form assumptions</td>
+</tr>
+<tr>
+<td>Regularization and machine learning</td>
+<td>Lasso, random forests, and neural networks combined with orthogonalization</td>
+<td>High-dimensional controls, heterogeneous effects</td>
+</tr>
+<tr>
+<td>Bayesian</td>
+<td>MCMC, sequential Monte Carlo, variational inference</td>
+<td>DSGE, large VARs, hierarchical models</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="en-s2-3">Inference</h3>
+<p>The central issue in inference has moved from "how do we get standard errors?" to "under what conditions is this still valid?"</p>
+<ul>
+<li>Robust variance estimation: allows heteroskedasticity, clustering, and serial correlation (HAC). With few clusters, the wild bootstrap is used.</li>
+<li>Inference robust to weak identification: uses tests that keep their size even when instruments are weak (Anderson–Rubin and others).</li>
+<li>Corrections for selection and search: studies how much multiple testing, pre-testing, and publication bias distort inference.</li>
+<li>The source of uncertainty: design-based inference, which defines uncertainty through the randomness of treatment assignment rather than sampling, has become more common.</li>
+</ul>
+<h3 id="en-s2-4">Data structures and two traditions</h3>
+<p>The basic data structures are cross-sections, time series, and panels. Network and spatial data, high-frequency data, and unstructured data such as text and images have been added to these.</p>
+<p>Research divides into a design-based, reduced-form tradition and a structural tradition that estimates an economic model directly. Many studies now mix the two, identifying structural parameters from quasi-experimental variation or computing welfare from sufficient statistics.</p>
+<figure class="fig " id="en-fig-traditions"><div class="fig-body"><div class="tri3"><div class="tri-cell"><p class="tri-h">Reduced-form approach</p><p>Design-based. Identification comes from how treatment was assigned.</p></div><div class="tri-arrow"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="tri-cell tri-mid"><p class="tri-h">Work that mixes the two</p><p>Structural parameters from quasi-experimental variation · welfare from sufficient statistics</p></div><div class="tri-arrow tri-arrow-rev"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="tri-cell"><p class="tri-h">Structural approach</p><p>Estimates an economic model directly. Restrictions from theory provide identification.</p></div></div></div><figcaption><span class="fig-no">Figure 3</span>The two research traditions and the work that mixes them.</figcaption></figure>
+</section>
+<section aria-labelledby="en-s3">
+<span class="sec-no" aria-hidden="true">03</span><h2 id="en-s3">How the field is divided</h2>
+<p>There is more than one way to divide the field. The official classification is the American Economic Association's JEL codes, while the profession uses a conventional division that mixes data structure with area of application. On top of these runs one more axis, which separates theoretical from applied econometrics. Theoretical econometrics studies the methods themselves, and applied econometrics uses them on empirical problems.</p>
+<figure class="fig " id="en-fig-fieldmap"><div class="fig-body"><div class="fmap"><a class="fm-band" href="#en-s5"><span class="fm-name">Machine learning and AI</span><span class="fm-line">Tools every field uses: DML · causal forests · text analysis · LLM-based measurement</span><span class="fm-go">§5</span></a><div class="fm-arrows" aria-hidden="true"><svg class="ar ar-d" viewBox="0 0 12 18" width="12" height="18" aria-hidden="true"><path d="M6 1v14M1.5 10.5 6 16l4.5-5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="ar ar-d" viewBox="0 0 12 18" width="12" height="18" aria-hidden="true"><path d="M6 1v14M1.5 10.5 6 16l4.5-5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="fm-cols"><div class="fm-frame"><p class="fm-head">Micro data: cross-sections and panels</p><a class="fm-box" href="#en-s4"><span class="fm-name">Microeconometrics and causal inference</span><span class="fm-line">DiD · IV · RDD · synthetic control · cluster inference</span><span class="fm-go">§4</span></a><a class="fm-box" href="#en-s8"><span class="fm-name">Structural estimation and empirical IO</span><span class="fm-line">demand estimation · dynamic choice models · auctions and games</span><span class="fm-go">§8</span></a><a class="fm-box" href="#en-s10"><span class="fm-name">Design and analysis of experiments</span><span class="fm-line">A/B tests · interference · sequential testing</span><span class="fm-go">§10</span></a></div><div class="fm-frame"><p class="fm-head">Time-series data</p><a class="fm-box" href="#en-s6"><span class="fm-name">Time series and macroeconometrics</span><span class="fm-line">VAR · local projections · state space</span><span class="fm-line">impulse responses and forecasting</span><span class="fm-go">§6</span></a><a class="fm-box" href="#en-s7"><span class="fm-name">Financial econometrics</span><span class="fm-line">factor models · volatility · high-frequency data</span><span class="fm-line">asset pricing and risk measurement</span><span class="fm-go">§7</span></a></div></div><div class="fm-arrows" aria-hidden="true"><svg class="ar ar-u" viewBox="0 0 12 18" width="12" height="18" aria-hidden="true"><path d="M6 17V3M1.5 7.5 6 2l4.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="ar ar-u" viewBox="0 0 12 18" width="12" height="18" aria-hidden="true"><path d="M6 17V3M1.5 7.5 6 2l4.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><a class="fm-band fm-base" href="#en-s9"><span class="fm-name">Identification and inference theory</span><span class="fm-line">Common foundation: partial identification · nonparametrics · high dimensions · Bayesian methods · statistical decisions</span><span class="fm-go">§9</span></a></div></div><figcaption><span class="fig-no">Figure 4</span>The seven fields stand on shared theory and split by data structure. Each box links to its section.</figcaption></figure>
+<p>The top and bottom bands span every field, and the five fields in the middle split into two groups by the data structure they mainly use. The arrows show the direction in which tools and theory enter each field.</p>
+<h3 id="en-s3-1">The official classification: JEL C codes</h3>
+<p>In the JEL system, econometrics belongs to category C (Mathematical and Quantitative Methods). C codes are attached to research on the methods themselves and, as a rule, not to research that applies established methods (<a href="https://www.aeaweb.org/jel/guide/jel.php?class=C">AEA JEL guide</a>).</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Category</th>
+<th>Main subcodes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Econometric and statistical methods: general</td>
+<td>C11 Bayesian analysis, C12 hypothesis testing, C13 estimation, C14 semiparametric and nonparametric methods</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Single equation models</td>
+<td>C21 cross-sectional models, treatment effects, quantile regression; C22 time series; C23 panel data; C26 instrumental variables</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Multiple or simultaneous equation models</td>
+<td>C31 social interaction models, C32 state space, C33 panel data, C38 factor models</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>Special topics</td>
+<td>C41 duration analysis, C44 statistical decision theory, C45 neural networks</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Econometric modeling</td>
+<td>C52 model evaluation and selection, C53 forecasting, C55 large data sets, C57 econometrics of games and auctions, C58 financial econometrics</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>Mathematical methods and simulation</td>
+<td>C61 optimization, C63 computational techniques</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>Game theory and bargaining theory</td>
+<td>Closer to economic theory than to econometrics</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>Data collection and estimation methodology</td>
+<td>C81 and C82 micro and macro data, C83 survey methods and sampling, C87 econometric software</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>Design of experiments</td>
+<td>C91 and C92 laboratory experiments, C93 field experiments</td>
+</tr>
+</tbody>
+</table></div>
+<p>The code names themselves carry recent research topics. C22 and C32 include 'Dynamic Treatment Effect Models', and C31 includes 'Social Interaction Models' (<a href="https://topcat.aeaweb.org/econlit/jelCodes.php?view=jel">JEL classification system</a>).</p>
+<h3 id="en-s3-2">The division used in the profession</h3>
+<p>Conference sessions, graduate courses, and journal space are mostly organized into the seven branches below. Sections 4–10 of this document follow this order.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Core question</th>
+<th>Representative methods</th>
+<th>Main applications</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microeconometrics and causal inference</td>
+<td>What is the causal effect of a policy or treatment?</td>
+<td>DiD, IV, RDD, synthetic control, panel and cluster inference</td>
+<td>Labor, public, health, development</td>
+</tr>
+<tr>
+<td>Machine learning and AI</td>
+<td>How can inference stay valid with high-dimensional and unstructured data?</td>
+<td>DML, causal forests, text analysis, LLM-based measurement</td>
+<td>All fields</td>
+</tr>
+<tr>
+<td>Time series and macroeconometrics</td>
+<td>What are the dynamic effects of shocks, and how do we forecast?</td>
+<td>VAR, local projections, state space, DSGE estimation</td>
+<td>Monetary and fiscal policy, business-cycle analysis</td>
+</tr>
+<tr>
+<td>Financial econometrics</td>
+<td>How do we measure risk, return, and volatility?</td>
+<td>Factor models, GARCH and realized volatility, high-frequency analysis</td>
+<td>Asset pricing, risk management</td>
+</tr>
+<tr>
+<td>Structural estimation and empirical IO</td>
+<td>What would a policy that has not yet been implemented do?</td>
+<td>Demand estimation (BLP), dynamic discrete choice, estimation of auctions and games</td>
+<td>Industrial organization, labor, trade</td>
+</tr>
+<tr>
+<td>Identification and inference theory</td>
+<td>What can be said under weak assumptions?</td>
+<td>Partial identification, nonparametric and semiparametric methods, high-dimensional methods, Bayesian methods</td>
+<td>Methodology in general</td>
+</tr>
+<tr>
+<td>Design and analysis of experiments</td>
+<td>How should experiments be designed and read?</td>
+<td>Randomized experiments, adaptive experiments, inference under interference</td>
+<td>Development economics, platform companies</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="en-s3-3">The frontier as the profession sees it</h3>
+<p>The Econometric Society World Congress, held in Seoul in August 2025, is the Society's central event and takes place once every 5 years. The invited sessions in econometrics had four topics: 'Causal Inference and Statistical Decisions', 'Frontiers in Nonparametric Methods', 'Misspecification in Econometrics', and 'Econometric Methods for Panel Data' (<a href="https://www.econometricsociety.org/regional-activities/schedule/2025/08/18/2025-World-Congress-Seoul-Korea?page=2">list of invited sessions</a>).</p>
+<p>Among the named lectures, Magne Mogstad gave the Fisher–Schultz Lecture and Hidehiko Ichimura gave the Frisch Memorial Lecture.</p>
+</section>
+<section aria-labelledby="en-s4">
+<span class="sec-no" aria-hidden="true">04</span><h2 id="en-s4">Recent developments ① Microeconometrics and causal inference</h2>
+<p class="sec-q"><b>Core question</b>What is the causal effect of a policy or treatment?</p>
+<p>Recent work in this field re-asks "what does a conventional regression actually estimate?" and builds new estimators that match the estimand. The spread of quasi-experimental methods also shows up in the numbers. In a study of more than 44,000 NBER and CEPR working papers, the share of causal claims rose from about 4% in 1990 to about 28% in 2020 (<a href="https://arxiv.org/abs/2501.06873v1">Garg and Fetzer, 2025</a>).</p>
+<figure class="fig " id="en-fig-causal"><div class="fig-head"><div><p class="fig-title">Share of causal claims in economics papers</p><p class="fig-sub">Average share of a paper's claims that are backed by causal inference methods</p></div><button type="button" class="tv" aria-pressed="false">Table view</button></div><div class="fig-body"><div class="viz narrow"><ul class="legend"><li><span class="key s1"></span>January 2025 version (cited in the text)</li><li><span class="key s2"></span>February 2026 revision</li></ul><div class="chart-wrap"><svg class="chart" viewBox="0 0 340 248" role="img" aria-label="Average share of causal claims per paper. In the January 2025 version it rises from 4.2% in 1990 to 27.8% in 2020; in the February 2026 revision, from 7.7% in 1990 to 32.6% in 2023."><line class="grid" x1="36" x2="318" y1="154.6" y2="154.6"/><line class="grid" x1="36" x2="318" y1="99.1" y2="99.1"/><line class="grid" x1="36" x2="318" y1="43.7" y2="43.7"/><line class="axis" x1="36" x2="318" y1="210.0" y2="210.0"/><text class="tick" x="30" y="213.5" text-anchor="end">0%</text><text class="tick" x="30" y="158.1" text-anchor="end">10%</text><text class="tick" x="30" y="102.6" text-anchor="end">20%</text><text class="tick" x="30" y="47.2" text-anchor="end">30%</text><line class="axis" x1="36.0" x2="36.0" y1="210.0" y2="214.0"/><text class="tick" x="36.0" y="227.0" text-anchor="middle">1990</text><line class="axis" x1="121.5" x2="121.5" y1="210.0" y2="214.0"/><text class="tick" x="121.5" y="227.0" text-anchor="middle">2000</text><line class="axis" x1="206.9" x2="206.9" y1="210.0" y2="214.0"/><text class="tick" x="206.9" y="227.0" text-anchor="middle">2010</text><line class="axis" x1="292.4" x2="292.4" y1="210.0" y2="214.0"/><text class="tick" x="292.4" y="227.0" text-anchor="middle">2020</text><line class="axis" x1="318.0" x2="318.0" y1="210.0" y2="214.0"/><polyline class="ln s1" points="36.0,186.7 121.5,163.4 206.9,115.2 292.4,55.9"/><circle class="dot s1" cx="36.0" cy="186.7" r="4"/><circle class="dot s1" cx="121.5" cy="163.4" r="4"/><circle class="dot s1" cx="206.9" cy="115.2" r="4"/><circle class="dot s1" cx="292.4" cy="55.9" r="4"/><polyline class="ln s2" points="36.0,167.3 121.5,162.3 206.9,90.8 292.4,34.3 318.0,29.3"/><circle class="dot s2" cx="36.0" cy="167.3" r="4"/><circle class="dot s2" cx="121.5" cy="162.3" r="4"/><circle class="dot s2" cx="206.9" cy="90.8" r="4"/><circle class="dot s2" cx="292.4" cy="34.3" r="4"/><circle class="dot s2" cx="318.0" cy="29.3" r="4"/><text class="lab num" x="43.0" y="199.7" text-anchor="start">4.2</text><text class="lab num" x="294.4" y="71.9" text-anchor="start">27.8</text><text class="lab num" x="43.0" y="159.3" text-anchor="start">7.7</text><text class="lab num" x="327.0" y="20.3" text-anchor="end">32.6</text><text class="tick" x="318.0" y="238.0" text-anchor="middle">2023</text><g class="xg"><line class="xh" x1="36.0" x2="36.0" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="10.0" y="16" width="52" height="194" data-tip="{&quot;h&quot;: &quot;1990&quot;, &quot;rows&quot;: [[&quot;4.2%&quot;, &quot;January 2025 version (cited in the text)&quot;, &quot;s1&quot;], [&quot;7.7%&quot;, &quot;February 2026 revision&quot;, &quot;s2&quot;]]}" aria-label="1990: January 2025 version (cited in the text) 4.2%, February 2026 revision 7.7%"/></g><g class="xg"><line class="xh" x1="121.5" x2="121.5" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="95.5" y="16" width="52" height="194" data-tip="{&quot;h&quot;: &quot;2000&quot;, &quot;rows&quot;: [[&quot;8.4%&quot;, &quot;January 2025 version (cited in the text)&quot;, &quot;s1&quot;], [&quot;8.6%&quot;, &quot;February 2026 revision&quot;, &quot;s2&quot;]]}" aria-label="2000: January 2025 version (cited in the text) 8.4%, February 2026 revision 8.6%"/></g><g class="xg"><line class="xh" x1="206.9" x2="206.9" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="180.9" y="16" width="52" height="194" data-tip="{&quot;h&quot;: &quot;2010&quot;, &quot;rows&quot;: [[&quot;17.1%&quot;, &quot;January 2025 version (cited in the text)&quot;, &quot;s1&quot;], [&quot;21.5%&quot;, &quot;February 2026 revision&quot;, &quot;s2&quot;]]}" aria-label="2010: January 2025 version (cited in the text) 17.1%, February 2026 revision 21.5%"/></g><g class="xg"><line class="xh" x1="292.4" x2="292.4" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="279.4" y="16" width="26" height="194" data-tip="{&quot;h&quot;: &quot;2020&quot;, &quot;rows&quot;: [[&quot;27.8%&quot;, &quot;January 2025 version (cited in the text)&quot;, &quot;s1&quot;], [&quot;31.7%&quot;, &quot;February 2026 revision&quot;, &quot;s2&quot;]]}" aria-label="2020: January 2025 version (cited in the text) 27.8%, February 2026 revision 31.7%"/></g><g class="xg"><line class="xh" x1="318.0" x2="318.0" y1="16" y2="210.0"/><rect class="hit" tabindex="0" x="305.0" y="16" width="26" height="194" data-tip="{&quot;h&quot;: &quot;2023&quot;, &quot;rows&quot;: [[&quot;32.6%&quot;, &quot;February 2026 revision&quot;, &quot;s2&quot;]]}" aria-label="2023: February 2026 revision 32.6%"/></g></svg></div></div><div class="viz-table"><div class="tbl in-fig fit"><table class="num"><thead><tr><th>Year</th><th>January 2025 version (cited in the text) (%)</th><th>February 2026 revision (%)</th></tr></thead><tbody><tr><td>1990</td><td>4.2</td><td>7.7</td></tr><tr><td>2000</td><td>8.4</td><td>8.6</td></tr><tr><td>2010</td><td>17.1</td><td>21.5</td></tr><tr><td>2020</td><td>27.8</td><td>31.7</td></tr><tr><td>2023</td><td>–</td><td>32.6</td></tr></tbody></table></div></div></div><figcaption><span class="fig-no">Figure 5</span><span class="badge">Data</span>In both versions the share of causal claims more than quadrupled between 1990 and 2020. The figures in the text (about 4% → about 28%) come from <a href="https://arxiv.org/abs/2501.06873v1">the January 2025 version</a>. <a href="https://arxiv.org/pdf/2501.06873v2">The February 2026 revision</a> reports 7.7% → 31.7% for the same period and 32.6% for 2023. Source: Garg and Fetzer, more than 44,000 NBER and CEPR working papers.</figcaption></figure>
+<figure class="fig " id="en-fig-designs"><div class="fig-body"><div class="tbl in-fig"><table><thead><tr><th>Design</th><th>Issue</th><th>Current standard or trend</th><th>Key references</th></tr></thead><tbody><tr><td>DiD</td><td>With staggered timing and heterogeneous effects, TWFE can get even the sign wrong</td><td>Aggregating group-time ATTs; the imputation approach</td><td>Callaway and Sant&#x27;Anna 2021; Borusyak, Jaravel, and Spiess 2024; Baker et al. 2026</td></tr><tr><td>IV</td><td>How far can the LATE interpretation be trusted?</td><td>Estimators designed for heterogeneity (MTE). Under weak instruments, the Anderson–Rubin test or the tF correction</td><td>Mogstad and Torgovitsky 2024; Lee et al. 2022</td></tr><tr><td>RDD</td><td>Beyond a univariate score to multivariate boundaries</td><td>Boundary discontinuity designs. Collapsing to a single distance leaves a large bias when the boundary has kinks</td><td>Cattaneo, Titiunik, and Yu 2025</td></tr><tr><td>Synthetic control</td><td>Methods keep expanding; mentions in applications have declined since 2020</td><td>Synthetic DiD, augmented synthetic control, matrix completion</td><td>Arkhangelsky et al. 2021; Ben-Michael et al. 2021; Athey et al. 2021</td></tr></tbody></table></div></div><figcaption><span class="fig-no">Figure 6</span>The four designs covered in this section, with the issue and the current standard for each.</figcaption></figure>
+<h3 id="en-s4-1">Difference-in-differences (DiD)</h3>
+<p>In DiD, the reassessment of 2018–2021 is settling into standard practice.</p>
+<ul>
+<li>The problem: when treatment timing is staggered and effects are heterogeneous, the two-way fixed effects (TWFE) regression can get not only the magnitude but even the sign wrong.</li>
+<li>The alternatives: methods that first estimate group-time ATTs and then aggregate them (Callaway and Sant'Anna 2021, Sun and Abraham 2021) and the imputation approach (Borusyak, Jaravel, and Spiess 2024) are used as the standard tools.</li>
+<li>Consolidation: the practitioner's guide by <a href="https://econpapers.repec.org/RePEc:aea:jeclit:v:64:y:2026:i:2:p:498-557">Baker et al. (2026, JEL)</a> organizes covariates, weights, multiple periods, and staggered treatment in one framework.</li>
+<li>The frontier: continuous treatments (<a href="https://arxiv.org/pdf/2107.02637v8">Callaway, Goodman-Bacon, and Sant'Anna, working paper revised December 2025</a>), complex designs under a parallel-trends assumption in general (<a href="https://sites.google.com/site/clementdechaisemartin/">de Chaisemartin and D'Haultfoeuille, forthcoming in the 2025 World Congress volume</a>), and sensitivity analysis for violations of parallel trends (Rambachan and Roth 2023).</li>
+</ul>
+<figure class="fig " id="en-fig-twfe"><div class="fig-body"><div class="viz narrow"><div class="chart-wrap"><svg class="chart schem" viewBox="0 0 340 228" role="img" aria-label="Outcome paths for three groups with staggered treatment. After the late group is treated, the already-treated early group serves as its control."><polygon class="band" points="205.0,68.7 310.0,37.2 310.0,111.2 205.0,117.5"/><line class="axis" x1="30" x2="30" y1="20" y2="190"/><line class="axis" x1="30" x2="312" y1="190" y2="190"/><line class="grid" x1="110" x2="110" y1="24" y2="190"/><line class="grid" x1="205" x2="205" y1="24" y2="190"/><polyline class="ln s0" points="30.0,172.0 310.0,155.2"/><polyline class="ln s2" points="30.0,146.0 205.0,135.5"/><polyline class="ln s2" points="205.0,117.5 310.0,111.2"/><line class="ln s2 thin" x1="205" x2="205" y1="135.5" y2="117.5"/><polyline class="ln s1" points="30.0,120.0 110.0,115.2"/><polyline class="ln s1" points="110.0,97.2 310.0,37.2"/><line class="ln s1 thin" x1="110" x2="110" y1="115.2" y2="97.2"/><text class="lab" x="36" y="112.6">Early treated</text><text class="lab" x="36" y="138.6">Late treated</text><text class="lab" x="36" y="164.6">Never treated</text><text class="lab strong" x="258" y="82" text-anchor="middle">Forbidden</text><text class="lab strong" x="258" y="95" text-anchor="middle">comparison</text><text class="tick txt" x="110" y="205" text-anchor="middle">early treatment</text><text class="tick txt" x="205" y="205" text-anchor="middle">late treatment</text><text class="tick txt" x="312" y="220" text-anchor="end">time →</text><text class="tick txt" x="30" y="13" text-anchor="start">outcome</text></svg></div><ul class="legend"><li><span class="key s1"></span>Early-treated group</li><li><span class="key s2"></span>Late-treated group</li><li><span class="key s0"></span>Never-treated group</li><li><span class="key band"></span>Forbidden comparison: window where an already-treated group serves as the control</li></ul></div></div><figcaption><span class="fig-no">Figure 7</span><span class="badge">Schematic</span>The comparisons TWFE makes under staggered timing. When it measures the effect for the late-treated group, the already-treated group enters as a control. If the early group's effect grows over time, that growth is wrongly subtracted as trend, and the estimate can be wrong in sign as well as magnitude. Not real data.</figcaption></figure>
+<p>The key point of the continuous-treatment paper is that comparing groups with different doses requires a stronger parallel-trends assumption. Without it, comparisons across dose groups are contaminated by selection bias.</p>
+<h3 id="en-s4-2">Instrumental variables (IV)</h3>
+<p>The central question in IV research is "how far can the LATE interpretation be trusted?" <a href="https://www.nber.org/papers/w32927">Mogstad and Torgovitsky (2024)</a> divide the approaches into two. One keeps the linear IV estimator and looks for an interpretation after the fact (reverse engineering), and the other designs estimators that allow for heterogeneity from the start (forward engineering). Marginal treatment effect (MTE) analysis is at the center of the latter.</p>
+<p>On the applied side, shift-share instruments and judge or examiner assignment designs have grown. In a study tracking NBER working papers, mentions of IV overall stayed flat, but shift-share instruments grew in every field (<a href="https://arxiv.org/abs/2405.20604v2">Goldsmith-Pinkham, 2024</a>). For weak-instrument inference, the trend is to use the Anderson–Rubin test or the tF correction (Lee et al. 2022) instead of the F&gt;10 rule of thumb.</p>
+<h3 id="en-s4-3">Regression discontinuity (RDD)</h3>
+<p>RDD now goes beyond a univariate score to multivariate boundaries. <a href="https://arxiv.org/abs/2511.06474v2">Cattaneo, Titiunik, and Yu (2025)</a> organize boundary discontinuity designs, in which a bivariate score such as a geographic boundary determines treatment, and review more than 80 empirical papers. According to the same authors' <a href="https://arxiv.org/abs/2505.05670v1">estimation and inference paper</a>, the common practice of reducing the problem to a single distance to the boundary leaves a large bias when the boundary has kinks.</p>
+<h3 id="en-s4-4">Synthetic control and panels</h3>
+<p>Synthetic control keeps expanding as a methodology, but growth in applications has stalled. Mentions of synthetic control in NBER working papers have declined since 2020 (<a href="https://arxiv.org/abs/2405.20604v2">Goldsmith-Pinkham, 2024</a>).</p>
+<p>The methodology is merging with DiD and factor models, as in synthetic DiD (Arkhangelsky et al. 2021), augmented synthetic control (Ben-Michael et al. 2021), and matrix completion (Athey et al. 2021). The World Congress volume published in 2025 (Advances in Economics and Econometrics: Twelfth World Congress) also includes a <a href="https://resolve.cambridge.org/core/books/abs/advances-in-economics-and-econometrics/synthetic-controls-in-action/C5DCBB92549C7BC346F8DEEE379276D0">chapter on synthetic controls</a> in its part 'Modern Causal Inference'.</p>
+<h3 id="en-s4-5">Credibility of observational data, and inference</h3>
+<ul>
+<li>LaLonde (1986), 40 years on: <a href="https://econpapers.repec.org/RePEc:aea:jecper:v:39:y:2025:i:4:p:173-202">Imbens and Xu (2025, JEP)</a> report that once overlap in the covariate distributions is secured, modern estimators give similar values. But nothing guarantees that those values are causal effects, so they conclude that validation exercises such as placebo tests are essential.</li>
+<li>Cluster inference: research keeps re-examining the practice of relying on asymptotic theory in which the number of clusters goes to infinity. <a href="https://arxiv.org/pdf/2604.02000">MacKinnon (2026)</a> discusses when cluster-robust inference can be trusted. <a href="https://arxiv.org/html/2308.10138v8">Chiang, Sasaki, and Wang (2025)</a> show that conventional methods lose consistency when some clusters are too large to ignore.</li>
+<li>Design-based inference: the benchmark is the view that separates the reasons for clustering adjustments into sampling and treatment assignment (Abadie, Athey, Imbens, and Wooldridge 2023). The practical guidance is to cluster at the level at which treatment is independently assigned (<a href="https://arxiv.org/pdf/2201.01194">Roth et al., 2023</a>).</li>
+</ul>
+</section>
+<section aria-labelledby="en-s5">
+<span class="sec-no" aria-hidden="true">05</span><h2 id="en-s5">Recent developments ② Machine learning and AI</h2>
+<p class="sec-q"><b>Core question</b>How can inference stay valid with high-dimensional and unstructured data?</p>
+<p>Machine learning has moved from being a prediction tool to being a component of inference procedures, and AI has entered as a measurement tool. The issue now is whether inference stays valid when values produced by ML and AI are used as if they were data.</p>
+<h3 id="en-s5-1">Causal ML</h3>
+<p>Double/debiased machine learning (DML) is the standard framework. It combines Neyman-orthogonal scores with cross-fitting so that inference on a low-dimensional target parameter remains valid even when high-dimensional nuisance parameters are estimated by ML (Chernozhukov et al. 2018). <a href="https://arxiv.org/abs/2504.08324v2">Ahrens et al. (2025, working paper revised 2026)</a> provide an introductory review with cross-sectional and panel examples.</p>
+<p>For heterogeneous treatment effects, causal forests (Wager and Athey 2018; Athey, Tibshirani, and Wager 2019) and policy learning (Kitagawa and Tetenov 2018, Athey and Wager 2021) are the default tools. Inference theory for deep neural networks used in first-stage estimation is also in place (Farrell, Liang, and Misra 2021).</p>
+<h3 id="en-s5-2">Inference with AI-generated variables</h3>
+<p>This is the fastest-growing topic of 2024–2026. The problem starts with the two-step practice of plugging variables that AI extracts from text or images directly into a regression.</p>
+<figure class="fig " id="en-fig-twostep"><div class="fig-body"><div class="flow"><p class="flow-lab">The practice: two steps</p><ol class="flow-row"><li class="flow-box"><b>Unstructured data</b><span>text · images</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box"><b>AI/ML model</b><span>extracts variables</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box"><b>Regression</b><span>generated variables enter as data</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box bad"><span class="st no"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><b>Biased estimates, invalid inference</b></li></ol><p class="flow-lab">Remedies</p><ul class="fix-row"><li><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Bias correction · joint estimation</b><span>Battaglia et al. 2025</span></div></li><li><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>For estimation: correct with a small validation sample</b><span>Ludwig et al. 2025</span></div></li><li><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>For prediction: no leakage between training data and the research sample</b><span>Ludwig et al. 2025</span></div></li></ul></div></div><figcaption><span class="fig-no">Figure 8</span><span class="badge">Schematic</span>The two-step practice of plugging AI-generated variables into a regression, and the remedies.</figcaption></figure>
+<ul>
+<li><a href="https://www.aeaweb.org/doi/10.1257/jel.20241733">Dell (2025, JEL)</a> reviews methods that use deep learning to structure unstructured data, such as classification, document digitization, and record linkage.</li>
+<li><a href="https://arxiv.org/abs/2402.15585v5">Battaglia, Christensen, Hansen, and Sacher (working paper revised 2025)</a> show that treating AI- or ML-generated variables as data biases estimates and invalidates inference. They propose bias correction and joint estimation as remedies.</li>
+<li><a href="https://www.nber.org/papers/w33344">Ludwig, Mullainathan, and Rambachan (2025, NBER working paper)</a> divide the use of LLMs into prediction and estimation. Prediction requires no leakage between the LLM's training data and the research sample, and estimation requires a small validation sample alongside. Without a validation sample, the choice of model and prompt alone can move the estimates substantially.</li>
+</ul>
+<p>The topic has already entered the mainstream. The Methods Lectures at the 2026 NBER Summer Institute were on 'Estimation and Inference with AI-Generated Data' (<a href="https://www.nber.org/news/summer-institute-2026">NBER</a>).</p>
+<h3 id="en-s5-3">LLMs as experimental subjects</h3>
+<p>Studies that use LLMs to simulate human responses surged after Horton's (2023) 'homo silicus', but recent validation results lean toward caution. A Nature Human Behaviour paper from October 2026 compared preference-survey responses from 67,201 people in 74 countries with LLM-simulated responses. Alignment was positive but weak, and the paper concludes that LLMs cannot yet be trusted to replace representative cross-national surveys (<a href="https://www.nature.com/articles/s41562-026-02611-4">paper</a>).</p>
+<figure class="fig fig-stats" id="en-fig-llmstats"><div class="fig-body"><div class="stats"><div class="stat"><p class="stat-v">74<span class="stat-u"> countries</span></p><p class="stat-l">Countries in the preference survey compared with LLM-simulated responses</p></div><div class="stat"><p class="stat-v">67,201</p><p class="stat-l">Human respondents in the comparison</p></div></div></div><figcaption>Source: <a href="https://www.nature.com/articles/s41562-026-02611-4">Nature Human Behaviour (2026)</a>. Alignment was positive but weak.</figcaption></figure>
+<p>The econometric prescription is to supplement, not to replace: collect some real responses and use them to correct the errors in the LLM responses (Ludwig et al. 2025).</p>
+<h3 id="en-s5-4">Empirical research carried out by AI agents</h3>
+<p>The way research is produced has itself become an object of research. In the APE project at the University of Zurich's Social Catalyst Lab, AI agents used public data to produce research questions, identification strategies, and full manuscripts, generating more than 1,000 policy-evaluation papers (<a href="https://www.stata.com/meeting/italy26/slides/Italy26_Cunningham.pdf">Cunningham, 2026</a>). In head-to-head matchups judged by an LLM, published AER and AEJ papers won about 83% of the time (<a href="https://arxiv.org/pdf/2604.03338">arXiv 2604.03338</a>).</p>
+<figure class="fig fig-stats" id="en-fig-apestats"><div class="fig-body"><div class="stats"><div class="stat"><p class="stat-v">1,000+<span class="stat-u"> papers</span></p><p class="stat-l">Policy-evaluation papers produced by AI agents in the APE project</p></div><div class="stat"><p class="stat-v"><span class="stat-u pre">about</span>83<span class="stat-u">%</span></p><span class="meter" aria-hidden="true"><span style="width:83%"></span></span><p class="stat-l">Share of LLM-judged head-to-head matchups won by published AER and AEJ papers</p></div></div></div><figcaption>Sources: <a href="https://www.stata.com/meeting/italy26/slides/Italy26_Cunningham.pdf">Cunningham (2026)</a>, <a href="https://arxiv.org/pdf/2604.03338">arXiv 2604.03338</a>. The win rate is the result of LLM judging.</figcaption></figure>
+<p>There are also experiments that give thousands of agents the same panel and task and compare how they estimate. Evaluating the estimation behavior of agents is emerging as a new question for econometrics.</p>
+</section>
+<section aria-labelledby="en-s6">
+<span class="sec-no" aria-hidden="true">06</span><h2 id="en-s6">Recent developments ③ Time series and macroeconometrics</h2>
+<p class="sec-q"><b>Core question</b>What are the dynamic effects of shocks, and how do we forecast?</p>
+<p>The central debate in macroeconometrics was whether impulse responses should be estimated by local projections (LP) or by VARs. In 2025–2026 this debate was largely settled in theory. On the forecasting side, validating time series foundation models has emerged as a new task.</p>
+<h3 id="en-s6-1">Local projections versus VARs</h3>
+<ul>
+<li>The two methods estimate the same object (Plagborg-Møller and Wolf 2021). The difference appears in finite samples. LP has small bias and large variance, and a VAR with short lags is the opposite.</li>
+<li><a href="https://www.econometricsociety.org/publications/econometrica/2026/07/01/Double-Robustness-of-Local-Projections-and-Some-Unpleasant-VARithmetic/file/ecta70056.pdf">Montiel Olea, Plagborg-Møller, Qian, and Wolf (2026, Econometrica)</a> prove that for VAR confidence intervals to keep their coverage under model misspecification, the lag length must be long, and the intervals then become as wide as those of LP. For VARs, the result says "there is no free lunch."</li>
+<li>The same authors' <a href="https://www.arxiv.org/pdf/2503.17144">primer for practitioners (2025)</a> recommends LP or a long-lag VAR when the goal is to assess uncertainty. It also gives guidance on choosing lags and controls, bias correction, and constructing confidence intervals.</li>
+<li>In their LP survey, <a href="https://www.aeaweb.org/doi/10.1257/jel.20241521">Jordà and Taylor (2025, JEL)</a> see the method as a bridge between empirical macro and micro policy evaluation. LP-DiD (Dube et al. 2023), which applies LP to difference-in-differences, is an example.</li>
+</ul>
+<figure class="fig " id="en-fig-lpvar"><div class="fig-body"><div class="tbl in-fig fit"><table><thead><tr><th>Method</th><th>Bias</th><th>Variance</th><th>Confidence intervals when the model is wrong</th></tr></thead><tbody><tr><td>Local projections (LP)</td><td>Small</td><td>Large</td><td>Coverage holds</td></tr><tr><td>Short-lag VAR</td><td>Large</td><td>Small</td><td>Coverage can fail</td></tr><tr><td>Long-lag VAR</td><td>Close to LP</td><td>Close to LP</td><td>Coverage holds. Intervals become as wide as LP</td></tr></tbody></table></div></div><figcaption><span class="fig-no">Figure 9</span>The two methods estimate the same object, and the difference appears in finite samples. When the goal is to assess uncertainty, the primer recommends LP or a long-lag VAR.</figcaption></figure>
+<h3 id="en-s6-2">Identification</h3>
+<p>Identification of macro shocks now leans more on external information than on model restrictions. Proxy SVARs that use external instruments (Stock and Watson 2018), identification from high-frequency data around policy announcements (Nakamura and Steinsson 2018, Bauer and Swanson 2023), and robust Bayesian inference for sign-restricted models (Giacomini and Kitagawa 2021) are representative.</p>
+<p>For heterogeneous-agent models, the sequence-space Jacobian method (Auclert et al. 2021) has greatly reduced the burden of estimation. How to handle the extreme observations of the COVID-19 period in VARs has also become a topic of its own (Lenza and Primiceri 2022).</p>
+<h3 id="en-s6-3">Forecasting and foundation models</h3>
+<p>Research that uses pretrained time series foundation models (TSFMs) for macro forecasting has grown quickly. The key issue is data leakage. The model may already have seen the realized values of its forecast target during training, and training on revised data does not match the first releases available in real time.</p>
+<p>MACROCAST by <a href="https://arxiv.org/abs/2606.28670">Carriero, Pettenuzzo, and Shekhar (2026, working paper)</a> is a model designed to shut down both kinds of leakage. In a real-time evaluation on FRED-MD, it beat AR(1) in about 80% of series-horizon combinations and also outperformed Bayesian VAR and dynamic factor model benchmarks. In contrast, a <a href="https://arxiv.org/html/2607.05291v1">comparison study (2026)</a> finds that TSFMs did not consistently beat econometric benchmarks in forecasting realized volatility.</p>
+<figure class="fig fig-stats" id="en-fig-tsfmstats"><div class="fig-body"><div class="stats"><div class="stat"><p class="stat-v"><span class="stat-u pre">about</span>80<span class="stat-u">%</span></p><span class="meter" aria-hidden="true"><span style="width:80%"></span></span><p class="stat-l">Series-horizon combinations in which MACROCAST beat AR(1) in a real-time FRED-MD evaluation</p></div><div class="stat"><p class="stat-v">9 : 8</p><p class="stat-l">TSFMs versus econometric models compared on realized-volatility forecasts for 50 assets. No consistent advantage for TSFMs.</p></div></div></div><figcaption>Sources: <a href="https://arxiv.org/abs/2606.28670">Carriero, Pettenuzzo, and Shekhar (2026)</a>, <a href="https://arxiv.org/html/2607.05291v1">comparison study (2026)</a>.</figcaption></figure>
+</section>
+<section aria-labelledby="en-s7">
+<span class="sec-no" aria-hidden="true">07</span><h2 id="en-s7">Recent developments ④ Financial econometrics</h2>
+<p class="sec-q"><b>Core question</b>How do we measure risk, return, and volatility?</p>
+<p>Recent discussion in financial econometrics is about how to screen the hundreds of return-predicting factors that have accumulated, and whether the performance of machine-learning asset pricing models can be trusted.</p>
+<h3 id="en-s7-1">Factor models and replication</h3>
+<ul>
+<li>Multiple testing: as factor candidates multiply, conventional significance levels produce more false discoveries (Harvey, Liu, and Zhu 2016).</li>
+<li>Factor selection: methods that test the contribution of a new factor under high-dimensional controls (Feng, Giglio, and Xiu 2020) have appeared, as has IPCA, which uses firm characteristics as instruments for factor loadings (Kelly, Pruitt, and Su 2019).</li>
+<li>Replication: large-scale replication studies have re-examined the reliability of the factor literature (Chen and Zimmermann 2022; Jensen, Kelly, and Pedersen 2023).</li>
+</ul>
+<h3 id="en-s7-2">Machine learning and the complexity debate</h3>
+<p>Since Gu, Kelly, and Xiu (2020), ML return prediction has become mainstream, and the 'virtue of complexity' is now under debate. <a href="https://www.sfi.ch/en/publications/the-virtue-of-complexity-in-return-prediction">Kelly, Malamud, and Zhou (2024, Journal of Finance)</a> show, with theory and US stock market data, that models with more parameters than observations predict returns better than simple models.</p>
+<p>In 2025 several papers challenged this result, and the authors responded, so the debate continues. The critics hold that complexity is not always a virtue (<a href="https://www.advisorperspectives.com/articles/2025/08/22/wall-street-complex-left-humans">Bloomberg column, 2025</a>).</p>
+<figure class="fig " id="en-fig-complexity"><div class="fig-body"><div class="flow"><ol class="flow-row"><li class="flow-box"><span class="yr">2020</span><b>Gu, Kelly, and Xiu</b><span>ML return prediction goes mainstream</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box"><span class="yr">2024</span><b>Kelly, Malamud, and Zhou</b><span>models with more parameters than observations predict better</span></li><li class="flow-ar" aria-hidden="true"><svg class="ar ar-r" viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><path d="M1 6h14M10.5 1.5 16 6l-5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li class="flow-box"><span class="yr">2025</span><b>Challenges and replies</b><span>critics: complexity is not always a virtue</span></li></ol></div></div><figcaption><span class="fig-no">Figure 10</span>How the 'virtue of complexity' debate has unfolded.</figcaption></figure>
+<h3 id="en-s7-3">Volatility and text</h3>
+<ul>
+<li>For volatility forecasting, realized-volatility data and HAR-type models are the benchmark. A 2026 comparison study pitted 9 TSFMs against 8 econometric models on 50 assets and found no consistent advantage for TSFMs (<a href="https://arxiv.org/html/2607.05291v1">arXiv 2607.05291</a>).</li>
+<li>Research that uses LLMs to predict returns from earnings calls or news text runs directly into the training-leakage problem. That is why the LLM econometric framework uses finance applications as its example (Ludwig et al. 2025).</li>
+</ul>
+<h3 id="en-s7-4">The spread of quasi-experimental methods</h3>
+<p>Finance is taking up the credibility revolution late. As of 2024, the share of papers mentioning experimental or quasi-experimental methods was 63% in applied micro and 47% in finance, and most of the growth outside applied micro came from difference-in-differences (<a href="https://www.nber.org/papers/w35051">Goldsmith-Pinkham, 2026</a>).</p>
+<figure class="fig " id="en-fig-adoption"><div class="fig-head"><div><p class="fig-title">Share of papers mentioning experimental or quasi-experimental methods, 2024</p></div><button type="button" class="tv" aria-pressed="false">Table view</button></div><div class="fig-body"><div class="viz"><div class="bars" role="img" aria-label="Applied micro 63%, finance 47%, macro and other 39%"><div class="bar-row" tabindex="0" data-tip="{&quot;h&quot;: &quot;Applied micro&quot;, &quot;rows&quot;: [[&quot;63%&quot;, &quot;share of papers, 2024&quot;, &quot;s1&quot;]]}"><span class="bar-lab">Applied micro</span><span class="bar-track"><span class="bar-fill" style="width:63%"></span><span class="bar-val" style="left:63%">63%</span></span></div><div class="bar-row" tabindex="0" data-tip="{&quot;h&quot;: &quot;Finance&quot;, &quot;rows&quot;: [[&quot;47%&quot;, &quot;share of papers, 2024&quot;, &quot;s1&quot;]]}"><span class="bar-lab">Finance</span><span class="bar-track"><span class="bar-fill" style="width:47%"></span><span class="bar-val" style="left:47%">47%</span></span></div><div class="bar-row" tabindex="0" data-tip="{&quot;h&quot;: &quot;Macro and other&quot;, &quot;rows&quot;: [[&quot;39%&quot;, &quot;share of papers, 2024&quot;, &quot;s1&quot;]]}"><span class="bar-lab">Macro and other</span><span class="bar-track"><span class="bar-fill" style="width:39%"></span><span class="bar-val" style="left:39%">39%</span></span></div><div class="bar-axis" aria-hidden="true"><span></span><span class="bar-ticks"><i style="left:0">0</i><i style="left:25%">25</i><i style="left:50%">50</i><i style="left:75%">75</i><i style="left:100%">100%</i></span></div></div></div><div class="viz-table"><div class="tbl in-fig fit"><table class="num"><thead><tr><th>Field</th><th>Share (%)</th></tr></thead><tbody><tr><td>Applied micro</td><td>63</td></tr><tr><td>Finance</td><td>47</td></tr><tr><td>Macro and other</td><td>39</td></tr></tbody></table></div></div></div><figcaption><span class="fig-no">Figure 11</span><span class="badge">Data</span>The current level in finance and macro is similar to that of applied micro in 2008–2010. Counting difference-in-differences raises the share of papers mentioning any such method by roughly 55 percent in finance and 30 percent in applied micro, which means that diffusion outside applied micro has been driven by DiD. Source: <a href="https://www.nber.org/papers/w35051">Goldsmith-Pinkham (2026)</a>, about 44,000 NBER working papers and journal articles.</figcaption></figure>
+</section>
+<section aria-labelledby="en-s8">
+<span class="sec-no" aria-hidden="true">08</span><h2 id="en-s8">Recent developments ⑤ Structural estimation and empirical IO</h2>
+<p class="sec-q"><b>Core question</b>What would a policy that has not yet been implemented do?</p>
+<p>Structural estimation research is moving toward making the basis for identification transparent, cutting computational cost with neural networks, and combining experiments with equilibrium models.</p>
+<figure class="fig " id="en-fig-structural"><div class="fig-body"><div class="trio" role="list"><div class="card" role="listitem"><span class="card-no">01</span><p class="card-h">Transparent identification</p><p>Nonparametric identification of demand (Berry and Haile 2021, 2024); the debate over identifying markups (Bond et al. 2021)</p></div><div class="card" role="listitem"><span class="card-no">02</span><p class="card-h">Neural networks to cut computation</p><p>Adversarial estimation (Kaji, Manresa, and Pouliot 2023); neural-network parameter estimation (Wei and Jiang 2025)</p></div><div class="card" role="listitem"><span class="card-no">03</span><p class="card-h">Experiments combined with equilibrium models</p><p>Treatment effects in market equilibrium (Munro, Kuang, and Wager 2025)</p></div></div></div><figcaption><span class="fig-no">Figure 12</span>Three directions in structural estimation, with the representative work covered in this section.</figcaption></figure>
+<h3 id="en-s8-1">Demand and production functions</h3>
+<ul>
+<li>Demand estimation: work continues on characterizing nonparametric identification conditions for demand for differentiated products (Berry and Haile 2021, 2024). In practice, PyBLP (Conlon and Gortmaker 2020) has standardized estimation practice.</li>
+<li>Production functions and markups: proxy-variable methods (Ackerberg, Caves, and Frazer 2015; Gandhi, Navarro, and Rivers 2020) are the default. The approach of measuring markups from production functions (De Loecker, Eeckhout, and Unger 2020) remains under debate, facing the criticism that identification is difficult with revenue data alone (Bond et al. 2021).</li>
+<li>Dynamic models: applications have broadened since conditional choice probability estimation (Hotz and Miller 1993, Arcidiacono and Miller 2011) lowered the computational burden.</li>
+</ul>
+<h3 id="en-s8-2">Estimation with neural networks</h3>
+<p>Neural networks have started to serve as estimation tools in models that had to rely on simulation because the likelihood is unavailable.</p>
+<ul>
+<li>The adversarial estimator of <a href="https://collaborate.princeton.edu/en/publications/an-adversarial-approach-to-structural-estimation/">Kaji, Manresa, and Pouliot (2023, Econometrica)</a> searches for the parameters at which a discriminator cannot tell data simulated from the structural model apart from the real data. With a sufficiently rich discriminator, it attains parametric efficiency under correct specification.</li>
+<li><a href="https://econpapers.repec.org/RePEc:inm:ormksc:v:44:y:2025:i:1:p:102-128">Wei and Jiang (2025, Marketing Science)</a> train a neural network on model-generated data so that feeding in moments of the data returns parameter estimates. In a consumer search model, the approach was more accurate and computationally lighter than existing methods.</li>
+</ul>
+<h3 id="en-s8-3">Combining experiments and equilibrium</h3>
+<p>An experiment run inside a market also affects the control group through prices. <a href="https://econpapers.repec.org/RePEc:aea:aecrev:v:115:y:2025:i:10:p:3273-3321">Munro, Kuang, and Wager (2025, AER)</a> show how to identify direct effects and the spillover effects that come from equilibrium changes using only an experiment that randomizes individual units within one large market. Estimating the spillover effects requires price elasticities, so the experimental design is augmented to obtain them.</p>
+<figure class="fig " id="en-fig-spillover"><div class="fig-body"><div class="viz narrow"><div class="chart-wrap"><svg class="chart schem" viewBox="0 0 340 200" role="img" aria-label="Treatment affects the treated group directly and, by changing the market price, also affects the control group."><defs><marker id="en-arw0" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arw a0"/></marker><marker id="en-arw1" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arw a1"/></marker><marker id="en-arw2" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arw a2"/></marker></defs><rect class="bx " x="4" y="80" width="66" height="40" rx="5"/><text class="lab strong" x="37.0" y="104.0" text-anchor="middle">Treatment</text><rect class="bx mid" x="100" y="78" width="112" height="44" rx="5"/><text class="lab strong" x="156.0" y="98.0" text-anchor="middle">Market price</text><text class="tick txt" x="156.0" y="112.0" text-anchor="middle">equilibrium shifts</text><rect class="bx " x="238" y="20" width="98" height="44" rx="5"/><text class="lab strong" x="287.0" y="40.0" text-anchor="middle">Treated group</text><text class="tick txt" x="287.0" y="54.0" text-anchor="middle">outcomes</text><rect class="bx " x="238" y="138" width="98" height="44" rx="5"/><text class="lab strong" x="287.0" y="158.0" text-anchor="middle">Control group</text><text class="tick txt" x="287.0" y="172.0" text-anchor="middle">outcomes</text><path class="cn s1" d="M40 80 C 60 28, 150 34, 234 42" marker-end="url(#en-arw1)"/><text class="lab" x="128" y="27" text-anchor="middle">direct effect</text><path class="cn" d="M70 100 H96" marker-end="url(#en-arw0)"/><path class="cn s2" d="M212 90 L236 62" marker-end="url(#en-arw2)"/><path class="cn s2" d="M212 112 L236 142" marker-end="url(#en-arw2)"/><text class="lab" x="287" y="105" text-anchor="middle">spillover effects</text></svg></div><ul class="legend"><li><span class="key s1"></span>Direct effect</li><li><span class="key s2"></span>Spillover effects from equilibrium changes</li></ul></div></div><figcaption><span class="fig-no">Figure 13</span><span class="badge">Schematic</span>An experiment inside a market reaches the control group through prices. Randomizing individual units and augmenting the design to obtain price elasticities identifies the direct and spillover effects separately (Munro, Kuang, and Wager 2025). Not real data.</figcaption></figure>
+<p>Research that deals at the estimation stage with the possibility that a structural model is wrong connects to the misspecification discussion in Section 9.</p>
+</section>
+<section aria-labelledby="en-s9">
+<span class="sec-no" aria-hidden="true">09</span><h2 id="en-s9">Recent developments ⑥ Identification and inference theory</h2>
+<p class="sec-q"><b>Core question</b>What can be said under weak assumptions?</p>
+<p>The common theme on the theory side is 'conclusions that can be trusted even when the model is wrong'. The four invited econometrics sessions at the 2025 World Congress give an outline of this field.</p>
+<h3 id="en-s9-1">Model misspecification</h3>
+<p>The World Congress review by <a href="https://tbarmstr.github.io/files/2025/07/misspecification_review_eswc_2025.pdf">Armstrong (2025)</a> frames misspecification research as, in the end, a problem of expanding the model to a larger one. How to expand it is itself the research question. 'Adapting to Misspecification' by <a href="https://tbarmstr.github.io/">Armstrong, Kline, and Sun (2025, Econometrica)</a> is the representative paper of this line of work.</p>
+<h3 id="en-s9-2">Partial identification and sensitivity analysis</h3>
+<p>Partial identification started from Manski's bounds analysis and is organized in Molinari's (2020) Handbook of Econometrics chapter. The form most widely used in applications is sensitivity analysis.</p>
+<ul>
+<li>Methods that check whether conclusions hold when parallel trends fail to some degree (Rambachan and Roth 2023)</li>
+<li>Methods that measure how strong an omitted variable must be to overturn the result (Cinelli and Hazlett 2020)</li>
+<li>Breakdown frontiers, which show how far assumptions can be relaxed before the conclusion collapses (Masten and Poirier 2020)</li>
+</ul>
+<h3 id="en-s9-3">Statistical decisions and empirical Bayes</h3>
+<p>Approaches that directly solve 'which treatment should be chosen?' instead of estimating and testing have gained ground. Empirical welfare maximization (Kitagawa and Tetenov 2018) and policy learning (Athey and Wager 2021) are the starting points, and the World Congress also made 'Causal Inference and Statistical Decisions' an invited session.</p>
+<p>Empirical Bayes is used as a standard tool in problems with many unit-level parameters, such as teachers, schools, firms, and judges. The Handbook of Labor Economics chapter by <a href="https://www.nber.org/papers/w33091">Walters (2024)</a> organizes the methods. Kline, Rose, and Walters (2024, AER), who grade firms on hiring discrimination, is the representative application.</p>
+<h3 id="en-s9-4">Panels, nonparametrics, high dimensions</h3>
+<ul>
+<li>Panels: the topic of an invited session at the World Congress. The focus is on the fixed-effects problem in nonlinear panels, interactive fixed effects (Bai 2009), and grouped heterogeneity (Bonhomme and Manresa 2015).</li>
+<li>Nonparametric and high-dimensional methods: work continues on attaching inferential guarantees to ML estimators, as in inference for deep neural network estimators (Farrell, Liang, and Misra 2021) and automatic debiased machine learning (Chernozhukov, Newey, and Singh 2022).</li>
+</ul>
+<h3 id="en-s9-5">Bayesian methods, networks, spatial data</h3>
+<ul>
+<li>Bayesian: shrinkage priors for large VARs (Giannone, Lenza, and Primiceri 2015), robust Bayes for set-identified models (Giacomini and Kitagawa 2021), tree-based causal inference (Hahn, Murray, and Carvalho 2020).</li>
+<li>Networks: causal inference under interference (Aronow and Samii 2017, Leung 2022) and models of network formation (Graham 2017, de Paula 2020).</li>
+<li>Spatial: inference robust to spatial correlation, and spatial unit roots (Müller and Watson 2022, 2024).</li>
+</ul>
+</section>
+<section aria-labelledby="en-s10">
+<span class="sec-no" aria-hidden="true">10</span><h2 id="en-s10">Applications in industry: experimental design and causal inference at tech companies</h2>
+<p class="sec-q"><b>Core question</b>How should experiments be designed and read?</p>
+<p>At tech companies, econometrics is used mainly in two places: the design and analysis of online experiments (A/B tests), and causal inference from observational data when experiments are impossible. Many topics that became academic frontiers, such as interference, sequential testing, and long-term effect estimation, started from problems in practice.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Problem in practice</th>
+<th>Method</th>
+<th>Representative work</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One user's treatment changes another user's outcome</td>
+<td>Two-sided randomization, cluster randomization, equilibrium models</td>
+<td>Johari, Li, Liskovich, and Weintraub (2022); Munro, Kuang, and Wager (2025)</td>
+</tr>
+<tr>
+<td>Treatments that apply to the whole market, such as pricing or dispatch</td>
+<td>Switchback experiments</td>
+<td>Bojinov, Simchi-Levi, and Zhao (2023)</td>
+</tr>
+<tr>
+<td>Results are watched continuously during the experiment</td>
+<td>Always-valid inference, confidence sequences</td>
+<td>Johari, Koomen, Pekelis, and Walsh (2022); Howard et al. (2021)</td>
+</tr>
+<tr>
+<td>Long-term effects are needed quickly</td>
+<td>Surrogate index</td>
+<td>Athey, Chetty, Imbens, and Kang (2025)</td>
+</tr>
+<tr>
+<td>Variance is large and power is low</td>
+<td>Pre-experiment covariate adjustment (CUPED)</td>
+<td>Deng et al. (2013)</td>
+</tr>
+<tr>
+<td>No experiment can be run</td>
+<td>Synthetic control, DiD, geo-level experiments</td>
+<td>Abadie (2021)</td>
+</tr>
+<tr>
+<td>Deciding whom to treat</td>
+<td>Heterogeneous treatment effects, policy learning</td>
+<td>Athey and Wager (2021)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="en-s10-1">Interference in two-sided markets</h3>
+<p>According to <a href="https://gsb.stanford.edu/faculty-research/publications/experimental-design-two-sided-platforms-analysis-bias">Johari, Li, Liskovich, and Weintraub (2022, Management Science)</a>, which side to randomize depends on the balance of supply and demand in the market. In a demand-constrained market, customer-side randomization works without bias and listing-side randomization is biased. In a supply-constrained market, the reverse holds. A design that randomizes both sides at once is unbiased in both extremes.</p>
+<figure class="fig " id="en-fig-twosided"><div class="fig-head"><div><p class="fig-title">Bias by side of randomization</p></div></div><div class="fig-body"><div class="tbl in-fig fit stack-sm"><table><thead><tr><th>Market state</th><th>Customer-side</th><th>Listing-side</th><th>Two-sided</th></tr></thead><tbody><tr><td>Demand-constrained</td><td class="stc"><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Unbiased</td><td class="stc"><span class="st no"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>Biased</td><td class="stc"><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Unbiased</td></tr><tr><td>Supply-constrained</td><td class="stc"><span class="st no"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>Biased</td><td class="stc"><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Unbiased</td><td class="stc"><span class="st ok"><svg class="ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Unbiased</td></tr></tbody></table></div></div><figcaption><span class="fig-no">Figure 14</span>Which side to randomize depends on the balance of supply and demand. Randomizing both sides at once is unbiased in both extremes. Source: <a href="https://gsb.stanford.edu/faculty-research/publications/experimental-design-two-sided-platforms-analysis-bias">Johari, Li, Liskovich, and Weintraub (2022)</a>.</figcaption></figure>
+<h3 id="en-s10-2">Long-term effects</h3>
+<p>The surrogate index method of <a href="https://opportunityinsights.org/paper/the-surrogate-index/">Athey, Chetty, Imbens, and Kang (2025, Review of Economic Studies)</a> combines several short-term outcomes into one predictive index to estimate long-term effects. Applied to a California job training experiment, it could estimate the effect on the 9-year mean employment rate at the 1.5-year mark, and standard errors fell by 35%.</p>
+<figure class="fig " id="en-fig-surrogate"><div class="fig-head"><div><p class="fig-title">Surrogate index: the 9-year effect at the 1.5-year mark</p></div></div><div class="fig-body"><div class="sur"><div class="sur-meter" role="img" aria-label="The 1.5-year mark on a 9-year horizon"><span class="sur-fill" style="width:16.67%"></span></div><div class="sur-scale" aria-hidden="true"><span style="left:0">0</span><span class="sur-mark" style="left:16.67%">1.5 years</span><span class="sur-end">9 years</span></div><div class="stats sur-stats"><div class="stat"><p class="stat-v">1.5<span class="stat-u"> years</span></p><p class="stat-l">Point at which the effect on the 9-year mean employment rate could be estimated</p></div><div class="stat"><p class="stat-v">−35<span class="stat-u">%</span></p><p class="stat-l">Reduction in standard errors</p></div></div></div></div><figcaption><span class="fig-no">Figure 15</span><span class="badge">Data</span>The surrogate index applied to a California job training experiment. Source: <a href="https://opportunityinsights.org/paper/the-surrogate-index/">Athey, Chetty, Imbens, and Kang (2025)</a>.</figcaption></figure>
+<h3 id="en-s10-3">The boundary between academia and industry</h3>
+<p>It has become common for methodological papers to list companies among the author affiliations. The author of the empirical Bayes handbook chapter is affiliated with UC Berkeley and Amazon (<a href="https://rfberlin.com/wp-content/uploads/2024/10/24022.pdf">Walters, 2024</a>), and one coauthor of the AI-generated variables paper is at Meta (<a href="https://econpapers.repec.org/RePEc:cwl:cwldpp:2421">Cowles Foundation Discussion Paper</a>).</p>
+<p>As practical references, the online experiments textbook by Kohavi, Tang, and Xu (2020) and the overview of economists at tech companies by Athey and Luca (2019) are the starting points.</p>
+</section>
+<section aria-labelledby="en-s11">
+<span class="sec-no" aria-hidden="true">11</span><h2 id="en-s11">Cross-cutting trends and open issues</h2>
+<p>The same trends recur across the seven fields.</p>
+<ol>
+<li>Fix the estimand first. The reassessment of TWFE, the debate over the LATE interpretation, and the clarification of how LP and VARs relate all started from 'what does this estimator estimate?'</li>
+<li>Do inference with misspecification in mind. Sensitivity analysis, bias-aware confidence intervals, and the robustness results for LP share the same concern.</li>
+<li>Put ML and AI inside the inference procedure. Orthogonalization, cross-fitting, and correction with validation samples are the devices.</li>
+<li>Combine design and structure. Experiments in market equilibrium, marginal treatment effects, and the surrogate index are examples.</li>
+<li>The way research is produced is changing. Empirical papers written by agents and automated data construction are now objects that methodology has to validate.</li>
+</ol>
+<figure class="fig " id="en-fig-flows"><div class="fig-body"><ol class="fl"><li><span class="fl-no">1</span><div><p class="fl-h">Fix the estimand first</p><p class="chips"><a class="chip" href="#en-s4"><span class="chip-s">§4</span>reassessment of TWFE</a><a class="chip" href="#en-s4"><span class="chip-s">§4</span>the LATE debate</a><a class="chip" href="#en-s6"><span class="chip-s">§6</span>how LP and VARs relate</a></p></div></li><li><span class="fl-no">2</span><div><p class="fl-h">Inference with misspecification in mind</p><p class="chips"><a class="chip" href="#en-s9"><span class="chip-s">§9</span>sensitivity analysis</a><a class="chip" href="#en-s9"><span class="chip-s">§9</span>bias-aware confidence intervals</a><a class="chip" href="#en-s6"><span class="chip-s">§6</span>robustness of LP</a></p></div></li><li><span class="fl-no">3</span><div><p class="fl-h">ML and AI inside the inference procedure</p><p class="chips"><a class="chip" href="#en-s5"><span class="chip-s">§5</span>orthogonalization · cross-fitting</a><a class="chip" href="#en-s5"><span class="chip-s">§5</span>correction with validation samples</a></p></div></li><li><span class="fl-no">4</span><div><p class="fl-h">Design combined with structure</p><p class="chips"><a class="chip" href="#en-s8"><span class="chip-s">§8</span>experiments in market equilibrium</a><a class="chip" href="#en-s4"><span class="chip-s">§4</span>marginal treatment effects</a><a class="chip" href="#en-s10"><span class="chip-s">§10</span>the surrogate index</a></p></div></li><li><span class="fl-no">5</span><div><p class="fl-h">The way research is produced is changing</p><p class="chips"><a class="chip" href="#en-s5"><span class="chip-s">§5</span>empirical papers written by agents</a><a class="chip" href="#en-s5"><span class="chip-s">§5</span>automated data construction</a></p></div></li></ol></div><figcaption><span class="fig-no">Figure 16</span>The five trends and the examples named in the text. Each example links to its section.</figcaption></figure>
+<p>The open issues are as follows.</p>
+<ul>
+<li>Uneven diffusion: as of 2024, the share of papers mentioning experimental or quasi-experimental methods is 63% in applied micro, 47% in finance, and 39% in macro and other fields. The current level in finance and macro is similar to that of applied micro in 2008–2010 (<a href="https://www.nber.org/papers/w35051">Goldsmith-Pinkham, 2026</a>).</li>
+<li>The gap between theory and application: according to the same study, the Journal of Econometrics is dominated by nonparametric estimation and asymptotic theory, while applied researchers use DiD and identification strategies.</li>
+<li>Reliability of AI-based measurement: the practice of using LLM output as variables without a validation sample, and the validity of LLMs as subjects, are not yet settled.</li>
+<li>The virtue of complexity: the return-predicting power of overparameterized models and leakage-free evaluation of foundation models are ongoing debates.</li>
+<li>Transparency: it has been pointed out that reporting of null results has declined and the use of private data has increased (<a href="https://econpapers.repec.org/RePEc:osf:osfxxx:u4vgs">Garg and Fetzer, 2024</a>).</li>
+</ul>
+</section>
+<section aria-labelledby="en-s12">
+<span class="sec-no" aria-hidden="true">12</span><h2 id="en-s12">References</h2>
+<p>This list covers the 2023–2026 literature that the text relies on. Work from 2022 or earlier is cited in the text by author and year.</p>
+<h3 id="en-s12-1">Surveys and practitioner guides</h3>
+<ul>
+<li>Baker, Callaway, Cunningham, Goodman-Bacon, Sant'Anna (2026), <a href="https://econpapers.repec.org/RePEc:aea:jeclit:v:64:y:2026:i:2:p:498-557">Difference-in-Differences Designs: A Practitioner's Guide</a>, Journal of Economic Literature 64(2)</li>
+<li>Jordà, Taylor (2025), <a href="https://www.aeaweb.org/doi/10.1257/jel.20241521">Local Projections</a>, Journal of Economic Literature 63(1)</li>
+<li>Dell (2025), <a href="https://www.aeaweb.org/doi/10.1257/jel.20241733">Deep Learning for Economists</a>, Journal of Economic Literature 63(1)</li>
+<li>Imbens, Xu (2025), <a href="https://econpapers.repec.org/RePEc:aea:jecper:v:39:y:2025:i:4:p:173-202">Comparing Experimental and Nonexperimental Methods</a>, Journal of Economic Perspectives 39(4)</li>
+<li>Mogstad, Torgovitsky (2024), <a href="https://www.nber.org/papers/w32927">Instrumental Variables with Unobserved Heterogeneity in Treatment Effects</a>, NBER WP 32927, prepared for the Handbook of Labor Economics</li>
+<li>Walters (2024), <a href="https://www.nber.org/papers/w33091">Empirical Bayes Methods in Labor Economics</a>, Handbook of Labor Economics 5</li>
+<li>Roth, Sant'Anna, Bilinski, Poe (2023), <a href="https://arxiv.org/pdf/2201.01194">What's Trending in Difference-in-Differences?</a>, Journal of Econometrics</li>
+</ul>
+<h3 id="en-s12-2">Published articles</h3>
+<ul>
+<li>Montiel Olea, Plagborg-Møller, Qian, Wolf (2026), <a href="https://www.econometricsociety.org/publications/econometrica/2026/07/01/Double-Robustness-of-Local-Projections-and-Some-Unpleasant-VARithmetic/file/ecta70056.pdf">Double Robustness of Local Projections and Some Unpleasant VARithmetic</a>, Econometrica 94(4)</li>
+<li>Simulated responses from large language models are weak proxies for human economic preferences across 74 countries (2026), <a href="https://www.nature.com/articles/s41562-026-02611-4">Nature Human Behaviour</a></li>
+<li>Munro, Kuang, Wager (2025), <a href="https://econpapers.repec.org/RePEc:aea:aecrev:v:115:y:2025:i:10:p:3273-3321">Treatment Effects in Market Equilibrium</a>, American Economic Review 115(10)</li>
+<li>Athey, Chetty, Imbens, Kang (2025), <a href="https://opportunityinsights.org/paper/the-surrogate-index/">The Surrogate Index</a>, Review of Economic Studies</li>
+<li>Armstrong, Kline, Sun (2025), <a href="https://tbarmstr.github.io/">Adapting to Misspecification</a>, Econometrica 93(6)</li>
+<li>Wei, Jiang (2025), <a href="https://econpapers.repec.org/RePEc:inm:ormksc:v:44:y:2025:i:1:p:102-128">Estimating Parameters of Structural Models Using Neural Networks</a>, Marketing Science 44(1)</li>
+<li>Kelly, Malamud, Zhou (2024), <a href="https://www.sfi.ch/en/publications/the-virtue-of-complexity-in-return-prediction">The Virtue of Complexity in Return Prediction</a>, Journal of Finance 79(1)</li>
+<li>Kaji, Manresa, Pouliot (2023), <a href="https://collaborate.princeton.edu/en/publications/an-adversarial-approach-to-structural-estimation/">An Adversarial Approach to Structural Estimation</a>, Econometrica 91(6)</li>
+<li>Johari, Li, Liskovich, Weintraub (2022), <a href="https://gsb.stanford.edu/faculty-research/publications/experimental-design-two-sided-platforms-analysis-bias">Experimental Design in Two-Sided Platforms: An Analysis of Bias</a>, Management Science 68(10)</li>
+</ul>
+<h3 id="en-s12-3">Working papers and forthcoming articles</h3>
+<ul>
+<li>Goldsmith-Pinkham (2026), <a href="https://www.nber.org/papers/w35051">Tracking the Credibility Revolution across Fields</a>, NBER WP 35051. The 2024 version is on <a href="https://arxiv.org/abs/2405.20604v2">arXiv</a></li>
+<li>Garg, Fetzer (2025), <a href="https://arxiv.org/abs/2501.06873v1">Causal Claims in Economics</a></li>
+<li>Callaway, Goodman-Bacon, Sant'Anna (2025), <a href="https://arxiv.org/pdf/2107.02637v8">Difference-in-Differences with a Continuous Treatment</a></li>
+<li>de Chaisemartin, D'Haultfoeuille, <a href="https://sites.google.com/site/clementdechaisemartin/">Treatment-Effect Estimation in Complex Designs under a Parallel-trends Assumption</a>, forthcoming in the 2025 World Congress volume</li>
+<li>Cattaneo, Titiunik, Yu (2025), <a href="https://arxiv.org/abs/2511.06474v2">Boundary Discontinuity Designs: Theory and Practice</a>, <a href="https://arxiv.org/abs/2505.05670v1">Estimation and Inference in Boundary Discontinuity Designs</a></li>
+<li>Armstrong (2025), <a href="https://tbarmstr.github.io/files/2025/07/misspecification_review_eswc_2025.pdf">Misspecification in Econometrics: A Selective Review</a>, forthcoming in the 2025 World Congress volume</li>
+<li>Ahrens, Chernozhukov, Hansen, Kozbur, Schaffer, Wiemann (2025), <a href="https://arxiv.org/abs/2504.08324v2">An Introduction to Double/Debiased Machine Learning</a></li>
+<li>Battaglia, Christensen, Hansen, Sacher (2025), <a href="https://arxiv.org/abs/2402.15585v5">Inference for Regression with Variables Generated by AI or Machine Learning</a></li>
+<li>Ludwig, Mullainathan, Rambachan (2025), <a href="https://www.nber.org/papers/w33344">Large Language Models: An Applied Econometric Framework</a>, NBER WP 33344</li>
+<li>Montiel Olea, Plagborg-Møller, Qian, Wolf (2025), <a href="https://www.arxiv.org/pdf/2503.17144">Local Projections or VARs? A Primer for Macroeconomists</a></li>
+<li>Carriero, Pettenuzzo, Shekhar (2026), <a href="https://arxiv.org/abs/2606.28670">MACROCAST: A Vintage-Consistent Time Series Foundation Model</a></li>
+<li>MacKinnon (2026), <a href="https://arxiv.org/pdf/2604.02000">When Can We Trust Cluster-Robust Inference?</a></li>
+<li>Chiang, Sasaki, Wang (2025), <a href="https://arxiv.org/html/2308.10138v8">Genuinely Robust Inference for Clustered Data</a></li>
+</ul>
+<h3 id="en-s12-4">Conferences, lectures, and other material</h3>
+<ul>
+<li><a href="https://www.econometricsociety.org/regional-activities/schedule/2025/08/18/2025-World-Congress-Seoul-Korea?page=2">Invited sessions, 2025 Econometric Society World Congress (Seoul)</a></li>
+<li><a href="https://www.nber.org/news/summer-institute-2026">NBER Summer Institute 2026 Methods Lectures announcement</a></li>
+<li><a href="https://topcat.aeaweb.org/econlit/jelCodes.php?view=jel">JEL classification system</a></li>
+<li>On the APE project: <a href="https://cepr.org/voxeu/columns/literature-support-and-capabilities-autonomous-research-agents">VoxEU column</a>, <a href="https://arxiv.org/pdf/2604.03338">arXiv 2604.03338</a>, <a href="https://www.stata.com/meeting/italy26/slides/Italy26_Cunningham.pdf">Cunningham slides</a></li>
+</ul>
+</section>
+<section aria-labelledby="en-s13">
+<span class="sec-no" aria-hidden="true">13</span><h2 id="en-s13">Notes on this document</h2>
+<ul>
+<li>Scope: written as of November 14, 2026, at researcher level, balanced across fields, and including industry applications. 'Recent' means 2023–2026.</li>
+<li>Evidence: figures and bibliographic details were checked against paper abstracts, journals, and conference or institutional pages. Work from 2022 or earlier is cited by author and year only, following standard bibliographic records.</li>
+<li>Working papers: grouped separately in Section 12. Results may change during peer review.</li>
+<li>Field boundaries: the seven-branch division follows convention, so the branches overlap. LP-DiD belongs to both time series and causal inference, and experiments in market equilibrium belong to both structural estimation and experimental design.</li>
+<li>Thinly covered areas: for high-frequency analysis in financial econometrics, Bayesian methods, and network and spatial econometrics, the 2025–2026 literature was not checked individually, so the text relies on representative work from 2022 or earlier. Developments in Korean academia are not covered.</li>
+<li>Caution in interpretation: APE's win rate is the result of LLM judging. Studies that measure the diffusion of methods by how often they are mentioned in paper text may differ from actual frequency of use.</li>
+</ul>
+</section></main></div></div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function cur(){return root.getAttribute('data-lang')==='en'?'en':'ko';}
+  function mark(l){
+    root.setAttribute('data-lang',l); root.setAttribute('lang',l);
+    var bs=document.querySelectorAll('.lang button');
+    for(var i=0;i<bs.length;i++){bs[i].setAttribute('aria-pressed',bs[i].getAttribute('data-set')===l?'true':'false');}
+    document.title=l==='en'?'An Overview of Econometrics and Recent Research by Field':'계량경제학 개관과 분야별 최신 연구 동향';
+    try{localStorage.setItem('econ-overview-lang',l);}catch(e){}
+  }
+  function nearest(l){
+    var hs=document.querySelectorAll('[data-l="'+l+'"] h1[id],[data-l="'+l+'"] h2[id],[data-l="'+l+'"] h3[id]');
+    var best=null, lim=120+(parseFloat(getComputedStyle(root).getPropertyValue('--aiel-bar-h'))||0);
+    for(var i=0;i<hs.length;i++){ if(hs[i].getBoundingClientRect().top<=lim){best=hs[i];} }
+    return best?best.id.slice(3):'top';
+  }
+  function setLang(l,jump){
+    var from=cur(); if(from===l){return;}
+    var suffix=jump?nearest(from):null;
+    mark(l);
+    if(suffix){ var t=document.getElementById(l+'-'+suffix); if(t){ try{location.hash=l+'-'+suffix;}catch(e){} t.scrollIntoView(); } }
+  }
+  var init='ko', h=(location.hash||'').replace('#','');
+  if(/^en(-|$)/.test(h)){init='en';}
+  else if(/^ko(-|$)/.test(h)){init='ko';}
+  else{ try{ if(localStorage.getItem('econ-overview-lang')==='en'){init='en';} }catch(e){} }
+  mark(init);
+  if(h&&document.getElementById(h)){document.getElementById(h).scrollIntoView();}
+  window.addEventListener('hashchange',function(){
+    var x=(location.hash||'').replace('#','');
+    if(/^en(-|$)/.test(x)&&cur()!=='en'){mark('en');}
+    if(/^ko(-|$)/.test(x)&&cur()!=='ko'){mark('ko');}
+    var t=document.getElementById(x); if(t){t.scrollIntoView();}
+  });
+  document.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('.lang button'):null;
+    if(b){setLang(b.getAttribute('data-set'),true);return;}
+    var tv=e.target.closest?e.target.closest('.tv'):null;
+    if(tv){
+      var f=tv.closest('.fig'); var on=f.classList.toggle('show-table');
+      tv.setAttribute('aria-pressed',on?'true':'false');
+      tv.textContent=on?(cur()==='en'?'Chart view':'그래프로 보기'):(cur()==='en'?'Table view':'표로 보기');
+    }
+  });
+  var tip=document.createElement('div'); tip.className='tip'; tip.setAttribute('role','status'); document.body.appendChild(tip);
+  function fill(el){
+    var d; try{d=JSON.parse(el.getAttribute('data-tip'));}catch(e){return false;}
+    tip.textContent='';
+    var hd=document.createElement('div'); hd.className='tip-h'; hd.textContent=d.h; tip.appendChild(hd);
+    (d.rows||[]).forEach(function(r){
+      var row=document.createElement('div'); row.className='tip-r';
+      var k=document.createElement('span'); k.className='tip-k '+(r[2]||'');
+      var v=document.createElement('b'); v.textContent=r[0];
+      var n=document.createElement('span'); n.textContent=r[1];
+      row.appendChild(k); row.appendChild(v); row.appendChild(n); tip.appendChild(row);
+    });
+    return true;
+  }
+  function place(x,y){
+    tip.style.display='block';
+    var w=tip.offsetWidth,hh=tip.offsetHeight,vw=window.innerWidth;
+    var left=Math.min(Math.max(8,x+12),vw-w-8), top=y-hh-12; if(top<8){top=y+16;}
+    tip.style.left=left+'px'; tip.style.top=top+'px';
+  }
+  function hide(){tip.style.display='none';}
+  document.addEventListener('pointermove',function(e){
+    var el=e.target.closest?e.target.closest('[data-tip]'):null;
+    if(el&&fill(el)){place(e.clientX,e.clientY);}else{hide();}
+  });
+  document.addEventListener('pointerleave',hide);
+  document.addEventListener('focusin',function(e){
+    var el=e.target.closest?e.target.closest('[data-tip]'):null;
+    if(el&&fill(el)){var r=el.getBoundingClientRect(); place(r.left+r.width/2,r.top+8);}
+  });
+  document.addEventListener('focusout',hide);
+  window.addEventListener('scroll',hide,{passive:true});
+})();
+</script>
+</body>
+</html>

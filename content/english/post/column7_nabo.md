@@ -12,7 +12,7 @@ description: "국회예산정책처 2027년 예산안 토론회"
 categories: ["AI_칼럼"]
 tags: ["AI","ECONOMICS","Government","Governance","Conference"]
 type: "featured" # available type (regular or featured)
-draft: false
+draft: true
 ---
 
 11월 2일, 국회예산정책처 주최 2027년 예산안 토론회에 토론자로 참석했습니다. 기획예산처 김명중 예산실장님과 국회예산정책처 임명현 예산분석실장님이 발제를 맡아주시고, 연세대학교 행정학과의 하연섭 교수님 사회 하에 정태호, 유상범 양당 예결위 간사님과 저, 그리고 세종대 김대종 교수님이 토론을 진행하였습니다.
